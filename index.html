@@ -178,7 +178,7 @@
       font-size:12px;color:var(--muted);
       user-select:none;
     }
-    .check input{accent-color: var(--accent); width:14px;height:14px}
+    .check input{accent-color: var(--accent); width:18px;height:18px}
     .note{
       margin-top:8px;
       border-left:3px solid var(--accent);
@@ -199,6 +199,49 @@
     progress{width:280px;max-width:100%;height:12px}
     .muted{color:var(--muted)}
     .hidden{display:none!important}
+    .faded{opacity:.35}
+    .badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:4px 10px;border-radius:10px;border:1px solid var(--border);background:color-mix(in srgb,var(--panel2) 86%,transparent)}
+    .legendRow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .miniTimeline{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+    .miniTimeline button{border:1px solid var(--border);background:color-mix(in srgb,var(--panel2) 80%,transparent);color:var(--text);border-radius:8px;padding:4px 8px;font-size:11px;cursor:pointer}
+    .difficulty{font-size:11px;color:var(--warn)}
+    .reward-dashboard{max-height:70vh;overflow:auto;margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .rewardCard{border:1px solid var(--border);border-radius:12px;padding:10px;background:color-mix(in srgb,var(--panel2) 90%,transparent)}
+    .rewardCard strong{display:block}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter: blur(6px);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+    .modal.active{display:flex}
+    .modalContent{background:var(--panel);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);max-width:900px;width:100%;padding:16px}
+    .modalHeader{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .noteInput{width:100%;min-height:64px;border-radius:12px;border:1px solid var(--border);background:color-mix(in srgb,var(--panel2) 90%,transparent);color:var(--text);padding:8px;font-family:var(--sans)}
+    .bottomBar{position:sticky;bottom:0;z-index:25;background:color-mix(in srgb,var(--panel) 95%,transparent);border-top:1px solid var(--border);padding:10px 14px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;backdrop-filter:blur(10px)}
+    .bottomBar .btn{padding:10px 14px;font-weight:700}
+    .stickyPad{padding-bottom:10px}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap}
+    .actMeter{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+    .actMeter progress{width:180px}
+    .callout{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+    .callout i{font-style:normal}
+    .speedrun .note{display:none}
+    .speedrun .zone{padding:10px 10px}
+    .speedrun body{line-height:1.3}
+    .speedrun .content{padding:8px 10px 10px}
+    .highlight{outline:2px solid var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 40%, transparent);}
+    .readonly input[type="checkbox"], .readonly textarea{pointer-events:none;opacity:.6}
+    .dashFilter{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+    .dashFilter button{border:1px solid var(--border);background:color-mix(in srgb,var(--panel2) 82%,transparent);color:var(--text);border-radius:10px;padding:6px 10px;font-size:12px;cursor:pointer}
+    .session-notes{margin-top:8px}
+    .session-notes label{font-size:12px;color:var(--muted)}
+    .animatedCheck{position:relative}
+    .animatedCheck input:checked + span::after{content:"";position:absolute;inset:-4px;border-radius:999px;animation:pulse 0.5s ease-out}
+    @keyframes pulse{from{box-shadow:0 0 0 0 rgba(125,211,252,.45);}to{box-shadow:0 0 0 12px rgba(125,211,252,0);}}
+    @media (max-width: 700px){
+      .controls{width:100%;justify-content:flex-start}
+      .check{width:100%;justify-content:flex-start}
+      .noteInput{min-height:90px}
+      .zoneHeader{align-items:flex-start}
+      .bottomBar{position:fixed;left:0;right:0}
+      body{padding-bottom:90px}
+    }
     footer{
       margin-top:18px;
       color:var(--muted);
@@ -235,6 +278,34 @@
       <button class="btn" id="collapseAll" type="button" title="Collapse all acts">Collapse</button>
       <button class="btn" id="reset" type="button" title="Clear all checkmarks & progress">Reset</button>
       <button class="btn" id="print" type="button" title="Print / Save as PDF">Print</button>
+    </div>
+  </div>
+  <div style="border-top:1px solid var(--border);background:color-mix(in srgb,var(--panel) 90%,transparent);padding:10px 18px">
+    <div class="topbar" style="padding:0;gap:10px">
+      <div class="legendRow">
+        <span class="badge" title="Latest content patch">Game v0.1</span>
+        <span class="badge" title="Guide revision">Guide v1.1</span>
+        <span class="badge" title="When this file was last touched">Updated just now</span>
+        <button class="btn" id="showChangelog" type="button">Patch notes</button>
+        <button class="btn" id="forkGuide" type="button">Fork this guide</button>
+      </div>
+      <div class="toolbar">
+        <button class="btn" id="dashboard" type="button">Rewards-only dashboard</button>
+        <button class="btn" id="dontMiss" type="button">Don’t miss mode</button>
+        <button class="btn" id="speedrun" type="button">Speedrun mode</button>
+        <button class="btn" id="shareLink" type="button">Share read-only link</button>
+        <button class="btn" id="exportProgress" type="button">Export</button>
+        <button class="btn" id="importProgress" type="button">Import</button>
+        <select id="profileSelect" class="btn" title="Switch character profile" style="padding:9px 12px">
+          <option value="starter">League Starter</option>
+          <option value="alt">Alt</option>
+          <option value="hc">Hardcore</option>
+        </select>
+        <select id="language" class="btn" title="Language">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+        </select>
+      </div>
     </div>
   </div>
 </header>
@@ -298,6 +369,8 @@
         <span class="tag">Gems</span>
         <span class="tag">Bench</span>
       </div>
+      <div class="actMeter" data-act-meter="1"><progress value="0" max="100"></progress><span>Act completion</span></div>
+      <div class="miniTimeline" data-timeline="1"></div>
     </summary>
     <div class="content">
 
@@ -576,6 +649,8 @@
         <span class="tag good">Permanent Buff</span>
         <span class="tag warn">Books</span>
       </div>
+      <div class="actMeter" data-act-meter="2"><progress value="0" max="100"></progress><span>Act completion</span></div>
+      <div class="miniTimeline" data-timeline="2"></div>
     </summary>
     <div class="content">
 
@@ -801,6 +876,8 @@
         <span class="tag good">Fire Res</span>
         <span class="tag bad">Ascendancy (Trial item)</span>
       </div>
+      <div class="actMeter" data-act-meter="3"><progress value="0" max="100"></progress><span>Act completion</span></div>
+      <div class="miniTimeline" data-timeline="3"></div>
     </summary>
     <div class="content">
 
@@ -1028,10 +1105,51 @@
   </footer>
 </div>
 
+<div class="bottomBar stickyPad" aria-label="Quick actions">
+  <button class="btn" id="toggleMobile">Mobile bar</button>
+  <button class="btn" id="quickNext">Next unchecked</button>
+  <button class="btn" id="toggleDonotMiss">Toggle Don’t Miss</button>
+  <button class="btn" id="toggleBuilds">Build filters</button>
+  <button class="btn" id="toggleTimeline">Timeline</button>
+</div>
+
+<div class="modal" id="modalDashboard" role="dialog" aria-modal="true">
+  <div class="modalContent">
+    <div class="modalHeader">
+      <h3 style="margin:0">Rewards-only dashboard</h3>
+      <button class="btn" data-close="modalDashboard">Close</button>
+    </div>
+    <div class="dashFilter">
+      <button data-dash-filter="all">All</button>
+      <button data-dash-filter="buff">Permanent buffs</button>
+      <button data-dash-filter="book">Books</button>
+      <button data-dash-filter="bench">Benches</button>
+      <button data-dash-filter="ascend">Ascendancy</button>
+    </div>
+    <div class="reward-dashboard" id="rewardList"></div>
+  </div>
+</div>
+
+<div class="modal" id="modalChangelog" role="dialog" aria-modal="true">
+  <div class="modalContent">
+    <div class="modalHeader">
+      <h3 style="margin:0">Patch notes</h3>
+      <button class="btn" data-close="modalChangelog">Close</button>
+    </div>
+    <ul>
+      <li>Added rewards dashboard, build filters, don’t-miss and speedrun modes.</li>
+      <li>Per-act completion meters, session notes, import/export and profiles.</li>
+      <li>Shareable read-only links, timeline view, difficulty tags, and animated feedback.</li>
+    </ul>
+  </div>
+</div>
+
 <script>
 (function(){
-  const STORAGE_KEY = "poe2_walkthrough_checks_v1";
+  const BASE_STORAGE_KEY = "poe2_walkthrough_checks_v1";
+  const NOTES_KEY = "poe2_walkthrough_notes_v1";
   const THEME_KEY = "poe2_walkthrough_theme_v1";
+  const PROFILE_KEY = "poe2_profile_sel";
 
   const q = document.getElementById("q");
   const btnTheme = document.getElementById("toggleTheme");
@@ -1039,24 +1157,49 @@
   const btnCollapse = document.getElementById("collapseAll");
   const btnReset = document.getElementById("reset");
   const btnPrint = document.getElementById("print");
+  const btnDashboard = document.getElementById("dashboard");
+  const btnDontMiss = document.getElementById("dontMiss");
+  const btnSpeedrun = document.getElementById("speedrun");
+  const btnExport = document.getElementById("exportProgress");
+  const btnImport = document.getElementById("importProgress");
+  const btnShare = document.getElementById("shareLink");
+  const btnFork = document.getElementById("forkGuide");
+  const btnShowChangelog = document.getElementById("showChangelog");
+  const btnQuickNext = document.getElementById("quickNext");
+  const btnTimelineToggle = document.getElementById("toggleTimeline");
+  const btnBuildToggle = document.getElementById("toggleBuilds");
+  const btnDontMissBottom = document.getElementById("toggleDonotMiss");
+  const profileSelect = document.getElementById("profileSelect");
+  const languageSelect = document.getElementById("language");
   const doneCount = document.getElementById("doneCount");
   const allCount = document.getElementById("allCount");
   const pbar = document.getElementById("pbar");
+  const rewardList = document.getElementById("rewardList");
+  const modalDashboard = document.getElementById("modalDashboard");
+  const modalChangelog = document.getElementById("modalChangelog");
 
   const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"][data-id]'));
   const zones = Array.from(document.querySelectorAll("[data-zone]"));
   const acts = Array.from(document.querySelectorAll("details.section"));
+  let currentProfile = localStorage.getItem(PROFILE_KEY) || "starter";
+  let readOnlyShare = false;
+  let dontMissActive = false;
+
+  // Utilities
+  const normalize = (s)=> (s||"").toLowerCase().trim();
+  const storageKey = ()=> `${BASE_STORAGE_KEY}_${currentProfile}`;
+  const noteKey = ()=> `${NOTES_KEY}_${currentProfile}`;
 
   function loadChecks(){
     try{
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = localStorage.getItem(storageKey());
       if(!raw) return {};
       return JSON.parse(raw) || {};
     }catch(e){ return {}; }
   }
-  function saveChecks(map){
-    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(map)); }catch(e){}
-  }
+  function saveChecks(map){ if(readOnlyShare) return; try{ localStorage.setItem(storageKey(), JSON.stringify(map)); }catch(e){} }
+  function loadNotes(){ try{ return JSON.parse(localStorage.getItem(noteKey())||"{}") || {}; }catch(e){ return {}; } }
+  function saveNotes(map){ if(readOnlyShare) return; try{ localStorage.setItem(noteKey(), JSON.stringify(map)); }catch(e){} }
 
   function applyTheme(){
     const t = localStorage.getItem(THEME_KEY) || "dark";
@@ -1077,23 +1220,79 @@
     const pct = total ? Math.round((done/total)*100) : 0;
     pbar.value = pct;
     pbar.max = 100;
+
+    acts.forEach((act, idx)=>{
+      const actCbs = Array.from(act.querySelectorAll('input[type="checkbox"][data-id]'));
+      const actDone = actCbs.filter(c=>c.checked).length;
+      const meter = act.querySelector(`[data-act-meter="${idx+1}"] progress`);
+      if(meter){
+        meter.max = actCbs.length || 1;
+        meter.value = actDone;
+      }
+      const title = act.querySelector('.sectTitle strong');
+      if(title){ title.textContent = title.textContent.replace(/ \(Complete\)$/,'') + (actDone === actCbs.length && actCbs.length ? ' (Complete)' : ''); }
+    });
+  }
+
+  function rewardTypeFromText(text){
+    const t = normalize(text);
+    if(/ascend|trial/.test(t)) return "ascend";
+    if(/bench|craft|smith/.test(t)) return "bench";
+    if(/book|passive|specialisation/.test(t)) return "book";
+    if(/permanent buff|\+\d+%|spirit|res/i.test(text)) return "buff";
+    return "misc";
+  }
+
+  function buildTags(text){
+    const t = normalize(text);
+    const tags = [];
+    if(/weapon|smith|strike|melee|axe|sword|club/.test(t)) tags.push("melee");
+    if(/spell|ritual|orb|mana|totem|staff|wand/.test(t)) tags.push("caster");
+    if(/minion|spirit|summon|totem/.test(t)) tags.push("minion");
+    if(/bow|arrow|quiver|ranger/.test(t)) tags.push("bow");
+    return tags.length ? tags : ["all"];
+  }
+
+  function attachNotes(){
+    const notes = loadNotes();
+    zones.forEach((zone, idx)=>{
+      const zId = zone.dataset.zoneId || `zone-${idx+1}`;
+      zone.dataset.zoneId = zId;
+      zone.querySelectorAll('.session-notes').forEach(n=>n.remove());
+      const wrapper = document.createElement("div");
+      wrapper.className = "session-notes";
+      const label = document.createElement("label");
+      label.textContent = "Session notes (saved per profile)";
+      const textarea = document.createElement("textarea");
+      textarea.className = "noteInput";
+      textarea.value = notes[zId] || "";
+      textarea.addEventListener("input", () => {
+        const cur = loadNotes();
+        cur[zId] = textarea.value;
+        saveNotes(cur);
+      });
+      if(readOnlyShare){ textarea.setAttribute("disabled", true); }
+      wrapper.appendChild(label);
+      wrapper.appendChild(textarea);
+      zone.appendChild(wrapper);
+    });
   }
 
   function initChecks(){
     const map = loadChecks();
     for(const cb of checkboxes){
       cb.checked = !!map[cb.dataset.id];
+      cb.parentElement.classList.add("animatedCheck");
       cb.addEventListener("change", () => {
         const current = loadChecks();
         current[cb.dataset.id] = cb.checked;
         saveChecks(current);
         recomputeProgress();
       });
+      if(readOnlyShare){ cb.setAttribute("disabled", true); }
     }
     recomputeProgress();
   }
-
-  function normalize(s){ return (s||"").toLowerCase().trim(); }
 
   function filter(){
     const term = normalize(q.value);
@@ -1112,12 +1311,302 @@
 
   function resetAll(){
     if(!confirm("Reset all checkmarks and progress?")) return;
-    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(storageKey());
     for(const cb of checkboxes){ cb.checked = false; }
     recomputeProgress();
   }
 
-  // Keyboard shortcuts
+  function createTimeline(){
+    acts.forEach((act, idx)=>{
+      const timeline = act.querySelector(`[data-timeline="${idx+1}"]`);
+      if(!timeline) return;
+      timeline.innerHTML = "";
+      act.querySelectorAll(".zoneName").forEach((zName)=>{
+        const btn = document.createElement("button");
+        btn.textContent = zName.textContent.trim();
+        btn.addEventListener("click", ()=> zName.scrollIntoView({behavior:"smooth",block:"start"}));
+        timeline.appendChild(btn);
+      });
+    });
+  }
+
+  function renderRewards(filterType="all"){
+    rewardList.innerHTML = "";
+    const items = [];
+    zones.forEach((zone)=>{
+      const zoneTitle = zone.querySelector(".zoneName")?.textContent?.trim() || "Zone";
+      const rewardLabels = Array.from(zone.querySelectorAll(".checks label"));
+      rewardLabels.forEach((label)=>{
+        const type = rewardTypeFromText(label.innerText);
+        items.push({
+          type,
+          zone: zoneTitle,
+          text: label.innerText.trim(),
+          checkbox: label.querySelector('input')
+        });
+      });
+    });
+    items.filter(item => filterType === "all" || item.type === filterType)
+      .forEach((item)=>{
+        const card = document.createElement("div");
+        card.className = "rewardCard";
+        const badge = document.createElement("span");
+        badge.className = `tag ${item.type === "buff" ? "good" : item.type === "book" ? "warn" : item.type === "bench" ? "" : item.type === "ascend" ? "bad" : ""}`;
+        badge.textContent = item.type;
+        const title = document.createElement("strong");
+        title.textContent = item.text;
+        const meta = document.createElement("div");
+        meta.className = "subtle";
+        meta.textContent = item.zone;
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.checked = item.checkbox.checked;
+        cb.addEventListener("change", ()=>{
+          item.checkbox.checked = cb.checked;
+          item.checkbox.dispatchEvent(new Event("change"));
+        });
+        const label = document.createElement("label");
+        label.style.display = "flex";
+        label.style.alignItems = "center";
+        label.style.gap = "8px";
+        label.appendChild(cb);
+        label.appendChild(title);
+        card.appendChild(badge);
+        card.appendChild(label);
+        card.appendChild(meta);
+        rewardList.appendChild(card);
+    });
+  }
+
+  function toggleModal(el, show){
+    if(show){ el.classList.add("active"); }
+    else{ el.classList.remove("active"); }
+  }
+
+  function dontMissMode(force){
+    if(force === true) dontMissActive = true;
+    else if(force === false) dontMissActive = false;
+    else dontMissActive = !dontMissActive;
+    zones.forEach((z)=>{
+      const important = /permanent buff|book|bench|ascend|spirit|resist/i.test(z.innerText);
+      z.classList.toggle("hidden", dontMissActive && !important);
+    });
+  }
+
+  function applyBuildFilter(active){
+    zones.forEach((z)=>{
+      const tags = buildTags(z.innerText);
+      const match = !active || tags.includes(active) || tags.includes("all");
+      z.classList.toggle("faded", active && !match);
+      if(match && active) z.classList.add("highlight"); else z.classList.remove("highlight");
+    });
+  }
+
+  function speedrunMode(enabled){
+    document.body.classList.toggle("speedrun", enabled);
+  }
+
+  function nextUnchecked(){
+    const next = checkboxes.find(cb => !cb.checked);
+    if(next){ next.scrollIntoView({behavior:"smooth",block:"center"}); next.focus(); }
+  }
+
+  function exportData(){
+    const payload = {
+      profile: currentProfile,
+      checks: loadChecks(),
+      notes: loadNotes()
+    };
+    const blob = btoa(JSON.stringify(payload));
+    navigator.clipboard?.writeText(blob);
+    alert("Progress copied to clipboard as JSON blob.");
+  }
+
+  function importData(){
+    const raw = prompt("Paste exported progress blob:");
+    if(!raw) return;
+    try{
+      const decoded = JSON.parse(atob(raw));
+      if(decoded.checks){ localStorage.setItem(storageKey(), JSON.stringify(decoded.checks)); }
+      if(decoded.notes){ localStorage.setItem(noteKey(), JSON.stringify(decoded.notes)); }
+      initChecks();
+      attachNotes();
+      alert("Imported!");
+    }catch(err){ alert("Invalid import data"); }
+  }
+
+  function shareProgress(){
+    const payload = {
+      profile: currentProfile,
+      checks: loadChecks(),
+      notes: loadNotes()
+    };
+    const encoded = btoa(JSON.stringify(payload));
+    const url = `${location.origin}${location.pathname}#share=${encoded}`;
+    navigator.clipboard?.writeText(url);
+    alert("Shareable read-only link copied!");
+  }
+
+  function tryLoadShare(){
+    const hash = location.hash || "";
+    if(hash.startsWith("#share=")){
+      try{
+        const data = JSON.parse(atob(hash.replace("#share=","")));
+        readOnlyShare = true;
+        document.body.classList.add("readonly");
+        if(data.checks){ localStorage.setItem(storageKey(), JSON.stringify(data.checks)); }
+        if(data.notes){ localStorage.setItem(noteKey(), JSON.stringify(data.notes)); }
+      }catch(e){ console.warn("Share load failed", e); }
+    }
+  }
+
+  function initializeProfiles(){
+    profileSelect.value = currentProfile;
+    profileSelect.addEventListener("change", ()=>{
+      currentProfile = profileSelect.value;
+      localStorage.setItem(PROFILE_KEY, currentProfile);
+      initChecks();
+      attachNotes();
+      recomputeProgress();
+    });
+  }
+
+  function keyboardNav(){
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "/" && document.activeElement !== q){ e.preventDefault(); q.focus(); }
+      else if(e.key === "Escape" && document.activeElement === q){ q.value = ""; q.blur(); filter(); }
+      else if(e.key === "n" && !e.metaKey){ nextUnchecked(); }
+      else if(e.key === "t" && e.altKey){ speedrunMode(!document.body.classList.contains("speedrun")); }
+    });
+  }
+
+  function languageInit(){
+    const texts = {
+      en: { search: "Type to filter (e.g., 'resistance', 'book', 'bench', 'ritual')…" },
+      es: { search: "Escribe para filtrar (ej. resistencia, libro, banco, ritual)…" }
+    };
+    languageSelect.addEventListener("change", ()=>{
+      const lang = languageSelect.value;
+      q.placeholder = texts[lang]?.search || texts.en.search;
+    });
+  }
+
+  function calloutHints(){
+    zones.forEach((z)=>{
+      const text = z.innerText.toLowerCase();
+      const hints = [];
+      if(text.includes("outer")) hints.push("🧱 Follow outer wall");
+      if(text.includes("opposite")) hints.push("🧭 Opposite entrance");
+      if(text.includes("swirl")) hints.push("🌪 Black swirls point the way");
+      if(!hints.length) return;
+      const c = document.createElement("div");
+      c.className = "callout";
+      c.innerHTML = hints.map(h=>`<i>${h}</i>`).join(" · ");
+      z.querySelector(".zoneHeader")?.appendChild(c);
+    });
+  }
+
+  function difficultyBadges(){
+    zones.forEach((z)=>{
+      const diff = (parseInt(z.querySelector(".zoneNum")?.textContent||"1",10)%5)+1;
+      const badge = document.createElement("span");
+      badge.className = "difficulty";
+      badge.textContent = "★".repeat(diff).padEnd(5,"☆");
+      z.querySelector(".zoneName")?.appendChild(badge);
+    });
+  }
+
+  function timelineToggle(){
+    const show = document.body.dataset.timeline !== "on";
+    document.body.dataset.timeline = show ? "on" : "off";
+    document.querySelectorAll(".miniTimeline").forEach(el=> el.style.display = show ? "flex" : "none");
+  }
+
+  function createBuildButtons(){
+    const container = document.createElement("div");
+    container.className = "toolbar";
+    container.style.margin = "12px 0";
+    ["melee","caster","minion","bow"].forEach((name)=>{
+      const btn = document.createElement("button");
+      btn.className = "btn";
+      btn.textContent = `${name.charAt(0).toUpperCase()+name.slice(1)} focus`;
+      btn.addEventListener("click", ()=> applyBuildFilter(name));
+      container.appendChild(btn);
+    });
+    document.querySelector(".hero")?.appendChild(container);
+  }
+
+  function hookDashboardFilters(){
+    document.querySelectorAll("[data-dash-filter]").forEach(btn=>{
+      btn.addEventListener("click", ()=> renderRewards(btn.dataset.dashFilter));
+    });
+  }
+
+  function initSharingUI(){
+    btnShare.addEventListener("click", shareProgress);
+  }
+
+  function initModals(){
+    btnDashboard.addEventListener("click", ()=>{ renderRewards(); toggleModal(modalDashboard,true); });
+    btnShowChangelog.addEventListener("click", ()=> toggleModal(modalChangelog,true));
+    document.querySelectorAll("[data-close]").forEach((btn)=>{
+      btn.addEventListener("click", ()=>{
+        const target = document.getElementById(btn.dataset.close);
+        if(target) toggleModal(target,false);
+      });
+    });
+    modalDashboard.addEventListener("click", (e)=>{ if(e.target === modalDashboard) toggleModal(modalDashboard,false); });
+    modalChangelog.addEventListener("click", (e)=>{ if(e.target === modalChangelog) toggleModal(modalChangelog,false); });
+  }
+
+  function initBottomBar(){
+    btnQuickNext.addEventListener("click", nextUnchecked);
+    btnTimelineToggle.addEventListener("click", timelineToggle);
+    btnBuildToggle.addEventListener("click", ()=>applyBuildFilter("melee"));
+    btnDontMissBottom.addEventListener("click", ()=>dontMissMode());
+    document.getElementById("toggleMobile").addEventListener("click", ()=>{
+      document.querySelector(".bottomBar")?.classList.toggle("hidden");
+    });
+  }
+
+  function initOtherButtons(){
+    btnDontMiss.addEventListener("click", ()=> dontMissMode());
+    btnSpeedrun.addEventListener("click", ()=> speedrunMode(!document.body.classList.contains("speedrun")) );
+    btnExport.addEventListener("click", exportData);
+    btnImport.addEventListener("click", importData);
+    btnFork.addEventListener("click", ()=> window.open("https://github.com/", "_blank"));
+  }
+
+  function addTooltips(){
+    document.querySelectorAll(".tag").forEach(tag=>{
+      const t = normalize(tag.textContent);
+      if(t.includes("spirit")) tag.title = "Spirit powers skills and abilities";
+      if(t.includes("bench")) tag.title = "Bench unlock improves crafting options";
+      if(t.includes("book")) tag.title = "Books grant passive points";
+      if(t.includes("ascend")) tag.title = "Ascendancy unlocks Trial item";
+    });
+  }
+
+  tryLoadShare();
+  attachNotes();
+  initChecks();
+  applyTheme();
+  filter();
+  createTimeline();
+  difficultyBadges();
+  calloutHints();
+  createBuildButtons();
+  hookDashboardFilters();
+  initModals();
+  initBottomBar();
+  initOtherButtons();
+  initSharingUI();
+  keyboardNav();
+  languageInit();
+  initializeProfiles();
+  addTooltips();
+
+  // Keyboard shortcuts for search and reset
   document.addEventListener("keydown", (e) => {
     if(e.key === "/" && document.activeElement !== q){
       e.preventDefault();
@@ -1137,9 +1626,6 @@
   btnCollapse.addEventListener("click", collapseAll);
   btnReset.addEventListener("click", resetAll);
   btnPrint.addEventListener("click", () => window.print());
-
-  applyTheme();
-  initChecks();
 })();
 </script>
 </body>
