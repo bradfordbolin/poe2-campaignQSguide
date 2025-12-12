@@ -22,40 +22,167 @@
       --radius: 14px;
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --bg-layer: radial-gradient(1200px 800px at 20% -10%, rgba(125,211,252,.20), transparent 55%),
+                  radial-gradient(1100px 700px at 110% 0%, rgba(167,139,250,.18), transparent 50%);
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 12px;
+      --space-lg: 18px;
+      --wrap-y: 22px;
+      --wrap-x: 18px;
+      --wrap-bottom: 70px;
+      --card-pad: 14px;
+      --section-pad: 14px;
+      --zone-pad: 12px;
+      --btn-pad: 9px 12px;
+      --control-gap: 10px;
+      --control-radius: 999px;
+      --font-size: 13px;
+      --line-height:1.55;
+      --header-blur: 10px;
     }
-    [data-theme="light"]{
-      --bg:#f6f8fb;
-      --panel:#ffffff;
-      --panel2:#f2f5fb;
-      --text:#0b1220;
-      --muted:#475569;
-      --border:#d8e1ef;
-      --accent:#0284c7;
-      --accent2:#6d28d9;
-      --shadow: 0 10px 30px rgba(2,6,23,.10);
+    [data-theme="poe-dark"]{}
+    [data-theme="parchment"]{
+      --bg: #f1e7d7;
+      --panel: #fbf5e6;
+      --panel2: #f5e8d1;
+      --text: #2f2616;
+      --muted: #6b5536;
+      --border: #d5c1a3;
+      --accent: #c47b27;
+      --accent2: #9a5b18;
+      --shadow: 0 8px 22px rgba(77,48,17,.18);
+      --radius: 16px;
+      --btn-pad: 10px 14px;
+      --wrap-bottom: 80px;
+      --bg-layer: radial-gradient(1200px 900px at 20% 10%, rgba(196,123,39,.18), transparent 50%),
+                  radial-gradient(1000px 760px at 80% 10%, rgba(154,91,24,.12), transparent 60%);
+    }
+    [data-theme="oled"]{
+      --bg:#000000;
+      --panel:#050505;
+      --panel2:#0a0a0a;
+      --text:#f7f7f7;
+      --muted:#9ca3af;
+      --border:#1f2937;
+      --accent:#22d3ee;
+      --accent2:#a21caf;
+      --shadow: 0 12px 28px rgba(0,0,0,.55);
+    }
+    [data-theme="high-contrast"]{
+      --bg:#0b0b0b;
+      --panel:#0f172a;
+      --panel2:#111827;
+      --text:#ffffff;
+      --muted:#e2e8f0;
+      --border:#fbbf24;
+      --accent:#fbbf24;
+      --accent2:#f97316;
+      --radius: 10px;
+      --shadow: 0 0 0 2px var(--border);
+      --line-height:1.45;
+    }
+    [data-theme="speedrun"]{
+      --space-sm: 6px;
+      --space-md: 8px;
+      --space-lg: 14px;
+      --wrap-y: 18px;
+      --wrap-x: 14px;
+      --wrap-bottom: 46px;
+      --card-pad: 10px;
+      --section-pad: 10px;
+      --zone-pad: 10px;
+      --btn-pad: 7px 10px;
+      --control-gap: 6px;
+      --radius: 10px;
+      --line-height:1.4;
+      --font-size:12px;
+    }
+    [data-theme="mobile"]{
+      --space-sm: 10px;
+      --space-md: 14px;
+      --space-lg: 22px;
+      --wrap-y: 22px;
+      --wrap-x: 14px;
+      --wrap-bottom: 90px;
+      --card-pad: 16px;
+      --zone-pad: 14px;
+      --btn-pad: 12px 16px;
+      --control-gap: 12px;
+      --radius: 16px;
+      --line-height:1.6;
+      --font-size:14px;
+    }
+    [data-theme="matrix"]{
+      --bg:#050807;
+      --panel:#08100d;
+      --panel2:#0b1612;
+      --text:#c1f7d5;
+      --muted:#5de093;
+      --border:#0f2f1f;
+      --accent:#22c55e;
+      --accent2:#15803d;
+      --shadow: 0 10px 30px rgba(4,12,9,.45);
+      --bg-layer: linear-gradient(180deg, rgba(34,197,94,.06), transparent);
+      --mono: "Share Tech Mono", var(--mono);
+    }
+    [data-theme="modern"]{
+      --bg:#0f172a;
+      --panel:#111827;
+      --panel2:#0b1220;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --border:#1f2937;
+      --accent:#38bdf8;
+      --accent2:#ec4899;
+      --shadow: 0 16px 38px rgba(15,23,42,.35);
+      --radius: 18px;
+      --btn-pad:10px 14px;
+    }
+    [data-theme="nature"]{
+      --bg:#0f2418;
+      --panel:#113021;
+      --panel2:#0d271a;
+      --text:#e4f4e9;
+      --muted:#9bd1b0;
+      --border:#1f5136;
+      --accent:#4ade80;
+      --accent2:#22c55e;
+      --bg-layer: radial-gradient(900px 900px at 10% 10%, rgba(34,197,94,.12), transparent 55%),
+                  radial-gradient(800px 700px at 80% 10%, rgba(52,211,153,.08), transparent 60%);
+    }
+    [data-theme="water"]{
+      --bg:#0a1b2a;
+      --panel:#0f2638;
+      --panel2:#0c1f2f;
+      --text:#dcefff;
+      --muted:#9ac7e3;
+      --border:#1c3d5a;
+      --accent:#38bdf8;
+      --accent2:#22c55e;
+      --bg-layer: radial-gradient(1000px 800px at 80% 0%, rgba(56,189,248,.20), transparent 60%),
+                  radial-gradient(1200px 900px at 10% 20%, rgba(34,197,235,.10), transparent 70%);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
       font-family:var(--sans);
-      background: radial-gradient(1200px 800px at 20% -10%, rgba(125,211,252,.20), transparent 55%),
-                  radial-gradient(1100px 700px at 110% 0%, rgba(167,139,250,.18), transparent 50%),
-                  var(--bg);
+      background: var(--bg-layer), var(--bg);
       color:var(--text);
-      line-height:1.55;
+      line-height:var(--line-height);
     }
     a{color:inherit}
-    .wrap{max-width:1100px;margin:0 auto;padding:22px 18px 70px}
+    .wrap{max-width:1100px;margin:0 auto;padding:var(--wrap-y) var(--wrap-x) var(--wrap-bottom)}
     header{
       position:sticky;top:0;z-index:20;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(var(--header-blur));
       background: color-mix(in srgb, var(--bg) 78%, transparent);
       border-bottom:1px solid var(--border);
     }
     .topbar{
-      max-width:1100px;margin:0 auto;padding:12px 18px;
-      display:flex;gap:12px;align-items:center;justify-content:space-between;
+      max-width:1100px;margin:0 auto;padding:var(--space-md) var(--wrap-x);
+      display:flex;gap:var(--space-md);align-items:center;justify-content:space-between;
     }
     .brand{display:flex;align-items:center;gap:10px}
     .logo{
@@ -64,14 +191,14 @@
       box-shadow: var(--shadow);
     }
     h1{font-size:18px;margin:0}
-    .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+    .controls{display:flex;gap:var(--control-gap);align-items:center;flex-wrap:wrap;justify-content:flex-end}
     .btn, .pill, input[type="search"]{
       border:1px solid var(--border);
       background: color-mix(in srgb, var(--panel) 92%, transparent);
       color:var(--text);
-      border-radius:999px;
-      padding:9px 12px;
-      font-size:13px;
+      border-radius:var(--control-radius);
+      padding:var(--btn-pad);
+      font-size:var(--font-size);
       box-shadow:none;
       outline:none;
     }
@@ -94,7 +221,7 @@
       border:1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding:14px;
+      padding:var(--card-pad);
     }
     .subtle{color:var(--muted);font-size:13px}
     .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -129,7 +256,7 @@
       list-style:none;
       display:flex;align-items:center;justify-content:space-between;gap:12px;
       cursor:pointer;
-      padding:14px 14px;
+      padding:var(--section-pad);
       background: color-mix(in srgb, var(--panel2) 76%, transparent);
       border-bottom:1px solid var(--border);
     }
@@ -139,11 +266,11 @@
     }
     .sectTitle strong{font-size:15px}
     .sectMeta{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-    .content{padding:12px 14px 14px}
+    .content{padding:var(--space-md) var(--section-pad) var(--section-pad)}
     .zone{
       border:1px solid var(--border);
       border-radius: 12px;
-      padding:12px 12px 10px;
+      padding:var(--zone-pad);
       background: color-mix(in srgb, var(--panel) 94%, transparent);
       margin-bottom:10px;
     }
@@ -250,7 +377,7 @@
     @media print{
       header{position:static;backdrop-filter:none}
       body{background:#fff}
-      :root,[data-theme="light"]{
+      :root,[data-theme]{
         --bg:#ffffff;--panel:#ffffff;--panel2:#ffffff;--text:#000;--muted:#333;--border:#ddd;
       }
       .btn,.pill,input[type="search"],.note{display:none!important}
@@ -273,7 +400,18 @@
     <div class="controls">
       <span class="pill" title="Search zones and rewards"><strong>Search</strong>&nbsp;<span class="kbd">/</span></span>
       <input id="q" type="search" placeholder="Type to filter (e.g., 'resistance', 'book', 'bench', 'ritual')…" autocomplete="off" />
-      <button class="btn" id="toggleTheme" type="button" title="Toggle dark/light">Theme</button>
+      <select class="btn" id="themeSelect" title="Theme picker">
+        <option value="poe-dark">PoE Dark</option>
+        <option value="parchment">Parchment</option>
+        <option value="oled">OLED</option>
+        <option value="high-contrast">High Contrast</option>
+        <option value="speedrun">Speedrun Compact</option>
+        <option value="mobile">Mobile Big Buttons</option>
+        <option value="matrix">Matrix</option>
+        <option value="modern">Modern</option>
+        <option value="nature">Nature</option>
+        <option value="water">Water</option>
+      </select>
       <button class="btn" id="expandAll" type="button" title="Expand all acts">Expand</button>
       <button class="btn" id="collapseAll" type="button" title="Collapse all acts">Collapse</button>
       <button class="btn" id="reset" type="button" title="Clear all checkmarks & progress">Reset</button>
@@ -1150,9 +1288,13 @@
   const NOTES_KEY = "poe2_walkthrough_notes_v1";
   const THEME_KEY = "poe2_walkthrough_theme_v1";
   const PROFILE_KEY = "poe2_profile_sel";
+  const DEFAULT_THEME = "poe-dark";
+  const SUPPORTED_THEMES = [
+    "poe-dark","parchment","oled","high-contrast","speedrun","mobile","matrix","modern","nature","water"
+  ];
 
   const q = document.getElementById("q");
-  const btnTheme = document.getElementById("toggleTheme");
+  const themeSelect = document.getElementById("themeSelect");
   const btnExpand = document.getElementById("expandAll");
   const btnCollapse = document.getElementById("collapseAll");
   const btnReset = document.getElementById("reset");
@@ -1201,15 +1343,15 @@
   function loadNotes(){ try{ return JSON.parse(localStorage.getItem(noteKey())||"{}") || {}; }catch(e){ return {}; } }
   function saveNotes(map){ if(readOnlyShare) return; try{ localStorage.setItem(noteKey(), JSON.stringify(map)); }catch(e){} }
 
-  function applyTheme(){
-    const t = localStorage.getItem(THEME_KEY) || "dark";
-    document.documentElement.setAttribute("data-theme", t === "light" ? "light" : "dark");
+  function resolveThemeName(name){
+    if(!name) return DEFAULT_THEME;
+    return SUPPORTED_THEMES.includes(name) ? name : DEFAULT_THEME;
   }
-  function toggleTheme(){
-    const cur = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
-    const next = cur === "light" ? "dark" : "light";
-    localStorage.setItem(THEME_KEY, next);
-    applyTheme();
+  function applyTheme(name){
+    const theme = resolveThemeName(name || localStorage.getItem(THEME_KEY));
+    document.documentElement.setAttribute("data-theme", theme);
+    if(themeSelect){ themeSelect.value = theme; }
+    localStorage.setItem(THEME_KEY, theme);
   }
 
   function recomputeProgress(){
@@ -1491,6 +1633,13 @@
     });
   }
 
+  function themePickerInit(){
+    if(!themeSelect) return;
+    const saved = resolveThemeName(localStorage.getItem(THEME_KEY));
+    themeSelect.value = saved;
+    themeSelect.addEventListener("change", (e)=> applyTheme(e.target.value));
+  }
+
   function calloutHints(){
     zones.forEach((z)=>{
       const text = z.innerText.toLowerCase();
@@ -1590,6 +1739,7 @@
   tryLoadShare();
   attachNotes();
   initChecks();
+  themePickerInit();
   applyTheme();
   filter();
   createTimeline();
@@ -1621,7 +1771,6 @@
   });
 
   q.addEventListener("input", filter);
-  btnTheme.addEventListener("click", toggleTheme);
   btnExpand.addEventListener("click", expandAll);
   btnCollapse.addEventListener("click", collapseAll);
   btnReset.addEventListener("click", resetAll);
