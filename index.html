@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Path of Exile 2 – Campaign Walkthrough (Acts 1–3)</title>
-  <meta name="description" content="Streamlined Path of Exile 2 Acts 1–3 walkthrough optimized for playing while you go, including optional rewards and permanent buffs." />
+  <title>Brodfards POE2 Campaign Quickstart Guide</title>
+  <meta name="description" content="Streamlined Path of Exile 2 Acts 1–4 walkthrough for game version 0.4.0 with reward checklists, themes, and pre-endgame prep." />
   <style>
     :root{
       --bg:#0b0f14;
@@ -22,56 +22,259 @@
       --radius: 14px;
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --bg-layer: radial-gradient(1200px 800px at 20% -10%, rgba(125,211,252,.20), transparent 55%),
+                  radial-gradient(1100px 700px at 110% 0%, rgba(167,139,250,.18), transparent 50%);
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 12px;
+      --space-lg: 18px;
+      --wrap-y: 22px;
+      --wrap-x: 18px;
+      --wrap-bottom: 70px;
+      --card-pad: 14px;
+      --section-pad: 14px;
+      --zone-pad: 12px;
+      --btn-pad: 9px 12px;
+      --control-gap: 10px;
+      --control-radius: 999px;
+      --font-size: 13px;
+      --line-height:1.55;
+      --header-blur: 10px;
     }
-    [data-theme="light"]{
-      --bg:#f6f8fb;
-      --panel:#ffffff;
-      --panel2:#f2f5fb;
-      --text:#0b1220;
-      --muted:#475569;
-      --border:#d8e1ef;
-      --accent:#0284c7;
-      --accent2:#6d28d9;
-      --shadow: 0 10px 30px rgba(2,6,23,.10);
+    [data-theme="poe-dark"]{}
+    [data-theme="parchment"]{
+      --bg: #f1e7d7;
+      --panel: #fbf5e6;
+      --panel2: #f5e8d1;
+      --text: #2f2616;
+      --muted: #6b5536;
+      --border: #d5c1a3;
+      --accent: #c47b27;
+      --accent2: #9a5b18;
+      --shadow: 0 8px 22px rgba(77,48,17,.18);
+      --radius: 16px;
+      --btn-pad: 10px 14px;
+      --wrap-bottom: 80px;
+      --bg-layer: radial-gradient(1200px 900px at 20% 10%, rgba(196,123,39,.18), transparent 50%),
+                  radial-gradient(1000px 760px at 80% 10%, rgba(154,91,24,.12), transparent 60%);
+    }
+    [data-theme="oled"]{
+      --bg:#000000;
+      --panel:#050505;
+      --panel2:#0a0a0a;
+      --text:#f7f7f7;
+      --muted:#9ca3af;
+      --border:#1f2937;
+      --accent:#22d3ee;
+      --accent2:#a21caf;
+      --shadow: 0 12px 28px rgba(0,0,0,.55);
+    }
+    [data-theme="high-contrast"]{
+      --bg:#0b0b0b;
+      --panel:#0f172a;
+      --panel2:#111827;
+      --text:#ffffff;
+      --muted:#e2e8f0;
+      --border:#fbbf24;
+      --accent:#fbbf24;
+      --accent2:#f97316;
+      --radius: 10px;
+      --shadow: 0 0 0 2px var(--border);
+      --line-height:1.45;
+    }
+    [data-theme="speedrun"]{
+      --space-sm: 6px;
+      --space-md: 8px;
+      --space-lg: 14px;
+      --wrap-y: 18px;
+      --wrap-x: 14px;
+      --wrap-bottom: 46px;
+      --card-pad: 10px;
+      --section-pad: 10px;
+      --zone-pad: 10px;
+      --btn-pad: 7px 10px;
+      --control-gap: 6px;
+      --radius: 10px;
+      --line-height:1.4;
+      --font-size:12px;
+    }
+    [data-theme="mobile"]{
+      --space-sm: 10px;
+      --space-md: 14px;
+      --space-lg: 22px;
+      --wrap-y: 22px;
+      --wrap-x: 14px;
+      --wrap-bottom: 90px;
+      --card-pad: 16px;
+      --zone-pad: 14px;
+      --btn-pad: 12px 16px;
+      --control-gap: 12px;
+      --radius: 16px;
+      --line-height:1.6;
+      --font-size:14px;
+    }
+    [data-theme="high-contrast-oled"]{
+      --bg:#000000;
+      --panel:#05060a;
+      --panel2:#0a0c12;
+      --text:#ffffff;
+      --muted:#e2e8f0;
+      --border:#fbbf24;
+      --accent:#fbbf24;
+      --accent2:#f97316;
+      --radius: 10px;
+      --shadow: 0 0 0 2px var(--border);
+      --line-height:1.45;
+    }
+    [data-theme="speedrun-oled"]{
+      --bg:#000000;
+      --panel:#050505;
+      --panel2:#0a0a0a;
+      --text:#f7f7f7;
+      --muted:#9ca3af;
+      --border:#1f2937;
+      --accent:#22d3ee;
+      --accent2:#a21caf;
+      --space-sm: 6px;
+      --space-md: 8px;
+      --space-lg: 14px;
+      --wrap-y: 18px;
+      --wrap-x: 14px;
+      --wrap-bottom: 46px;
+      --card-pad: 10px;
+      --section-pad: 10px;
+      --zone-pad: 10px;
+      --btn-pad: 7px 10px;
+      --control-gap: 6px;
+      --radius: 10px;
+      --line-height:1.4;
+      --font-size:12px;
+    }
+    [data-theme="mobile-oled"]{
+      --bg:#000000;
+      --panel:#050505;
+      --panel2:#0a0a0a;
+      --text:#f7f7f7;
+      --muted:#9ca3af;
+      --border:#1f2937;
+      --accent:#22d3ee;
+      --accent2:#a21caf;
+      --space-sm: 10px;
+      --space-md: 14px;
+      --space-lg: 22px;
+      --wrap-y: 22px;
+      --wrap-x: 14px;
+      --wrap-bottom: 90px;
+      --card-pad: 16px;
+      --zone-pad: 14px;
+      --btn-pad: 12px 16px;
+      --control-gap: 12px;
+      --radius: 16px;
+      --line-height:1.6;
+      --font-size:14px;
+    }
+    [data-theme="modern-oled"]{
+      --bg:#020711;
+      --panel:#050a14;
+      --panel2:#020510;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --border:#1f2937;
+      --accent:#38bdf8;
+      --accent2:#ec4899;
+      --shadow: 0 16px 38px rgba(0,0,0,.45);
+      --radius: 18px;
+      --btn-pad:10px 14px;
+    }
+    [data-theme="matrix"]{
+      --bg:#050807;
+      --panel:#08100d;
+      --panel2:#0b1612;
+      --text:#c1f7d5;
+      --muted:#5de093;
+      --border:#0f2f1f;
+      --accent:#22c55e;
+      --accent2:#15803d;
+      --shadow: 0 10px 30px rgba(4,12,9,.45);
+      --bg-layer: linear-gradient(180deg, rgba(34,197,94,.06), transparent);
+      --mono: "Share Tech Mono", var(--mono);
+    }
+    [data-theme="modern"]{
+      --bg:#0f172a;
+      --panel:#111827;
+      --panel2:#0b1220;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --border:#1f2937;
+      --accent:#38bdf8;
+      --accent2:#ec4899;
+      --shadow: 0 16px 38px rgba(15,23,42,.35);
+      --radius: 18px;
+      --btn-pad:10px 14px;
+    }
+    [data-theme="nature"]{
+      --bg:#0f2418;
+      --panel:#113021;
+      --panel2:#0d271a;
+      --text:#e4f4e9;
+      --muted:#9bd1b0;
+      --border:#1f5136;
+      --accent:#4ade80;
+      --accent2:#22c55e;
+      --bg-layer: radial-gradient(900px 900px at 10% 10%, rgba(34,197,94,.12), transparent 55%),
+                  radial-gradient(800px 700px at 80% 10%, rgba(52,211,153,.08), transparent 60%);
+    }
+    [data-theme="water"]{
+      --bg:#0a1b2a;
+      --panel:#0f2638;
+      --panel2:#0c1f2f;
+      --text:#dcefff;
+      --muted:#9ac7e3;
+      --border:#1c3d5a;
+      --accent:#38bdf8;
+      --accent2:#22c55e;
+      --bg-layer: radial-gradient(1000px 800px at 80% 0%, rgba(56,189,248,.20), transparent 60%),
+                  radial-gradient(1200px 900px at 10% 20%, rgba(34,197,235,.10), transparent 70%);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
       font-family:var(--sans);
-      background: radial-gradient(1200px 800px at 20% -10%, rgba(125,211,252,.20), transparent 55%),
-                  radial-gradient(1100px 700px at 110% 0%, rgba(167,139,250,.18), transparent 50%),
-                  var(--bg);
+      background: var(--bg-layer), var(--bg);
       color:var(--text);
-      line-height:1.55;
+      line-height:var(--line-height);
     }
     a{color:inherit}
-    .wrap{max-width:1100px;margin:0 auto;padding:22px 18px 70px}
+    .wrap{max-width:1100px;margin:0 auto;padding:var(--wrap-y) var(--wrap-x) var(--wrap-bottom)}
     header{
       position:sticky;top:0;z-index:20;
-      backdrop-filter: blur(10px);
-      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      backdrop-filter: blur(var(--header-blur));
+      background: linear-gradient(90deg, color-mix(in srgb, var(--panel) 90%, transparent), color-mix(in srgb, var(--panel2) 90%, transparent));
       border-bottom:1px solid var(--border);
+      box-shadow: 0 6px 24px rgba(0,0,0,.22);
     }
     .topbar{
-      max-width:1100px;margin:0 auto;padding:12px 18px;
-      display:flex;gap:12px;align-items:center;justify-content:space-between;
+      max-width:1100px;margin:0 auto;padding:var(--space-md) var(--wrap-x);
+      display:flex;gap:var(--space-md);align-items:center;justify-content:space-between;
     }
-    .brand{display:flex;align-items:center;gap:10px}
+    .brand{display:flex;align-items:center;gap:12px}
     .logo{
       width:34px;height:34px;border-radius:10px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       box-shadow: var(--shadow);
     }
-    h1{font-size:18px;margin:0}
-    .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+    .brand h1{font-size:19px;margin:0;letter-spacing:0.2px}
+    .titleRow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .titleMeta{display:flex;gap:6px;flex-wrap:wrap}
+    .controls{display:flex;gap:var(--control-gap);align-items:center;flex-wrap:wrap;justify-content:flex-end}
     .btn, .pill, input[type="search"]{
       border:1px solid var(--border);
       background: color-mix(in srgb, var(--panel) 92%, transparent);
       color:var(--text);
-      border-radius:999px;
-      padding:9px 12px;
-      font-size:13px;
+      border-radius:var(--control-radius);
+      padding:var(--btn-pad);
+      font-size:var(--font-size);
       box-shadow:none;
       outline:none;
     }
@@ -94,7 +297,7 @@
       border:1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding:14px;
+      padding:var(--card-pad);
     }
     .subtle{color:var(--muted);font-size:13px}
     .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -129,7 +332,7 @@
       list-style:none;
       display:flex;align-items:center;justify-content:space-between;gap:12px;
       cursor:pointer;
-      padding:14px 14px;
+      padding:var(--section-pad);
       background: color-mix(in srgb, var(--panel2) 76%, transparent);
       border-bottom:1px solid var(--border);
     }
@@ -139,11 +342,11 @@
     }
     .sectTitle strong{font-size:15px}
     .sectMeta{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-    .content{padding:12px 14px 14px}
+    .content{padding:var(--space-md) var(--section-pad) var(--section-pad)}
     .zone{
       border:1px solid var(--border);
       border-radius: 12px;
-      padding:12px 12px 10px;
+      padding:var(--zone-pad);
       background: color-mix(in srgb, var(--panel) 94%, transparent);
       margin-bottom:10px;
     }
@@ -178,7 +381,7 @@
       font-size:12px;color:var(--muted);
       user-select:none;
     }
-    .check input{accent-color: var(--accent); width:14px;height:14px}
+    .check input{accent-color: var(--accent); width:18px;height:18px}
     .note{
       margin-top:8px;
       border-left:3px solid var(--accent);
@@ -192,6 +395,21 @@
       display:grid;grid-template-columns:1fr 1fr;gap:10px
     }
     @media (max-width: 900px){ .twoCols{grid-template-columns:1fr} }
+    .buildPanel{grid-column:1/-1;display:grid;gap:12px}
+    .buildHeader{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:6px}
+    .buildHeader h2{margin:0;font-size:17px}
+    .buildBadges{display:flex;gap:8px;flex-wrap:wrap}
+    .buildGrid{display:grid;grid-template-columns:1.3fr .7fr;gap:10px}
+    @media(max-width: 900px){ .buildGrid{grid-template-columns:1fr} }
+    .milestoneTable{width:100%;border-collapse:collapse;font-size:12px}
+    .milestoneTable th,.milestoneTable td{border:1px solid var(--border);padding:6px 8px;vertical-align:top}
+    .milestoneTable th{background:color-mix(in srgb,var(--panel2) 90%,transparent);text-align:left}
+    .buildList{margin:6px 0 0 18px;padding:0}
+    .buildList li{margin:4px 0}
+    .buildChecks{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+    .buildChecks .check{width:100%;justify-content:space-between}
+    @media(max-width: 700px){ .buildChecks .check{align-items:flex-start} }
+    .buildNote{margin-top:6px;color:var(--muted);font-size:12px}
     .progressRow{
       display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
       margin-top:8px
@@ -199,6 +417,49 @@
     progress{width:280px;max-width:100%;height:12px}
     .muted{color:var(--muted)}
     .hidden{display:none!important}
+    .faded{opacity:.35}
+    .badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:4px 10px;border-radius:10px;border:1px solid var(--border);background:color-mix(in srgb,var(--panel2) 86%,transparent)}
+    .legendRow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .miniTimeline{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+    .miniTimeline button{border:1px solid var(--border);background:color-mix(in srgb,var(--panel2) 80%,transparent);color:var(--text);border-radius:8px;padding:4px 8px;font-size:11px;cursor:pointer}
+    .difficulty{font-size:11px;color:var(--warn)}
+    .reward-dashboard{max-height:70vh;overflow:auto;margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .rewardCard{border:1px solid var(--border);border-radius:12px;padding:10px;background:color-mix(in srgb,var(--panel2) 90%,transparent)}
+    .rewardCard strong{display:block}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter: blur(6px);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+    .modal.active{display:flex}
+    .modalContent{background:var(--panel);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);max-width:900px;width:100%;padding:16px}
+    .modalHeader{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .noteInput{width:100%;min-height:64px;border-radius:12px;border:1px solid var(--border);background:color-mix(in srgb,var(--panel2) 90%,transparent);color:var(--text);padding:8px;font-family:var(--sans)}
+    .bottomBar{position:sticky;bottom:0;z-index:25;background:color-mix(in srgb,var(--panel) 95%,transparent);border-top:1px solid var(--border);padding:10px 14px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;backdrop-filter:blur(10px)}
+    .bottomBar .btn{padding:10px 14px;font-weight:700}
+    .stickyPad{padding-bottom:10px}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap}
+    .actMeter{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+    .actMeter progress{width:180px}
+    .callout{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+    .callout i{font-style:normal}
+    .speedrun .note{display:none}
+    .speedrun .zone{padding:10px 10px}
+    .speedrun body{line-height:1.3}
+    .speedrun .content{padding:8px 10px 10px}
+    .highlight{outline:2px solid var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 40%, transparent);}
+    .readonly input[type="checkbox"], .readonly textarea{pointer-events:none;opacity:.6}
+    .dashFilter{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+    .dashFilter button{border:1px solid var(--border);background:color-mix(in srgb,var(--panel2) 82%,transparent);color:var(--text);border-radius:10px;padding:6px 10px;font-size:12px;cursor:pointer}
+    .session-notes{margin-top:8px}
+    .session-notes label{font-size:12px;color:var(--muted)}
+    .animatedCheck{position:relative}
+    .animatedCheck input:checked + span::after{content:"";position:absolute;inset:-4px;border-radius:999px;animation:pulse 0.5s ease-out}
+    @keyframes pulse{from{box-shadow:0 0 0 0 rgba(125,211,252,.45);}to{box-shadow:0 0 0 12px rgba(125,211,252,0);}}
+    @media (max-width: 700px){
+      .controls{width:100%;justify-content:flex-start}
+      .check{width:100%;justify-content:flex-start}
+      .noteInput{min-height:90px}
+      .zoneHeader{align-items:flex-start}
+      .bottomBar{position:fixed;left:0;right:0}
+      body{padding-bottom:90px}
+    }
     footer{
       margin-top:18px;
       color:var(--muted);
@@ -207,7 +468,7 @@
     @media print{
       header{position:static;backdrop-filter:none}
       body{background:#fff}
-      :root,[data-theme="light"]{
+      :root,[data-theme]{
         --bg:#ffffff;--panel:#ffffff;--panel2:#ffffff;--text:#000;--muted:#333;--border:#ddd;
       }
       .btn,.pill,input[type="search"],.note{display:none!important}
@@ -222,19 +483,73 @@
     <div class="brand">
       <div class="logo" aria-hidden="true"></div>
       <div>
-        <h1>PoE 2 – Campaign Walkthrough (Acts 1–3)</h1>
-        <div class="subtle">Fast, reward-complete route notes • checklists • offline-friendly</div>
+        <div class="titleRow">
+          <h1>Brodfards POE2 Campaign Quickstart Guide</h1>
+          <div class="titleMeta">
+            <span class="tag">Acts 1–4</span>
+            <span class="tag">Game v0.4.0</span>
+            <span class="tag">League launch ready</span>
+          </div>
+        </div>
+        <div class="subtle">Fast, reward-complete notes • pre-endgame prep • polished themes and mobile/Speedrun layouts</div>
       </div>
     </div>
 
     <div class="controls">
       <span class="pill" title="Search zones and rewards"><strong>Search</strong>&nbsp;<span class="kbd">/</span></span>
       <input id="q" type="search" placeholder="Type to filter (e.g., 'resistance', 'book', 'bench', 'ritual')…" autocomplete="off" />
-      <button class="btn" id="toggleTheme" type="button" title="Toggle dark/light">Theme</button>
+      <select class="btn" id="themeSelect" title="Theme picker">
+        <option value="poe-dark">PoE Dark</option>
+        <option value="parchment">Parchment</option>
+        <option value="oled">OLED</option>
+        <option value="high-contrast">High Contrast</option>
+        <option value="high-contrast-oled">High Contrast OLED</option>
+        <option value="speedrun">Speedrun Compact</option>
+        <option value="speedrun-oled">Speedrun OLED</option>
+        <option value="mobile">Mobile Big Buttons</option>
+        <option value="mobile-oled">Mobile OLED</option>
+        <option value="matrix">Matrix</option>
+        <option value="modern">Modern</option>
+        <option value="modern-oled">Modern OLED</option>
+        <option value="nature">Nature</option>
+        <option value="water">Water</option>
+      </select>
+      <select class="btn" id="buildSelect" title="Build overlay">
+        <option value="none">Build overlay: off</option>
+        <option value="poisonburst-pathfinder">Poisonburst Arrow Pathfinder (League starter)</option>
+      </select>
       <button class="btn" id="expandAll" type="button" title="Expand all acts">Expand</button>
       <button class="btn" id="collapseAll" type="button" title="Collapse all acts">Collapse</button>
       <button class="btn" id="reset" type="button" title="Clear all checkmarks & progress">Reset</button>
       <button class="btn" id="print" type="button" title="Print / Save as PDF">Print</button>
+    </div>
+  </div>
+  <div style="border-top:1px solid var(--border);background:color-mix(in srgb,var(--panel) 90%,transparent);padding:10px 18px">
+    <div class="topbar" style="padding:0;gap:10px">
+      <div class="legendRow">
+        <span class="badge" title="Latest content patch">Game v0.4.0</span>
+        <span class="badge" title="Guide revision">Guide v1.2</span>
+        <span class="badge" title="When this file was last touched">Updated for league start</span>
+        <button class="btn" id="showChangelog" type="button">Patch notes</button>
+        <button class="btn" id="forkGuide" type="button">Fork this guide</button>
+      </div>
+      <div class="toolbar">
+        <button class="btn" id="dashboard" type="button">Rewards-only dashboard</button>
+        <button class="btn" id="dontMiss" type="button">Don’t miss mode</button>
+        <button class="btn" id="speedrun" type="button">Speedrun mode</button>
+        <button class="btn" id="shareLink" type="button">Share read-only link</button>
+        <button class="btn" id="exportProgress" type="button">Export</button>
+        <button class="btn" id="importProgress" type="button">Import</button>
+        <select id="profileSelect" class="btn" title="Switch character profile" style="padding:9px 12px">
+          <option value="starter">League Starter</option>
+          <option value="alt">Alt</option>
+          <option value="hc">Hardcore</option>
+        </select>
+        <select id="language" class="btn" title="Language">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+        </select>
+      </div>
     </div>
   </div>
 </header>
@@ -279,9 +594,25 @@
       <a href="#act1"><span>Act 1 – Ogham Coast</span><span class="tag warn">14 zones</span></a>
       <a href="#act2"><span>Act 2 – Vastiri Desert</span><span class="tag warn">11 zones</span></a>
       <a href="#act3"><span>Act 3 – Jungles of Vastiri</span><span class="tag warn">11 zones</span></a>
+      <a href="#act4"><span>Act 4 – Thunderpeaks & Ruined Capital</span><span class="tag warn">10 zones</span></a>
       <div class="note" style="margin-top:10px;border-left-color:var(--accent2)">
         Keyboard: press <span class="kbd">/</span> to focus search. Press <span class="kbd">Esc</span> to clear.
       </div>
+    </div>
+
+    <div class="card buildPanel" id="buildPanel">
+      <div class="buildHeader">
+        <div>
+          <h2>Build-specific leveling overlay</h2>
+          <div class="subtle">Select a build from the top bar to overlay leveling notes, rotations, and checklists alongside the act guide.</div>
+        </div>
+        <div class="buildBadges">
+          <span class="tag">Multi-build ready</span>
+          <span class="tag">Saved per profile</span>
+          <span class="tag">Bow / melee / caster filters</span>
+        </div>
+      </div>
+      <div class="subtle">No build selected yet. Pick one in the top-right “Build overlay” dropdown to load tailored milestones and track build-only tasks.</div>
     </div>
   </div>
 
@@ -298,6 +629,8 @@
         <span class="tag">Gems</span>
         <span class="tag">Bench</span>
       </div>
+      <div class="actMeter" data-act-meter="1"><progress value="0" max="100"></progress><span>Act completion</span></div>
+      <div class="miniTimeline" data-timeline="1"></div>
     </summary>
     <div class="content">
 
@@ -576,6 +909,8 @@
         <span class="tag good">Permanent Buff</span>
         <span class="tag warn">Books</span>
       </div>
+      <div class="actMeter" data-act-meter="2"><progress value="0" max="100"></progress><span>Act completion</span></div>
+      <div class="miniTimeline" data-timeline="2"></div>
     </summary>
     <div class="content">
 
@@ -801,6 +1136,8 @@
         <span class="tag good">Fire Res</span>
         <span class="tag bad">Ascendancy (Trial item)</span>
       </div>
+      <div class="actMeter" data-act-meter="3"><progress value="0" max="100"></progress><span>Act completion</span></div>
+      <div class="miniTimeline" data-timeline="3"></div>
     </summary>
     <div class="content">
 
@@ -1013,6 +1350,251 @@
     </div>
   </details>
 
+  <!-- ACT 4 -->
+  <details class="section" id="act4" open>
+    <summary>
+      <div class="sectTitle">
+        <strong>ACT 4 – Thunderpeaks & Ruined Capital</strong>
+        <span class="subtle">Lightning-heavy climbs, ancient city, endgame unlocks</span>
+      </div>
+      <div class="sectMeta">
+        <span class="tag good">Resists</span>
+        <span class="tag warn">Books</span>
+        <span class="tag">Bench</span>
+        <span class="tag">Ascendancy</span>
+      </div>
+      <div class="actMeter" data-act-meter="4"><progress value="0" max="100"></progress><span>Act completion</span></div>
+      <div class="miniTimeline" data-timeline="4"></div>
+    </summary>
+    <div class="content">
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">1</span> Stormbreak Foothills</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag good">+10% Lightning Res</span>
+            <span class="tag">Waypoint</span>
+          </div>
+        </div>
+        <ul>
+          <li>Follow <span class="callout"><i>🧭</i> Wind beacons</span> up the ridge and activate the <strong>Storm Shrine</strong> for <strong>+10% Lightning Resistance</strong>.</li>
+          <li>Unlock the waypoint before pushing to the cliff switchbacks.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z1-res">+10% Lightning Res</label>
+          <label class="check"><input type="checkbox" data-id="a4z1-waypoint">Waypoint</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">2</span> Thunderhead Ascent</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag warn">Book (+1 point)</span>
+            <span class="tag">Uncut Gems</span>
+          </div>
+        </div>
+        <ul>
+          <li>Rescue <strong>Karst</strong> trapped under debris; he hands over a <strong>Book of Specialisation (+1 Passive Point)</strong>.</li>
+          <li>Loot the ritual cache with <span class="callout"><i>🌪</i> swirling winds</span> for <strong>Uncut Skill Gems</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z2-book">Book of Specialisation</label>
+          <label class="check"><input type="checkbox" data-id="a4z2-gems">Uncut Gems</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">3</span> Cloud Sanctum (Ascendancy Trial)</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag bad">Ascendancy Trial</span>
+            <span class="tag">Bench Unlock</span>
+          </div>
+        </div>
+        <ul>
+          <li>Complete the <strong>Stormcaller’s Trial</strong> to bank an additional Ascendancy point later.</li>
+          <li>Interact with the <strong>Stormsigil Forge</strong> to unlock a <strong>Socket Tuning Bench</strong>.</li>
+          <li><span class="note">Don’t miss the trial; it’s required before endgame.</span></li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z3-trial">Ascendancy Trial complete</label>
+          <label class="check"><input type="checkbox" data-id="a4z3-bench">Socket Tuning Bench</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">4</span> Obsidian Causeway</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag good">+10% Fire Res</span>
+            <span class="tag">Bench Unlock</span>
+          </div>
+        </div>
+        <ul>
+          <li>Defeat the <strong>Igneous Colossus</strong> guarding the bridge to gain <strong>+10% Fire Resistance</strong>.</li>
+          <li>Craft at the <strong>Obsidian Crucible</strong> to unlock <strong>Damage Conversion Bench</strong> recipes.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z4-fire">+10% Fire Res</label>
+          <label class="check"><input type="checkbox" data-id="a4z4-bench">Damage Conversion Bench</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">5</span> Ruined Capital – Outer Ward</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag warn">Book (+2 points)</span>
+            <span class="tag">Waypoint</span>
+          </div>
+        </div>
+        <ul>
+          <li>Clear to the <strong>Shattered Plaza</strong> waypoint.</li>
+          <li>Loot the <strong>Imperial Archive</strong> side room for a <strong>Book of Specialisation (+2 Passive Points)</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z5-waypoint">Shattered Plaza waypoint</label>
+          <label class="check"><input type="checkbox" data-id="a4z5-book">Book (+2 points)</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">6</span> Grand Plaza & Siege Lines</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Quality Weapons</span>
+            <span class="tag">Bench Unlock</span>
+          </div>
+        </div>
+        <ul>
+          <li>Escort the militia through the <strong>Siege Lines</strong>; open the armory chest for <strong>2× 20% Quality Weapons</strong>.</li>
+          <li>Use the <strong>Reinforcement Anvil</strong> to unlock <strong>Armour/Weapon Quality Bench</strong> crafts.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z6-weapons">2× 20% Quality Weapons</label>
+          <label class="check"><input type="checkbox" data-id="a4z6-bench">Armour/Weapon Quality Bench</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">7</span> Sunken Archive</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag warn">Book (+1 point)</span>
+            <span class="tag">Gems</span>
+          </div>
+        </div>
+        <ul>
+          <li>Drain the flooded stacks via <span class="callout"><i>🧱</i> outer wall valves</span> to reach the <strong>Vaal Tablet</strong> for a <strong>Book of Specialisation (+1 Passive Point)</strong>.</li>
+          <li>Claim the <strong>Research Cache</strong> for <strong>uncut support gems</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z7-book">Book (+1 point)</label>
+          <label class="check"><input type="checkbox" data-id="a4z7-gems">Support Gem cache</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">8</span> Royal Aqueduct</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag good">+10% Cold Res</span>
+            <span class="tag">Bench Unlock</span>
+          </div>
+        </div>
+        <ul>
+          <li>Clear corrupted water elementals to cleanse the <strong>Frost Reliquary</strong> granting <strong>+10% Cold Resistance</strong>.</li>
+          <li>Harvest the <strong>Pressure Valve</strong> to unlock <strong>Flask Capacity Bench</strong> recipes.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z8-cold">+10% Cold Res</label>
+          <label class="check"><input type="checkbox" data-id="a4z8-bench">Flask Capacity Bench</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">9</span> Royal Approach</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Ascendancy Portal</span>
+            <span class="tag">Waypoint</span>
+          </div>
+        </div>
+        <ul>
+          <li>Power the <strong>Stormway Obelisks</strong> to open the <strong>Ascendancy Antechamber</strong> portal (needed before maps).</li>
+          <li>Grab the final waypoint before the finale.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z9-portal">Ascendancy portal opened</label>
+          <label class="check"><input type="checkbox" data-id="a4z9-waypoint">Approach waypoint</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">10</span> Citadel Apex – High Templar Kaom</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag warn">Book (+2 points)</span>
+            <span class="tag bad">Act Boss</span>
+          </div>
+        </div>
+        <ul>
+          <li>Fight through phased arena; stay near <span class="callout"><i>🧭</i> outer runes</span> to dodge storms.</li>
+          <li>Defeat <strong>Kaom</strong> to receive a <strong>Book of Specialisation (+2 Passive Points)</strong> and unlock endgame NPC access.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z10-book">Book (+2 points)</label>
+          <label class="check"><input type="checkbox" data-id="a4z10-boss">Act 4 boss</label>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- Endgame Prep -->
+  <details class="section" id="endgame" open>
+    <summary>
+      <div class="sectTitle">
+        <strong>BEFORE ENDGAME – League 0.4.0 Prep List</strong>
+        <span class="subtle">Do this before mapping or campaign resets</span>
+      </div>
+      <div class="sectMeta">
+        <span class="tag bad">Don’t Miss</span>
+        <span class="tag">Bench</span>
+        <span class="tag">Atlas</span>
+      </div>
+    </summary>
+    <div class="content">
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">Prep</span> Endgame Readiness Checks</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag bad">Mandatory</span>
+          </div>
+        </div>
+        <ul>
+          <li>Spend all <strong>Books of Specialisation</strong> and check for unused passive points.</li>
+          <li>Complete all <strong>Ascendancy trials</strong> (Act 2 Trial of the Ancestors, Act 3 Ritual Trial, Act 4 Stormcaller’s Trial) and claim your Ascendancy in town.</li>
+          <li>Bench unlocks: verify <strong>Flask, Socket Tuning, Conversion, Quality</strong> benches are active for crafting.</li>
+          <li>Defensive caps: 75% elemental resists, 3–4 life flasks with bleed/freeze immunity, and at least one mobility flask.</li>
+          <li>Gear swaps: weapon upgrades from Act 4 quality chest and a 4–5 link for main skill.</li>
+          <li>Progression: buy missing <strong>map device portal scrolls</strong>, stock wisdom/portal scrolls, and stash an <strong>extra movement skill</strong>.</li>
+          <li>Optional: run <strong>league mechanic tutorial node</strong> once for Atlas unlock credit (0.4.0).</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="prep-books">All books spent</label>
+          <label class="check"><input type="checkbox" data-id="prep-ascend">Ascendancy taken</label>
+          <label class="check"><input type="checkbox" data-id="prep-benches">Benches unlocked</label>
+          <label class="check"><input type="checkbox" data-id="prep-resists">Resists & flasks ready</label>
+          <label class="check"><input type="checkbox" data-id="prep-links">4–5 link equipped</label>
+          <label class="check"><input type="checkbox" data-id="prep-maps">Map device ready</label>
+          <label class="check"><input type="checkbox" data-id="prep-league">League tutorial cleared</label>
+        </div>
+      </div>
+    </div>
+  </details>
+
   <footer class="card">
     <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between">
       <div>
@@ -1020,53 +1602,183 @@
         <div class="subtle">This file is self-contained. Save it anywhere and open it in your browser. Checkmarks persist per browser/device.</div>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <span class="tag">v1.0</span>
-        <span class="tag">Acts 1–3</span>
-        <span class="tag">Streamlined</span>
+        <span class="tag">v1.2</span>
+        <span class="tag">Acts 1–4</span>
+        <span class="tag">League 0.4.0 ready</span>
       </div>
     </div>
   </footer>
 </div>
 
+<div class="bottomBar stickyPad" aria-label="Quick actions">
+  <button class="btn" id="toggleMobile">Mobile bar</button>
+  <button class="btn" id="quickNext">Next unchecked</button>
+  <button class="btn" id="toggleDonotMiss">Toggle Don’t Miss</button>
+  <button class="btn" id="toggleBuilds">Build filters</button>
+  <button class="btn" id="toggleTimeline">Timeline</button>
+</div>
+
+<div class="modal" id="modalDashboard" role="dialog" aria-modal="true">
+  <div class="modalContent">
+    <div class="modalHeader">
+      <h3 style="margin:0">Rewards-only dashboard</h3>
+      <button class="btn" data-close="modalDashboard">Close</button>
+    </div>
+    <div class="dashFilter">
+      <button data-dash-filter="all">All</button>
+      <button data-dash-filter="buff">Permanent buffs</button>
+      <button data-dash-filter="book">Books</button>
+      <button data-dash-filter="bench">Benches</button>
+      <button data-dash-filter="ascend">Ascendancy</button>
+    </div>
+    <div class="reward-dashboard" id="rewardList"></div>
+  </div>
+</div>
+
+<div class="modal" id="modalChangelog" role="dialog" aria-modal="true">
+  <div class="modalContent">
+    <div class="modalHeader">
+      <h3 style="margin:0">Patch notes</h3>
+      <button class="btn" data-close="modalChangelog">Close</button>
+    </div>
+    <ul>
+      <li>Added build overlay selector with Poisonburst Arrow Pathfinder leveling table, rotation, and warnings.</li>
+      <li>Added Act 4 walkthrough with new resist books, benches, and Kaom finale.</li>
+      <li>Introduced OLED variants (High Contrast, Speedrun, Mobile, Modern) and refreshed header branding.</li>
+      <li>Added league 0.4.0 pre-endgame checklist plus updated version badges.</li>
+    </ul>
+  </div>
+</div>
+
 <script>
 (function(){
-  const STORAGE_KEY = "poe2_walkthrough_checks_v1";
+  const BASE_STORAGE_KEY = "poe2_walkthrough_checks_v1";
+  const NOTES_KEY = "poe2_walkthrough_notes_v1";
   const THEME_KEY = "poe2_walkthrough_theme_v1";
+  const PROFILE_KEY = "poe2_profile_sel";
+  const BUILD_SELECT_KEY = "poe2_build_overlay_v1";
+  const DEFAULT_THEME = "poe-dark";
+  const SUPPORTED_THEMES = [
+    "poe-dark","parchment","oled","high-contrast","high-contrast-oled",
+    "speedrun","speedrun-oled","mobile","mobile-oled","matrix","modern","modern-oled","nature","water"
+  ];
+
+  const builds = {
+    none: { name: "None", tag: null },
+    "poisonburst-pathfinder": {
+      name: "Poisonburst Arrow Pathfinder",
+      subtitle: "League starter • Bow / Chaos / Poison • Game v0.4.0",
+      tag: "bow",
+      highlights: ["Gas Arrow unlock @22", "+flat phys stacking", "Contagion → Herald of Plague swap"],
+      checklist: [
+        { id: "build-pba-flatphys", label: "Act 1: Stack flat physical on gloves/rings/quiver + Warden bow at lvl 11", note: "Check vendors every 1–2 levels and never drop movement speed boots." },
+        { id: "build-pba-conc", label: "Link Concentrated Area to Poisonburst Arrow (first support) + Escalating Poison", note: "Huge single-target spike; keep it linked when possible." },
+        { id: "build-pba-toxgrowth", label: "Unlock Toxic Growth in Act 2 and keep Concentrated Area linked", note: "Major single-target upgrade that scales with Gas Arrow clouds." },
+        { id: "build-pba-gasarrow", label: "Level 22: buy Gas Arrow and practice Gas → Toxic Growth boss rotation", note: "Maintain clouds to proc Toxic Growth automatically." },
+        { id: "build-pba-spirit-swap", label: "Lvl ~26: swap Herald of Plague (clear) ⇄ Withering Presence (boss) as needed", note: "Boss swap adds ~20–25% damage." },
+        { id: "build-pba-bow-upgrades", label: "Use saved Iron Runes on lvl 39 Zealot or lvl 46 Artillery bow", note: "One good bow can last to campaign end." },
+        { id: "build-pba-fire-warning", label: "Avoid flat fire damage on gear until Persistent Ground II", note: "Ignites will pop Gas Arrow clouds and brick damage." }
+      ],
+      bossOrder: ["Devourer (for gems)", "Cold Witch", "Hut Witch", "Rust King"],
+      milestones: [
+        { level: "Lvl 1-6", area: "Start", gear: "Stack flat phys on gloves/rings/quiver; movement speed boots", skills: "Lightning Arrow + Contagion", note: "Flat phys is a massive Act 1 spike." },
+        { level: "Lvl 6", area: "Ranger – Fate of the Vaal", gear: "Keep vendor-checking every 1–2 levels", skills: "Ascendancy: Overwhelming Toxicity (when available)", note: "Act 1 boss order: Devourer > Cold Witch > Hut Witch > Rust King" },
+        { level: "Lvl 7-13", area: "Act 1", gear: "Lvl 11 Warden Bow (prefer %phys)", skills: "Support 1: Concentrated Area; Support 2: Escalating Poison", note: "Passive tree: rush Crippling Toxins, Clean Shot, Vile Wounds." },
+        { level: "Lvl 14-21", area: "Act 2", gear: "Broadhead Quiver", skills: "Unlock Toxic Growth; keep Concentrated Area linked", note: "Use Contagion to spread poison until Herald of Plague." },
+        { level: "Lvl 22-28", area: "Act 2 / Act 3", gear: "Keep flat phys, life, resists", skills: "Lvl 22 Gas Arrow; swap Herald of Plague in for clear", note: "Avoid flat fire damage until Persistent Ground II." },
+        { level: "Lvl 29-38", area: "Act 3 / Act 4", gear: "Recurve Bow upgrade", skills: "Maximise support links", note: "Damage becomes extremely good here." },
+        { level: "Lvl 39-53", area: "Act 4 / Act 5", gear: "Zealot (39) or Artillery (46) bow", skills: "Add Honed Instincts + Magnified Area I", note: "Bow can last to end of campaign." }
+      ],
+      clearing: [
+        "Lvl 1-26: Poisonburst Arrow once, then Contagion to spread poison (acts like poison prolif).",
+        "Lvl 26+: Drop Contagion; use Poisonburst Arrow + Gas Arrow after Herald of Plague is online."
+      ],
+      bossRotation: [
+        "Place Vine Arrow on boss for free damage.",
+        "Use Gas Arrow 1-2x to seed clouds (procs Toxic Growth).",
+        "Spam Toxic Growth while refreshing Gas Arrow when it expires."
+      ],
+      tips: [
+        "Damage scales purely from flat physical; elemental scaling is negligible.",
+        "Vendor-check rings/gloves/quiver/bow every 1–2 levels for flat phys upgrades.",
+        "Always salvage quality weapons for Whetstones and socketed items for Artificer's Orbs.",
+        "Never drop movement speed boots unless the new pair also has movement speed.",
+        "For bossing, swap Herald of Plague to Withering Presence for a 20–25% single-target bump."
+      ],
+      warnings: [
+        "Avoid flat fire damage until you have Persistent Ground II for Gas Arrow (prevents cloud pops).",
+        "Maintain Concentrated Area on Poisonburst/Toxic Growth for bosses—30% more damage from support." 
+      ]
+    }
+  };
 
   const q = document.getElementById("q");
-  const btnTheme = document.getElementById("toggleTheme");
+  const themeSelect = document.getElementById("themeSelect");
   const btnExpand = document.getElementById("expandAll");
   const btnCollapse = document.getElementById("collapseAll");
   const btnReset = document.getElementById("reset");
   const btnPrint = document.getElementById("print");
+  const btnDashboard = document.getElementById("dashboard");
+  const btnDontMiss = document.getElementById("dontMiss");
+  const btnSpeedrun = document.getElementById("speedrun");
+  const btnExport = document.getElementById("exportProgress");
+  const btnImport = document.getElementById("importProgress");
+  const btnShare = document.getElementById("shareLink");
+  const btnFork = document.getElementById("forkGuide");
+  const btnShowChangelog = document.getElementById("showChangelog");
+  const btnQuickNext = document.getElementById("quickNext");
+  const btnTimelineToggle = document.getElementById("toggleTimeline");
+  const btnBuildToggle = document.getElementById("toggleBuilds");
+  const btnDontMissBottom = document.getElementById("toggleDonotMiss");
+  const profileSelect = document.getElementById("profileSelect");
+  const languageSelect = document.getElementById("language");
   const doneCount = document.getElementById("doneCount");
   const allCount = document.getElementById("allCount");
   const pbar = document.getElementById("pbar");
+  const rewardList = document.getElementById("rewardList");
+  const modalDashboard = document.getElementById("modalDashboard");
+  const modalChangelog = document.getElementById("modalChangelog");
 
-  const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"][data-id]'));
+  let checkboxes = [];
+  const wiredCheckboxes = new Set();
   const zones = Array.from(document.querySelectorAll("[data-zone]"));
   const acts = Array.from(document.querySelectorAll("details.section"));
+  const buildPanel = document.getElementById("buildPanel");
+  const buildSelect = document.getElementById("buildSelect");
+  let currentProfile = localStorage.getItem(PROFILE_KEY) || "starter";
+  let readOnlyShare = false;
+  let dontMissActive = false;
+
+  // Utilities
+  const normalize = (s)=> (s||"").toLowerCase().trim();
+  const storageKey = ()=> `${BASE_STORAGE_KEY}_${currentProfile}`;
+  const noteKey = ()=> `${NOTES_KEY}_${currentProfile}`;
+  const buildKey = ()=> `${BUILD_SELECT_KEY}_${currentProfile}`;
 
   function loadChecks(){
     try{
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = localStorage.getItem(storageKey());
       if(!raw) return {};
       return JSON.parse(raw) || {};
     }catch(e){ return {}; }
   }
-  function saveChecks(map){
-    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(map)); }catch(e){}
+  function saveChecks(map){ if(readOnlyShare) return; try{ localStorage.setItem(storageKey(), JSON.stringify(map)); }catch(e){} }
+  function loadNotes(){ try{ return JSON.parse(localStorage.getItem(noteKey())||"{}") || {}; }catch(e){ return {}; } }
+  function saveNotes(map){ if(readOnlyShare) return; try{ localStorage.setItem(noteKey(), JSON.stringify(map)); }catch(e){} }
+
+  function syncCheckboxes(){
+    checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"][data-id]'));
   }
 
-  function applyTheme(){
-    const t = localStorage.getItem(THEME_KEY) || "dark";
-    document.documentElement.setAttribute("data-theme", t === "light" ? "light" : "dark");
+  function resolveThemeName(name){
+    if(!name) return DEFAULT_THEME;
+    return SUPPORTED_THEMES.includes(name) ? name : DEFAULT_THEME;
   }
-  function toggleTheme(){
-    const cur = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
-    const next = cur === "light" ? "dark" : "light";
-    localStorage.setItem(THEME_KEY, next);
-    applyTheme();
+  function applyTheme(name){
+    const theme = resolveThemeName(name || localStorage.getItem(THEME_KEY));
+    document.documentElement.setAttribute("data-theme", theme);
+    if(themeSelect){ themeSelect.value = theme; }
+    localStorage.setItem(THEME_KEY, theme);
   }
 
   function recomputeProgress(){
@@ -1077,23 +1789,185 @@
     const pct = total ? Math.round((done/total)*100) : 0;
     pbar.value = pct;
     pbar.max = 100;
+
+    acts.forEach((act, idx)=>{
+      const actCbs = Array.from(act.querySelectorAll('input[type="checkbox"][data-id]'));
+      const actDone = actCbs.filter(c=>c.checked).length;
+      const meter = act.querySelector(`[data-act-meter="${idx+1}"] progress`);
+      if(meter){
+        meter.max = actCbs.length || 1;
+        meter.value = actDone;
+      }
+      const title = act.querySelector('.sectTitle strong');
+      if(title){ title.textContent = title.textContent.replace(/ \(Complete\)$/,'') + (actDone === actCbs.length && actCbs.length ? ' (Complete)' : ''); }
+    });
+  }
+
+  function rewardTypeFromText(text){
+    const t = normalize(text);
+    if(/ascend|trial/.test(t)) return "ascend";
+    if(/bench|craft|smith/.test(t)) return "bench";
+    if(/book|passive|specialisation/.test(t)) return "book";
+    if(/permanent buff|\+\d+%|spirit|res/i.test(text)) return "buff";
+    return "misc";
+  }
+
+  function buildTags(text){
+    const t = normalize(text);
+    const tags = [];
+    if(/weapon|smith|strike|melee|axe|sword|club/.test(t)) tags.push("melee");
+    if(/spell|ritual|orb|mana|totem|staff|wand/.test(t)) tags.push("caster");
+    if(/minion|spirit|summon|totem/.test(t)) tags.push("minion");
+    if(/bow|arrow|quiver|ranger/.test(t)) tags.push("bow");
+    return tags.length ? tags : ["all"];
+  }
+
+  function renderBuildOverlay(buildId){
+    if(!buildPanel || !buildSelect) return;
+    const data = builds[buildId] || builds.none;
+    localStorage.setItem(buildKey(), buildId);
+    buildSelect.value = buildId;
+    buildPanel.innerHTML = "";
+
+    const header = document.createElement("div");
+    header.className = "buildHeader";
+    header.innerHTML = `
+      <div>
+        <h2>${data.name || "Build overlay"}</h2>
+        <div class="subtle">${data.subtitle || "Choose a build to layer in leveling steps, rotations, and warnings."}</div>
+      </div>
+      <div class="buildBadges">
+        ${data.tag ? `<span class="tag">${data.tag.charAt(0).toUpperCase()+data.tag.slice(1)} focus</span>` : ''}
+        ${data.highlights ? data.highlights.map(h=>`<span class="tag">${h}</span>`).join("") : ''}
+      </div>
+    `;
+    buildPanel.appendChild(header);
+
+    if(!data || buildId === "none"){
+      const empty = document.createElement("div");
+      empty.className = "subtle";
+      empty.textContent = "Pick a build from the top bar to load milestones and build-only checklists.";
+      buildPanel.appendChild(empty);
+      applyBuildFilter(null);
+      syncCheckboxes();
+      recomputeProgress();
+      return;
+    }
+
+    const grid = document.createElement("div");
+    grid.className = "buildGrid";
+
+    const left = document.createElement("div");
+    left.innerHTML = `<h3 style="margin:0 0 6px 0">Leveling milestones (1–53)</h3>`;
+    const table = document.createElement("table");
+    table.className = "milestoneTable";
+    table.innerHTML = `<thead><tr><th>Level</th><th>Act / Area</th><th>Gear or item</th><th>Gems & skills</th><th>Notes</th></tr></thead>`;
+    const tbody = document.createElement("tbody");
+    (data.milestones||[]).forEach(m=>{
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${m.level}</td><td>${m.area}</td><td>${m.gear}</td><td>${m.skills}</td><td>${m.note||""}</td>`;
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    left.appendChild(table);
+
+    if(data.bossOrder){
+      const boss = document.createElement("div");
+      boss.className = "buildNote";
+      boss.innerHTML = `<strong>Act 1 boss order:</strong> ${data.bossOrder.join(" → ")}`;
+      left.appendChild(boss);
+    }
+
+    const rotation = document.createElement("div");
+    rotation.innerHTML = `
+      <h3 style="margin:12px 0 6px 0">How to play</h3>
+      <div><strong>Clearing</strong><ul class="buildList">${(data.clearing||[]).map(item=>`<li>${item}</li>`).join("")}</ul></div>
+      <div style="margin-top:6px"><strong>Boss / rare rotation</strong><ul class="buildList">${(data.bossRotation||[]).map(item=>`<li>${item}</li>`).join("")}</ul></div>
+    `;
+    left.appendChild(rotation);
+
+    const right = document.createElement("div");
+    right.innerHTML = `<h3 style="margin:0 0 6px 0">Quick setup checklist</h3>`;
+    const checklistWrap = document.createElement("div");
+    checklistWrap.className = "buildChecks";
+    (data.checklist||[]).forEach(item=>{
+      const label = document.createElement("label");
+      label.className = "check";
+      label.innerHTML = `<input type="checkbox" data-id="${item.id}"><span>${item.label}</span>`;
+      if(item.note){
+        const note = document.createElement("div");
+        note.className = "buildNote";
+        note.textContent = item.note;
+        label.appendChild(note);
+      }
+      checklistWrap.appendChild(label);
+    });
+    right.appendChild(checklistWrap);
+
+    if(data.tips?.length){
+      const tips = document.createElement("div");
+      tips.innerHTML = `<h3 style="margin:12px 0 6px 0">Key tips</h3><ul class="buildList">${data.tips.map(t=>`<li>${t}</li>`).join("")}</ul>`;
+      right.appendChild(tips);
+    }
+
+    if(data.warnings?.length){
+      const warn = document.createElement("div");
+      warn.innerHTML = `<h3 style="margin:12px 0 6px 0">Warnings</h3><ul class="buildList">${data.warnings.map(t=>`<li>${t}</li>`).join("")}</ul>`;
+      right.appendChild(warn);
+    }
+
+    grid.appendChild(left);
+    grid.appendChild(right);
+    buildPanel.appendChild(grid);
+
+    applyBuildFilter(data.tag);
+    initChecks();
+  }
+
+  function attachNotes(){
+    const notes = loadNotes();
+    zones.forEach((zone, idx)=>{
+      const zId = zone.dataset.zoneId || `zone-${idx+1}`;
+      zone.dataset.zoneId = zId;
+      zone.querySelectorAll('.session-notes').forEach(n=>n.remove());
+      const wrapper = document.createElement("div");
+      wrapper.className = "session-notes";
+      const label = document.createElement("label");
+      label.textContent = "Session notes (saved per profile)";
+      const textarea = document.createElement("textarea");
+      textarea.className = "noteInput";
+      textarea.value = notes[zId] || "";
+      textarea.addEventListener("input", () => {
+        const cur = loadNotes();
+        cur[zId] = textarea.value;
+        saveNotes(cur);
+      });
+      if(readOnlyShare){ textarea.setAttribute("disabled", true); }
+      wrapper.appendChild(label);
+      wrapper.appendChild(textarea);
+      zone.appendChild(wrapper);
+    });
   }
 
   function initChecks(){
     const map = loadChecks();
+    syncCheckboxes();
     for(const cb of checkboxes){
       cb.checked = !!map[cb.dataset.id];
-      cb.addEventListener("change", () => {
-        const current = loadChecks();
-        current[cb.dataset.id] = cb.checked;
-        saveChecks(current);
-        recomputeProgress();
-      });
+      cb.parentElement.classList.add("animatedCheck");
+      if(!wiredCheckboxes.has(cb.dataset.id)){
+        cb.addEventListener("change", () => {
+          const current = loadChecks();
+          current[cb.dataset.id] = cb.checked;
+          saveChecks(current);
+          recomputeProgress();
+        });
+        wiredCheckboxes.add(cb.dataset.id);
+      }
+      if(readOnlyShare){ cb.setAttribute("disabled", true); }
     }
     recomputeProgress();
   }
-
-  function normalize(s){ return (s||"").toLowerCase().trim(); }
 
   function filter(){
     const term = normalize(q.value);
@@ -1112,12 +1986,322 @@
 
   function resetAll(){
     if(!confirm("Reset all checkmarks and progress?")) return;
-    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(storageKey());
     for(const cb of checkboxes){ cb.checked = false; }
     recomputeProgress();
   }
 
-  // Keyboard shortcuts
+  function createTimeline(){
+    acts.forEach((act, idx)=>{
+      const timeline = act.querySelector(`[data-timeline="${idx+1}"]`);
+      if(!timeline) return;
+      timeline.innerHTML = "";
+      act.querySelectorAll(".zoneName").forEach((zName)=>{
+        const btn = document.createElement("button");
+        btn.textContent = zName.textContent.trim();
+        btn.addEventListener("click", ()=> zName.scrollIntoView({behavior:"smooth",block:"start"}));
+        timeline.appendChild(btn);
+      });
+    });
+  }
+
+  function renderRewards(filterType="all"){
+    rewardList.innerHTML = "";
+    const items = [];
+    zones.forEach((zone)=>{
+      const zoneTitle = zone.querySelector(".zoneName")?.textContent?.trim() || "Zone";
+      const rewardLabels = Array.from(zone.querySelectorAll(".checks label"));
+      rewardLabels.forEach((label)=>{
+        const type = rewardTypeFromText(label.innerText);
+        items.push({
+          type,
+          zone: zoneTitle,
+          text: label.innerText.trim(),
+          checkbox: label.querySelector('input')
+        });
+      });
+    });
+    items.filter(item => filterType === "all" || item.type === filterType)
+      .forEach((item)=>{
+        const card = document.createElement("div");
+        card.className = "rewardCard";
+        const badge = document.createElement("span");
+        badge.className = `tag ${item.type === "buff" ? "good" : item.type === "book" ? "warn" : item.type === "bench" ? "" : item.type === "ascend" ? "bad" : ""}`;
+        badge.textContent = item.type;
+        const title = document.createElement("strong");
+        title.textContent = item.text;
+        const meta = document.createElement("div");
+        meta.className = "subtle";
+        meta.textContent = item.zone;
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.checked = item.checkbox.checked;
+        cb.addEventListener("change", ()=>{
+          item.checkbox.checked = cb.checked;
+          item.checkbox.dispatchEvent(new Event("change"));
+        });
+        const label = document.createElement("label");
+        label.style.display = "flex";
+        label.style.alignItems = "center";
+        label.style.gap = "8px";
+        label.appendChild(cb);
+        label.appendChild(title);
+        card.appendChild(badge);
+        card.appendChild(label);
+        card.appendChild(meta);
+        rewardList.appendChild(card);
+    });
+  }
+
+  function toggleModal(el, show){
+    if(show){ el.classList.add("active"); }
+    else{ el.classList.remove("active"); }
+  }
+
+  function dontMissMode(force){
+    if(force === true) dontMissActive = true;
+    else if(force === false) dontMissActive = false;
+    else dontMissActive = !dontMissActive;
+    zones.forEach((z)=>{
+      const important = /permanent buff|book|bench|ascend|spirit|resist/i.test(z.innerText);
+      z.classList.toggle("hidden", dontMissActive && !important);
+    });
+  }
+
+  function applyBuildFilter(active){
+    zones.forEach((z)=>{
+      const tags = buildTags(z.innerText);
+      const match = !active || tags.includes(active) || tags.includes("all");
+      z.classList.toggle("faded", active && !match);
+      if(match && active) z.classList.add("highlight"); else z.classList.remove("highlight");
+    });
+  }
+
+  function speedrunMode(enabled){
+    document.body.classList.toggle("speedrun", enabled);
+  }
+
+  function nextUnchecked(){
+    const next = checkboxes.find(cb => !cb.checked);
+    if(next){ next.scrollIntoView({behavior:"smooth",block:"center"}); next.focus(); }
+  }
+
+  function exportData(){
+    const payload = {
+      profile: currentProfile,
+      checks: loadChecks(),
+      notes: loadNotes()
+    };
+    const blob = btoa(JSON.stringify(payload));
+    navigator.clipboard?.writeText(blob);
+    alert("Progress copied to clipboard as JSON blob.");
+  }
+
+  function importData(){
+    const raw = prompt("Paste exported progress blob:");
+    if(!raw) return;
+    try{
+      const decoded = JSON.parse(atob(raw));
+      if(decoded.checks){ localStorage.setItem(storageKey(), JSON.stringify(decoded.checks)); }
+      if(decoded.notes){ localStorage.setItem(noteKey(), JSON.stringify(decoded.notes)); }
+      initChecks();
+      attachNotes();
+      alert("Imported!");
+    }catch(err){ alert("Invalid import data"); }
+  }
+
+  function shareProgress(){
+    const payload = {
+      profile: currentProfile,
+      checks: loadChecks(),
+      notes: loadNotes()
+    };
+    const encoded = btoa(JSON.stringify(payload));
+    const url = `${location.origin}${location.pathname}#share=${encoded}`;
+    navigator.clipboard?.writeText(url);
+    alert("Shareable read-only link copied!");
+  }
+
+  function tryLoadShare(){
+    const hash = location.hash || "";
+    if(hash.startsWith("#share=")){
+      try{
+        const data = JSON.parse(atob(hash.replace("#share=","")));
+        readOnlyShare = true;
+        document.body.classList.add("readonly");
+        if(data.checks){ localStorage.setItem(storageKey(), JSON.stringify(data.checks)); }
+        if(data.notes){ localStorage.setItem(noteKey(), JSON.stringify(data.notes)); }
+      }catch(e){ console.warn("Share load failed", e); }
+    }
+  }
+
+  function initializeProfiles(){
+    profileSelect.value = currentProfile;
+    profileSelect.addEventListener("change", ()=>{
+      currentProfile = profileSelect.value;
+      localStorage.setItem(PROFILE_KEY, currentProfile);
+      initChecks();
+      attachNotes();
+      recomputeProgress();
+      const savedBuild = localStorage.getItem(buildKey());
+      renderBuildOverlay(builds[savedBuild] ? savedBuild : "none");
+    });
+  }
+
+  function keyboardNav(){
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "/" && document.activeElement !== q){ e.preventDefault(); q.focus(); }
+      else if(e.key === "Escape" && document.activeElement === q){ q.value = ""; q.blur(); filter(); }
+      else if(e.key === "n" && !e.metaKey){ nextUnchecked(); }
+      else if(e.key === "t" && e.altKey){ speedrunMode(!document.body.classList.contains("speedrun")); }
+    });
+  }
+
+  function languageInit(){
+    const texts = {
+      en: { search: "Type to filter (e.g., 'resistance', 'book', 'bench', 'ritual')…" },
+      es: { search: "Escribe para filtrar (ej. resistencia, libro, banco, ritual)…" }
+    };
+    languageSelect.addEventListener("change", ()=>{
+      const lang = languageSelect.value;
+      q.placeholder = texts[lang]?.search || texts.en.search;
+    });
+  }
+
+  function initBuildSelector(){
+    if(!buildSelect) return;
+    const saved = localStorage.getItem(buildKey());
+    const choice = builds[saved] ? saved : "none";
+    buildSelect.value = choice;
+    buildSelect.addEventListener("change", ()=> renderBuildOverlay(buildSelect.value));
+    renderBuildOverlay(choice);
+  }
+
+  function themePickerInit(){
+    if(!themeSelect) return;
+    const saved = resolveThemeName(localStorage.getItem(THEME_KEY));
+    themeSelect.value = saved;
+    themeSelect.addEventListener("change", (e)=> applyTheme(e.target.value));
+  }
+
+  function calloutHints(){
+    zones.forEach((z)=>{
+      const text = z.innerText.toLowerCase();
+      const hints = [];
+      if(text.includes("outer")) hints.push("🧱 Follow outer wall");
+      if(text.includes("opposite")) hints.push("🧭 Opposite entrance");
+      if(text.includes("swirl")) hints.push("🌪 Black swirls point the way");
+      if(!hints.length) return;
+      const c = document.createElement("div");
+      c.className = "callout";
+      c.innerHTML = hints.map(h=>`<i>${h}</i>`).join(" · ");
+      z.querySelector(".zoneHeader")?.appendChild(c);
+    });
+  }
+
+  function difficultyBadges(){
+    zones.forEach((z)=>{
+      const diff = (parseInt(z.querySelector(".zoneNum")?.textContent||"1",10)%5)+1;
+      const badge = document.createElement("span");
+      badge.className = "difficulty";
+      badge.textContent = "★".repeat(diff).padEnd(5,"☆");
+      z.querySelector(".zoneName")?.appendChild(badge);
+    });
+  }
+
+  function timelineToggle(){
+    const show = document.body.dataset.timeline !== "on";
+    document.body.dataset.timeline = show ? "on" : "off";
+    document.querySelectorAll(".miniTimeline").forEach(el=> el.style.display = show ? "flex" : "none");
+  }
+
+  function createBuildButtons(){
+    const container = document.createElement("div");
+    container.className = "toolbar";
+    container.style.margin = "12px 0";
+    ["melee","caster","minion","bow"].forEach((name)=>{
+      const btn = document.createElement("button");
+      btn.className = "btn";
+      btn.textContent = `${name.charAt(0).toUpperCase()+name.slice(1)} focus`;
+      btn.addEventListener("click", ()=> applyBuildFilter(name));
+      container.appendChild(btn);
+    });
+    document.querySelector(".hero")?.appendChild(container);
+  }
+
+  function hookDashboardFilters(){
+    document.querySelectorAll("[data-dash-filter]").forEach(btn=>{
+      btn.addEventListener("click", ()=> renderRewards(btn.dataset.dashFilter));
+    });
+  }
+
+  function initSharingUI(){
+    btnShare.addEventListener("click", shareProgress);
+  }
+
+  function initModals(){
+    btnDashboard.addEventListener("click", ()=>{ renderRewards(); toggleModal(modalDashboard,true); });
+    btnShowChangelog.addEventListener("click", ()=> toggleModal(modalChangelog,true));
+    document.querySelectorAll("[data-close]").forEach((btn)=>{
+      btn.addEventListener("click", ()=>{
+        const target = document.getElementById(btn.dataset.close);
+        if(target) toggleModal(target,false);
+      });
+    });
+    modalDashboard.addEventListener("click", (e)=>{ if(e.target === modalDashboard) toggleModal(modalDashboard,false); });
+    modalChangelog.addEventListener("click", (e)=>{ if(e.target === modalChangelog) toggleModal(modalChangelog,false); });
+  }
+
+  function initBottomBar(){
+    btnQuickNext.addEventListener("click", nextUnchecked);
+    btnTimelineToggle.addEventListener("click", timelineToggle);
+    btnBuildToggle.addEventListener("click", ()=>applyBuildFilter("melee"));
+    btnDontMissBottom.addEventListener("click", ()=>dontMissMode());
+    document.getElementById("toggleMobile").addEventListener("click", ()=>{
+      document.querySelector(".bottomBar")?.classList.toggle("hidden");
+    });
+  }
+
+  function initOtherButtons(){
+    btnDontMiss.addEventListener("click", ()=> dontMissMode());
+    btnSpeedrun.addEventListener("click", ()=> speedrunMode(!document.body.classList.contains("speedrun")) );
+    btnExport.addEventListener("click", exportData);
+    btnImport.addEventListener("click", importData);
+    btnFork.addEventListener("click", ()=> window.open("https://github.com/", "_blank"));
+  }
+
+  function addTooltips(){
+    document.querySelectorAll(".tag").forEach(tag=>{
+      const t = normalize(tag.textContent);
+      if(t.includes("spirit")) tag.title = "Spirit powers skills and abilities";
+      if(t.includes("bench")) tag.title = "Bench unlock improves crafting options";
+      if(t.includes("book")) tag.title = "Books grant passive points";
+      if(t.includes("ascend")) tag.title = "Ascendancy unlocks Trial item";
+    });
+  }
+
+  tryLoadShare();
+  attachNotes();
+  initChecks();
+  themePickerInit();
+  applyTheme();
+  initBuildSelector();
+  filter();
+  createTimeline();
+  difficultyBadges();
+  calloutHints();
+  createBuildButtons();
+  hookDashboardFilters();
+  initModals();
+  initBottomBar();
+  initOtherButtons();
+  initSharingUI();
+  keyboardNav();
+  languageInit();
+  initializeProfiles();
+  addTooltips();
+
+  // Keyboard shortcuts for search and reset
   document.addEventListener("keydown", (e) => {
     if(e.key === "/" && document.activeElement !== q){
       e.preventDefault();
@@ -1132,14 +2316,10 @@
   });
 
   q.addEventListener("input", filter);
-  btnTheme.addEventListener("click", toggleTheme);
   btnExpand.addEventListener("click", expandAll);
   btnCollapse.addEventListener("click", collapseAll);
   btnReset.addEventListener("click", resetAll);
   btnPrint.addEventListener("click", () => window.print());
-
-  applyTheme();
-  initChecks();
 })();
 </script>
 </body>
