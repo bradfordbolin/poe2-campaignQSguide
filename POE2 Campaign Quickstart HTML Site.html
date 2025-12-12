@@ -1,0 +1,1146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Path of Exile 2 – Campaign Walkthrough (Acts 1–3)</title>
+  <meta name="description" content="Streamlined Path of Exile 2 Acts 1–3 walkthrough optimized for playing while you go, including optional rewards and permanent buffs." />
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --panel:#0f1621;
+      --panel2:#121c2a;
+      --text:#e6edf3;
+      --muted:#a9b4c0;
+      --border:#223046;
+      --accent:#7dd3fc;
+      --accent2:#a78bfa;
+      --good:#34d399;
+      --warn:#fbbf24;
+      --bad:#fb7185;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 14px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    [data-theme="light"]{
+      --bg:#f6f8fb;
+      --panel:#ffffff;
+      --panel2:#f2f5fb;
+      --text:#0b1220;
+      --muted:#475569;
+      --border:#d8e1ef;
+      --accent:#0284c7;
+      --accent2:#6d28d9;
+      --shadow: 0 10px 30px rgba(2,6,23,.10);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(125,211,252,.20), transparent 55%),
+                  radial-gradient(1100px 700px at 110% 0%, rgba(167,139,250,.18), transparent 50%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .wrap{max-width:1100px;margin:0 auto;padding:22px 18px 70px}
+    header{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter: blur(10px);
+      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar{
+      max-width:1100px;margin:0 auto;padding:12px 18px;
+      display:flex;gap:12px;align-items:center;justify-content:space-between;
+    }
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{
+      width:34px;height:34px;border-radius:10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: var(--shadow);
+    }
+    h1{font-size:18px;margin:0}
+    .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+    .btn, .pill, input[type="search"]{
+      border:1px solid var(--border);
+      background: color-mix(in srgb, var(--panel) 92%, transparent);
+      color:var(--text);
+      border-radius:999px;
+      padding:9px 12px;
+      font-size:13px;
+      box-shadow:none;
+      outline:none;
+    }
+    .btn{cursor:pointer}
+    .btn:hover{border-color: color-mix(in srgb, var(--border) 60%, var(--accent) 40%)}
+    input[type="search"]{min-width:260px}
+    .pill{display:inline-flex;align-items:center;gap:8px}
+    .kbd{
+      font-family:var(--mono);font-size:12px;color:var(--muted);
+      border:1px solid var(--border);border-bottom-width:2px;border-radius:8px;
+      padding:1px 6px;background: color-mix(in srgb, var(--panel2) 88%, transparent);
+    }
+    .hero{
+      margin-top:18px;
+      display:grid;grid-template-columns: 1.2fr .8fr;gap:14px;
+    }
+    @media (max-width: 900px){ .hero{grid-template-columns:1fr} input[type="search"]{min-width:160px} }
+    .card{
+      background: linear-gradient(180deg, color-mix(in srgb, var(--panel) 92%, transparent), color-mix(in srgb, var(--panel2) 92%, transparent));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:14px;
+    }
+    .subtle{color:var(--muted);font-size:13px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width: 700px){ .grid2{grid-template-columns:1fr} }
+    .toc a{
+      display:flex;justify-content:space-between;align-items:center;
+      text-decoration:none;
+      padding:8px 10px;border-radius:10px;
+      border:1px solid transparent;
+      color:var(--text);
+    }
+    .toc a:hover{border-color:var(--border);background: color-mix(in srgb, var(--panel2) 70%, transparent)}
+    .tag{
+      display:inline-flex;align-items:center;gap:6px;
+      font-size:12px;padding:2px 10px;border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background: color-mix(in srgb, var(--panel2) 86%, transparent);
+      white-space:nowrap;
+    }
+    .tag.good{color: color-mix(in srgb, var(--good) 85%, var(--text)); border-color: color-mix(in srgb, var(--good) 35%, var(--border));}
+    .tag.warn{color: color-mix(in srgb, var(--warn) 85%, var(--text)); border-color: color-mix(in srgb, var(--warn) 35%, var(--border));}
+    .tag.bad{color: color-mix(in srgb, var(--bad) 85%, var(--text)); border-color: color-mix(in srgb, var(--bad) 35%, var(--border));}
+    .section{
+      margin-top:16px;
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background: color-mix(in srgb, var(--panel) 92%, transparent);
+    }
+    .section > summary{
+      list-style:none;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      cursor:pointer;
+      padding:14px 14px;
+      background: color-mix(in srgb, var(--panel2) 76%, transparent);
+      border-bottom:1px solid var(--border);
+    }
+    .section > summary::-webkit-details-marker{display:none}
+    .sectTitle{
+      display:flex;align-items:baseline;gap:10px;flex-wrap:wrap
+    }
+    .sectTitle strong{font-size:15px}
+    .sectMeta{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    .content{padding:12px 14px 14px}
+    .zone{
+      border:1px solid var(--border);
+      border-radius: 12px;
+      padding:12px 12px 10px;
+      background: color-mix(in srgb, var(--panel) 94%, transparent);
+      margin-bottom:10px;
+    }
+    .zoneHeader{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      margin-bottom:6px;
+    }
+    .zoneName{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+      font-weight:700;
+    }
+    .zoneNum{
+      font-family:var(--mono);
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:2px 8px;
+      background: color-mix(in srgb, var(--panel2) 85%, transparent);
+    }
+    ul{margin:6px 0 0 18px;padding:0}
+    li{margin:4px 0}
+    .checks{
+      display:flex;gap:10px;flex-wrap:wrap;margin-top:8px
+    }
+    .check{
+      display:inline-flex;align-items:center;gap:8px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:6px 10px;
+      background: color-mix(in srgb, var(--panel2) 86%, transparent);
+      font-size:12px;color:var(--muted);
+      user-select:none;
+    }
+    .check input{accent-color: var(--accent); width:14px;height:14px}
+    .note{
+      margin-top:8px;
+      border-left:3px solid var(--accent);
+      padding:8px 10px;
+      background: color-mix(in srgb, var(--panel2) 80%, transparent);
+      border-radius:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .twoCols{
+      display:grid;grid-template-columns:1fr 1fr;gap:10px
+    }
+    @media (max-width: 900px){ .twoCols{grid-template-columns:1fr} }
+    .progressRow{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      margin-top:8px
+    }
+    progress{width:280px;max-width:100%;height:12px}
+    .muted{color:var(--muted)}
+    .hidden{display:none!important}
+    footer{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    @media print{
+      header{position:static;backdrop-filter:none}
+      body{background:#fff}
+      :root,[data-theme="light"]{
+        --bg:#ffffff;--panel:#ffffff;--panel2:#ffffff;--text:#000;--muted:#333;--border:#ddd;
+      }
+      .btn,.pill,input[type="search"],.note{display:none!important}
+      .section{break-inside:avoid}
+      details{break-inside:avoid}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <h1>PoE 2 – Campaign Walkthrough (Acts 1–3)</h1>
+        <div class="subtle">Fast, reward-complete route notes • checklists • offline-friendly</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <span class="pill" title="Search zones and rewards"><strong>Search</strong>&nbsp;<span class="kbd">/</span></span>
+      <input id="q" type="search" placeholder="Type to filter (e.g., 'resistance', 'book', 'bench', 'ritual')…" autocomplete="off" />
+      <button class="btn" id="toggleTheme" type="button" title="Toggle dark/light">Theme</button>
+      <button class="btn" id="expandAll" type="button" title="Expand all acts">Expand</button>
+      <button class="btn" id="collapseAll" type="button" title="Collapse all acts">Collapse</button>
+      <button class="btn" id="reset" type="button" title="Clear all checkmarks & progress">Reset</button>
+      <button class="btn" id="print" type="button" title="Print / Save as PDF">Print</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="card">
+      <div class="twoCols">
+        <div>
+          <h2 style="margin:0 0 6px 0;font-size:16px">How to use while playing</h2>
+          <div class="subtle">
+            Keep this open on a second monitor. Check off each zone’s objectives as you complete them.
+            Progress is saved automatically in your browser (local storage).
+          </div>
+          <div class="note">
+            Tip: Use the search box to instantly filter to “Book of Specialisation”, “Permanent Buff”, “Bench”, “Uncut Skill Gem”, etc.
+          </div>
+        </div>
+        <div>
+          <h2 style="margin:0 0 6px 0;font-size:16px">Quick rewards legend</h2>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag good">Permanent Buff</span>
+            <span class="tag warn">Book / Points</span>
+            <span class="tag">Gems</span>
+            <span class="tag">Bench Unlock</span>
+            <span class="tag">Currency / Loot</span>
+            <span class="tag bad">Don’t Miss</span>
+          </div>
+          <div class="progressRow">
+            <div>
+              <div style="font-weight:700">Overall Progress</div>
+              <div class="subtle"><span id="doneCount">0</span> / <span id="allCount">0</span> items checked</div>
+            </div>
+            <progress id="pbar" value="0" max="100"></progress>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card toc">
+      <h2 style="margin:0 0 8px 0;font-size:16px">Table of contents</h2>
+      <a href="#act1"><span>Act 1 – Ogham Coast</span><span class="tag warn">14 zones</span></a>
+      <a href="#act2"><span>Act 2 – Vastiri Desert</span><span class="tag warn">11 zones</span></a>
+      <a href="#act3"><span>Act 3 – Jungles of Vastiri</span><span class="tag warn">11 zones</span></a>
+      <div class="note" style="margin-top:10px;border-left-color:var(--accent2)">
+        Keyboard: press <span class="kbd">/</span> to focus search. Press <span class="kbd">Esc</span> to clear.
+      </div>
+    </div>
+  </div>
+
+  <!-- ACT 1 -->
+  <details class="section" id="act1" open>
+    <summary>
+      <div class="sectTitle">
+        <strong>ACT 1 – Ogham Coast</strong>
+        <span class="subtle">Reward-complete route</span>
+      </div>
+      <div class="sectMeta">
+        <span class="tag good">Resists</span>
+        <span class="tag warn">Books</span>
+        <span class="tag">Gems</span>
+        <span class="tag">Bench</span>
+      </div>
+    </summary>
+    <div class="content">
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">1</span> Clearfell</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag good">+10% Cold Res</span>
+            <span class="tag">Uncut Gems</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Locate the exit to <strong>The Grelwood</strong>.</li>
+          <li><strong>North:</strong> Kill the boss for <strong>+10% Cold Resistance</strong> (Permanent Buff).</li>
+          <li><strong>Mysterious Campsite:</strong> Chest for <strong>Lvl 1 Uncut Skill Gem</strong>.</li>
+          <li><strong>Mud Burrow:</strong> Boss for <strong>Lvl 2 Uncut Skill Gem</strong> + <strong>Lvl 1 Uncut Support Gem</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a1z1-main">Exit found</label>
+          <label class="check"><input type="checkbox" data-id="a1z1-coldres">+10% Cold Res</label>
+          <label class="check"><input type="checkbox" data-id="a1z1-camp">Campsite chest</label>
+          <label class="check"><input type="checkbox" data-id="a1z1-burrow">Mud Burrow boss</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">2</span> The Grelwood</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Uncut Gem</span>
+            <span class="tag">Flasks</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Layout:</strong> Diamond pattern. Visit all 4 points.</li>
+          <li><strong>Brambleghast:</strong> Drops <strong>Lvl 1 Uncut Skill Gem</strong>.</li>
+          <li><strong>Areagne’s Hut:</strong> Flasks + <strong>Lvl 1 Uncut Skill Gem</strong>.</li>
+          <li><strong>Main path:</strong> Locate <strong>Grim Tangle</strong> (enter first), <strong>Red Vale</strong>, and the <strong>Waypoint</strong> (Tree of Souls).</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a1z2-4points">All 4 points</label>
+          <label class="check"><input type="checkbox" data-id="a1z2-bramble">Brambleghast</label>
+          <label class="check"><input type="checkbox" data-id="a1z2-hut">Areagne’s Hut</label>
+          <label class="check"><input type="checkbox" data-id="a1z2-waypoint">Waypoint tagged</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">3</span> The Grim Tangle</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Support Gem</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Route:</strong> Head in the exact opposite direction of where you entered.</li>
+          <li><strong>Rotten Druid:</strong> Boss for <strong>Lvl 1 Uncut Support Gem</strong>.</li>
+        </ul>
+        <div class="note">Skip: when <strong>Una</strong> spawns, click her to start the song, then log out / respawn at checkpoint to skip the long animation.</div>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a1z3-boss">Rotten Druid</label>
+          <label class="check"><input type="checkbox" data-id="a1z3-exit">Exit found</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">4</span> The Red Vale</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Quest</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Find 3 <strong>Rust Altars</strong> to complete the quest.</li>
+          <li><strong>Route:</strong> Follow the outer edge in a loop; sometimes one altar is in the middle near the blood river.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a1z4-altars">3 Rust Altars</label>
+          <label class="check"><input type="checkbox" data-id="a1z4-exit">Exit found</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">5</span> Cemetery of the Eternals</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Ring</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Locate <strong>Tomb of the Consort</strong> and <strong>Mausoleum of the Praetor</strong>.</li>
+          <li><strong>Optional:</strong> Find the <strong>Ancient Ruin Sarcophagus</strong> for a <strong>Normal Ring</strong> (usually on far opposite wall).</li>
+        </ul>
+        <div class="note">Tip: One tomb often spawns along the same wall as the Lachlann boss arena.</div>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a1z5-tomb">Tomb found</label>
+          <label class="check"><input type="checkbox" data-id="a1z5-maus">Mausoleum found</label>
+          <label class="check"><input type="checkbox" data-id="a1z5-ring">Ring sarcophagus</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">6</span> Mausoleum of the Praetor</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Quest</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Kill <strong>Draven</strong> (Sorrow Among Stones).</li>
+          <li><strong>Route:</strong> Head to the quadrant opposite your entrance; look for a tile with a “ribbed” outer edge.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a1z6-draven">Draven dead</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">7</span> Tomb of the Consort</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Support Gem</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Kill <strong>Asinia</strong> (Sorrow Among Stones).</li>
+          <li><strong>Optional:</strong> Find <strong>Haunted Treasure</strong> (spawns a Rare Eternal Knight) for <strong>Lvl 1 Uncut Support Gem</strong>.</li>
+          <li><strong>Route:</strong> Follow corridors through the center toward the top of the map.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a1z7-asinia">Asinia dead</label>
+          <label class="check"><input type="checkbox" data-id="a1z7-treasure">Haunted Treasure</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">8</span> Hunting Grounds</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag warn">Book</span>
+            <span class="tag">Lvl 4 Skill Gem</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Layout:</strong> Key points in the 4 corners; avoid the middle unless doing the Ritual.</li>
+          <li><strong>Crowbell:</strong> Drops <strong>Book of Specialisation</strong> (Passive Point).</li>
+          <li><strong>Ritual (middle):</strong> Complete for <strong>Lvl 4 Uncut Skill Gem</strong>.</li>
+          <li><strong>Exits:</strong> Find entrances to <strong>Ogham Farmlands</strong> and <strong>Freythorn</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a1z8-book">Book of Specialisation</label>
+          <label class="check"><input type="checkbox" data-id="a1z8-ritual">Ritual gem</label>
+          <label class="check"><input type="checkbox" data-id="a1z8-exits">Both exits found</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">9</span> Freythorn</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag good">+30 Spirit</span>
+            <span class="tag">Spirit Gem</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Complete 3 <strong>Ritual Encounters</strong>, then kill <strong>King of the Mist</strong>.</li>
+          <li><strong>Reward:</strong> <strong>+30 Maximum Spirit</strong> + <strong>Uncut Spirit Gem</strong>.</li>
+          <li><strong>Route:</strong> Loop the area. If you find boss arena first, the <strong>black magic swirls</strong> point toward missed Rituals.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a1z9-rituals">3 Rituals</label>
+          <label class="check"><input type="checkbox" data-id="a1z9-boss">King of the Mist</label>
+          <label class="check"><input type="checkbox" data-id="a1z9-reward">Spirit reward</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">10</span> Ogham Farmlands</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag warn">Book</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Find <strong>Una's Hut</strong>.</li>
+          <li><strong>Reward:</strong> Loot the Lute Box for <strong>Book of Specialisation</strong>.</li>
+          <li><strong>Route:</strong> Opposite direction from entrance. Hut is hidden <em>behind</em> a long hut with carts blocking the direct path.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a1z10-hut">Una’s Hut</label>
+          <label class="check"><input type="checkbox" data-id="a1z10-book">Book of Specialisation</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">11</span> Ogham Village</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Bench Unlock</span>
+            <span class="tag">Quest</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Kill <strong>The Executioner</strong> (north).</li>
+          <li><strong>Essential:</strong> Find <strong>Renly's Tools</strong> to unlock the <strong>Smithing Bench</strong>.</li>
+          <li><strong>Route:</strong> Hug the <strong>right-hand wall</strong> and head north. Tools are in a room along this path (or slightly south if you hit the waypoint first).</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a1z11-exec">Executioner</label>
+          <label class="check"><input type="checkbox" data-id="a1z11-tools">Renly’s Tools (Smithing Bench)</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">12</span> The Manor Ramparts</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Support Gem</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Route:</strong> Follow the U-shape path.</li>
+          <li><strong>Optional:</strong> Find the <strong>Gallows</strong> (hanging body) for <strong>Lvl 1 Uncut Support Gem</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a1z12-gallows">Gallows reward</label>
+          <label class="check"><input type="checkbox" data-id="a1z12-exit">Exit found</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">13</span> Ogham Manor (Floor 1)</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag good">+10% Fire Res</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Route:</strong> Head northeast, cross the bridge, go north.</li>
+          <li><strong>Candlemass:</strong> Boss for <strong>+10% Fire Resistance</strong> (Permanent Buff).</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a1z13-candle">Candlemass (+Fire Res)</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">14</span> Ogham Manor (Floors 2 & 3)</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag bad">Final Boss</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Floor 2:</strong> Head opposite your entrance to find stairs to Floor 3.</li>
+          <li><strong>Floor 3:</strong> Cross the bridge to the <strong>Count of Ogham</strong> (Act 1 final boss).</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a1z14-f2">Reached Floor 3</label>
+          <label class="check"><input type="checkbox" data-id="a1z14-boss">Count of Ogham</label>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ACT 2 -->
+  <details class="section" id="act2" open>
+    <summary>
+      <div class="sectTitle">
+        <strong>ACT 2 – Vastiri Desert</strong>
+        <span class="subtle">3 core quests + key optional rewards</span>
+      </div>
+      <div class="sectMeta">
+        <span class="tag bad">Ascendancy Unlock</span>
+        <span class="tag good">Permanent Buff</span>
+        <span class="tag warn">Books</span>
+      </div>
+    </summary>
+    <div class="content">
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">1</span> Vastiri Outskirts</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Town</span>
+            <span class="tag">Boss</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Head to <strong>Ardura Caravan</strong> (town).</li>
+          <li><strong>Rathbreaker:</strong> Kill on main path for quest progress.</li>
+          <li><strong>Route:</strong> Linear—follow the main path.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a2z1-town">Reached town</label>
+          <label class="check"><input type="checkbox" data-id="a2z1-boss">Rathbreaker</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">2</span> Mawdun Quarry (Trail of Corruption)</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag bad">Don’t Miss</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Locate <strong>Mawdun Mine</strong> entrance.</li>
+          <li><strong>Prison of the Disgraced:</strong> Look for <strong>Yellow Paper Seals</strong> on walls.</li>
+          <li><strong>Balbala:</strong> Kill for <strong>Djinn Barya</strong> (Unlocks <strong>Ascendancy Class</strong>). <strong>Do not miss this.</strong></li>
+          <li><strong>Layout:</strong> S/Z-shape winding downward.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a2z2-prison">Found Prison</label>
+          <label class="check"><input type="checkbox" data-id="a2z2-balbala">Balbala (Djinn Barya)</label>
+          <label class="check"><input type="checkbox" data-id="a2z2-exit">Mine entrance</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">3</span> Mawdun Mine</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Uncut Gem</span>
+            <span class="tag">Artificer’s Orb</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Find the exit.</li>
+          <li><strong>Munitions Bunker:</strong> Side area for <strong>Uncut Skill Gem</strong>.</li>
+          <li><strong>Bridge Cache:</strong> Near a checkpoint—<strong>Faridun War Cache</strong> with an <strong>Artificer’s Orb</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a2z3-bunker">Munitions Bunker</label>
+          <label class="check"><input type="checkbox" data-id="a2z3-orb">Artificer’s Orb</label>
+          <label class="check"><input type="checkbox" data-id="a2z3-exit">Exit found</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">4</span> Mastodon Badlands</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Quest</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Enter <strong>The Bone Pits</strong>.</li>
+          <li><strong>Route:</strong> Wide open—use edges to locate the entrance faster.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a2z4-bonepits">Bone Pits entrance</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">5</span> The Bone Pits</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Quest Item</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Kill <strong>Ekbab, Ancient Steed</strong>.</li>
+          <li><strong>Reward:</strong> Loot <strong>Mastodon Tusks</strong>.</li>
+          <li><strong>Route:</strong> Search for the large arena.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a2z5-boss">Ekbab dead</label>
+          <label class="check"><input type="checkbox" data-id="a2z5-tusks">Tusks looted</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">6</span> Keth (City of Seven Waters)</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag warn">Book (+2 weapon points)</span>
+            <span class="tag">Essence of Water</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Find <strong>The Venom Pit</strong> (often one of 4 corners).</li>
+          <li><strong>Kabala:</strong> Kill for <strong>Book of Specialisation (+2 Weapon Passive Points)</strong>.</li>
+          <li><strong>Quest:</strong> Ignite the Goddess with Everlasting Cinders (found in zone) to get <strong>Essence of Water</strong> (Magic Ring).</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a2z6-book">Book (+2 weapon)</label>
+          <label class="check"><input type="checkbox" data-id="a2z6-ring">Essence of Water ring</label>
+          <label class="check"><input type="checkbox" data-id="a2z6-venompit">Venom Pit found</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">7</span> The Lost City</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Spirit Gem</span>
+            <span class="tag">Magic Jewel</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Locate <strong>The Buried Shrines</strong>.</li>
+          <li><strong>Golden Tomb:</strong> Large golden sarcophagus for <strong>Uncut Spirit Gem</strong>.</li>
+          <li><strong>Ninth Treasure of Keth:</strong> Kill the big bug unique enemy for a <strong>Magic Jewel</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a2z7-spirit">Golden Tomb (Spirit Gem)</label>
+          <label class="check"><input type="checkbox" data-id="a2z7-jewel">Magic Jewel</label>
+          <label class="check"><input type="checkbox" data-id="a2z7-shrines">Buried Shrines found</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">8</span> Buried Shrines</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Support Gem</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Pass through to next zone.</li>
+          <li><strong>Suspicious Sarcophagus:</strong> Interact to spawn event. Reward: <strong>Uncut Support Gem</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a2z8-sarc">Suspicious Sarcophagus</label>
+          <label class="check"><input type="checkbox" data-id="a2z8-exit">Exit</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">9</span> Valley of the Titans (A Crown of Stone)</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag good">Permanent Buff</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Enter <strong>Titan Grotto</strong>.</li>
+          <li><strong>Offering to Amrit:</strong> Place <strong>Kabala Clan Relic</strong> + <strong>Sun Clan Relic</strong> at the altar. Reward: <strong>Permanent Buff</strong> (choose <strong>+30% Charm Charges</strong> OR <strong>+15% Flask Life Recovery</strong>).</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a2z9-relics">Relics placed (buff chosen)</label>
+          <label class="check"><input type="checkbox" data-id="a2z9-grotto">Titan Grotto entered</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">10</span> Titan Grotto</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Seals</span>
+            <span class="tag">Quest Item</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Find 3 <strong>Ancient Seals</strong> to open the boss door.</li>
+          <li><strong>Zalmarath:</strong> Kill to obtain <strong>Primordial Fire</strong>.</li>
+          <li><strong>Route:</strong> Run the outer edge; seals often sit near checkpoints.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a2z10-seals">3 Seals</label>
+          <label class="check"><input type="checkbox" data-id="a2z10-boss">Zalmarath</label>
+          <label class="check"><input type="checkbox" data-id="a2z10-fire">Primordial Fire</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">11</span> The Spires of Deshar (Finale)</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag good">+10% Lightning Res</span>
+            <span class="tag warn">Book (+2 weapon)</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Kill <strong>Iktab, the Deathlord</strong>.</li>
+          <li><strong>Sisters of Garukhan:</strong> Interact for <strong>+10% Lightning Resistance</strong> (Permanent Buff).</li>
+          <li><strong>Fallen Rhoa Rider:</strong> Loot body near a burial tower for <strong>Book of Specialisation (+2 Weapon Passive Points)</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a2z11-boss">Iktab dead</label>
+          <label class="check"><input type="checkbox" data-id="a2z11-lightres">+10% Lightning Res</label>
+          <label class="check"><input type="checkbox" data-id="a2z11-book">Book (+2 weapon)</label>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ACT 3 -->
+  <details class="section" id="act3" open>
+    <summary>
+      <div class="sectTitle">
+        <strong>ACT 3 – Jungles of Vastiri</strong>
+        <span class="subtle">Key spirit, resist, ascendancy hooks</span>
+      </div>
+      <div class="sectMeta">
+        <span class="tag good">Spirit</span>
+        <span class="tag good">Fire Res</span>
+        <span class="tag bad">Ascendancy (Trial item)</span>
+      </div>
+    </summary>
+    <div class="content">
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">1</span> Sandswept Marsh</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Lesser Jeweller’s Orb</span>
+            <span class="tag">Lvl 9 Skill Gem</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Find <strong>Ziggurat Encampment</strong> (town).</li>
+          <li><strong>Azak Campfire:</strong> Huts with green leaves → chest for <strong>Lesser Jeweller’s Orb</strong>.</li>
+          <li><strong>Foul Ritual:</strong> Kill <strong>Rootdredge</strong> for <strong>Uncut Skill Gem (Lvl 9)</strong>.</li>
+          <li><strong>Hanging Tree:</strong> Click corpse for a <strong>Magic Ring</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a3z1-town">Reached town</label>
+          <label class="check"><input type="checkbox" data-id="a3z1-jewel">Lesser Jeweller’s Orb</label>
+          <label class="check"><input type="checkbox" data-id="a3z1-rootdredge">Rootdredge gem</label>
+          <label class="check"><input type="checkbox" data-id="a3z1-ring">Hanging tree ring</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">2</span> Jungle Ruins</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag warn">Book (+2 points)</span>
+            <span class="tag">Rare Belt</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Find entrances to <strong>Venom Crypts</strong> and <strong>Infested Barrens</strong>.</li>
+          <li><strong>Silverfist:</strong> Kill the large gorilla for <strong>Book of Specialisation (+2 Passive Points)</strong>.</li>
+          <li><strong>Jungle Grave:</strong> Interactive object drops <strong>Rare Belt</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a3z2-book">Silverfist book</label>
+          <label class="check"><input type="checkbox" data-id="a3z2-belt">Rare belt</label>
+          <label class="check"><input type="checkbox" data-id="a3z2-exits">Both exits found</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">3</span> Venom Crypts</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag good">Permanent Buff</span>
+            <span class="tag">Artificer’s Orb</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Retrieve <strong>Corpse Snake Venom</strong>.</li>
+          <li><strong>Turn-in:</strong> Return venom to <strong>Servi</strong> in town for a <strong>Permanent Buff</strong> (choose: <strong>Stun Threshold</strong>, <strong>Ailment Threshold</strong>, or <strong>Mana Regen</strong>).</li>
+          <li><strong>Loot:</strong> Keep an eye out for an <strong>Artificer’s Orb</strong> in this zone.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a3z3-venom">Venom collected</label>
+          <label class="check"><input type="checkbox" data-id="a3z3-buff">Buff chosen</label>
+          <label class="check"><input type="checkbox" data-id="a3z3-orb">Artificer’s Orb</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">4</span> Infested Barrens</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Hub Zone</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Central hub connecting to <strong>Azak Bog</strong> and <strong>Chimeral Wetlands</strong>.</li>
+          <li><strong>Route:</strong> Tag the waypoint and checkpoints to travel quickly between sub-zones.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a3z4-waypoint">Waypoint tagged</label>
+          <label class="check"><input type="checkbox" data-id="a3z4-paths">Both paths found</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">5</span> The Azak Bog</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag good">+40 Spirit</span>
+            <span class="tag">Ritual</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Kill boss <strong>Ignagduk</strong>.</li>
+          <li><strong>Reward:</strong> <strong>+40 Maximum Spirit</strong> (Permanent Buff).</li>
+        </ul>
+        <div class="note">Tip: Complete the <strong>Flameskin Ritual</strong> (light all fires) <em>before</em> the boss for a Fire Res buff that makes the fight easier.</div>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a3z5-ritual">Flameskin Ritual</label>
+          <label class="check"><input type="checkbox" data-id="a3z5-boss">Ignagduk</label>
+          <label class="check"><input type="checkbox" data-id="a3z5-spirit">+40 Spirit</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">6</span> Chimeral Wetlands</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag bad">Ascendancy Hook</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Find <strong>Jiquani’s Machinarium</strong>.</li>
+          <li><strong>Xyclucian:</strong> Boss drops <strong>Ultimatum</strong> (Unlocks Trial of Chaos for Ascendancy points later).</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a3z6-ultimatum">Ultimatum acquired</label>
+          <label class="check"><input type="checkbox" data-id="a3z6-machinarium">Machinarium found</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">7</span> Jiquani’s Machinarium</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Route</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Pass through to <strong>Jiquani’s Sanctum</strong>.</li>
+          <li><strong>Optional:</strong> Interact with <strong>Paquate’s Mechanism</strong> for loot.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a3z7-mechanism">Paquate’s Mechanism</label>
+          <label class="check"><input type="checkbox" data-id="a3z7-exit">Reached Sanctum</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">8</span> Jiquani’s Sanctum</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag good">+10% Fire Res</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Blackjaw:</strong> Kill for <strong>+10% Fire Resistance</strong> (Permanent Buff).</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a3z8-fire">+10% Fire Res</label>
+          <label class="check"><input type="checkbox" data-id="a3z8-exit">Exit</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">9</span> The Matlan Waterways</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Route</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Follow <strong>Alva</strong> and locate <strong>The Drowned City</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a3z9-drowned">Drowned City found</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">10</span> The Molten Vault (connected to Drowned City)</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Bench Unlock</span>
+            <span class="tag">Artificer’s Orb</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Objective:</strong> Kill <strong>Mektul, the Forgemaster</strong>.</li>
+          <li><strong>Rewards:</strong> Unlock <strong>Reforging Bench</strong> (sockets/links changes in town) + <strong>Artificer’s Orb</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a3z10-boss">Mektul dead</label>
+          <label class="check"><input type="checkbox" data-id="a3z10-bench">Reforging Bench unlocked</label>
+          <label class="check"><input type="checkbox" data-id="a3z10-orb">Artificer’s Orb</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">11</span> Apex of Filth → Utzaal & Aggorat (Finale)</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag warn">Book (+2 points)</span>
+            <span class="tag">Quality Flasks</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Apex of Filth:</strong> Find the <strong>Cauldron Keeper</strong>; place mushrooms into cauldron. Reward: <strong>2× Quality Flasks</strong>.</li>
+          <li><strong>Blood Sacrifice (Aggorat):</strong> Find <strong>Sacrificial Heart</strong> (from Vaal Goliaths) → place on altar. Reward: <strong>Book of Specialisation (+2 Passive Points)</strong>.</li>
+          <li><strong>Finale:</strong> Reach <strong>Temple of Kopec</strong> and defeat the Act 3 boss.</li>
+          <li><strong>Treasures of Utzaal:</strong> Optional extra currency/loot.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a3z11-flasks">2× Quality Flasks</label>
+          <label class="check"><input type="checkbox" data-id="a3z11-heart">Sacrificial Heart</label>
+          <label class="check"><input type="checkbox" data-id="a3z11-book">Book (+2 points)</label>
+          <label class="check"><input type="checkbox" data-id="a3z11-boss">Act 3 boss</label>
+          <label class="check"><input type="checkbox" data-id="a3z11-treasure">Treasures of Utzaal</label>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <footer class="card">
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-weight:700;color:var(--text)">Offline-friendly</div>
+        <div class="subtle">This file is self-contained. Save it anywhere and open it in your browser. Checkmarks persist per browser/device.</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span class="tag">v1.0</span>
+        <span class="tag">Acts 1–3</span>
+        <span class="tag">Streamlined</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const STORAGE_KEY = "poe2_walkthrough_checks_v1";
+  const THEME_KEY = "poe2_walkthrough_theme_v1";
+
+  const q = document.getElementById("q");
+  const btnTheme = document.getElementById("toggleTheme");
+  const btnExpand = document.getElementById("expandAll");
+  const btnCollapse = document.getElementById("collapseAll");
+  const btnReset = document.getElementById("reset");
+  const btnPrint = document.getElementById("print");
+  const doneCount = document.getElementById("doneCount");
+  const allCount = document.getElementById("allCount");
+  const pbar = document.getElementById("pbar");
+
+  const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"][data-id]'));
+  const zones = Array.from(document.querySelectorAll("[data-zone]"));
+  const acts = Array.from(document.querySelectorAll("details.section"));
+
+  function loadChecks(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return {};
+      return JSON.parse(raw) || {};
+    }catch(e){ return {}; }
+  }
+  function saveChecks(map){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(map)); }catch(e){}
+  }
+
+  function applyTheme(){
+    const t = localStorage.getItem(THEME_KEY) || "dark";
+    document.documentElement.setAttribute("data-theme", t === "light" ? "light" : "dark");
+  }
+  function toggleTheme(){
+    const cur = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+    const next = cur === "light" ? "dark" : "light";
+    localStorage.setItem(THEME_KEY, next);
+    applyTheme();
+  }
+
+  function recomputeProgress(){
+    const total = checkboxes.length;
+    const done = checkboxes.filter(c => c.checked).length;
+    allCount.textContent = total;
+    doneCount.textContent = done;
+    const pct = total ? Math.round((done/total)*100) : 0;
+    pbar.value = pct;
+    pbar.max = 100;
+  }
+
+  function initChecks(){
+    const map = loadChecks();
+    for(const cb of checkboxes){
+      cb.checked = !!map[cb.dataset.id];
+      cb.addEventListener("change", () => {
+        const current = loadChecks();
+        current[cb.dataset.id] = cb.checked;
+        saveChecks(current);
+        recomputeProgress();
+      });
+    }
+    recomputeProgress();
+  }
+
+  function normalize(s){ return (s||"").toLowerCase().trim(); }
+
+  function filter(){
+    const term = normalize(q.value);
+    if(!term){
+      for(const z of zones){ z.classList.remove("hidden"); }
+      return;
+    }
+    for(const z of zones){
+      const txt = normalize(z.innerText);
+      z.classList.toggle("hidden", !txt.includes(term));
+    }
+  }
+
+  function expandAll(){ for(const a of acts){ a.open = true; } }
+  function collapseAll(){ for(const a of acts){ a.open = false; } }
+
+  function resetAll(){
+    if(!confirm("Reset all checkmarks and progress?")) return;
+    localStorage.removeItem(STORAGE_KEY);
+    for(const cb of checkboxes){ cb.checked = false; }
+    recomputeProgress();
+  }
+
+  // Keyboard shortcuts
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "/" && document.activeElement !== q){
+      e.preventDefault();
+      q.focus();
+    }else if(e.key === "Escape"){
+      if(document.activeElement === q){
+        q.value = "";
+        q.blur();
+        filter();
+      }
+    }
+  });
+
+  q.addEventListener("input", filter);
+  btnTheme.addEventListener("click", toggleTheme);
+  btnExpand.addEventListener("click", expandAll);
+  btnCollapse.addEventListener("click", collapseAll);
+  btnReset.addEventListener("click", resetAll);
+  btnPrint.addEventListener("click", () => window.print());
+
+  applyTheme();
+  initChecks();
+})();
+</script>
+</body>
+</html>
