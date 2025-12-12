@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Path of Exile 2 – Campaign Walkthrough (Acts 1–3)</title>
-  <meta name="description" content="Streamlined Path of Exile 2 Acts 1–3 walkthrough optimized for playing while you go, including optional rewards and permanent buffs." />
+  <title>Brodfards POE2 Campaign Quickstart Guide</title>
+  <meta name="description" content="Streamlined Path of Exile 2 Acts 1–4 walkthrough for game version 0.4.0 with reward checklists, themes, and pre-endgame prep." />
   <style>
     :root{
       --bg:#0b0f14;
@@ -113,6 +113,79 @@
       --line-height:1.6;
       --font-size:14px;
     }
+    [data-theme="high-contrast-oled"]{
+      --bg:#000000;
+      --panel:#05060a;
+      --panel2:#0a0c12;
+      --text:#ffffff;
+      --muted:#e2e8f0;
+      --border:#fbbf24;
+      --accent:#fbbf24;
+      --accent2:#f97316;
+      --radius: 10px;
+      --shadow: 0 0 0 2px var(--border);
+      --line-height:1.45;
+    }
+    [data-theme="speedrun-oled"]{
+      --bg:#000000;
+      --panel:#050505;
+      --panel2:#0a0a0a;
+      --text:#f7f7f7;
+      --muted:#9ca3af;
+      --border:#1f2937;
+      --accent:#22d3ee;
+      --accent2:#a21caf;
+      --space-sm: 6px;
+      --space-md: 8px;
+      --space-lg: 14px;
+      --wrap-y: 18px;
+      --wrap-x: 14px;
+      --wrap-bottom: 46px;
+      --card-pad: 10px;
+      --section-pad: 10px;
+      --zone-pad: 10px;
+      --btn-pad: 7px 10px;
+      --control-gap: 6px;
+      --radius: 10px;
+      --line-height:1.4;
+      --font-size:12px;
+    }
+    [data-theme="mobile-oled"]{
+      --bg:#000000;
+      --panel:#050505;
+      --panel2:#0a0a0a;
+      --text:#f7f7f7;
+      --muted:#9ca3af;
+      --border:#1f2937;
+      --accent:#22d3ee;
+      --accent2:#a21caf;
+      --space-sm: 10px;
+      --space-md: 14px;
+      --space-lg: 22px;
+      --wrap-y: 22px;
+      --wrap-x: 14px;
+      --wrap-bottom: 90px;
+      --card-pad: 16px;
+      --zone-pad: 14px;
+      --btn-pad: 12px 16px;
+      --control-gap: 12px;
+      --radius: 16px;
+      --line-height:1.6;
+      --font-size:14px;
+    }
+    [data-theme="modern-oled"]{
+      --bg:#020711;
+      --panel:#050a14;
+      --panel2:#020510;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --border:#1f2937;
+      --accent:#38bdf8;
+      --accent2:#ec4899;
+      --shadow: 0 16px 38px rgba(0,0,0,.45);
+      --radius: 18px;
+      --btn-pad:10px 14px;
+    }
     [data-theme="matrix"]{
       --bg:#050807;
       --panel:#08100d;
@@ -177,20 +250,23 @@
     header{
       position:sticky;top:0;z-index:20;
       backdrop-filter: blur(var(--header-blur));
-      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      background: linear-gradient(90deg, color-mix(in srgb, var(--panel) 90%, transparent), color-mix(in srgb, var(--panel2) 90%, transparent));
       border-bottom:1px solid var(--border);
+      box-shadow: 0 6px 24px rgba(0,0,0,.22);
     }
     .topbar{
       max-width:1100px;margin:0 auto;padding:var(--space-md) var(--wrap-x);
       display:flex;gap:var(--space-md);align-items:center;justify-content:space-between;
     }
-    .brand{display:flex;align-items:center;gap:10px}
+    .brand{display:flex;align-items:center;gap:12px}
     .logo{
       width:34px;height:34px;border-radius:10px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       box-shadow: var(--shadow);
     }
-    h1{font-size:18px;margin:0}
+    .brand h1{font-size:19px;margin:0;letter-spacing:0.2px}
+    .titleRow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .titleMeta{display:flex;gap:6px;flex-wrap:wrap}
     .controls{display:flex;gap:var(--control-gap);align-items:center;flex-wrap:wrap;justify-content:flex-end}
     .btn, .pill, input[type="search"]{
       border:1px solid var(--border);
@@ -319,6 +395,21 @@
       display:grid;grid-template-columns:1fr 1fr;gap:10px
     }
     @media (max-width: 900px){ .twoCols{grid-template-columns:1fr} }
+    .buildPanel{grid-column:1/-1;display:grid;gap:12px}
+    .buildHeader{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:6px}
+    .buildHeader h2{margin:0;font-size:17px}
+    .buildBadges{display:flex;gap:8px;flex-wrap:wrap}
+    .buildGrid{display:grid;grid-template-columns:1.3fr .7fr;gap:10px}
+    @media(max-width: 900px){ .buildGrid{grid-template-columns:1fr} }
+    .milestoneTable{width:100%;border-collapse:collapse;font-size:12px}
+    .milestoneTable th,.milestoneTable td{border:1px solid var(--border);padding:6px 8px;vertical-align:top}
+    .milestoneTable th{background:color-mix(in srgb,var(--panel2) 90%,transparent);text-align:left}
+    .buildList{margin:6px 0 0 18px;padding:0}
+    .buildList li{margin:4px 0}
+    .buildChecks{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+    .buildChecks .check{width:100%;justify-content:space-between}
+    @media(max-width: 700px){ .buildChecks .check{align-items:flex-start} }
+    .buildNote{margin-top:6px;color:var(--muted);font-size:12px}
     .progressRow{
       display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
       margin-top:8px
@@ -392,8 +483,15 @@
     <div class="brand">
       <div class="logo" aria-hidden="true"></div>
       <div>
-        <h1>PoE 2 – Campaign Walkthrough (Acts 1–3)</h1>
-        <div class="subtle">Fast, reward-complete route notes • checklists • offline-friendly</div>
+        <div class="titleRow">
+          <h1>Brodfards POE2 Campaign Quickstart Guide</h1>
+          <div class="titleMeta">
+            <span class="tag">Acts 1–4</span>
+            <span class="tag">Game v0.4.0</span>
+            <span class="tag">League launch ready</span>
+          </div>
+        </div>
+        <div class="subtle">Fast, reward-complete notes • pre-endgame prep • polished themes and mobile/Speedrun layouts</div>
       </div>
     </div>
 
@@ -405,12 +503,20 @@
         <option value="parchment">Parchment</option>
         <option value="oled">OLED</option>
         <option value="high-contrast">High Contrast</option>
+        <option value="high-contrast-oled">High Contrast OLED</option>
         <option value="speedrun">Speedrun Compact</option>
+        <option value="speedrun-oled">Speedrun OLED</option>
         <option value="mobile">Mobile Big Buttons</option>
+        <option value="mobile-oled">Mobile OLED</option>
         <option value="matrix">Matrix</option>
         <option value="modern">Modern</option>
+        <option value="modern-oled">Modern OLED</option>
         <option value="nature">Nature</option>
         <option value="water">Water</option>
+      </select>
+      <select class="btn" id="buildSelect" title="Build overlay">
+        <option value="none">Build overlay: off</option>
+        <option value="poisonburst-pathfinder">Poisonburst Arrow Pathfinder (League starter)</option>
       </select>
       <button class="btn" id="expandAll" type="button" title="Expand all acts">Expand</button>
       <button class="btn" id="collapseAll" type="button" title="Collapse all acts">Collapse</button>
@@ -421,9 +527,9 @@
   <div style="border-top:1px solid var(--border);background:color-mix(in srgb,var(--panel) 90%,transparent);padding:10px 18px">
     <div class="topbar" style="padding:0;gap:10px">
       <div class="legendRow">
-        <span class="badge" title="Latest content patch">Game v0.1</span>
-        <span class="badge" title="Guide revision">Guide v1.1</span>
-        <span class="badge" title="When this file was last touched">Updated just now</span>
+        <span class="badge" title="Latest content patch">Game v0.4.0</span>
+        <span class="badge" title="Guide revision">Guide v1.2</span>
+        <span class="badge" title="When this file was last touched">Updated for league start</span>
         <button class="btn" id="showChangelog" type="button">Patch notes</button>
         <button class="btn" id="forkGuide" type="button">Fork this guide</button>
       </div>
@@ -488,9 +594,25 @@
       <a href="#act1"><span>Act 1 – Ogham Coast</span><span class="tag warn">14 zones</span></a>
       <a href="#act2"><span>Act 2 – Vastiri Desert</span><span class="tag warn">11 zones</span></a>
       <a href="#act3"><span>Act 3 – Jungles of Vastiri</span><span class="tag warn">11 zones</span></a>
+      <a href="#act4"><span>Act 4 – Thunderpeaks & Ruined Capital</span><span class="tag warn">10 zones</span></a>
       <div class="note" style="margin-top:10px;border-left-color:var(--accent2)">
         Keyboard: press <span class="kbd">/</span> to focus search. Press <span class="kbd">Esc</span> to clear.
       </div>
+    </div>
+
+    <div class="card buildPanel" id="buildPanel">
+      <div class="buildHeader">
+        <div>
+          <h2>Build-specific leveling overlay</h2>
+          <div class="subtle">Select a build from the top bar to overlay leveling notes, rotations, and checklists alongside the act guide.</div>
+        </div>
+        <div class="buildBadges">
+          <span class="tag">Multi-build ready</span>
+          <span class="tag">Saved per profile</span>
+          <span class="tag">Bow / melee / caster filters</span>
+        </div>
+      </div>
+      <div class="subtle">No build selected yet. Pick one in the top-right “Build overlay” dropdown to load tailored milestones and track build-only tasks.</div>
     </div>
   </div>
 
@@ -1228,6 +1350,251 @@
     </div>
   </details>
 
+  <!-- ACT 4 -->
+  <details class="section" id="act4" open>
+    <summary>
+      <div class="sectTitle">
+        <strong>ACT 4 – Thunderpeaks & Ruined Capital</strong>
+        <span class="subtle">Lightning-heavy climbs, ancient city, endgame unlocks</span>
+      </div>
+      <div class="sectMeta">
+        <span class="tag good">Resists</span>
+        <span class="tag warn">Books</span>
+        <span class="tag">Bench</span>
+        <span class="tag">Ascendancy</span>
+      </div>
+      <div class="actMeter" data-act-meter="4"><progress value="0" max="100"></progress><span>Act completion</span></div>
+      <div class="miniTimeline" data-timeline="4"></div>
+    </summary>
+    <div class="content">
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">1</span> Stormbreak Foothills</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag good">+10% Lightning Res</span>
+            <span class="tag">Waypoint</span>
+          </div>
+        </div>
+        <ul>
+          <li>Follow <span class="callout"><i>🧭</i> Wind beacons</span> up the ridge and activate the <strong>Storm Shrine</strong> for <strong>+10% Lightning Resistance</strong>.</li>
+          <li>Unlock the waypoint before pushing to the cliff switchbacks.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z1-res">+10% Lightning Res</label>
+          <label class="check"><input type="checkbox" data-id="a4z1-waypoint">Waypoint</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">2</span> Thunderhead Ascent</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag warn">Book (+1 point)</span>
+            <span class="tag">Uncut Gems</span>
+          </div>
+        </div>
+        <ul>
+          <li>Rescue <strong>Karst</strong> trapped under debris; he hands over a <strong>Book of Specialisation (+1 Passive Point)</strong>.</li>
+          <li>Loot the ritual cache with <span class="callout"><i>🌪</i> swirling winds</span> for <strong>Uncut Skill Gems</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z2-book">Book of Specialisation</label>
+          <label class="check"><input type="checkbox" data-id="a4z2-gems">Uncut Gems</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">3</span> Cloud Sanctum (Ascendancy Trial)</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag bad">Ascendancy Trial</span>
+            <span class="tag">Bench Unlock</span>
+          </div>
+        </div>
+        <ul>
+          <li>Complete the <strong>Stormcaller’s Trial</strong> to bank an additional Ascendancy point later.</li>
+          <li>Interact with the <strong>Stormsigil Forge</strong> to unlock a <strong>Socket Tuning Bench</strong>.</li>
+          <li><span class="note">Don’t miss the trial; it’s required before endgame.</span></li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z3-trial">Ascendancy Trial complete</label>
+          <label class="check"><input type="checkbox" data-id="a4z3-bench">Socket Tuning Bench</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">4</span> Obsidian Causeway</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag good">+10% Fire Res</span>
+            <span class="tag">Bench Unlock</span>
+          </div>
+        </div>
+        <ul>
+          <li>Defeat the <strong>Igneous Colossus</strong> guarding the bridge to gain <strong>+10% Fire Resistance</strong>.</li>
+          <li>Craft at the <strong>Obsidian Crucible</strong> to unlock <strong>Damage Conversion Bench</strong> recipes.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z4-fire">+10% Fire Res</label>
+          <label class="check"><input type="checkbox" data-id="a4z4-bench">Damage Conversion Bench</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">5</span> Ruined Capital – Outer Ward</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag warn">Book (+2 points)</span>
+            <span class="tag">Waypoint</span>
+          </div>
+        </div>
+        <ul>
+          <li>Clear to the <strong>Shattered Plaza</strong> waypoint.</li>
+          <li>Loot the <strong>Imperial Archive</strong> side room for a <strong>Book of Specialisation (+2 Passive Points)</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z5-waypoint">Shattered Plaza waypoint</label>
+          <label class="check"><input type="checkbox" data-id="a4z5-book">Book (+2 points)</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">6</span> Grand Plaza & Siege Lines</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Quality Weapons</span>
+            <span class="tag">Bench Unlock</span>
+          </div>
+        </div>
+        <ul>
+          <li>Escort the militia through the <strong>Siege Lines</strong>; open the armory chest for <strong>2× 20% Quality Weapons</strong>.</li>
+          <li>Use the <strong>Reinforcement Anvil</strong> to unlock <strong>Armour/Weapon Quality Bench</strong> crafts.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z6-weapons">2× 20% Quality Weapons</label>
+          <label class="check"><input type="checkbox" data-id="a4z6-bench">Armour/Weapon Quality Bench</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">7</span> Sunken Archive</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag warn">Book (+1 point)</span>
+            <span class="tag">Gems</span>
+          </div>
+        </div>
+        <ul>
+          <li>Drain the flooded stacks via <span class="callout"><i>🧱</i> outer wall valves</span> to reach the <strong>Vaal Tablet</strong> for a <strong>Book of Specialisation (+1 Passive Point)</strong>.</li>
+          <li>Claim the <strong>Research Cache</strong> for <strong>uncut support gems</strong>.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z7-book">Book (+1 point)</label>
+          <label class="check"><input type="checkbox" data-id="a4z7-gems">Support Gem cache</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">8</span> Royal Aqueduct</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag good">+10% Cold Res</span>
+            <span class="tag">Bench Unlock</span>
+          </div>
+        </div>
+        <ul>
+          <li>Clear corrupted water elementals to cleanse the <strong>Frost Reliquary</strong> granting <strong>+10% Cold Resistance</strong>.</li>
+          <li>Harvest the <strong>Pressure Valve</strong> to unlock <strong>Flask Capacity Bench</strong> recipes.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z8-cold">+10% Cold Res</label>
+          <label class="check"><input type="checkbox" data-id="a4z8-bench">Flask Capacity Bench</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">9</span> Royal Approach</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag">Ascendancy Portal</span>
+            <span class="tag">Waypoint</span>
+          </div>
+        </div>
+        <ul>
+          <li>Power the <strong>Stormway Obelisks</strong> to open the <strong>Ascendancy Antechamber</strong> portal (needed before maps).</li>
+          <li>Grab the final waypoint before the finale.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z9-portal">Ascendancy portal opened</label>
+          <label class="check"><input type="checkbox" data-id="a4z9-waypoint">Approach waypoint</label>
+        </div>
+      </div>
+
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">10</span> Citadel Apex – High Templar Kaom</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag warn">Book (+2 points)</span>
+            <span class="tag bad">Act Boss</span>
+          </div>
+        </div>
+        <ul>
+          <li>Fight through phased arena; stay near <span class="callout"><i>🧭</i> outer runes</span> to dodge storms.</li>
+          <li>Defeat <strong>Kaom</strong> to receive a <strong>Book of Specialisation (+2 Passive Points)</strong> and unlock endgame NPC access.</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="a4z10-book">Book (+2 points)</label>
+          <label class="check"><input type="checkbox" data-id="a4z10-boss">Act 4 boss</label>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- Endgame Prep -->
+  <details class="section" id="endgame" open>
+    <summary>
+      <div class="sectTitle">
+        <strong>BEFORE ENDGAME – League 0.4.0 Prep List</strong>
+        <span class="subtle">Do this before mapping or campaign resets</span>
+      </div>
+      <div class="sectMeta">
+        <span class="tag bad">Don’t Miss</span>
+        <span class="tag">Bench</span>
+        <span class="tag">Atlas</span>
+      </div>
+    </summary>
+    <div class="content">
+      <div class="zone" data-zone>
+        <div class="zoneHeader">
+          <div class="zoneName"><span class="zoneNum">Prep</span> Endgame Readiness Checks</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag bad">Mandatory</span>
+          </div>
+        </div>
+        <ul>
+          <li>Spend all <strong>Books of Specialisation</strong> and check for unused passive points.</li>
+          <li>Complete all <strong>Ascendancy trials</strong> (Act 2 Trial of the Ancestors, Act 3 Ritual Trial, Act 4 Stormcaller’s Trial) and claim your Ascendancy in town.</li>
+          <li>Bench unlocks: verify <strong>Flask, Socket Tuning, Conversion, Quality</strong> benches are active for crafting.</li>
+          <li>Defensive caps: 75% elemental resists, 3–4 life flasks with bleed/freeze immunity, and at least one mobility flask.</li>
+          <li>Gear swaps: weapon upgrades from Act 4 quality chest and a 4–5 link for main skill.</li>
+          <li>Progression: buy missing <strong>map device portal scrolls</strong>, stock wisdom/portal scrolls, and stash an <strong>extra movement skill</strong>.</li>
+          <li>Optional: run <strong>league mechanic tutorial node</strong> once for Atlas unlock credit (0.4.0).</li>
+        </ul>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-id="prep-books">All books spent</label>
+          <label class="check"><input type="checkbox" data-id="prep-ascend">Ascendancy taken</label>
+          <label class="check"><input type="checkbox" data-id="prep-benches">Benches unlocked</label>
+          <label class="check"><input type="checkbox" data-id="prep-resists">Resists & flasks ready</label>
+          <label class="check"><input type="checkbox" data-id="prep-links">4–5 link equipped</label>
+          <label class="check"><input type="checkbox" data-id="prep-maps">Map device ready</label>
+          <label class="check"><input type="checkbox" data-id="prep-league">League tutorial cleared</label>
+        </div>
+      </div>
+    </div>
+  </details>
+
   <footer class="card">
     <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between">
       <div>
@@ -1235,9 +1602,9 @@
         <div class="subtle">This file is self-contained. Save it anywhere and open it in your browser. Checkmarks persist per browser/device.</div>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <span class="tag">v1.0</span>
-        <span class="tag">Acts 1–3</span>
-        <span class="tag">Streamlined</span>
+        <span class="tag">v1.2</span>
+        <span class="tag">Acts 1–4</span>
+        <span class="tag">League 0.4.0 ready</span>
       </div>
     </div>
   </footer>
@@ -1275,9 +1642,10 @@
       <button class="btn" data-close="modalChangelog">Close</button>
     </div>
     <ul>
-      <li>Added rewards dashboard, build filters, don’t-miss and speedrun modes.</li>
-      <li>Per-act completion meters, session notes, import/export and profiles.</li>
-      <li>Shareable read-only links, timeline view, difficulty tags, and animated feedback.</li>
+      <li>Added build overlay selector with Poisonburst Arrow Pathfinder leveling table, rotation, and warnings.</li>
+      <li>Added Act 4 walkthrough with new resist books, benches, and Kaom finale.</li>
+      <li>Introduced OLED variants (High Contrast, Speedrun, Mobile, Modern) and refreshed header branding.</li>
+      <li>Added league 0.4.0 pre-endgame checklist plus updated version badges.</li>
     </ul>
   </div>
 </div>
@@ -1288,10 +1656,61 @@
   const NOTES_KEY = "poe2_walkthrough_notes_v1";
   const THEME_KEY = "poe2_walkthrough_theme_v1";
   const PROFILE_KEY = "poe2_profile_sel";
+  const BUILD_SELECT_KEY = "poe2_build_overlay_v1";
   const DEFAULT_THEME = "poe-dark";
   const SUPPORTED_THEMES = [
-    "poe-dark","parchment","oled","high-contrast","speedrun","mobile","matrix","modern","nature","water"
+    "poe-dark","parchment","oled","high-contrast","high-contrast-oled",
+    "speedrun","speedrun-oled","mobile","mobile-oled","matrix","modern","modern-oled","nature","water"
   ];
+
+  const builds = {
+    none: { name: "None", tag: null },
+    "poisonburst-pathfinder": {
+      name: "Poisonburst Arrow Pathfinder",
+      subtitle: "League starter • Bow / Chaos / Poison • Game v0.4.0",
+      tag: "bow",
+      highlights: ["Gas Arrow unlock @22", "+flat phys stacking", "Contagion → Herald of Plague swap"],
+      checklist: [
+        { id: "build-pba-flatphys", label: "Act 1: Stack flat physical on gloves/rings/quiver + Warden bow at lvl 11", note: "Check vendors every 1–2 levels and never drop movement speed boots." },
+        { id: "build-pba-conc", label: "Link Concentrated Area to Poisonburst Arrow (first support) + Escalating Poison", note: "Huge single-target spike; keep it linked when possible." },
+        { id: "build-pba-toxgrowth", label: "Unlock Toxic Growth in Act 2 and keep Concentrated Area linked", note: "Major single-target upgrade that scales with Gas Arrow clouds." },
+        { id: "build-pba-gasarrow", label: "Level 22: buy Gas Arrow and practice Gas → Toxic Growth boss rotation", note: "Maintain clouds to proc Toxic Growth automatically." },
+        { id: "build-pba-spirit-swap", label: "Lvl ~26: swap Herald of Plague (clear) ⇄ Withering Presence (boss) as needed", note: "Boss swap adds ~20–25% damage." },
+        { id: "build-pba-bow-upgrades", label: "Use saved Iron Runes on lvl 39 Zealot or lvl 46 Artillery bow", note: "One good bow can last to campaign end." },
+        { id: "build-pba-fire-warning", label: "Avoid flat fire damage on gear until Persistent Ground II", note: "Ignites will pop Gas Arrow clouds and brick damage." }
+      ],
+      bossOrder: ["Devourer (for gems)", "Cold Witch", "Hut Witch", "Rust King"],
+      milestones: [
+        { level: "Lvl 1-6", area: "Start", gear: "Stack flat phys on gloves/rings/quiver; movement speed boots", skills: "Lightning Arrow + Contagion", note: "Flat phys is a massive Act 1 spike." },
+        { level: "Lvl 6", area: "Ranger – Fate of the Vaal", gear: "Keep vendor-checking every 1–2 levels", skills: "Ascendancy: Overwhelming Toxicity (when available)", note: "Act 1 boss order: Devourer > Cold Witch > Hut Witch > Rust King" },
+        { level: "Lvl 7-13", area: "Act 1", gear: "Lvl 11 Warden Bow (prefer %phys)", skills: "Support 1: Concentrated Area; Support 2: Escalating Poison", note: "Passive tree: rush Crippling Toxins, Clean Shot, Vile Wounds." },
+        { level: "Lvl 14-21", area: "Act 2", gear: "Broadhead Quiver", skills: "Unlock Toxic Growth; keep Concentrated Area linked", note: "Use Contagion to spread poison until Herald of Plague." },
+        { level: "Lvl 22-28", area: "Act 2 / Act 3", gear: "Keep flat phys, life, resists", skills: "Lvl 22 Gas Arrow; swap Herald of Plague in for clear", note: "Avoid flat fire damage until Persistent Ground II." },
+        { level: "Lvl 29-38", area: "Act 3 / Act 4", gear: "Recurve Bow upgrade", skills: "Maximise support links", note: "Damage becomes extremely good here." },
+        { level: "Lvl 39-53", area: "Act 4 / Act 5", gear: "Zealot (39) or Artillery (46) bow", skills: "Add Honed Instincts + Magnified Area I", note: "Bow can last to end of campaign." }
+      ],
+      clearing: [
+        "Lvl 1-26: Poisonburst Arrow once, then Contagion to spread poison (acts like poison prolif).",
+        "Lvl 26+: Drop Contagion; use Poisonburst Arrow + Gas Arrow after Herald of Plague is online."
+      ],
+      bossRotation: [
+        "Place Vine Arrow on boss for free damage.",
+        "Use Gas Arrow 1-2x to seed clouds (procs Toxic Growth).",
+        "Spam Toxic Growth while refreshing Gas Arrow when it expires."
+      ],
+      tips: [
+        "Damage scales purely from flat physical; elemental scaling is negligible.",
+        "Vendor-check rings/gloves/quiver/bow every 1–2 levels for flat phys upgrades.",
+        "Always salvage quality weapons for Whetstones and socketed items for Artificer's Orbs.",
+        "Never drop movement speed boots unless the new pair also has movement speed.",
+        "For bossing, swap Herald of Plague to Withering Presence for a 20–25% single-target bump."
+      ],
+      warnings: [
+        "Avoid flat fire damage until you have Persistent Ground II for Gas Arrow (prevents cloud pops).",
+        "Maintain Concentrated Area on Poisonburst/Toxic Growth for bosses—30% more damage from support." 
+      ]
+    }
+  };
 
   const q = document.getElementById("q");
   const themeSelect = document.getElementById("themeSelect");
@@ -1320,9 +1739,12 @@
   const modalDashboard = document.getElementById("modalDashboard");
   const modalChangelog = document.getElementById("modalChangelog");
 
-  const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"][data-id]'));
+  let checkboxes = [];
+  const wiredCheckboxes = new Set();
   const zones = Array.from(document.querySelectorAll("[data-zone]"));
   const acts = Array.from(document.querySelectorAll("details.section"));
+  const buildPanel = document.getElementById("buildPanel");
+  const buildSelect = document.getElementById("buildSelect");
   let currentProfile = localStorage.getItem(PROFILE_KEY) || "starter";
   let readOnlyShare = false;
   let dontMissActive = false;
@@ -1331,6 +1753,7 @@
   const normalize = (s)=> (s||"").toLowerCase().trim();
   const storageKey = ()=> `${BASE_STORAGE_KEY}_${currentProfile}`;
   const noteKey = ()=> `${NOTES_KEY}_${currentProfile}`;
+  const buildKey = ()=> `${BUILD_SELECT_KEY}_${currentProfile}`;
 
   function loadChecks(){
     try{
@@ -1342,6 +1765,10 @@
   function saveChecks(map){ if(readOnlyShare) return; try{ localStorage.setItem(storageKey(), JSON.stringify(map)); }catch(e){} }
   function loadNotes(){ try{ return JSON.parse(localStorage.getItem(noteKey())||"{}") || {}; }catch(e){ return {}; } }
   function saveNotes(map){ if(readOnlyShare) return; try{ localStorage.setItem(noteKey(), JSON.stringify(map)); }catch(e){} }
+
+  function syncCheckboxes(){
+    checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"][data-id]'));
+  }
 
   function resolveThemeName(name){
     if(!name) return DEFAULT_THEME;
@@ -1395,6 +1822,108 @@
     return tags.length ? tags : ["all"];
   }
 
+  function renderBuildOverlay(buildId){
+    if(!buildPanel || !buildSelect) return;
+    const data = builds[buildId] || builds.none;
+    localStorage.setItem(buildKey(), buildId);
+    buildSelect.value = buildId;
+    buildPanel.innerHTML = "";
+
+    const header = document.createElement("div");
+    header.className = "buildHeader";
+    header.innerHTML = `
+      <div>
+        <h2>${data.name || "Build overlay"}</h2>
+        <div class="subtle">${data.subtitle || "Choose a build to layer in leveling steps, rotations, and warnings."}</div>
+      </div>
+      <div class="buildBadges">
+        ${data.tag ? `<span class="tag">${data.tag.charAt(0).toUpperCase()+data.tag.slice(1)} focus</span>` : ''}
+        ${data.highlights ? data.highlights.map(h=>`<span class="tag">${h}</span>`).join("") : ''}
+      </div>
+    `;
+    buildPanel.appendChild(header);
+
+    if(!data || buildId === "none"){
+      const empty = document.createElement("div");
+      empty.className = "subtle";
+      empty.textContent = "Pick a build from the top bar to load milestones and build-only checklists.";
+      buildPanel.appendChild(empty);
+      applyBuildFilter(null);
+      syncCheckboxes();
+      recomputeProgress();
+      return;
+    }
+
+    const grid = document.createElement("div");
+    grid.className = "buildGrid";
+
+    const left = document.createElement("div");
+    left.innerHTML = `<h3 style="margin:0 0 6px 0">Leveling milestones (1–53)</h3>`;
+    const table = document.createElement("table");
+    table.className = "milestoneTable";
+    table.innerHTML = `<thead><tr><th>Level</th><th>Act / Area</th><th>Gear or item</th><th>Gems & skills</th><th>Notes</th></tr></thead>`;
+    const tbody = document.createElement("tbody");
+    (data.milestones||[]).forEach(m=>{
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${m.level}</td><td>${m.area}</td><td>${m.gear}</td><td>${m.skills}</td><td>${m.note||""}</td>`;
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    left.appendChild(table);
+
+    if(data.bossOrder){
+      const boss = document.createElement("div");
+      boss.className = "buildNote";
+      boss.innerHTML = `<strong>Act 1 boss order:</strong> ${data.bossOrder.join(" → ")}`;
+      left.appendChild(boss);
+    }
+
+    const rotation = document.createElement("div");
+    rotation.innerHTML = `
+      <h3 style="margin:12px 0 6px 0">How to play</h3>
+      <div><strong>Clearing</strong><ul class="buildList">${(data.clearing||[]).map(item=>`<li>${item}</li>`).join("")}</ul></div>
+      <div style="margin-top:6px"><strong>Boss / rare rotation</strong><ul class="buildList">${(data.bossRotation||[]).map(item=>`<li>${item}</li>`).join("")}</ul></div>
+    `;
+    left.appendChild(rotation);
+
+    const right = document.createElement("div");
+    right.innerHTML = `<h3 style="margin:0 0 6px 0">Quick setup checklist</h3>`;
+    const checklistWrap = document.createElement("div");
+    checklistWrap.className = "buildChecks";
+    (data.checklist||[]).forEach(item=>{
+      const label = document.createElement("label");
+      label.className = "check";
+      label.innerHTML = `<input type="checkbox" data-id="${item.id}"><span>${item.label}</span>`;
+      if(item.note){
+        const note = document.createElement("div");
+        note.className = "buildNote";
+        note.textContent = item.note;
+        label.appendChild(note);
+      }
+      checklistWrap.appendChild(label);
+    });
+    right.appendChild(checklistWrap);
+
+    if(data.tips?.length){
+      const tips = document.createElement("div");
+      tips.innerHTML = `<h3 style="margin:12px 0 6px 0">Key tips</h3><ul class="buildList">${data.tips.map(t=>`<li>${t}</li>`).join("")}</ul>`;
+      right.appendChild(tips);
+    }
+
+    if(data.warnings?.length){
+      const warn = document.createElement("div");
+      warn.innerHTML = `<h3 style="margin:12px 0 6px 0">Warnings</h3><ul class="buildList">${data.warnings.map(t=>`<li>${t}</li>`).join("")}</ul>`;
+      right.appendChild(warn);
+    }
+
+    grid.appendChild(left);
+    grid.appendChild(right);
+    buildPanel.appendChild(grid);
+
+    applyBuildFilter(data.tag);
+    initChecks();
+  }
+
   function attachNotes(){
     const notes = loadNotes();
     zones.forEach((zone, idx)=>{
@@ -1422,15 +1951,19 @@
 
   function initChecks(){
     const map = loadChecks();
+    syncCheckboxes();
     for(const cb of checkboxes){
       cb.checked = !!map[cb.dataset.id];
       cb.parentElement.classList.add("animatedCheck");
-      cb.addEventListener("change", () => {
-        const current = loadChecks();
-        current[cb.dataset.id] = cb.checked;
-        saveChecks(current);
-        recomputeProgress();
-      });
+      if(!wiredCheckboxes.has(cb.dataset.id)){
+        cb.addEventListener("change", () => {
+          const current = loadChecks();
+          current[cb.dataset.id] = cb.checked;
+          saveChecks(current);
+          recomputeProgress();
+        });
+        wiredCheckboxes.add(cb.dataset.id);
+      }
       if(readOnlyShare){ cb.setAttribute("disabled", true); }
     }
     recomputeProgress();
@@ -1610,6 +2143,8 @@
       initChecks();
       attachNotes();
       recomputeProgress();
+      const savedBuild = localStorage.getItem(buildKey());
+      renderBuildOverlay(builds[savedBuild] ? savedBuild : "none");
     });
   }
 
@@ -1631,6 +2166,15 @@
       const lang = languageSelect.value;
       q.placeholder = texts[lang]?.search || texts.en.search;
     });
+  }
+
+  function initBuildSelector(){
+    if(!buildSelect) return;
+    const saved = localStorage.getItem(buildKey());
+    const choice = builds[saved] ? saved : "none";
+    buildSelect.value = choice;
+    buildSelect.addEventListener("change", ()=> renderBuildOverlay(buildSelect.value));
+    renderBuildOverlay(choice);
   }
 
   function themePickerInit(){
@@ -1741,6 +2285,7 @@
   initChecks();
   themePickerInit();
   applyTheme();
+  initBuildSelector();
   filter();
   createTimeline();
   difficultyBadges();
