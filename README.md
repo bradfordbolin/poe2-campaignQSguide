@@ -1,4 +1,4 @@
-# Path of Exile 2 Campaign Walkthrough (Acts 1–3)
+# Path of Exile 2 Campaign Walkthrough + Leveling Build Guide
 
 This repository hosts a single static `index.html` file that contains the interactive campaign guide. No build tools or package installation is required: you can open the file directly in a browser or publish it with GitHub Pages.
 
