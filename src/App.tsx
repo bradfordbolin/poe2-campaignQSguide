@@ -3,6 +3,64 @@ import './App.css'
 import { normalizeChapters, masterDb } from './lib/normalize'
 import type { NormalizedChecklistItem } from './types/masterDb'
 
+type ThemeId =
+  | 'poe2-obsidian-gilt'
+  | 'poe2-vaal-ember'
+  | 'poe2-verdant-eldritch'
+  | 'poe2-blood-moon'
+  | 'poe2-stormsteel'
+  | 'poe2-ash-pyrite'
+
+const themeOptions: { label: string; value: ThemeId }[] = [
+  { label: 'Obsidian Gilt', value: 'poe2-obsidian-gilt' },
+  { label: 'Vaal Ember', value: 'poe2-vaal-ember' },
+  { label: 'Eldritch Verdigris', value: 'poe2-verdant-eldritch' },
+  { label: 'Blood Moon Brass', value: 'poe2-blood-moon' },
+  { label: 'Stormsteel', value: 'poe2-stormsteel' },
+  { label: 'Ash & Pyrite', value: 'poe2-ash-pyrite' },
+]
+
+const themeIds = new Set(themeOptions.map((option) => option.value))
+const defaultTheme: ThemeId = 'poe2-obsidian-gilt'
+const themeStorageKey = 'theme'
+const contrastStorageKey = 'contrast'
+
+const readInitialPreferences = (): { theme: ThemeId; contrast: '' | 'high' } => {
+  if (typeof localStorage === 'undefined')
+    return { theme: defaultTheme, contrast: '' }
+
+  try {
+    const storedTheme = localStorage.getItem(themeStorageKey) as ThemeId | null
+    const theme = storedTheme && themeIds.has(storedTheme) ? storedTheme : defaultTheme
+    const contrast = localStorage.getItem(contrastStorageKey) === 'high' ? 'high' : ''
+
+    return { theme, contrast }
+  } catch (error) {
+    console.warn('Falling back to default theme preferences', error)
+    return { theme: defaultTheme, contrast: '' }
+  }
+}
+
+const applyThemeDataset = (theme: ThemeId) => {
+  if (typeof document === 'undefined') return
+  document.documentElement.dataset.theme = theme
+}
+
+const applyContrastDataset = (contrast: '' | 'high') => {
+  if (typeof document === 'undefined') return
+  if (contrast === 'high') {
+    document.documentElement.dataset.contrast = 'high'
+  } else {
+    document.documentElement.removeAttribute('data-contrast')
+  }
+}
+
+const initialPreferences = readInitialPreferences()
+if (typeof document !== 'undefined') {
+  applyThemeDataset(initialPreferences.theme)
+  applyContrastDataset(initialPreferences.contrast)
+}
+
 const normalizedChapters = normalizeChapters()
 const storageVersion = masterDb.meta?.revision
   ? `poe2-checklist-v${masterDb.meta.revision}`
@@ -101,6 +159,8 @@ const getDefaultSectionExpansion = (mode: 'speedrun' | 'full') => {
 }
 
 function App() {
+  const [theme, setTheme] = useState<ThemeId>(initialPreferences.theme)
+  const [contrast, setContrast] = useState(initialPreferences.contrast === 'high')
   const [search, setSearch] = useState('')
   const [mode, setMode] = useState<'speedrun' | 'full'>('speedrun')
   const [completed, setCompleted] = useState<Set<string>>(() => loadCompleted())
@@ -114,6 +174,28 @@ function App() {
   useEffect(() => {
     persistCompleted(completed)
   }, [completed])
+
+  useEffect(() => {
+    applyThemeDataset(theme)
+    if (typeof localStorage !== 'undefined') {
+      try {
+        localStorage.setItem(themeStorageKey, theme)
+      } catch (error) {
+        console.warn('Unable to store theme preference', error)
+      }
+    }
+  }, [theme])
+
+  useEffect(() => {
+    applyContrastDataset(contrast ? 'high' : '')
+    if (typeof localStorage !== 'undefined') {
+      try {
+        localStorage.setItem(contrastStorageKey, contrast ? 'high' : '')
+      } catch (error) {
+        console.warn('Unable to store contrast preference', error)
+      }
+    }
+  }, [contrast])
 
   useEffect(() => {
     setExpandedSections(getDefaultSectionExpansion(mode))
@@ -302,6 +384,28 @@ function App() {
                   Full
                 </button>
               </div>
+            </div>
+            <div className="theme-controls">
+              <label htmlFor="theme">Theme</label>
+              <select
+                id="theme"
+                value={theme}
+                onChange={(event) => setTheme(event.target.value as ThemeId)}
+              >
+                {themeOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <label className="contrast-toggle">
+                <input
+                  type="checkbox"
+                  checked={contrast}
+                  onChange={(event) => setContrast(event.target.checked)}
+                />
+                High Contrast
+              </label>
             </div>
             <div className="progress-block">
               <div className="progress-label">

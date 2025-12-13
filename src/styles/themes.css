@@ -1,0 +1,127 @@
+:root {
+  color-scheme: dark;
+  --bg: #030405;
+  --text: #f6f2e9;
+  --muted: #c6beb0;
+  --panel: #0c1017;
+  --panel-strong: #0f1622;
+  --card: #111925;
+  --border: rgba(240, 179, 90, 0.32);
+  --accent: #f0b35a;
+  --accent2: #7ce7ff;
+  --focus: #ffd479;
+  --shadow: rgba(0, 0, 0, 0.7);
+  --progress-bg: rgba(255, 255, 255, 0.12);
+  --progress-fill: linear-gradient(90deg, var(--accent), var(--accent2));
+  --pill-bg: rgba(240, 179, 90, 0.15);
+  --pill-text: #f6f2e9;
+  --input-bg: rgba(255, 255, 255, 0.06);
+  --input-border: rgba(255, 255, 255, 0.18);
+  --input-placeholder: rgba(255, 255, 255, 0.45);
+  --button-bg: var(--accent);
+  --button-text: #0a0d12;
+  --button-secondary-bg: rgba(255, 255, 255, 0.08);
+  --button-secondary-text: var(--text);
+  --row-hover: rgba(255, 255, 255, 0.04);
+  --done-opacity: 0.5;
+}
+
+:root[data-contrast='high'] {
+  --border: rgba(255, 255, 255, 0.52);
+  --progress-bg: rgba(255, 255, 255, 0.25);
+  --row-hover: rgba(255, 255, 255, 0.1);
+  --done-opacity: 0.32;
+  --focus: #ffffff;
+  --button-secondary-bg: rgba(255, 255, 255, 0.16);
+  --input-border: rgba(255, 255, 255, 0.32);
+}
+
+:root[data-theme='poe2-obsidian-gilt'] {
+  --bg: #030405;
+  --text: #f6f2e9;
+  --muted: #c6beb0;
+  --panel: #0b0f15;
+  --panel-strong: #0f1724;
+  --card: #111a26;
+  --border: rgba(240, 179, 90, 0.32);
+  --accent: #f0b35a;
+  --accent2: #7ce7ff;
+  --focus: #ffd479;
+  --shadow: rgba(0, 0, 0, 0.7);
+  --pill-bg: rgba(240, 179, 90, 0.15);
+}
+
+:root[data-theme='poe2-vaal-ember'] {
+  --bg: #0b0506;
+  --text: #ffe8da;
+  --muted: #d8b7ab;
+  --panel: #140808;
+  --panel-strong: #1b0b0d;
+  --card: #220e12;
+  --border: rgba(255, 116, 72, 0.35);
+  --accent: #ff7448;
+  --accent2: #f7c065;
+  --focus: #ffd6a6;
+  --shadow: rgba(0, 0, 0, 0.68);
+  --pill-bg: rgba(247, 192, 101, 0.15);
+}
+
+:root[data-theme='poe2-verdant-eldritch'] {
+  --bg: #020806;
+  --text: #e9fff2;
+  --muted: #a9cbb8;
+  --panel: #04100e;
+  --panel-strong: #092018;
+  --card: #0d2a1e;
+  --border: rgba(92, 230, 184, 0.32);
+  --accent: #5ce6b8;
+  --accent2: #9bf07c;
+  --focus: #c9ffb5;
+  --shadow: rgba(0, 0, 0, 0.62);
+  --pill-bg: rgba(92, 230, 184, 0.15);
+}
+
+:root[data-theme='poe2-blood-moon'] {
+  --bg: #070308;
+  --text: #ffeef5;
+  --muted: #d7b5c6;
+  --panel: #100612;
+  --panel-strong: #19081a;
+  --card: #210a22;
+  --border: rgba(255, 107, 115, 0.34);
+  --accent: #ff6b73;
+  --accent2: #ffce6a;
+  --focus: #ffd1c2;
+  --shadow: rgba(0, 0, 0, 0.66);
+  --pill-bg: rgba(255, 107, 115, 0.15);
+}
+
+:root[data-theme='poe2-stormsteel'] {
+  --bg: #04070d;
+  --text: #e4f1ff;
+  --muted: #a4b7d1;
+  --panel: #08101b;
+  --panel-strong: #0d1826;
+  --card: #0f2033;
+  --border: rgba(106, 184, 255, 0.32);
+  --accent: #6ab8ff;
+  --accent2: #6bffe3;
+  --focus: #c6e8ff;
+  --shadow: rgba(0, 0, 0, 0.62);
+  --pill-bg: rgba(106, 184, 255, 0.15);
+}
+
+:root[data-theme='poe2-ash-pyrite'] {
+  --bg: #0a0a09;
+  --text: #f3eadb;
+  --muted: #cbb89f;
+  --panel: #12110f;
+  --panel-strong: #191612;
+  --card: #201c15;
+  --border: rgba(227, 193, 107, 0.32);
+  --accent: #e3c16b;
+  --accent2: #9ed2c0;
+  --focus: #ffe5ad;
+  --shadow: rgba(0, 0, 0, 0.65);
+  --pill-bg: rgba(227, 193, 107, 0.15);
+}
