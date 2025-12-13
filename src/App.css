@@ -254,6 +254,19 @@ button:disabled {
   color: #94a3b8;
 }
 
+.reward-lines {
+  margin-left: 26px;
+  margin-top: 4px;
+  color: #0f172a;
+  display: grid;
+  gap: 2px;
+}
+
+.reward-line {
+  font-size: 14px;
+  color: #0f172a;
+}
+
 .empty {
   text-align: center;
   padding: 24px;

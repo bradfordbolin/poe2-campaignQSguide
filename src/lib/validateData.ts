@@ -7,6 +7,12 @@ const interludeTitleMap: Record<string, string> = {
 }
 
 const permanentPowerRegex = /permanent\s+(buff|power)/i
+const rewardTagMatchers = [
+  permanentPowerRegex,
+  /skill\s*points?|passive|book/i,
+  /ascendancy/i,
+  /(unlock|key|access|gate)/i,
+]
 
 const buildRewardIndex = (
   containers: Record<string, RewardContainer> | undefined,
@@ -117,11 +123,39 @@ export const validateMasterData = (db: MasterDb) => {
     })
   }
 
+  const validateRewardAssociations = (section: CampaignSection) => {
+    const rewardSource = chapterRewards.get(section.chapter)
+    if (!rewardSource) return
+
+    const sectionZones = resolveZoneDisplayNames(section.zone_ids ?? section.zones, zoneDisplayMap)
+    const matchingEntries = rewardSource.zones?.filter((entry) =>
+      sectionZones.includes(entry.zone),
+    )
+    if (!matchingEntries || matchingEntries.length === 0) return
+
+    const bossNames = matchingEntries.flatMap((entry) => entry.key ?? [])
+    if (bossNames.length <= 1) return
+
+    matchingEntries.forEach((entry) => {
+      entry.reward_notes?.forEach((note) => {
+        if (!rewardTagMatchers.some((regex) => regex.test(note))) return
+
+        const matched = bossNames.some((boss) => note.toLowerCase().includes(boss.toLowerCase()))
+        if (!matched) {
+          warn(
+            `Section ${section.id} has reward note that cannot be matched to a boss: "${note}" (zone ${entry.zone})`,
+          )
+        }
+      })
+    })
+  }
+
   const sections = db.campaign_progression_sections?.sections ?? []
   sections.forEach((section) => {
     validateZones(section)
     validateLevelRange(section)
     validatePermanentPowerNotes(section)
+    validateRewardAssociations(section)
   })
 
   const allRewardContainers = [

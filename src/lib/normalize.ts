@@ -73,12 +73,23 @@ const formatLevelRange = (section: CampaignSection) => {
 const resolveZoneDisplayNames = (zoneIds: string[], zoneMap: Map<string, string>) =>
   zoneIds.map((id) => zoneMap.get(id) ?? id)
 
+const rewardTagMatchers = [
+  { tag: 'permanent_buff', test: (text: string) => /permanent\s+(buff|power)/i.test(text) },
+  {
+    tag: 'skill_points',
+    test: (text: string) => /skill\s*points?|passive|book/i.test(text),
+  },
+  { tag: 'ascendancy', test: (text: string) => /ascendancy/i.test(text) },
+  { tag: 'key_unlock', test: (text: string) => /(unlock|key|access|gate)/i.test(text) },
+]
+
 const buildChecklistItems = (
   sectionId: string,
   resolvedZones: string[],
   rewards: RewardContainer | undefined,
 ): NormalizedChecklistItem[] => {
-  const items: NormalizedChecklistItem[] = []
+  const bossItems: { item: NormalizedChecklistItem; name: string }[] = []
+  const rewardItems: { item: NormalizedChecklistItem; note: string }[] = []
 
   const candidates = rewards?.zones ?? []
   candidates
@@ -87,26 +98,54 @@ const buildChecklistItems = (
       entry.key?.forEach((boss) => {
         const text = `Defeat: ${boss}`
         const tags = /optional/i.test(boss) ? ['optional_content'] : ['required_progression']
-        items.push({ id: hashChecklistId(sectionId, text), text, tags })
+        const item = { id: hashChecklistId(sectionId, text), text, tags }
+        bossItems.push({ item, name: boss })
       })
 
       entry.reward_notes?.forEach((note) => {
         const lower = note.toLowerCase()
-        const tags: string[] = []
-        if (lower.includes('permanent buff')) tags.push('permanent_buff')
-        if (lower.includes('skill point') || lower.includes('skill points') || lower.includes('passive') || lower.includes('book')) {
-          tags.push('skill_points')
-        }
-        if (lower.includes('unlock') || lower.includes('key') || lower.includes('access') || lower.includes('gate')) {
-          tags.push('key_unlock')
-        }
+        const tags = rewardTagMatchers
+          .filter((matcher) => matcher.test(lower))
+          .map((matcher) => matcher.tag)
 
         if (tags.length > 0) {
           const text = `Reward: ${note}`
-          items.push({ id: hashChecklistId(sectionId, text), text, tags })
+          const item: NormalizedChecklistItem = { id: hashChecklistId(sectionId, text), text, tags }
+          rewardItems.push({ item, note })
         }
       })
     })
+
+  const bossCount = bossItems.length
+  const impliedByMap = new Map<string, string>()
+
+  if (bossCount === 1 && rewardItems.length > 0) {
+    const boss = bossItems[0]
+    boss.item.impliedRewards = rewardItems.map((reward) => ({ ...reward.item, impliedBy: boss.item.id }))
+    rewardItems.forEach((reward) => impliedByMap.set(reward.item.id, boss.item.id))
+  }
+
+  if (bossCount > 1) {
+    rewardItems.forEach((reward) => {
+      const match = bossItems.find((boss) =>
+        reward.note.toLowerCase().includes(boss.name.toLowerCase()),
+      )
+      if (match) {
+        const implied = { ...reward.item, impliedBy: match.item.id }
+        impliedByMap.set(reward.item.id, match.item.id)
+        match.item.impliedRewards = [...(match.item.impliedRewards ?? []), implied]
+      }
+    })
+  }
+
+  const items: NormalizedChecklistItem[] = [
+    ...bossItems.map((entry) => entry.item),
+    ...rewardItems.map((reward) =>
+      impliedByMap.has(reward.item.id)
+        ? { ...reward.item, impliedBy: impliedByMap.get(reward.item.id) }
+        : reward.item,
+    ),
+  ]
 
   return items
 }

@@ -31,12 +31,19 @@ const persistCompleted = (completed: Set<string>) => {
 }
 
 const modeFilters: Record<'speedrun' | 'full', Set<string>> = {
-  speedrun: new Set(['required_progression', 'permanent_buff', 'skill_points', 'key_unlock']),
+  speedrun: new Set([
+    'required_progression',
+    'permanent_buff',
+    'skill_points',
+    'key_unlock',
+    'ascendancy',
+  ]),
   full: new Set([
     'required_progression',
     'permanent_buff',
     'skill_points',
     'key_unlock',
+    'ascendancy',
     'optional_content',
     'optional_buff',
     'optional_boss',
@@ -166,7 +173,8 @@ function App() {
   const firstUnchecked = useMemo(() => {
     for (const chapter of filteredChapters) {
       for (const section of chapter.sections) {
-        for (const item of section.checklist) {
+        const visibleItems = section.checklist.filter((item) => !item.impliedBy)
+        for (const item of visibleItems) {
           if (!completed.has(item.id)) return { itemId: item.id, sectionId: section.id, chapter: chapter.title }
         }
       }
@@ -177,11 +185,17 @@ function App() {
   const toggleItem = (item: NormalizedChecklistItem) => {
     setCompleted((prev) => {
       const next = new Set(prev)
-      if (next.has(item.id)) {
-        next.delete(item.id)
-      } else {
-        next.add(item.id)
-      }
+      const nextState = !next.has(item.id)
+      const idsToSync = [item.id, ...(item.impliedRewards?.map((reward) => reward.id) ?? [])]
+
+      idsToSync.forEach((id) => {
+        if (nextState) {
+          next.add(id)
+        } else {
+          next.delete(id)
+        }
+      })
+
       return next
     })
   }
@@ -383,21 +397,32 @@ function App() {
 
                       {expanded && (
                         <ul className="checklist">
-                          {section.checklist.map((item) => {
-                            const checked = completed.has(item.id)
-                            return (
-                              <li key={item.id} data-item-id={item.id}>
-                                <label>
-                                  <input
-                                    type="checkbox"
-                                    checked={checked}
-                                    onChange={() => toggleItem(item)}
-                                  />
-                                  <span className={checked ? 'checked' : ''}>{item.text}</span>
-                                </label>
-                              </li>
-                            )
-                          })}
+                          {section.checklist
+                            .filter((item) => !item.impliedBy)
+                            .map((item) => {
+                              const checked = completed.has(item.id)
+                              return (
+                                <li key={item.id} data-item-id={item.id}>
+                                  <label>
+                                    <input
+                                      type="checkbox"
+                                      checked={checked}
+                                      onChange={() => toggleItem(item)}
+                                    />
+                                    <span className={checked ? 'checked' : ''}>{item.text}</span>
+                                  </label>
+                                  {item.impliedRewards?.length ? (
+                                    <div className="reward-lines">
+                                      {item.impliedRewards.map((reward) => (
+                                        <div key={reward.id} className="reward-line">
+                                          {reward.text}
+                                        </div>
+                                      ))}
+                                    </div>
+                                  ) : null}
+                                </li>
+                              )
+                            })}
                         </ul>
                       )}
                     </article>

@@ -58,6 +58,8 @@ export interface NormalizedChecklistItem {
   id: string
   text: string
   tags: string[]
+  impliedBy?: string
+  impliedRewards?: NormalizedChecklistItem[]
 }
 
 export interface NormalizedSection {
