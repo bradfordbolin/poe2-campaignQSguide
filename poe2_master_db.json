@@ -6,10 +6,11 @@
     "notes": [
       "This file is intended to be re-uploaded/pasted into future chats to restore context.",
       "Fields marked 'verification_flag' should be validated against primary sources (GGG patch notes / in-game) when available.",
-      "2025-12-12: Added campaign progression section common-level ranges table (v1) + build overlay data-format templates."
+      "2025-12-12: Added campaign progression section common-level ranges table (v1) + build overlay data-format templates.",
+      "2025-12-13: Checklist cleanup: added checklist_overrides.key_kinds to prevent non-boss keys (secrets/quests/hubs/checkpoints) from generating 'Defeat' checklist items; fixed Act 4 Kingsmarch common-level range to align with Act 4 start; added reward-note matcher hints for checklist generation."
     ],
     "last_updated": "2025-12-13",
-    "revision": 1,
+    "revision": 2,
     "campaign_section_rule": "Hub sections may imply subzones; implied subzones are not standalone sections."
   },
   "sources": [
@@ -1420,10 +1421,10 @@
           "Kingsmarch"
         ],
         "common_level_range": {
-          "min": 53,
-          "max": 54
+          "min": 46,
+          "max": 46
         },
-        "common_level_range_display": "53-54",
+        "common_level_range_display": "46",
         "zone_ids": [
           "kingsmarch"
         ],
@@ -2428,6 +2429,24 @@
       "zone_kind": "map",
       "parent_zone_id": null,
       "return_to_parent": false
+    }
+  },
+  "checklist_overrides": {
+    "key_kinds": {
+      "Gallows secret": "secret",
+      "Orok Campfire secret": "secret",
+      "Town hub": "hub",
+      "Ancient Monument": "checkpoint",
+      "Orbala's Pillar": "checkpoint",
+      "Blood Sacrifice": "checkpoint",
+      "Corpse-snake Venom": "checkpoint",
+      "Una's Lute quest": "quest"
+    },
+    "reward_note_matchers": {
+      "permanent_power_regex": "(?i)\\bpermanent buff\\b|\\bmaximum mana\\b|\\bmaximum life\\b|\\bspirit\\b|\\bresistance\\b|\\bCDR\\b|\\bmove(ment)? speed\\b|\\bXP\\b|\\battribute\\b",
+      "skill_points_regex": "(?i)\\bbook\\b|\\bpassive\\b|\\bskill point\\b|\\bweapon set passive\\b",
+      "ascendancy_regex": "(?i)\\bascendancy\\b|\\btouch altar\\b",
+      "unlock_regex": "(?i)\\bunlock\\b|\\bbench\\b|\\bgate\\b|\\baccess\\b"
     }
   }
 }

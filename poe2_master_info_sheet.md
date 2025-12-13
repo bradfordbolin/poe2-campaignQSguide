@@ -16,6 +16,33 @@ This document is a running reference database derived from **user-provided Maxro
 
 Note: Per user-provided walkthrough summary: full release planned as 6 acts with no interludes.
 
+## Checklist Rules for the App
+
+The app generates checklists with **only permanent power + required progression**:
+
+Included (checkboxes):
+- **Permanent buffs / permanent stat choices** (including changeable relic buffs and permanent tattoos/attributes/resists)
+- **Skill point / passive point style rewards** (e.g. "Book: +2 Weapon Set Passive Skill Points")
+- **Ascendancy unlocks**
+- **Mandatory progression gates** (usually act bosses)
+
+Excluded (no checkboxes):
+- Routing notes ("find exit", "enter zone", etc.)
+- Secrets / monuments / hubs unless they directly grant permanent power
+
+### Key Classification Overrides
+
+Some `key[]` entries in the source summaries are **not bosses** (they are quests, secrets, hubs, or checkpoint actions).  
+To prevent these from incorrectly becoming **“Defeat:”** checklist items, the master DB includes:
+
+- `checklist_overrides.key_kinds` (map: key string → kind)
+
+Non-`boss` kinds are **not** turned into a “Defeat:” checkbox. Any permanent-power reward from that zone should still appear via the reward note filters.
+
+### Notes
+
+- **Act 4 Kingsmarch** common level range was corrected to **46** to match the Act 4 start band in the section table.
+
 ## Leveling Gear Breakpoints
 
 | Level | Upgrade | Notes |
