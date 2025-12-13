@@ -619,10 +619,10 @@
           <h2>Build-specific leveling overlay</h2>
           <div class="subtle">Select a build from the top bar to overlay leveling notes, rotations, and checklists alongside the act guide.</div>
         </div>
-        <div class="buildBadges">
+          <div class="buildBadges">
           <span class="tag">Multi-build ready</span>
           <span class="tag">Saved per profile</span>
-          <span class="tag">Bow / melee / caster filters</span>
+          <span class="tag">Inline milestones</span>
         </div>
       </div>
       <div class="subtle">No build selected yet. Pick one in the top-right “Build overlay” dropdown to load tailored milestones and track build-only tasks.</div>
@@ -920,8 +920,8 @@
     </div>
   </details>
 
-  <!-- INTERLUDES -->
-  <details class="section" id="interludes">
+  <!-- ACT 2 -->
+  <details class="section" id="act2">
     <summary>
       <div class="sectTitle">
         <strong>ACT 2 – Vastiri Desert</strong>
@@ -935,7 +935,7 @@
       <div class="actMeter" data-act-meter="2"><progress value="0" max="100"></progress><span>Act completion</span></div>
       <div class="miniTimeline" data-timeline="2"></div>
     </summary>
-    <div class="buildInline" data-build-inline="interludes"></div>
+    <div class="buildInline" data-build-inline="act2"></div>
     <div class="content">
 
       <div class="zone" data-zone>
@@ -1253,27 +1253,6 @@
         </div>
       </div>
 
-    </div>
-  </details>
-
-  <!-- ACT 2 -->
-  <details class="section" id="act2">
-    <summary>
-      <div class="sectTitle">
-        <strong>ACT 2 – Vastiri Desert</strong>
-        <span class="subtle">3 core quests + key optional rewards</span>
-      </div>
-      <div class="sectMeta">
-        <span class="tag bad">Ascendancy Unlock</span>
-        <span class="tag good">Permanent Buff</span>
-        <span class="tag warn">Books</span>
-      </div>
-      <div class="actMeter" data-act-meter="2"><progress value="0" max="100"></progress><span>Act completion</span></div>
-      <div class="miniTimeline" data-timeline="2"></div>
-    </summary>
-    <div class="buildInline" data-build-inline="act2"></div>
-    <div class="content">
-
       <div class="zone" data-zone>
         <div class="zoneHeader">
           <div class="zoneName"><span class="zoneNum">3</span> Venom Crypts</div>
@@ -1538,27 +1517,6 @@
         </div>
       </div>
 
-    </div>
-  </details>
-
-  <!-- ACT 3 -->
-  <details class="section" id="act3">
-    <summary>
-      <div class="sectTitle">
-        <strong>ACT 3 – Jungles of Vastiri</strong>
-        <span class="subtle">Key spirit, resist, ascendancy hooks</span>
-      </div>
-      <div class="sectMeta">
-        <span class="tag good">Spirit</span>
-        <span class="tag good">Fire Res</span>
-        <span class="tag bad">Ascendancy (Trial item)</span>
-      </div>
-      <div class="actMeter" data-act-meter="3"><progress value="0" max="100"></progress><span>Act completion</span></div>
-      <div class="miniTimeline" data-timeline="3"></div>
-    </summary>
-    <div class="buildInline" data-build-inline="act3"></div>
-    <div class="content">
-
       <div class="zone" data-zone>
         <div class="zoneHeader">
           <div class="zoneName"><span class="zoneNum">5</span> Journey’s End</div>
@@ -1765,8 +1723,8 @@
     </div>
   </details>
 
-  <!-- ACT 4 -->
-  <details class="section" id="act4">
+  <!-- INTERLUDES -->
+  <details class="section" id="interludes">
     <summary>
       <div class="sectTitle">
         <strong>INTERLUDES (temporary story until Act 5)</strong>
@@ -1778,7 +1736,7 @@
         <span class="tag good">Permanent Buff</span>
       </div>
     </summary>
-    <div class="buildInline" data-build-inline="act4"></div>
+    <div class="buildInline" data-build-inline="interludes"></div>
     <div class="content">
 
       <h3 style="margin:0 0 6px 0">INTERLUDE 1: Curse of Holten</h3>
@@ -2316,7 +2274,7 @@
         <div class="subtle">${data.subtitle || "Choose a build to layer in leveling steps, rotations, and warnings."}</div>
       </div>
       <div class="buildBadges">
-        ${data.tag ? `<span class="tag">${data.tag.charAt(0).toUpperCase()+data.tag.slice(1)} focus</span>` : ''}
+        ${data.tag ? `<span class="tag">${data.tag.charAt(0).toUpperCase()+data.tag.slice(1)}</span>` : ''}
         ${data.highlights ? data.highlights.map(h=>`<span class="tag">${h}</span>`).join("") : ''}
       </div>
     `;
@@ -2753,20 +2711,6 @@
     document.querySelectorAll(".miniTimeline").forEach(el=> el.style.display = show ? "flex" : "none");
   }
 
-  function createBuildButtons(){
-    const container = document.createElement("div");
-    container.className = "toolbar";
-    container.style.margin = "12px 0";
-    ["melee","caster","minion","bow"].forEach((name)=>{
-      const btn = document.createElement("button");
-      btn.className = "btn";
-      btn.textContent = `${name.charAt(0).toUpperCase()+name.slice(1)} focus`;
-      btn.addEventListener("click", ()=> applyBuildFilter(name));
-      container.appendChild(btn);
-    });
-    document.querySelector(".hero")?.appendChild(container);
-  }
-
   function hookDashboardFilters(){
     document.querySelectorAll("[data-dash-filter]").forEach(btn=>{
       btn.addEventListener("click", ()=> renderRewards(btn.dataset.dashFilter));
@@ -2828,7 +2772,6 @@
   createTimeline();
   difficultyBadges();
   calloutHints();
-  createBuildButtons();
   hookDashboardFilters();
   initModals();
   initBottomBar();
