@@ -12,7 +12,8 @@ export interface CampaignSection {
     max?: number
   }
   common_level_range_display?: string
-  zone_ids: string[]
+  zone_ids?: string[]
+  zones?: string[]
   is_active?: boolean
   deprecated?: boolean
   replaced_by?: string
@@ -48,7 +49,7 @@ export interface MasterDb {
   campaign_progression_sections: {
     sections: CampaignSection[]
   }
-  zones_db: Record<string, Omit<ZonesDbEntry, 'zone_id'>>
+  zones_db?: Record<string, Omit<ZonesDbEntry, 'zone_id'>>
   acts: Record<string, RewardContainer>
   interludes: Record<string, RewardContainer>
 }

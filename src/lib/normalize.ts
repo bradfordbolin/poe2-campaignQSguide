@@ -8,16 +8,6 @@ import type {
   RewardContainer,
 } from '../types/masterDb'
 
-const canonicalChapterOrder = [
-  'Act 1',
-  'Act 2',
-  'Act 3',
-  'Act 4',
-  "Interlude 1: Curse of Holten",
-  'Interlude 2: The Stolen Barya',
-  "Interlude 3: Doryani's Contingency",
-]
-
 const interludeTitleMap: Record<string, string> = {
   interlude_1_curse_of_holten: 'Interlude 1: Curse of Holten',
   interlude_2_the_stolen_barya: 'Interlude 2: The Stolen Barya',
@@ -118,41 +108,79 @@ const buildChecklistItems = (
 
 export const normalizeChapters = (): NormalizedChapter[] => {
   const zoneMap = new Map<string, string>(
-    Object.entries(masterDb.zones_db).map(([id, info]) => [id, info.display_name]),
+    Object.entries(masterDb.zones_db ?? {}).map(([id, info]) => [id, info.display_name]),
   )
 
-  const sections = masterDb.campaign_progression_sections.sections
-    .filter(isSectionActive)
-    .sort((a, b) => a.order - b.order)
+  const normalizeSection = (section: CampaignSection): NormalizedSection => {
+    const zoneIds = section.zone_ids ?? section.zones ?? []
+    const zoneNames = resolveZoneDisplayNames(zoneIds, zoneMap)
+    const impliedSubzones = resolveZoneDisplayNames(
+      section.completion_rule?.subzones_implied ?? [],
+      zoneMap,
+    )
 
-  return canonicalChapterOrder
-    .map((chapterTitle) => {
-      const chapterSections = sections
-        .filter((section) => section.chapter === chapterTitle)
-        .map<NormalizedSection>((section) => {
-          const zoneNames = resolveZoneDisplayNames(section.zone_ids, zoneMap)
-          const impliedSubzones = resolveZoneDisplayNames(
-            section.completion_rule?.subzones_implied ?? [],
-            zoneMap,
-          )
+    const rewardsSource = actRewards[section.chapter] ?? interludeRewards[section.chapter]
+    const checklist = buildChecklistItems(section.id, zoneNames, rewardsSource)
 
-          const rewardsSource =
-            actRewards[chapterTitle] ?? interludeRewards[chapterTitle]
-          const checklist = buildChecklistItems(section.id, zoneNames, rewardsSource)
+    return {
+      id: section.id,
+      title: section.section_title,
+      order: section.order,
+      chapter: section.chapter,
+      levelRange: formatLevelRange(section),
+      zoneNames,
+      impliedSubzones,
+      checklist,
+    }
+  }
 
-          return {
-            id: section.id,
-            title: section.section_title,
-            order: section.order,
-            chapter: section.chapter,
-            levelRange: formatLevelRange(section),
-            zoneNames,
-            impliedSubzones,
-            checklist,
-          }
-        })
+  const buildChaptersFromSections = (sections: CampaignSection[]): NormalizedChapter[] => {
+    const chapters = new Map<string, CampaignSection[]>()
 
-      return { title: chapterTitle, sections: chapterSections }
+    sections.filter(isSectionActive).forEach((section) => {
+      const bucket = chapters.get(section.chapter) ?? []
+      bucket.push(section)
+      chapters.set(section.chapter, bucket)
     })
-    .filter((chapter) => chapter.sections.length > 0)
+
+    return Array.from(chapters.entries())
+      .map(([title, chapterSections]) => {
+        const sortedSections = [...chapterSections].sort((a, b) => a.order - b.order)
+        const normalizedSections = sortedSections.map(normalizeSection)
+        const minOrder = normalizedSections[0]?.order ?? Number.POSITIVE_INFINITY
+        return { title, sections: normalizedSections, order: minOrder }
+      })
+      .sort((a, b) => a.order - b.order)
+      .map(({ title, sections }) => ({ title, sections }))
+      .filter((chapter) => chapter.sections.length > 0)
+  }
+
+  const sections = masterDb.campaign_progression_sections?.sections ?? []
+  if (sections.length > 0) {
+    return buildChaptersFromSections(sections)
+  }
+
+  const legacyChapters = (masterDb as unknown as { campaign_progression_chapters?: unknown })
+    .campaign_progression_chapters
+
+  if (legacyChapters && typeof legacyChapters === 'object') {
+    const legacySections: CampaignSection[] = []
+
+    if (Array.isArray((legacyChapters as { sections?: unknown }).sections)) {
+      legacySections.push(...(((legacyChapters as { sections: CampaignSection[] }).sections ?? [])
+        .filter(Boolean) as CampaignSection[]))
+    } else {
+      Object.values(legacyChapters).forEach((value) => {
+        if (Array.isArray(value)) {
+          legacySections.push(...(value.filter(Boolean) as CampaignSection[]))
+        }
+      })
+    }
+
+    if (legacySections.length > 0) {
+      return buildChaptersFromSections(legacySections)
+    }
+  }
+
+  return []
 }
