@@ -1,4 +1,5 @@
 import data from '../data/poe2_master_db.json'
+import { validateMasterData } from './validateData'
 import type {
   CampaignSection,
   MasterDb,
@@ -15,6 +16,10 @@ const interludeTitleMap: Record<string, string> = {
 }
 
 export const masterDb: MasterDb = data
+
+if (import.meta.env.DEV) {
+  validateMasterData(masterDb)
+}
 
 const buildRewardIndex = (
   containers: Record<string, RewardContainer>,
