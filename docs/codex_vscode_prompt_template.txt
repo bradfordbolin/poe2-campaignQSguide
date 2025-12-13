@@ -6,6 +6,9 @@ Context / Guardrails
 - Keep changes minimal and incremental. Prefer small diffs over refactors.
 - Preserve existing localStorage / persistence keys unless I explicitly request a reset/migration.
 - If you change data files: also keep `src/data/*` copies in sync with the repo-root master files.
+- Command execution visibility:
+  - When you need to run any commands, run them in the VS Code integrated terminal (WSL bash), not in a hidden runner.
+  - Before each command, echo it, then paste the full stdout/stderr back into chat.
 
 Before you start
 1) In the VS Code terminal, run and verify:
