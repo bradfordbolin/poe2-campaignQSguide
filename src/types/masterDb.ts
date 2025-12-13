@@ -55,7 +55,8 @@ export interface MasterDb {
 
 export interface NormalizedChecklistItem {
   id: string
-  label: string
+  text: string
+  tags: string[]
 }
 
 export interface NormalizedSection {

@@ -26,11 +26,28 @@ const persistCompleted = (completed: Set<string>) => {
   localStorage.setItem(storageVersion, JSON.stringify(values))
 }
 
-const computeProgress = (chapters = normalizedChapters) =>
+const modeFilters: Record<'speedrun' | 'full', Set<string>> = {
+  speedrun: new Set(['required_progression', 'permanent_buff', 'skill_points', 'key_unlock']),
+  full: new Set([
+    'required_progression',
+    'permanent_buff',
+    'skill_points',
+    'key_unlock',
+    'optional_content',
+    'optional_buff',
+    'optional_boss',
+    'farming_stop',
+  ]),
+}
+
+const computeProgress = (chapters = normalizedChapters, completed: Set<string> = new Set()) =>
   chapters.reduce(
     (totals, chapter) => {
       chapter.sections.forEach((section) => {
-        totals.total += section.checklist.length
+        section.checklist.forEach((item) => {
+          totals.total += 1
+          if (completed.has(item.id)) totals.done += 1
+        })
       })
       return totals
     },
@@ -39,6 +56,7 @@ const computeProgress = (chapters = normalizedChapters) =>
 
 function App() {
   const [search, setSearch] = useState('')
+  const [mode, setMode] = useState<'speedrun' | 'full'>('speedrun')
   const [completed, setCompleted] = useState<Set<string>>(() => loadCompleted())
 
   useEffect(() => {
@@ -47,27 +65,37 @@ function App() {
 
   const filteredChapters = useMemo(() => {
     const query = search.trim().toLowerCase()
-    if (!query) return normalizedChapters
-    return normalizedChapters
+    const allowedTags = modeFilters[mode]
+
+    const filterChecklist = (items: NormalizedChecklistItem[]) =>
+      items.filter((item) => item.tags.some((tag) => allowedTags.has(tag)))
+
+    const chapters = normalizedChapters
       .map((chapter) => {
-        const sections = chapter.sections.filter((section) => {
-          const haystack = [
-            section.title,
-            ...section.zoneNames,
-            ...section.impliedSubzones,
-            section.levelRange ?? '',
-          ]
-            .join(' ')
-            .toLowerCase()
-          return haystack.includes(query)
-        })
+        const sections = chapter.sections
+          .map((section) => {
+            const haystack = [
+              section.title,
+              ...section.zoneNames,
+              ...section.impliedSubzones,
+              section.levelRange ?? '',
+            ]
+              .join(' ')
+              .toLowerCase()
+            if (query && !haystack.includes(query)) return null
+            const checklist = filterChecklist(section.checklist)
+            return { ...section, checklist }
+          })
+          .filter((section): section is NonNullable<typeof section> => Boolean(section))
         return { ...chapter, sections }
       })
       .filter((chapter) => chapter.sections.length > 0)
-  }, [search])
 
-  const totals = useMemo(() => computeProgress(normalizedChapters), [])
-  const doneCount = completed.size
+    return chapters
+  }, [search, mode])
+
+  const totals = useMemo(() => computeProgress(filteredChapters, completed), [filteredChapters, completed])
+  const doneCount = totals.done
   const progressPercent = totals.total
     ? Math.min(100, Math.round((doneCount / totals.total) * 100))
     : 0
@@ -130,6 +158,25 @@ function App() {
               onChange={(event) => setSearch(event.target.value)}
             />
           </div>
+          <div className="mode-toggle">
+            <span className="mode-label">Mode:</span>
+            <div className="mode-buttons" role="group" aria-label="Mode selection">
+              <button
+                type="button"
+                className={mode === 'speedrun' ? 'active' : ''}
+                onClick={() => setMode('speedrun')}
+              >
+                Speedrun
+              </button>
+              <button
+                type="button"
+                className={mode === 'full' ? 'active' : ''}
+                onClick={() => setMode('full')}
+              >
+                Full
+              </button>
+            </div>
+          </div>
           <div className="progress-block">
             <div className="progress-label">
               Progress: {doneCount} / {totals.total}
@@ -186,7 +233,7 @@ function App() {
                             checked={checked}
                             onChange={() => toggleItem(item)}
                           />
-                          <span className={checked ? 'checked' : ''}>{item.label}</span>
+                          <span className={checked ? 'checked' : ''}>{item.text}</span>
                         </label>
                       </li>
                     )

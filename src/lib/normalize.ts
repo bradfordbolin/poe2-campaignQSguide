@@ -48,9 +48,10 @@ const interludeRewards = buildRewardIndex(masterDb.interludes, (key) => {
   return interludeTitleMap[key] ?? key
 })
 
-const hashChecklistId = (sectionId: string, label: string) => {
-  const normalized = label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
-  const base = `${sectionId}__${normalized}`
+const hashChecklistId = (sectionId: string, text: string) => {
+  const normalized = text.trim().toLowerCase().replace(/\s+/g, ' ')
+  const slug = normalized.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
+  const base = `${sectionId}__${slug}`
   const checksum = Array.from(base).reduce((acc, char) => acc + char.charCodeAt(0), 0)
   return `${base}-${checksum.toString(36)}`
 }
@@ -83,22 +84,32 @@ const buildChecklistItems = (
   rewards: RewardContainer | undefined,
 ): NormalizedChecklistItem[] => {
   const items: NormalizedChecklistItem[] = []
-  items.push({
-    id: hashChecklistId(sectionId, 'Complete section objectives'),
-    label: 'Complete section objectives',
-  })
 
   const candidates = rewards?.zones ?? []
   candidates
     .filter((entry) => resolvedZones.includes(entry.zone))
     .forEach((entry) => {
       entry.key?.forEach((boss) => {
-        const label = `Defeat: ${boss}`
-        items.push({ id: hashChecklistId(sectionId, label), label })
+        const text = `Defeat: ${boss}`
+        const tags = /optional/i.test(boss) ? ['optional_content'] : ['required_progression']
+        items.push({ id: hashChecklistId(sectionId, text), text, tags })
       })
+
       entry.reward_notes?.forEach((note) => {
-        const label = `Reward: ${note}`
-        items.push({ id: hashChecklistId(sectionId, label), label })
+        const lower = note.toLowerCase()
+        const tags: string[] = []
+        if (lower.includes('permanent buff')) tags.push('permanent_buff')
+        if (lower.includes('skill point') || lower.includes('skill points') || lower.includes('passive') || lower.includes('book')) {
+          tags.push('skill_points')
+        }
+        if (lower.includes('unlock') || lower.includes('key') || lower.includes('access') || lower.includes('gate')) {
+          tags.push('key_unlock')
+        }
+
+        if (tags.length > 0) {
+          const text = `Reward: ${note}`
+          items.push({ id: hashChecklistId(sectionId, text), text, tags })
+        }
       })
     })
 
