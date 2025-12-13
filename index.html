@@ -435,6 +435,11 @@
     .bottomBar .btn{padding:10px 14px;font-weight:700}
     .stickyPad{padding-bottom:10px}
     .toolbar{display:flex;gap:8px;flex-wrap:wrap}
+    .menu{position:relative}
+    .menuPanel{position:absolute;right:0;top:calc(100% + 6px);background:color-mix(in srgb,var(--panel2) 96%,transparent);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:8px;display:none;flex-direction:column;gap:6px;min-width:180px;z-index:30}
+    .menuPanel.show{display:flex}
+    .menuItem{width:100%;text-align:left;justify-content:flex-start}
+    .buildInline{border:1px dashed var(--border);border-radius:12px;padding:10px;margin:10px 0;display:none;flex-direction:column;gap:6px;background:color-mix(in srgb,var(--panel2) 80%,transparent)}
     .actMeter{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
     .actMeter progress{width:180px}
     .callout{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
@@ -530,16 +535,23 @@
         <span class="badge" title="Latest content patch">Game v0.4.0</span>
         <span class="badge" title="Guide revision">Guide v1.2</span>
         <span class="badge" title="When this file was last touched">Updated for league start</span>
-        <button class="btn" id="showChangelog" type="button">Patch notes</button>
+        <button class="btn" id="showChangelog" type="button">Guide changes</button>
+        <a class="btn" href="https://www.pathofexile.com/forum/view-forum/2212" target="_blank" rel="noreferrer noopener">Game patch notes</a>
+        <a class="btn" href="https://www.filterblade.xyz/" target="_blank" rel="noreferrer noopener">FilterBlade</a>
         <button class="btn" id="forkGuide" type="button">Fork this guide</button>
       </div>
       <div class="toolbar">
         <button class="btn" id="dashboard" type="button">Rewards-only dashboard</button>
         <button class="btn" id="dontMiss" type="button">Don’t miss mode</button>
         <button class="btn" id="speedrun" type="button">Speedrun mode</button>
-        <button class="btn" id="shareLink" type="button">Share read-only link</button>
-        <button class="btn" id="exportProgress" type="button">Export</button>
-        <button class="btn" id="importProgress" type="button">Import</button>
+        <div class="menu">
+          <button class="btn" id="moreBtn" type="button" aria-expanded="false">More ▾</button>
+          <div class="menuPanel" id="morePanel" role="menu">
+            <button class="btn menuItem" id="shareLink" type="button">Share read-only link</button>
+            <button class="btn menuItem" id="exportProgress" type="button">Export</button>
+            <button class="btn menuItem" id="importProgress" type="button">Import</button>
+          </div>
+        </div>
         <select id="profileSelect" class="btn" title="Switch character profile" style="padding:9px 12px">
           <option value="starter">League Start</option>
           <option value="alt">Alt 1</option>
@@ -618,7 +630,7 @@
   </div>
 
   <!-- ACT 1 -->
-  <details class="section" id="act1" open>
+  <details class="section" id="act1">
     <summary>
       <div class="sectTitle">
         <strong>ACT 1 – Ogham Coast</strong>
@@ -633,6 +645,7 @@
       <div class="actMeter" data-act-meter="1"><progress value="0" max="100"></progress><span>Act completion</span></div>
       <div class="miniTimeline" data-timeline="1"></div>
     </summary>
+    <div class="buildInline" data-build-inline="act1"></div>
     <div class="content">
 
       <div class="zone" data-zone>
@@ -908,7 +921,7 @@
   </details>
 
   <!-- INTERLUDES -->
-  <details class="section" id="interludes" open>
+  <details class="section" id="interludes">
     <summary>
       <div class="sectTitle">
         <strong>INTERLUDES (temporary story until Act 5)</strong>
@@ -920,6 +933,7 @@
         <span class="tag good">Permanent Buff</span>
       </div>
     </summary>
+    <div class="buildInline" data-build-inline="interludes"></div>
     <div class="content">
 
       <h3 style="margin:0 0 6px 0">INTERLUDE 1: Curse of Holten</h3>
@@ -1173,7 +1187,7 @@
   </details>
 
   <!-- ACT 2 -->
-  <details class="section" id="act2" open>
+  <details class="section" id="act2">
     <summary>
       <div class="sectTitle">
         <strong>ACT 2 – Vastiri Desert</strong>
@@ -1187,6 +1201,7 @@
       <div class="actMeter" data-act-meter="2"><progress value="0" max="100"></progress><span>Act completion</span></div>
       <div class="miniTimeline" data-timeline="2"></div>
     </summary>
+    <div class="buildInline" data-build-inline="act2"></div>
     <div class="content">
 
       <div class="zone" data-zone>
@@ -1445,7 +1460,7 @@
   </details>
 
   <!-- ACT 3 -->
-  <details class="section" id="act3" open>
+  <details class="section" id="act3">
     <summary>
       <div class="sectTitle">
         <strong>ACT 3 – Jungles of Vastiri</strong>
@@ -1459,6 +1474,7 @@
       <div class="actMeter" data-act-meter="3"><progress value="0" max="100"></progress><span>Act completion</span></div>
       <div class="miniTimeline" data-timeline="3"></div>
     </summary>
+    <div class="buildInline" data-build-inline="act3"></div>
     <div class="content">
 
       <div class="zone" data-zone>
@@ -1674,7 +1690,7 @@
   </details>
 
   <!-- ACT 4 -->
-  <details class="section" id="act4" open>
+  <details class="section" id="act4">
     <summary>
       <div class="sectTitle">
         <strong>ACT 4 – Kingsmarch Islands (reward-complete)</strong>
@@ -1688,6 +1704,7 @@
       <div class="actMeter" data-act-meter="4"><progress value="0" max="100"></progress><span>Act completion</span></div>
       <div class="miniTimeline" data-timeline="4"></div>
     </summary>
+    <div class="buildInline" data-build-inline="act4"></div>
     <div class="content">
 
       <div class="note" style="border-left-color:var(--accent2)"><strong>Suggested League Start 100% order:</strong> Kedge Bay + Journey’s End → Eye of Hinekora → Whakapanu → Singing Caverns → Shrike Island → Abandoned Prison → Solitary Confinement → Arastas → Ngakanu. Kingsmarch is non-linear; routes vary.</div>
@@ -1973,7 +1990,7 @@
   </details>
 
   <!-- Endgame Prep -->
-  <details class="section" id="endgame" open>
+  <details class="section" id="endgame">
     <summary>
       <div class="sectTitle">
         <strong>BEFORE ENDGAME – League 0.4.0 Prep List</strong>
@@ -1985,6 +2002,7 @@
         <span class="tag">Atlas</span>
       </div>
     </summary>
+    <div class="buildInline" data-build-inline="endgame"></div>
     <div class="content">
       <div class="zone" data-zone>
         <div class="zoneHeader">
@@ -2048,8 +2066,6 @@
       <button data-dash-filter="all">All</button>
       <button data-dash-filter="buff">Permanent buffs</button>
       <button data-dash-filter="book">Books</button>
-      <button data-dash-filter="bench">Benches</button>
-      <button data-dash-filter="ascend">Ascendancy</button>
     </div>
     <div class="reward-dashboard" id="rewardList"></div>
   </div>
@@ -2077,7 +2093,7 @@
   const THEME_KEY = "poe2_walkthrough_theme_v1";
   const PROFILE_KEY = "poe2_profile_sel";
   const BUILD_SELECT_KEY = "poe2_build_overlay_v1";
-  const DEFAULT_THEME = "poe-dark";
+  const DEFAULT_THEME = "oled";
   const SUPPORTED_THEMES = [
     "poe-dark","parchment","oled","high-contrast","high-contrast-oled",
     "speedrun","speedrun-oled","mobile","mobile-oled","matrix","modern","modern-oled","nature","water"
@@ -2091,23 +2107,23 @@
       tag: "bow",
       highlights: ["Gas Arrow unlock @22", "+flat phys stacking", "Contagion → Herald of Plague swap"],
       checklist: [
-        { id: "build-pba-flatphys", label: "Act 1: Stack flat physical on gloves/rings/quiver + Warden bow at lvl 11", note: "Check vendors every 1–2 levels and never drop movement speed boots." },
-        { id: "build-pba-conc", label: "Link Concentrated Area to Poisonburst Arrow (first support) + Escalating Poison", note: "Huge single-target spike; keep it linked when possible." },
-        { id: "build-pba-toxgrowth", label: "Unlock Toxic Growth in Act 2 and keep Concentrated Area linked", note: "Major single-target upgrade that scales with Gas Arrow clouds." },
-        { id: "build-pba-gasarrow", label: "Level 22: buy Gas Arrow and practice Gas → Toxic Growth boss rotation", note: "Maintain clouds to proc Toxic Growth automatically." },
-        { id: "build-pba-spirit-swap", label: "Lvl ~26: swap Herald of Plague (clear) ⇄ Withering Presence (boss) as needed", note: "Boss swap adds ~20–25% damage." },
-        { id: "build-pba-bow-upgrades", label: "Use saved Iron Runes on lvl 39 Zealot or lvl 46 Artillery bow", note: "One good bow can last to campaign end." },
-        { id: "build-pba-fire-warning", label: "Avoid flat fire damage on gear until Persistent Ground II", note: "Ignites will pop Gas Arrow clouds and brick damage." }
+        { id: "build-pba-flatphys", act: 1, label: "Act 1: Stack flat physical on gloves/rings/quiver + Warden bow at lvl 11", note: "Check vendors every 1–2 levels and never drop movement speed boots." },
+        { id: "build-pba-conc", act: 1, label: "Link Concentrated Area to Poisonburst Arrow (first support) + Escalating Poison", note: "Huge single-target spike; keep it linked when possible." },
+        { id: "build-pba-toxgrowth", act: 2, label: "Unlock Toxic Growth in Act 2 and keep Concentrated Area linked", note: "Major single-target upgrade that scales with Gas Arrow clouds." },
+        { id: "build-pba-gasarrow", act: 2, label: "Level 22: buy Gas Arrow and practice Gas → Toxic Growth boss rotation", note: "Maintain clouds to proc Toxic Growth automatically." },
+        { id: "build-pba-spirit-swap", act: 3, label: "Lvl ~26: swap Herald of Plague (clear) ⇄ Withering Presence (boss) as needed", note: "Boss swap adds ~20–25% damage." },
+        { id: "build-pba-bow-upgrades", act: 4, label: "Use saved Iron Runes on lvl 39 Zealot or lvl 46 Artillery bow", note: "One good bow can last to campaign end." },
+        { id: "build-pba-fire-warning", act: 2, label: "Avoid flat fire damage on gear until Persistent Ground II", note: "Ignites will pop Gas Arrow clouds and brick damage." }
       ],
       bossOrder: ["Devourer (for gems)", "Cold Witch", "Hut Witch", "Rust King"],
       milestones: [
-        { level: "Lvl 1-6", area: "Start", gear: "Stack flat phys on gloves/rings/quiver; movement speed boots", skills: "Lightning Arrow + Contagion", note: "Flat phys is a massive Act 1 spike." },
-        { level: "Lvl 6", area: "Ranger – Fate of the Vaal", gear: "Keep vendor-checking every 1–2 levels", skills: "Ascendancy: Overwhelming Toxicity (when available)", note: "Act 1 boss order: Devourer > Cold Witch > Hut Witch > Rust King" },
-        { level: "Lvl 7-13", area: "Act 1", gear: "Lvl 11 Warden Bow (prefer %phys)", skills: "Support 1: Concentrated Area; Support 2: Escalating Poison", note: "Passive tree: rush Crippling Toxins, Clean Shot, Vile Wounds." },
-        { level: "Lvl 14-21", area: "Act 2", gear: "Broadhead Quiver", skills: "Unlock Toxic Growth; keep Concentrated Area linked", note: "Use Contagion to spread poison until Herald of Plague." },
-        { level: "Lvl 22-28", area: "Act 2 / Act 3", gear: "Keep flat phys, life, resists", skills: "Lvl 22 Gas Arrow; swap Herald of Plague in for clear", note: "Avoid flat fire damage until Persistent Ground II." },
-        { level: "Lvl 29-38", area: "Act 3 / Act 4", gear: "Recurve Bow upgrade", skills: "Maximise support links", note: "Damage becomes extremely good here." },
-        { level: "Lvl 39-53", area: "Act 4 / Act 5", gear: "Zealot (39) or Artillery (46) bow", skills: "Add Honed Instincts + Magnified Area I", note: "Bow can last to end of campaign." }
+        { act: 1, level: "Lvl 1-6", area: "Start", gear: "Stack flat phys on gloves/rings/quiver; movement speed boots", skills: "Lightning Arrow + Contagion", note: "Flat phys is a massive Act 1 spike." },
+        { act: 1, level: "Lvl 6", area: "Ranger – Fate of the Vaal", gear: "Keep vendor-checking every 1–2 levels", skills: "Ascendancy: Overwhelming Toxicity (when available)", note: "Act 1 boss order: Devourer > Cold Witch > Hut Witch > Rust King" },
+        { act: 1, level: "Lvl 7-13", area: "Act 1", gear: "Lvl 11 Warden Bow (prefer %phys)", skills: "Support 1: Concentrated Area; Support 2: Escalating Poison", note: "Passive tree: rush Crippling Toxins, Clean Shot, Vile Wounds." },
+        { act: 2, level: "Lvl 14-21", area: "Act 2", gear: "Broadhead Quiver", skills: "Unlock Toxic Growth; keep Concentrated Area linked", note: "Use Contagion to spread poison until Herald of Plague." },
+        { act: 3, level: "Lvl 22-28", area: "Act 2 / Act 3", gear: "Keep flat phys, life, resists", skills: "Lvl 22 Gas Arrow; swap Herald of Plague in for clear", note: "Avoid flat fire damage until Persistent Ground II." },
+        { act: 3, level: "Lvl 29-38", area: "Act 3 / Act 4", gear: "Recurve Bow upgrade", skills: "Maximise support links", note: "Damage becomes extremely good here." },
+        { act: 4, level: "Lvl 39-53", area: "Act 4 / Act 5", gear: "Zealot (39) or Artillery (46) bow", skills: "Add Honed Instincts + Magnified Area I", note: "Bow can last to end of campaign." }
       ],
       clearing: [
         "Lvl 1-26: Poisonburst Arrow once, then Contagion to spread poison (acts like poison prolif).",
@@ -2144,6 +2160,8 @@
   const btnExport = document.getElementById("exportProgress");
   const btnImport = document.getElementById("importProgress");
   const btnShare = document.getElementById("shareLink");
+  const btnMore = document.getElementById("moreBtn");
+  const morePanel = document.getElementById("morePanel");
   const btnFork = document.getElementById("forkGuide");
   const btnShowChangelog = document.getElementById("showChangelog");
   const btnQuickNext = document.getElementById("quickNext");
@@ -2225,10 +2243,8 @@
 
   function rewardTypeFromText(text){
     const t = normalize(text);
-    if(/ascend|trial/.test(t)) return "ascend";
-    if(/bench|craft|smith/.test(t)) return "bench";
     if(/book|passive|specialisation/.test(t)) return "book";
-    if(/permanent buff|\+\d+%|spirit|res/i.test(text)) return "buff";
+    if(/permanent buff|\+\d+%|spirit|res|boon|choice/.test(t)) return "buff";
     return "misc";
   }
 
@@ -2268,6 +2284,7 @@
       empty.className = "subtle";
       empty.textContent = "Pick a build from the top bar to load milestones and build-only checklists.";
       buildPanel.appendChild(empty);
+      renderBuildInlineSteps("none");
       applyBuildFilter(null);
       syncCheckboxes();
       recomputeProgress();
@@ -2278,25 +2295,10 @@
     grid.className = "buildGrid";
 
     const left = document.createElement("div");
-    left.innerHTML = `<h3 style="margin:0 0 6px 0">Leveling milestones (1–53)</h3>`;
-    const table = document.createElement("table");
-    table.className = "milestoneTable";
-    table.innerHTML = `<thead><tr><th>Level</th><th>Act / Area</th><th>Gear or item</th><th>Gems & skills</th><th>Notes</th></tr></thead>`;
-    const tbody = document.createElement("tbody");
-    (data.milestones||[]).forEach(m=>{
-      const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${m.level}</td><td>${m.area}</td><td>${m.gear}</td><td>${m.skills}</td><td>${m.note||""}</td>`;
-      tbody.appendChild(tr);
-    });
-    table.appendChild(tbody);
-    left.appendChild(table);
-
-    if(data.bossOrder){
-      const boss = document.createElement("div");
-      boss.className = "buildNote";
-      boss.innerHTML = `<strong>Act 1 boss order:</strong> ${data.bossOrder.join(" → ")}`;
-      left.appendChild(boss);
-    }
+    const inlineNote = document.createElement("div");
+    inlineNote.className = "note";
+    inlineNote.textContent = "Build milestones and setup steps now appear inline inside each Act section below.";
+    left.appendChild(inlineNote);
 
     const rotation = document.createElement("div");
     rotation.innerHTML = `
@@ -2307,26 +2309,16 @@
     left.appendChild(rotation);
 
     const right = document.createElement("div");
-    right.innerHTML = `<h3 style="margin:0 0 6px 0">Quick setup checklist</h3>`;
-    const checklistWrap = document.createElement("div");
-    checklistWrap.className = "buildChecks";
-    (data.checklist||[]).forEach(item=>{
-      const label = document.createElement("label");
-      label.className = "check";
-      label.innerHTML = `<input type="checkbox" data-id="${item.id}"><span>${item.label}</span>`;
-      if(item.note){
-        const note = document.createElement("div");
-        note.className = "buildNote";
-        note.textContent = item.note;
-        label.appendChild(note);
-      }
-      checklistWrap.appendChild(label);
-    });
-    right.appendChild(checklistWrap);
+    if(data.bossOrder){
+      const boss = document.createElement("div");
+      boss.className = "buildNote";
+      boss.innerHTML = `<strong>Act 1 boss order:</strong> ${data.bossOrder.join(" → ")}`;
+      right.appendChild(boss);
+    }
 
     if(data.tips?.length){
       const tips = document.createElement("div");
-      tips.innerHTML = `<h3 style="margin:12px 0 6px 0">Key tips</h3><ul class="buildList">${data.tips.map(t=>`<li>${t}</li>`).join("")}</ul>`;
+      tips.innerHTML = `<h3 style="margin:0 0 6px 0">Key tips</h3><ul class="buildList">${data.tips.map(t=>`<li>${t}</li>`).join("")}</ul>`;
       right.appendChild(tips);
     }
 
@@ -2340,6 +2332,7 @@
     grid.appendChild(right);
     buildPanel.appendChild(grid);
 
+    renderBuildInlineSteps(buildId);
     applyBuildFilter(data.tag);
     initChecks();
   }
@@ -2425,6 +2418,18 @@
     });
   }
 
+  function rewardHowTo(zone, rewardText){
+    const noteItems = Array.from(zone.querySelectorAll(".notes li"));
+    const allItems = noteItems.length ? noteItems : Array.from(zone.querySelectorAll("ul li"));
+    if(!allItems.length) return "";
+    const target = normalize(rewardText);
+    const match = allItems.find(li=>{
+      const txt = normalize(li.textContent);
+      return target.split(/\s+/).some(word => word.length > 3 && txt.includes(word));
+    }) || allItems.find(li=> /objective|boss|kill|reward|book|buff|chest|quest/i.test(li.textContent)) || allItems[0];
+    return match ? match.textContent.trim() : "";
+  }
+
   function renderRewards(filterType="all"){
     rewardList.innerHTML = "";
     const items = [];
@@ -2433,11 +2438,13 @@
       const rewardLabels = Array.from(zone.querySelectorAll(".checks label"));
       rewardLabels.forEach((label)=>{
         const type = rewardTypeFromText(label.innerText);
+        if(type === "misc") return;
         items.push({
           type,
           zone: zoneTitle,
           text: label.innerText.trim(),
-          checkbox: label.querySelector('input')
+          checkbox: label.querySelector('input'),
+          how: rewardHowTo(zone, label.innerText)
         });
       });
     });
@@ -2446,13 +2453,16 @@
         const card = document.createElement("div");
         card.className = "rewardCard";
         const badge = document.createElement("span");
-        badge.className = `tag ${item.type === "buff" ? "good" : item.type === "book" ? "warn" : item.type === "bench" ? "" : item.type === "ascend" ? "bad" : ""}`;
+        badge.className = `tag ${item.type === "buff" ? "good" : item.type === "book" ? "warn" : ""}`;
         badge.textContent = item.type;
         const title = document.createElement("strong");
         title.textContent = item.text;
         const meta = document.createElement("div");
         meta.className = "subtle";
         meta.textContent = item.zone;
+        const how = document.createElement("div");
+        how.className = "subtle";
+        how.textContent = item.how ? `How: ${item.how}` : "";
         const cb = document.createElement("input");
         cb.type = "checkbox";
         cb.checked = item.checkbox.checked;
@@ -2469,6 +2479,7 @@
         card.appendChild(badge);
         card.appendChild(label);
         card.appendChild(meta);
+        if(how.textContent){ card.appendChild(how); }
         rewardList.appendChild(card);
     });
   }
@@ -2486,6 +2497,70 @@
       const important = /permanent buff|book|bench|ascend|spirit|resist/i.test(z.innerText);
       z.classList.toggle("hidden", dontMissActive && !important);
     });
+  }
+
+  function toggleMoreMenu(show){
+    if(!btnMore || !morePanel) return;
+    const next = typeof show === "boolean" ? show : !morePanel.classList.contains("show");
+    morePanel.classList.toggle("show", next);
+    btnMore.setAttribute("aria-expanded", next ? "true" : "false");
+  }
+
+  function initMoreMenu(){
+    if(!btnMore || !morePanel) return;
+    btnMore.addEventListener("click", (e)=>{ e.stopPropagation(); toggleMoreMenu(); });
+    document.addEventListener("click", (e)=>{
+      if(!morePanel.classList.contains("show")) return;
+      if(!morePanel.contains(e.target) && e.target !== btnMore){ toggleMoreMenu(false); }
+    });
+    document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") toggleMoreMenu(false); });
+  }
+
+  function renderBuildInlineSteps(buildId){
+    const containers = Array.from(document.querySelectorAll('[data-build-inline]'));
+    containers.forEach((c)=>{ c.innerHTML = ""; c.style.display = "none"; });
+    if(!buildId || buildId === "none"){ syncCheckboxes(); recomputeProgress(); return; }
+
+    const build = builds[buildId];
+    if(!build) return;
+    const grouped = {};
+    const push = (act, item)=>{ const key = act ? `act${act}` : "misc"; if(!grouped[key]) grouped[key] = []; grouped[key].push(item); };
+
+    (build.checklist||[]).forEach(item=> push(item.act || "misc", { ...item, type: "checklist" }));
+    (build.milestones||[]).forEach((item, idx)=> push(item.act || "misc", { ...item, type: "milestone", id: item.id || `bld-${buildId}-ms-${idx+1}`}));
+
+    containers.forEach((container)=>{
+      const rows = grouped[container.dataset.buildInline] || [];
+      if(!rows.length) return;
+      container.style.display = "flex";
+      const title = document.createElement("div");
+      title.className = "subtle";
+      title.textContent = `${build.name || "Build"} steps for this act:`;
+      container.appendChild(title);
+      rows.forEach((row)=>{
+        const label = document.createElement("label");
+        label.className = "check";
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.dataset.id = row.id;
+        label.appendChild(cb);
+        const span = document.createElement("span");
+        if(row.type === "milestone"){
+          const left = row.level ? `<strong>${row.level}</strong>` : "Milestone";
+          const area = row.area ? ` – ${row.area}` : "";
+          const detail = row.skills ? `: ${row.skills}` : row.gear ? `: ${row.gear}` : "";
+          span.innerHTML = `${left}${area}${detail}`;
+        }else{
+          span.textContent = row.label || "Build step";
+        }
+        label.appendChild(span);
+        container.appendChild(label);
+        if(row.note){ const note = document.createElement("div"); note.className = "note"; note.textContent = row.note; container.appendChild(note); }
+      });
+    });
+
+    syncCheckboxes();
+    recomputeProgress();
   }
 
   function applyBuildFilter(active){
@@ -2715,6 +2790,7 @@
   initModals();
   initBottomBar();
   initOtherButtons();
+  initMoreMenu();
   initSharingUI();
   keyboardNav();
   languageInit();
