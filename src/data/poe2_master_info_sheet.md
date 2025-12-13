@@ -18,24 +18,24 @@ Note: Per user-provided walkthrough summary: full release planned as 6 acts with
 
 ## Leveling Gear Breakpoints
 
-| Level | Upgrade                                                 | Notes                                                                                           |
-| ----- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| 1     | 10% movement speed boots                                | Look for 'Runner’s' prefix; transmute boots aggressively; augment magic boots without a prefix. |
-| 4     | Flask upgrade (Medium)                                  |                                                                                                 |
-| 8     | Ruby Ring / Attribute amulets / Flask charges           |                                                                                                 |
-| 10    | Flask upgrade (Greater)                                 |                                                                                                 |
-| 12    | Sapphire Ring                                           |                                                                                                 |
-| 15    | 15% movement speed boots                                |                                                                                                 |
-| 16    | Flask upgrade (Grand) / Topaz Ring                      |                                                                                                 |
-| 23    | Flask upgrade (Giant) / +1 Charm Slot Belts             |                                                                                                 |
-| 26    | Flask charge regen mod                                  |                                                                                                 |
-| 30    | Flask upgrade (Colossal) / 20% MS boots / Spirit amulet |                                                                                                 |
-| 32    | Cast speed rings (spellcasters)                         |                                                                                                 |
-| 35    | Prismatic rings (all res)                               |                                                                                                 |
-| 40    | Flask upgrade (Gargantuan)                              |                                                                                                 |
-| 50    | 25% MS boots / Flask upgrade (Transcendant)             |                                                                                                 |
-| 60    | Flask upgrade (Ultimate)                                |                                                                                                 |
-| 62    | Fine belt (charge regen)                                |                                                                                                 |
+| Level | Upgrade | Notes |
+| --- | --- | --- |
+| 1 | 10% movement speed boots | Look for 'Runner’s' prefix; transmute boots aggressively; augment magic boots without a prefix. |
+| 4 | Flask upgrade (Medium) |  |
+| 8 | Ruby Ring / Attribute amulets / Flask charges |  |
+| 10 | Flask upgrade (Greater) |  |
+| 12 | Sapphire Ring |  |
+| 15 | 15% movement speed boots |  |
+| 16 | Flask upgrade (Grand) / Topaz Ring |  |
+| 23 | Flask upgrade (Giant) / +1 Charm Slot Belts |  |
+| 26 | Flask charge regen mod |  |
+| 30 | Flask upgrade (Colossal) / 20% MS boots / Spirit amulet |  |
+| 32 | Cast speed rings (spellcasters) |  |
+| 35 | Prismatic rings (all res) |  |
+| 40 | Flask upgrade (Gargantuan) |  |
+| 50 | 25% MS boots / Flask upgrade (Transcendant) |  |
+| 60 | Flask upgrade (Ultimate) |  |
+| 62 | Fine belt (charge regen) |  |
 
 ## Acts (high-value rewards / buffs)
 
@@ -121,11 +121,9 @@ Note: Per user-provided walkthrough summary: full release planned as 6 acts with
 ## General Rules (from leveling strategy)
 
 ### Stat priority
-
 - Movement Speed > Resistances > Life > Base damage > Damage scaling > Armor/Evasion
 
 ### Crafting & currency
-
 - Runes are the strongest campaign crafting tool (weapon damage runes; armor resistance runes).
 - Salvage all socketed and quality gear you aren’t using.
 - Early: prioritize gold to buy key bases/flasks/jewelry; later mix in disenchanting for shards.
@@ -133,7 +131,6 @@ Note: Per user-provided walkthrough summary: full release planned as 6 acts with
 - Use Transmutes freely; Augments sparingly; Regals on strong 2-mod magic items; Alchs sparingly on an up-to-date weapon or long-term utility item.
 
 ### Survival
-
 - Keep moving; run circles around enemies; 'hug the boss' for easier dodging.
 - Use life flask preemptively.
 - Resist cap matters greatly; target specific resistances for known upcoming bosses.
@@ -141,13 +138,12 @@ Note: Per user-provided walkthrough summary: full release planned as 6 acts with
 ### Common fixes
 
 **Attributes:**
-
 - Respec flexible attribute nodes (small gold cost)
 - Get attributes on gear
 - Grab bonus attribute nodes if needed
 
-**Mana:**
 
+**Mana:**
 - Upgrade mana flasks constantly
 - Use charge regen suffix for bosses
 - Trim high-mana supports
@@ -155,7 +151,6 @@ Note: Per user-provided walkthrough summary: full release planned as 6 acts with
 - Mana on kill for clearing; leech is supplemental early
 
 ### QoL / techniques
-
 - CTRL+Click shortcut to NPC interactions (e.g., identify all).
 - Checkpoints: teleport to discovered checkpoints; respawn-at-checkpoint can reset zones.
 - Movement skills via temporary mace/shield + uncut gem (Leap Slam / Shield Charge); weapon swap passives can temporarily allocate STR nodes; dodge-roll to animation-cancel landing.
@@ -166,6 +161,7 @@ Note: Per user-provided walkthrough summary: full release planned as 6 acts with
 - **Act 4 - Halls of the Dead: Navali grants +2 weapon-set points** — User-provided summary attributes points to Navali; external notes suggest reward tied to Trial completion; verify.
 - **Interlude 2 - Sacred Wells guarantee Exalted Orb + Orb of Alchemy** — Often reported inconsistently; treat as unconfirmed until validated.
 - **Interlude 2 - Orbala's Pillar exact boon options** — User-provided list may be incomplete/variable; verify.
+
 
 ---
 
@@ -181,69 +177,68 @@ Note: Per user-provided walkthrough summary: full release planned as 6 acts with
 
 This table is the **canonical website guide section order** for Early Access, with an estimated “common player level” range for each section.
 
-| Order | Chapter                            | Section                                            | Common level |
-| ----: | :--------------------------------- | :------------------------------------------------- | :----------- |
-|     1 | Act 1                              | The Riverbank                                      | 1-2          |
-|     2 | Act 1                              | Clearfell                                          | 2-3          |
-|     3 | Act 1                              | The Mud Burrow                                     | 3-4          |
-|     4 | Act 1                              | The Grelwood / The Red Vale / Tree of Souls        | 4-6          |
-|     5 | Act 1                              | The Grim Tangle                                    | 6-7          |
-|     6 | Act 1                              | Cemetery of the Eternals                           | 7-8          |
-|     7 | Act 1                              | Mausoleum of the Praetor                           | 9-10         |
-|     8 | Act 1                              | Hunting Grounds / Freythorn                        | 10-12        |
-|     9 | Act 1                              | Ogham Farmlands                                    | 12-13        |
-|    10 | Act 1                              | Ogham Village                                      | 13-14        |
-|    11 | Act 1                              | Manor Ramparts                                     | 14-15        |
-|    12 | Act 1                              | Ogham Manor                                        | 15-16        |
-|    13 | Act 2                              | Vastiri Outskirts                                  | 16-17        |
-|    14 | Act 2                              | Mawdun Quarry / Mawdun Mine                        | 17-19        |
-|    15 | Act 2                              | Traitor’s Passage                                  | 19-20        |
-|    16 | Act 2                              | The Halani Gates                                   | 20-21        |
-|    17 | Act 2                              | Trial of the Sekhemas                              | 22-23        |
-|    18 | Act 2                              | Keth                                               | 25-26        |
-|    19 | Act 2                              | Mastodon Badlands / The Lost City / V              | 26-27        |
-|    20 | Act 3                              | The Bone Pits / Buried Shrines / The Titan Grotto  | 27-28        |
-|    21 | Act 3                              | Deshar / Path of Mourning / Spires of Deshar       | 28-31        |
-|    22 | Act 3                              | The Dreadnought / Dreadnought Vanguard             | 31-33        |
-|    23 | Act 3                              | Sandswept Marsh / Jungle Ruins                     | 33-35        |
-|    24 | Act 3                              | Venom Crypts / Infested Barrens                    | 35-36        |
-|    25 | Act 3                              | Azak Bog / Chimeral Wetlands                       | 36-37        |
-|    26 | Act 3                              | Jiquani’s Machinarium / The Temple of Chaos        | 37-39        |
-|    27 | Act 3                              | Jiquani’s Sanctum                                  | 38-39        |
-|    28 | Act 3                              | The Matlan Waterways / The Drowned City            | 39-41        |
-|    29 | Act 3                              | The Molten Vault / Apex of Filth / Temple of Kopec | 41-43        |
-|    30 | Act 3                              | Utzaal                                             | 43-44        |
-|    31 | Act 3                              | Aggorat (Past)                                     | 44-45        |
-|    32 | Act 3                              | The Black Chambers (Past)                          | 45-46        |
-|    33 | Act 4                              | Kingsmarch                                         | 53-54        |
-|    34 | Act 4                              | Whakapanu Island & Singing Cavern                  | 46-48        |
-|    35 | Act 4                              | Abandoned Prison                                   | 46-47        |
-|    36 | Act 4                              | Eye of Hinekora                                    | 46-47        |
-|    37 | Act 4                              | Halls of the Dead                                  | 47-48        |
-|    38 | Act 4                              | Kedge Bay / Journey's End                          | 46-48        |
-|    39 | Act 4                              | Isle of Kin / Volcanic Warrens                     | 46-48        |
-|    40 | Interlude 1: Curse of Holten       | Scorched Farmlands                                 | 54-55        |
-|    41 | Interlude 1: Curse of Holten       | Stones of Serle                                    | 54-55        |
-|    42 | Interlude 1: Curse of Holten       | Wolvenhold                                         | 56-57        |
-|    43 | Interlude 1: Curse of Holten       | Holten Estate                                      | 56-57        |
-|    44 | Interlude 2: The Stolen Barya      | The Khari Crossing                                 | 54-55        |
-|    45 | Interlude 2: The Stolen Barya      | Sel Khari Sanctuary                                | 55-56        |
-|    46 | Interlude 2: The Stolen Barya      | The Galai Gates                                    | 56-57        |
-|    47 | Interlude 2: The Stolen Barya      | Qimah                                              | 56-57        |
-|    48 | Interlude 2: The Stolen Barya      | Qimah Reservoir                                    | 56-57        |
-|    49 | Interlude 3: Doryani's Contingency | The Ashen Forest                                   | 54-55        |
-|    50 | Interlude 3: Doryani's Contingency | Kriar Village                                      | 54-55        |
-|    51 | Interlude 3: Doryani's Contingency | Howling Caves                                      | 55-56        |
-|    52 | Interlude 3: Doryani's Contingency | Kriar Peaks                                        | 56-57        |
-|    53 | Interlude 3: Doryani's Contingency | Etched Ravine                                      | 56-57        |
-|    54 | Interlude 3: Doryani's Contingency | Endgame transition                                 | 60-65        |
+|   Order | Chapter                            | Section                                            | Common level   |
+|--------:|:-----------------------------------|:---------------------------------------------------|:---------------|
+|       1 | Act 1                              | The Riverbank                                      | 1-2            |
+|       2 | Act 1                              | Clearfell                                          | 2-3            |
+|       3 | Act 1                              | The Mud Burrow                                     | 3-4            |
+|       4 | Act 1                              | The Grelwood / The Red Vale / Tree of Souls        | 4-6            |
+|       5 | Act 1                              | The Grim Tangle                                    | 6-7            |
+|       6 | Act 1                              | Cemetery of the Eternals                           | 7-8            |
+|       7 | Act 1                              | Mausoleum of the Praetor                           | 9-10           |
+|       8 | Act 1                              | Hunting Grounds / Freythorn                        | 10-12          |
+|       9 | Act 1                              | Ogham Farmlands                                    | 12-13          |
+|      10 | Act 1                              | Ogham Village                                      | 13-14          |
+|      11 | Act 1                              | Manor Ramparts                                     | 14-15          |
+|      12 | Act 1                              | Ogham Manor                                        | 15-16          |
+|      13 | Act 2                              | Vastiri Outskirts                                  | 16-17          |
+|      14 | Act 2                              | Mawdun Quarry / Mawdun Mine                        | 17-19          |
+|      15 | Act 2                              | Traitor’s Passage                                  | 19-20          |
+|      16 | Act 2                              | The Halani Gates                                   | 20-21          |
+|      17 | Act 2                              | Trial of the Sekhemas                              | 22-23          |
+|      18 | Act 2                              | Keth                                               | 25-26          |
+|      19 | Act 2                              | Mastodon Badlands / The Lost City / V              | 26-27          |
+|      20 | Act 3                              | The Bone Pits / Buried Shrines / The Titan Grotto  | 27-28          |
+|      21 | Act 3                              | Deshar / Path of Mourning / Spires of Deshar       | 28-31          |
+|      22 | Act 3                              | The Dreadnought / Dreadnought Vanguard             | 31-33          |
+|      23 | Act 3                              | Sandswept Marsh / Jungle Ruins                     | 33-35          |
+|      24 | Act 3                              | Venom Crypts / Infested Barrens                    | 35-36          |
+|      25 | Act 3                              | Azak Bog / Chimeral Wetlands                       | 36-37          |
+|      26 | Act 3                              | Jiquani’s Machinarium / The Temple of Chaos        | 37-39          |
+|      27 | Act 3                              | Jiquani’s Sanctum                                  | 38-39          |
+|      28 | Act 3                              | The Matlan Waterways / The Drowned City            | 39-41          |
+|      29 | Act 3                              | The Molten Vault / Apex of Filth / Temple of Kopec | 41-43          |
+|      30 | Act 3                              | Utzaal                                             | 43-44          |
+|      31 | Act 3                              | Aggorat (Past)                                     | 44-45          |
+|      32 | Act 3                              | The Black Chambers (Past)                          | 45-46          |
+|      33 | Act 4                              | Kingsmarch                                         | 53-54          |
+|      34 | Act 4                              | Whakapanu Island & Singing Cavern                  | 46-48          |
+|      35 | Act 4                              | Abandoned Prison                                   | 46-47          |
+|      36 | Act 4                              | Eye of Hinekora                                    | 46-47          |
+|      37 | Act 4                              | Halls of the Dead                                  | 47-48          |
+|      38 | Act 4                              | Kedge Bay / Journey's End                          | 46-48          |
+|      39 | Act 4                              | Isle of Kin / Volcanic Warrens                     | 46-48          |
+|      40 | Interlude 1: Curse of Holten       | Scorched Farmlands                                 | 54-55          |
+|      41 | Interlude 1: Curse of Holten       | Stones of Serle                                    | 54-55          |
+|      42 | Interlude 1: Curse of Holten       | Wolvenhold                                         | 56-57          |
+|      43 | Interlude 1: Curse of Holten       | Holten Estate                                      | 56-57          |
+|      44 | Interlude 2: The Stolen Barya      | The Khari Crossing                                 | 54-55          |
+|      45 | Interlude 2: The Stolen Barya      | Sel Khari Sanctuary                                | 55-56          |
+|      46 | Interlude 2: The Stolen Barya      | The Galai Gates                                    | 56-57          |
+|      47 | Interlude 2: The Stolen Barya      | Qimah                                              | 56-57          |
+|      48 | Interlude 2: The Stolen Barya      | Qimah Reservoir                                    | 56-57          |
+|      49 | Interlude 3: Doryani's Contingency | The Ashen Forest                                   | 54-55          |
+|      50 | Interlude 3: Doryani's Contingency | Kriar Village                                      | 54-55          |
+|      51 | Interlude 3: Doryani's Contingency | Howling Caves                                      | 55-56          |
+|      52 | Interlude 3: Doryani's Contingency | Kriar Peaks                                        | 56-57          |
+|      53 | Interlude 3: Doryani's Contingency | Etched Ravine                                      | 56-57          |
+|      54 | Interlude 3: Doryani's Contingency | Endgame transition                                 | 60-65          |
 
 ### Data formats to support per-build inserts (v1)
 
 **Goal:** move “level breakpoints / checklist items / new gear” into the relevant campaign guide sections, while keeping the build overlay’s static panels (How to Play / Key Tips) unchanged.
 
 **Campaign progression sections (build-agnostic)**
-
 - `campaign_progression_sections.sections[]`
   - `id` (e.g. `sec_01`)
   - `order` (1..N)
@@ -254,7 +249,6 @@ This table is the **canonical website guide section order** for Early Access, wi
   - `common_level_range_display` (e.g. `14-15`)
 
 **Build overlay definition (per build)**
-
 - `build_overlays[]`
   - `id`, `name`, `class`, `ascendancy`, `source_url`
   - `static_panels.how_to_play` (string/markdown)
@@ -264,39 +258,26 @@ This table is the **canonical website guide section order** for Early Access, wi
   - `rules.auto_map_milestone_groups.method = "level_range_overlap"` (optional helper rule)
 
 **Recommended rendering rule (simple default)**
-
 - When rendering a campaign section, show any milestone group whose `level_range` overlaps that section’s `common_level_range`.
 - Allow manual overrides via `section_inserts[]` when a build needs a specific placement.
+## Checklist generation rules (v2 rebuild)
 
-## Campaign section streamlining rule
+### Goal
+- **Speedrun mode:** show only **permanent power** (permanent buffs/stat choices, skill-point books, ascendancy unlocks, key/unlock benches) **plus required progression bosses**.
+- **Full mode:** Speedrun items **plus** explicitly marked **optional bosses/content**.
 
-**Canonical (Option 1):** A _campaign section_ is the player-facing **hub checklist unit**. Any required areas that are **entered from that hub and return to it** are treated as **implied subzones** and should **not** be their own standalone campaign sections.
+### Data-driven overrides (in `poe2_master_db.json`)
+`checklist_overrides` provides deterministic rules to prevent “Defeat: quest/secret/hub/monument” noise:
 
-### Required fields
+- `key_kinds` (map): key string → kind  
+  Kinds include: `boss`, `quest`, `secret`, `hub`, `checkpoint`, `trial`
+- `key_kind_default`: default kind for unknown keys (recommended: `boss`)
+- `key_kind_checkbox_kinds`: which key kinds may produce a “Defeat:” checklist item (recommended: `["boss"]`)
+- `never_checklist_key_kinds`: kinds that must never create checkboxes (recommended: `["quest","secret","hub","checkpoint","trial"]`)
+- `optional_key_suffix_regex`: pattern to tag optional keys (default: `(optional)` suffix)
+- `reward_note_matchers`: regex patterns used to detect permanent power + unlock rewards
+- `mode_tag_visibility`: which tags are visible in each mode
 
-- `campaign_progression_sections.sections[]`
-  - `is_active` (boolean, default true)
-  - `deprecated` (boolean, optional)
-  - `replaced_by` (string section id, optional)
-  - `section_kind` (string; recommended values: `hub`, `side_area`, `subzone_deprecated`)
-  - `zone_ids[]` (string IDs that map into `zones_db`)
-  - `completion_rule` (object, optional but recommended for hubs)
-    - `zones_required[]` (zone_ids)
-    - `subzones_implied[]` (zone_ids)
-    - `zones_optional[]` (zone_ids, optional)
-
-- `zones_db`
-  - keyed by `zone_id`
-  - each zone entry includes: `display_name`, `chapter`, `zone_kind`, `parent_zone_id`, `return_to_parent`
-
-### Act 1 example: Cemetery consolidation
-
-- `sec_06` remains active and becomes the hub section:
-  - title: **Cemetery of the Eternals**
-  - `completion_rule.zones_required`: `["cemetery_of_the_eternals"]`
-  - `completion_rule.subzones_implied`: `["mausoleum_of_the_praetor"]`
-
-- `sec_07` is deprecated (kept only for backward compatibility):
-  - `is_active: false`
-  - `deprecated: true`
-  - `replaced_by: "sec_06"`
+### Implementation note
+- Item IDs should remain stable across refactors (hash of `section_id` + normalized display text).
+- `src/data/*` copies must be refreshed from the root master files when master data is updated.

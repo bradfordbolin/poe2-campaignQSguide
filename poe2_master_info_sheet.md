@@ -16,33 +16,6 @@ This document is a running reference database derived from **user-provided Maxro
 
 Note: Per user-provided walkthrough summary: full release planned as 6 acts with no interludes.
 
-## Checklist Rules for the App
-
-The app generates checklists with **only permanent power + required progression**:
-
-Included (checkboxes):
-- **Permanent buffs / permanent stat choices** (including changeable relic buffs and permanent tattoos/attributes/resists)
-- **Skill point / passive point style rewards** (e.g. "Book: +2 Weapon Set Passive Skill Points")
-- **Ascendancy unlocks**
-- **Mandatory progression gates** (usually act bosses)
-
-Excluded (no checkboxes):
-- Routing notes ("find exit", "enter zone", etc.)
-- Secrets / monuments / hubs unless they directly grant permanent power
-
-### Key Classification Overrides
-
-Some `key[]` entries in the source summaries are **not bosses** (they are quests, secrets, hubs, or checkpoint actions).  
-To prevent these from incorrectly becoming **“Defeat:”** checklist items, the master DB includes:
-
-- `checklist_overrides.key_kinds` (map: key string → kind)
-
-Non-`boss` kinds are **not** turned into a “Defeat:” checkbox. Any permanent-power reward from that zone should still appear via the reward note filters.
-
-### Notes
-
-- **Act 4 Kingsmarch** common level range was corrected to **46** to match the Act 4 start band in the section table.
-
 ## Leveling Gear Breakpoints
 
 | Level | Upgrade | Notes |
@@ -287,36 +260,24 @@ This table is the **canonical website guide section order** for Early Access, wi
 **Recommended rendering rule (simple default)**
 - When rendering a campaign section, show any milestone group whose `level_range` overlaps that section’s `common_level_range`.
 - Allow manual overrides via `section_inserts[]` when a build needs a specific placement.
+## Checklist generation rules (v2 rebuild)
 
-## Campaign section streamlining rule
+### Goal
+- **Speedrun mode:** show only **permanent power** (permanent buffs/stat choices, skill-point books, ascendancy unlocks, key/unlock benches) **plus required progression bosses**.
+- **Full mode:** Speedrun items **plus** explicitly marked **optional bosses/content**.
 
-**Canonical (Option 1):** A *campaign section* is the player-facing **hub checklist unit**. Any required areas that are **entered from that hub and return to it** are treated as **implied subzones** and should **not** be their own standalone campaign sections.
+### Data-driven overrides (in `poe2_master_db.json`)
+`checklist_overrides` provides deterministic rules to prevent “Defeat: quest/secret/hub/monument” noise:
 
-### Required fields
+- `key_kinds` (map): key string → kind  
+  Kinds include: `boss`, `quest`, `secret`, `hub`, `checkpoint`, `trial`
+- `key_kind_default`: default kind for unknown keys (recommended: `boss`)
+- `key_kind_checkbox_kinds`: which key kinds may produce a “Defeat:” checklist item (recommended: `["boss"]`)
+- `never_checklist_key_kinds`: kinds that must never create checkboxes (recommended: `["quest","secret","hub","checkpoint","trial"]`)
+- `optional_key_suffix_regex`: pattern to tag optional keys (default: `(optional)` suffix)
+- `reward_note_matchers`: regex patterns used to detect permanent power + unlock rewards
+- `mode_tag_visibility`: which tags are visible in each mode
 
-- `campaign_progression_sections.sections[]`
-  - `is_active` (boolean, default true)
-  - `deprecated` (boolean, optional)
-  - `replaced_by` (string section id, optional)
-  - `section_kind` (string; recommended values: `hub`, `side_area`, `subzone_deprecated`)
-  - `zone_ids[]` (string IDs that map into `zones_db`)
-  - `completion_rule` (object, optional but recommended for hubs)
-    - `zones_required[]` (zone_ids)
-    - `subzones_implied[]` (zone_ids)
-    - `zones_optional[]` (zone_ids, optional)
-
-- `zones_db`
-  - keyed by `zone_id`
-  - each zone entry includes: `display_name`, `chapter`, `zone_kind`, `parent_zone_id`, `return_to_parent`
-
-### Act 1 example: Cemetery consolidation
-
-- `sec_06` remains active and becomes the hub section:
-  - title: **Cemetery of the Eternals**
-  - `completion_rule.zones_required`: `["cemetery_of_the_eternals"]`
-  - `completion_rule.subzones_implied`: `["mausoleum_of_the_praetor"]`
-
-- `sec_07` is deprecated (kept only for backward compatibility):
-  - `is_active: false`
-  - `deprecated: true`
-  - `replaced_by: "sec_06"`
+### Implementation note
+- Item IDs should remain stable across refactors (hash of `section_id` + normalized display text).
+- `src/data/*` copies must be refreshed from the root master files when master data is updated.

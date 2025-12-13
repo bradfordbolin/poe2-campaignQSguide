@@ -6,12 +6,10 @@
     "notes": [
       "This file is intended to be re-uploaded/pasted into future chats to restore context.",
       "Fields marked 'verification_flag' should be validated against primary sources (GGG patch notes / in-game) when available.",
-      "2025-12-12: Added campaign progression section common-level ranges table (v1) + build overlay data-format templates.",
-      "2025-12-13: Checklist cleanup: added checklist_overrides.key_kinds to prevent non-boss keys (secrets/quests/hubs/checkpoints) from generating 'Defeat' checklist items; fixed Act 4 Kingsmarch common-level range to align with Act 4 start; added reward-note matcher hints for checklist generation."
+      "2025-12-12: Added campaign progression section common-level ranges table (v1) + build overlay data-format templates."
     ],
     "last_updated": "2025-12-13",
-    "revision": 2,
-    "campaign_section_rule": "Hub sections may imply subzones; implied subzones are not standalone sections."
+    "revision": 1
   },
   "sources": [
     {
@@ -798,11 +796,7 @@
           "min": 1,
           "max": 2
         },
-        "common_level_range_display": "1-2",
-        "zone_ids": [
-          "the_riverbank"
-        ],
-        "is_active": true
+        "common_level_range_display": "1-2"
       },
       {
         "id": "sec_02",
@@ -816,11 +810,7 @@
           "min": 2,
           "max": 3
         },
-        "common_level_range_display": "2-3",
-        "zone_ids": [
-          "clearfell"
-        ],
-        "is_active": true
+        "common_level_range_display": "2-3"
       },
       {
         "id": "sec_03",
@@ -834,11 +824,7 @@
           "min": 3,
           "max": 4
         },
-        "common_level_range_display": "3-4",
-        "zone_ids": [
-          "the_mud_burrow"
-        ],
-        "is_active": true
+        "common_level_range_display": "3-4"
       },
       {
         "id": "sec_04",
@@ -854,13 +840,7 @@
           "min": 4,
           "max": 6
         },
-        "common_level_range_display": "4-6",
-        "zone_ids": [
-          "the_grelwood",
-          "the_red_vale",
-          "tree_of_souls"
-        ],
-        "is_active": true
+        "common_level_range_display": "4-6"
       },
       {
         "id": "sec_05",
@@ -874,11 +854,7 @@
           "min": 6,
           "max": 7
         },
-        "common_level_range_display": "6-7",
-        "zone_ids": [
-          "the_grim_tangle"
-        ],
-        "is_active": true
+        "common_level_range_display": "6-7"
       },
       {
         "id": "sec_06",
@@ -892,21 +868,7 @@
           "min": 7,
           "max": 8
         },
-        "common_level_range_display": "7-8",
-        "zone_ids": [
-          "cemetery_of_the_eternals"
-        ],
-        "is_active": true,
-        "section_kind": "hub",
-        "completion_rule": {
-          "zones_required": [
-            "cemetery_of_the_eternals"
-          ],
-          "subzones_implied": [
-            "mausoleum_of_the_praetor"
-          ]
-        },
-        "notes": "Mausoleum of the Praetor is an implied subzone entered from this section."
+        "common_level_range_display": "7-8"
       },
       {
         "id": "sec_07",
@@ -920,15 +882,7 @@
           "min": 9,
           "max": 10
         },
-        "common_level_range_display": "9-10",
-        "zone_ids": [
-          "mausoleum_of_the_praetor"
-        ],
-        "is_active": false,
-        "deprecated": true,
-        "replaced_by": "sec_06",
-        "deprecated_reason": "Folded into sec_06 (Cemetery of the Eternals) as an implied subzone per Option 1 streamlining.",
-        "section_kind": "subzone_deprecated"
+        "common_level_range_display": "9-10"
       },
       {
         "id": "sec_08",
@@ -943,12 +897,7 @@
           "min": 10,
           "max": 12
         },
-        "common_level_range_display": "10-12",
-        "zone_ids": [
-          "hunting_grounds",
-          "freythorn"
-        ],
-        "is_active": true
+        "common_level_range_display": "10-12"
       },
       {
         "id": "sec_09",
@@ -962,11 +911,7 @@
           "min": 12,
           "max": 13
         },
-        "common_level_range_display": "12-13",
-        "zone_ids": [
-          "ogham_farmlands"
-        ],
-        "is_active": true
+        "common_level_range_display": "12-13"
       },
       {
         "id": "sec_10",
@@ -980,11 +925,7 @@
           "min": 13,
           "max": 14
         },
-        "common_level_range_display": "13-14",
-        "zone_ids": [
-          "ogham_village"
-        ],
-        "is_active": true
+        "common_level_range_display": "13-14"
       },
       {
         "id": "sec_11",
@@ -998,11 +939,7 @@
           "min": 14,
           "max": 15
         },
-        "common_level_range_display": "14-15",
-        "zone_ids": [
-          "manor_ramparts"
-        ],
-        "is_active": true
+        "common_level_range_display": "14-15"
       },
       {
         "id": "sec_12",
@@ -1016,11 +953,7 @@
           "min": 15,
           "max": 16
         },
-        "common_level_range_display": "15-16",
-        "zone_ids": [
-          "ogham_manor"
-        ],
-        "is_active": true
+        "common_level_range_display": "15-16"
       },
       {
         "id": "sec_13",
@@ -1034,11 +967,7 @@
           "min": 16,
           "max": 17
         },
-        "common_level_range_display": "16-17",
-        "zone_ids": [
-          "vastiri_outskirts"
-        ],
-        "is_active": true
+        "common_level_range_display": "16-17"
       },
       {
         "id": "sec_14",
@@ -1053,12 +982,7 @@
           "min": 17,
           "max": 19
         },
-        "common_level_range_display": "17-19",
-        "zone_ids": [
-          "mawdun_quarry",
-          "mawdun_mine"
-        ],
-        "is_active": true
+        "common_level_range_display": "17-19"
       },
       {
         "id": "sec_15",
@@ -1072,11 +996,7 @@
           "min": 19,
           "max": 20
         },
-        "common_level_range_display": "19-20",
-        "zone_ids": [
-          "traitors_passage"
-        ],
-        "is_active": true
+        "common_level_range_display": "19-20"
       },
       {
         "id": "sec_16",
@@ -1090,11 +1010,7 @@
           "min": 20,
           "max": 21
         },
-        "common_level_range_display": "20-21",
-        "zone_ids": [
-          "the_halani_gates"
-        ],
-        "is_active": true
+        "common_level_range_display": "20-21"
       },
       {
         "id": "sec_17",
@@ -1108,11 +1024,7 @@
           "min": 22,
           "max": 23
         },
-        "common_level_range_display": "22-23",
-        "zone_ids": [
-          "trial_of_the_sekhemas"
-        ],
-        "is_active": true
+        "common_level_range_display": "22-23"
       },
       {
         "id": "sec_18",
@@ -1126,11 +1038,7 @@
           "min": 25,
           "max": 26
         },
-        "common_level_range_display": "25-26",
-        "zone_ids": [
-          "keth"
-        ],
-        "is_active": true
+        "common_level_range_display": "25-26"
       },
       {
         "id": "sec_19",
@@ -1146,13 +1054,7 @@
           "min": 26,
           "max": 27
         },
-        "common_level_range_display": "26-27",
-        "zone_ids": [
-          "mastodon_badlands",
-          "the_lost_city",
-          "v"
-        ],
-        "is_active": true
+        "common_level_range_display": "26-27"
       },
       {
         "id": "sec_20",
@@ -1168,13 +1070,7 @@
           "min": 27,
           "max": 28
         },
-        "common_level_range_display": "27-28",
-        "zone_ids": [
-          "the_bone_pits",
-          "buried_shrines",
-          "the_titan_grotto"
-        ],
-        "is_active": true
+        "common_level_range_display": "27-28"
       },
       {
         "id": "sec_21",
@@ -1190,13 +1086,7 @@
           "min": 28,
           "max": 31
         },
-        "common_level_range_display": "28-31",
-        "zone_ids": [
-          "deshar",
-          "path_of_mourning",
-          "spires_of_deshar"
-        ],
-        "is_active": true
+        "common_level_range_display": "28-31"
       },
       {
         "id": "sec_22",
@@ -1211,12 +1101,7 @@
           "min": 31,
           "max": 33
         },
-        "common_level_range_display": "31-33",
-        "zone_ids": [
-          "the_dreadnought",
-          "dreadnought_vanguard"
-        ],
-        "is_active": true
+        "common_level_range_display": "31-33"
       },
       {
         "id": "sec_23",
@@ -1231,12 +1116,7 @@
           "min": 33,
           "max": 35
         },
-        "common_level_range_display": "33-35",
-        "zone_ids": [
-          "sandswept_marsh",
-          "jungle_ruins"
-        ],
-        "is_active": true
+        "common_level_range_display": "33-35"
       },
       {
         "id": "sec_24",
@@ -1251,12 +1131,7 @@
           "min": 35,
           "max": 36
         },
-        "common_level_range_display": "35-36",
-        "zone_ids": [
-          "venom_crypts",
-          "infested_barrens"
-        ],
-        "is_active": true
+        "common_level_range_display": "35-36"
       },
       {
         "id": "sec_25",
@@ -1271,12 +1146,7 @@
           "min": 36,
           "max": 37
         },
-        "common_level_range_display": "36-37",
-        "zone_ids": [
-          "azak_bog",
-          "chimeral_wetlands"
-        ],
-        "is_active": true
+        "common_level_range_display": "36-37"
       },
       {
         "id": "sec_26",
@@ -1291,12 +1161,7 @@
           "min": 37,
           "max": 39
         },
-        "common_level_range_display": "37-39",
-        "zone_ids": [
-          "jiquanis_machinarium",
-          "the_temple_of_chaos"
-        ],
-        "is_active": true
+        "common_level_range_display": "37-39"
       },
       {
         "id": "sec_27",
@@ -1310,11 +1175,7 @@
           "min": 38,
           "max": 39
         },
-        "common_level_range_display": "38-39",
-        "zone_ids": [
-          "jiquanis_sanctum"
-        ],
-        "is_active": true
+        "common_level_range_display": "38-39"
       },
       {
         "id": "sec_28",
@@ -1329,12 +1190,7 @@
           "min": 39,
           "max": 41
         },
-        "common_level_range_display": "39-41",
-        "zone_ids": [
-          "the_matlan_waterways",
-          "the_drowned_city"
-        ],
-        "is_active": true
+        "common_level_range_display": "39-41"
       },
       {
         "id": "sec_29",
@@ -1350,13 +1206,7 @@
           "min": 41,
           "max": 43
         },
-        "common_level_range_display": "41-43",
-        "zone_ids": [
-          "the_molten_vault",
-          "apex_of_filth",
-          "temple_of_kopec"
-        ],
-        "is_active": true
+        "common_level_range_display": "41-43"
       },
       {
         "id": "sec_30",
@@ -1370,11 +1220,7 @@
           "min": 43,
           "max": 44
         },
-        "common_level_range_display": "43-44",
-        "zone_ids": [
-          "utzaal"
-        ],
-        "is_active": true
+        "common_level_range_display": "43-44"
       },
       {
         "id": "sec_31",
@@ -1388,11 +1234,7 @@
           "min": 44,
           "max": 45
         },
-        "common_level_range_display": "44-45",
-        "zone_ids": [
-          "aggorat_past"
-        ],
-        "is_active": true
+        "common_level_range_display": "44-45"
       },
       {
         "id": "sec_32",
@@ -1406,11 +1248,7 @@
           "min": 45,
           "max": 46
         },
-        "common_level_range_display": "45-46",
-        "zone_ids": [
-          "the_black_chambers_past"
-        ],
-        "is_active": true
+        "common_level_range_display": "45-46"
       },
       {
         "id": "sec_33",
@@ -1421,14 +1259,10 @@
           "Kingsmarch"
         ],
         "common_level_range": {
-          "min": 46,
-          "max": 46
+          "min": 53,
+          "max": 54
         },
-        "common_level_range_display": "46",
-        "zone_ids": [
-          "kingsmarch"
-        ],
-        "is_active": true
+        "common_level_range_display": "53-54"
       },
       {
         "id": "sec_34",
@@ -1443,12 +1277,7 @@
           "min": 46,
           "max": 48
         },
-        "common_level_range_display": "46-48",
-        "zone_ids": [
-          "whakapanu_island",
-          "singing_cavern"
-        ],
-        "is_active": true
+        "common_level_range_display": "46-48"
       },
       {
         "id": "sec_35",
@@ -1462,11 +1291,7 @@
           "min": 46,
           "max": 47
         },
-        "common_level_range_display": "46-47",
-        "zone_ids": [
-          "abandoned_prison"
-        ],
-        "is_active": true
+        "common_level_range_display": "46-47"
       },
       {
         "id": "sec_36",
@@ -1480,11 +1305,7 @@
           "min": 46,
           "max": 47
         },
-        "common_level_range_display": "46-47",
-        "zone_ids": [
-          "eye_of_hinekora"
-        ],
-        "is_active": true
+        "common_level_range_display": "46-47"
       },
       {
         "id": "sec_37",
@@ -1498,11 +1319,7 @@
           "min": 47,
           "max": 48
         },
-        "common_level_range_display": "47-48",
-        "zone_ids": [
-          "halls_of_the_dead"
-        ],
-        "is_active": true
+        "common_level_range_display": "47-48"
       },
       {
         "id": "sec_38",
@@ -1517,12 +1334,7 @@
           "min": 46,
           "max": 48
         },
-        "common_level_range_display": "46-48",
-        "zone_ids": [
-          "kedge_bay",
-          "journeys_end"
-        ],
-        "is_active": true
+        "common_level_range_display": "46-48"
       },
       {
         "id": "sec_39",
@@ -1537,12 +1349,7 @@
           "min": 46,
           "max": 48
         },
-        "common_level_range_display": "46-48",
-        "zone_ids": [
-          "isle_of_kin",
-          "volcanic_warrens"
-        ],
-        "is_active": true
+        "common_level_range_display": "46-48"
       },
       {
         "id": "sec_40",
@@ -1556,11 +1363,7 @@
           "min": 54,
           "max": 55
         },
-        "common_level_range_display": "54-55",
-        "zone_ids": [
-          "scorched_farmlands"
-        ],
-        "is_active": true
+        "common_level_range_display": "54-55"
       },
       {
         "id": "sec_41",
@@ -1574,11 +1377,7 @@
           "min": 54,
           "max": 55
         },
-        "common_level_range_display": "54-55",
-        "zone_ids": [
-          "stones_of_serle"
-        ],
-        "is_active": true
+        "common_level_range_display": "54-55"
       },
       {
         "id": "sec_42",
@@ -1592,11 +1391,7 @@
           "min": 56,
           "max": 57
         },
-        "common_level_range_display": "56-57",
-        "zone_ids": [
-          "wolvenhold"
-        ],
-        "is_active": true
+        "common_level_range_display": "56-57"
       },
       {
         "id": "sec_43",
@@ -1610,11 +1405,7 @@
           "min": 56,
           "max": 57
         },
-        "common_level_range_display": "56-57",
-        "zone_ids": [
-          "holten_estate"
-        ],
-        "is_active": true
+        "common_level_range_display": "56-57"
       },
       {
         "id": "sec_44",
@@ -1628,11 +1419,7 @@
           "min": 54,
           "max": 55
         },
-        "common_level_range_display": "54-55",
-        "zone_ids": [
-          "the_khari_crossing"
-        ],
-        "is_active": true
+        "common_level_range_display": "54-55"
       },
       {
         "id": "sec_45",
@@ -1646,11 +1433,7 @@
           "min": 55,
           "max": 56
         },
-        "common_level_range_display": "55-56",
-        "zone_ids": [
-          "sel_khari_sanctuary"
-        ],
-        "is_active": true
+        "common_level_range_display": "55-56"
       },
       {
         "id": "sec_46",
@@ -1664,11 +1447,7 @@
           "min": 56,
           "max": 57
         },
-        "common_level_range_display": "56-57",
-        "zone_ids": [
-          "the_galai_gates"
-        ],
-        "is_active": true
+        "common_level_range_display": "56-57"
       },
       {
         "id": "sec_47",
@@ -1682,11 +1461,7 @@
           "min": 56,
           "max": 57
         },
-        "common_level_range_display": "56-57",
-        "zone_ids": [
-          "qimah"
-        ],
-        "is_active": true
+        "common_level_range_display": "56-57"
       },
       {
         "id": "sec_48",
@@ -1700,11 +1475,7 @@
           "min": 56,
           "max": 57
         },
-        "common_level_range_display": "56-57",
-        "zone_ids": [
-          "qimah_reservoir"
-        ],
-        "is_active": true
+        "common_level_range_display": "56-57"
       },
       {
         "id": "sec_49",
@@ -1718,11 +1489,7 @@
           "min": 54,
           "max": 55
         },
-        "common_level_range_display": "54-55",
-        "zone_ids": [
-          "the_ashen_forest"
-        ],
-        "is_active": true
+        "common_level_range_display": "54-55"
       },
       {
         "id": "sec_50",
@@ -1736,11 +1503,7 @@
           "min": 54,
           "max": 55
         },
-        "common_level_range_display": "54-55",
-        "zone_ids": [
-          "kriar_village"
-        ],
-        "is_active": true
+        "common_level_range_display": "54-55"
       },
       {
         "id": "sec_51",
@@ -1754,11 +1517,7 @@
           "min": 55,
           "max": 56
         },
-        "common_level_range_display": "55-56",
-        "zone_ids": [
-          "howling_caves"
-        ],
-        "is_active": true
+        "common_level_range_display": "55-56"
       },
       {
         "id": "sec_52",
@@ -1772,11 +1531,7 @@
           "min": 56,
           "max": 57
         },
-        "common_level_range_display": "56-57",
-        "zone_ids": [
-          "kriar_peaks"
-        ],
-        "is_active": true
+        "common_level_range_display": "56-57"
       },
       {
         "id": "sec_53",
@@ -1790,11 +1545,7 @@
           "min": 56,
           "max": 57
         },
-        "common_level_range_display": "56-57",
-        "zone_ids": [
-          "etched_ravine"
-        ],
-        "is_active": true
+        "common_level_range_display": "56-57"
       },
       {
         "id": "sec_54",
@@ -1806,9 +1557,7 @@
           "min": 60,
           "max": 65
         },
-        "common_level_range_display": "60-65",
-        "zone_ids": [],
-        "is_active": true
+        "common_level_range_display": "60-65"
       }
     ]
   },
@@ -1911,542 +1660,48 @@
       "verification_flag": "Milestone group boundaries were derived from the Mobalytics guide variants; validate if guide updates."
     }
   ],
-  "zones_db": {
-    "cemetery_of_the_eternals": {
-      "display_name": "Cemetery of the Eternals",
-      "chapter": "Act 1",
-      "zone_kind": "hub",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "clearfell": {
-      "display_name": "Clearfell",
-      "chapter": "Act 1",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "freythorn": {
-      "display_name": "Freythorn",
-      "chapter": "Act 1",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "hunting_grounds": {
-      "display_name": "Hunting Grounds",
-      "chapter": "Act 1",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "manor_ramparts": {
-      "display_name": "Manor Ramparts",
-      "chapter": "Act 1",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "mausoleum_of_the_praetor": {
-      "display_name": "Mausoleum of the Praetor",
-      "chapter": "Act 1",
-      "zone_kind": "subzone",
-      "parent_zone_id": "cemetery_of_the_eternals",
-      "return_to_parent": true
-    },
-    "ogham_farmlands": {
-      "display_name": "Ogham Farmlands",
-      "chapter": "Act 1",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "ogham_manor": {
-      "display_name": "Ogham Manor",
-      "chapter": "Act 1",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "ogham_village": {
-      "display_name": "Ogham Village",
-      "chapter": "Act 1",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_grelwood": {
-      "display_name": "The Grelwood",
-      "chapter": "Act 1",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_grim_tangle": {
-      "display_name": "The Grim Tangle",
-      "chapter": "Act 1",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_mud_burrow": {
-      "display_name": "The Mud Burrow",
-      "chapter": "Act 1",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_red_vale": {
-      "display_name": "The Red Vale",
-      "chapter": "Act 1",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_riverbank": {
-      "display_name": "The Riverbank",
-      "chapter": "Act 1",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "tree_of_souls": {
-      "display_name": "Tree of Souls",
-      "chapter": "Act 1",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "keth": {
-      "display_name": "Keth",
-      "chapter": "Act 2",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "mastodon_badlands": {
-      "display_name": "Mastodon Badlands",
-      "chapter": "Act 2",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "mawdun_mine": {
-      "display_name": "Mawdun Mine",
-      "chapter": "Act 2",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "mawdun_quarry": {
-      "display_name": "Mawdun Quarry",
-      "chapter": "Act 2",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_halani_gates": {
-      "display_name": "The Halani Gates",
-      "chapter": "Act 2",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_lost_city": {
-      "display_name": "The Lost City",
-      "chapter": "Act 2",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "traitors_passage": {
-      "display_name": "Traitor’s Passage",
-      "chapter": "Act 2",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "trial_of_the_sekhemas": {
-      "display_name": "Trial of the Sekhemas",
-      "chapter": "Act 2",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "v": {
-      "display_name": "V",
-      "chapter": "Act 2",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "vastiri_outskirts": {
-      "display_name": "Vastiri Outskirts",
-      "chapter": "Act 2",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "aggorat_past": {
-      "display_name": "Aggorat (Past)",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "apex_of_filth": {
-      "display_name": "Apex of Filth",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "azak_bog": {
-      "display_name": "Azak Bog",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "buried_shrines": {
-      "display_name": "Buried Shrines",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "chimeral_wetlands": {
-      "display_name": "Chimeral Wetlands",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "deshar": {
-      "display_name": "Deshar",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "dreadnought_vanguard": {
-      "display_name": "Dreadnought Vanguard",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "infested_barrens": {
-      "display_name": "Infested Barrens",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "jiquanis_machinarium": {
-      "display_name": "Jiquani’s Machinarium",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "jiquanis_sanctum": {
-      "display_name": "Jiquani’s Sanctum",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "jungle_ruins": {
-      "display_name": "Jungle Ruins",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "path_of_mourning": {
-      "display_name": "Path of Mourning",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "sandswept_marsh": {
-      "display_name": "Sandswept Marsh",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "spires_of_deshar": {
-      "display_name": "Spires of Deshar",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "temple_of_kopec": {
-      "display_name": "Temple of Kopec",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_black_chambers_past": {
-      "display_name": "The Black Chambers (Past)",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_bone_pits": {
-      "display_name": "The Bone Pits",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_dreadnought": {
-      "display_name": "The Dreadnought",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_drowned_city": {
-      "display_name": "The Drowned City",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_matlan_waterways": {
-      "display_name": "The Matlan Waterways",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_molten_vault": {
-      "display_name": "The Molten Vault",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_temple_of_chaos": {
-      "display_name": "The Temple of Chaos",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_titan_grotto": {
-      "display_name": "The Titan Grotto",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "utzaal": {
-      "display_name": "Utzaal",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "venom_crypts": {
-      "display_name": "Venom Crypts",
-      "chapter": "Act 3",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "abandoned_prison": {
-      "display_name": "Abandoned Prison",
-      "chapter": "Act 4",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "eye_of_hinekora": {
-      "display_name": "Eye of Hinekora",
-      "chapter": "Act 4",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "halls_of_the_dead": {
-      "display_name": "Halls of the Dead",
-      "chapter": "Act 4",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "isle_of_kin": {
-      "display_name": "Isle of Kin",
-      "chapter": "Act 4",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "journeys_end": {
-      "display_name": "Journey's End",
-      "chapter": "Act 4",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "kedge_bay": {
-      "display_name": "Kedge Bay",
-      "chapter": "Act 4",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "kingsmarch": {
-      "display_name": "Kingsmarch",
-      "chapter": "Act 4",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "singing_cavern": {
-      "display_name": "Singing Cavern",
-      "chapter": "Act 4",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "volcanic_warrens": {
-      "display_name": "Volcanic Warrens",
-      "chapter": "Act 4",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "whakapanu_island": {
-      "display_name": "Whakapanu Island",
-      "chapter": "Act 4",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "holten_estate": {
-      "display_name": "Holten Estate",
-      "chapter": "Interlude 1: Curse of Holten",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "scorched_farmlands": {
-      "display_name": "Scorched Farmlands",
-      "chapter": "Interlude 1: Curse of Holten",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "stones_of_serle": {
-      "display_name": "Stones of Serle",
-      "chapter": "Interlude 1: Curse of Holten",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "wolvenhold": {
-      "display_name": "Wolvenhold",
-      "chapter": "Interlude 1: Curse of Holten",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "qimah": {
-      "display_name": "Qimah",
-      "chapter": "Interlude 2: The Stolen Barya",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "qimah_reservoir": {
-      "display_name": "Qimah Reservoir",
-      "chapter": "Interlude 2: The Stolen Barya",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "sel_khari_sanctuary": {
-      "display_name": "Sel Khari Sanctuary",
-      "chapter": "Interlude 2: The Stolen Barya",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_galai_gates": {
-      "display_name": "The Galai Gates",
-      "chapter": "Interlude 2: The Stolen Barya",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_khari_crossing": {
-      "display_name": "The Khari Crossing",
-      "chapter": "Interlude 2: The Stolen Barya",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "etched_ravine": {
-      "display_name": "Etched Ravine",
-      "chapter": "Interlude 3: Doryani's Contingency",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "howling_caves": {
-      "display_name": "Howling Caves",
-      "chapter": "Interlude 3: Doryani's Contingency",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "kriar_peaks": {
-      "display_name": "Kriar Peaks",
-      "chapter": "Interlude 3: Doryani's Contingency",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "kriar_village": {
-      "display_name": "Kriar Village",
-      "chapter": "Interlude 3: Doryani's Contingency",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    },
-    "the_ashen_forest": {
-      "display_name": "The Ashen Forest",
-      "chapter": "Interlude 3: Doryani's Contingency",
-      "zone_kind": "map",
-      "parent_zone_id": null,
-      "return_to_parent": false
-    }
-  },
   "checklist_overrides": {
     "key_kinds": {
+      "Fallen Dekhara / Final Letter": "quest",
+      "Orbala's Pillar": "checkpoint",
+      "Tests of mettle": "trial",
+      "Tests of strength": "trial",
       "Gallows secret": "secret",
       "Orok Campfire secret": "secret",
       "Town hub": "hub",
       "Ancient Monument": "checkpoint",
-      "Orbala's Pillar": "checkpoint",
       "Blood Sacrifice": "checkpoint",
-      "Corpse-snake Venom": "checkpoint",
+      "Corpse-snake Venom": "quest",
       "Una's Lute quest": "quest"
     },
-    "reward_note_matchers": {
-      "permanent_power_regex": "(?i)\\bpermanent buff\\b|\\bmaximum mana\\b|\\bmaximum life\\b|\\bspirit\\b|\\bresistance\\b|\\bCDR\\b|\\bmove(ment)? speed\\b|\\bXP\\b|\\battribute\\b",
-      "skill_points_regex": "(?i)\\bbook\\b|\\bpassive\\b|\\bskill point\\b|\\bweapon set passive\\b",
-      "ascendancy_regex": "(?i)\\bascendancy\\b|\\btouch altar\\b",
-      "unlock_regex": "(?i)\\bunlock\\b|\\bbench\\b|\\bgate\\b|\\baccess\\b"
+    "key_kind_default": "boss",
+    "key_kind_checkbox_kinds": [
+      "boss"
+    ],
+    "never_checklist_key_kinds": [
+      "quest",
+      "secret",
+      "hub",
+      "checkpoint",
+      "trial"
+    ],
+    "optional_key_suffix_regex": "(?i)\\(optional\\)",
+    "mode_tag_visibility": {
+      "speedrun": [
+        "required_progression",
+        "permanent_buff",
+        "skill_points",
+        "ascendancy",
+        "key_unlock"
+      ],
+      "full": [
+        "required_progression",
+        "permanent_buff",
+        "skill_points",
+        "ascendancy",
+        "key_unlock",
+        "optional_content"
+      ]
     }
   }
 }
