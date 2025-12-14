@@ -299,6 +299,14 @@ type Poe2GameInfo = {
   }
 }
 
+const formatNumber = (value: number) => {
+  try {
+    return new Intl.NumberFormat(undefined).format(value)
+  } catch {
+    return String(value)
+  }
+}
+
 const formatCompactNumber = (value: number) => {
   try {
     return new Intl.NumberFormat(undefined, { notation: 'compact' }).format(
@@ -423,15 +431,32 @@ function App() {
   }, [completed])
 
   useEffect(() => {
-    const url = `${import.meta.env.BASE_URL}poe2-game-info.json`
-    fetch(url)
-      .then((response) => (response.ok ? response.json() : null))
-      .then((json) => {
-        if (json && typeof json === 'object') {
-          setGameInfo(json as Poe2GameInfo)
-        }
-      })
-      .catch(() => {})
+    let cancelled = false
+
+    const fetchInfo = () => {
+      const url = new URL(
+        `${import.meta.env.BASE_URL}poe2-game-info.json`,
+        window.location.origin
+      )
+      url.searchParams.set('t', String(Date.now()))
+
+      fetch(url.toString(), { cache: 'no-store' })
+        .then((response) => (response.ok ? response.json() : null))
+        .then((json) => {
+          if (cancelled) return
+          if (json && typeof json === 'object') {
+            setGameInfo(json as Poe2GameInfo)
+          }
+        })
+        .catch(() => {})
+    }
+
+    fetchInfo()
+    const id = window.setInterval(fetchInfo, 5 * 60 * 1000)
+    return () => {
+      cancelled = true
+      window.clearInterval(id)
+    }
   }, [])
 
   const leagueStartAt = gameInfo?.league?.start_at ?? ''
@@ -1027,16 +1052,6 @@ function App() {
               </div>
               <div className="text-xs text-muted-foreground">
                 Acts/Interludes with progress tracking
-                {typeof gameInfo?.steam?.current_players?.player_count ===
-                'number' ? (
-                  <>
-                    {' '}
-                    · Steam players:{' '}
-                    {formatCompactNumber(
-                      gameInfo.steam.current_players.player_count
-                    )}
-                  </>
-                ) : null}
               </div>
             </div>
 
@@ -1320,54 +1335,6 @@ function App() {
                         Progress is stored locally in your browser.
                       </div>
                     </div>
-
-                    {gameInfo?.steam ? (
-                      <>
-                        <Separator />
-                        <div className="space-y-2">
-                          <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                            Game info (Steam)
-                          </div>
-                          {gameInfo.steam.latest_version ? (
-                            <div className="text-xs text-muted-foreground">
-                              Latest patch:{' '}
-                              <a
-                                href={gameInfo.steam.latest_version.url}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="underline underline-offset-2"
-                              >
-                                v{gameInfo.steam.latest_version.version}
-                              </a>
-                            </div>
-                          ) : null}
-                          {gameInfo.generated_at ? (
-                            <div className="text-xs text-muted-foreground">
-                              Updated:{' '}
-                              {new Date(gameInfo.generated_at).toLocaleString()}
-                            </div>
-                          ) : null}
-                          {gameInfo.steam.latest_news?.length ? (
-                            <ul className="list-disc space-y-1 pl-5 text-xs text-muted-foreground">
-                              {gameInfo.steam.latest_news
-                                .slice(0, 3)
-                                .map((item) => (
-                                  <li key={item.gid}>
-                                    <a
-                                      href={item.url}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                      className="underline underline-offset-2"
-                                    >
-                                      {item.title}
-                                    </a>
-                                  </li>
-                                ))}
-                            </ul>
-                          ) : null}
-                        </div>
-                      </>
-                    ) : null}
                   </div>
                 </SheetContent>
               </Sheet>
@@ -1472,8 +1439,9 @@ function App() {
                           </div>
                           <Button
                             variant="outline"
-                            size="sm"
-                            className="gap-2"
+                            size="icon"
+                            title="Reset act"
+                            aria-label="Reset act"
                             onPointerDown={(event) => event.stopPropagation()}
                             onClick={(event) => {
                               event.preventDefault()
@@ -1482,7 +1450,6 @@ function App() {
                             }}
                           >
                             <RotateCcw className="h-4 w-4" />
-                            Reset act
                           </Button>
                         </div>
                       </AccordionTrigger>
@@ -1789,42 +1756,164 @@ function App() {
               <div className="flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
                 <div className="border-b border-border px-4 py-3">
                   <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Game info
+                  </div>
+                </div>
+
+                <div className="space-y-3 border-b border-border p-4 text-sm">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="rounded-md border border-border bg-muted p-3">
+                      <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Steam players
+                      </div>
+                      {typeof gameInfo?.steam?.current_players?.player_count ===
+                      'number' ? (
+                        <a
+                          href="https://steamdb.info/app/2694490/"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mt-1 block text-lg font-semibold text-foreground underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                          title="Open SteamDB"
+                        >
+                          {formatNumber(
+                            gameInfo.steam.current_players.player_count
+                          )}
+                        </a>
+                      ) : (
+                        <div className="mt-1 text-sm text-muted-foreground">
+                          Unavailable
+                        </div>
+                      )}
+                      {typeof gameInfo?.steam?.current_players?.player_count ===
+                      'number' ? (
+                        <div className="mt-0.5 text-xs text-muted-foreground">
+                          {formatCompactNumber(
+                            gameInfo.steam.current_players.player_count
+                          )}
+                        </div>
+                      ) : null}
+                      {gameInfo?.steam?.current_players?.fetched_at ? (
+                        <div className="mt-1 text-xs text-muted-foreground">
+                          Updated:{' '}
+                          {new Date(
+                            gameInfo.steam.current_players.fetched_at
+                          ).toLocaleString()}
+                        </div>
+                      ) : null}
+                    </div>
+
+                    <div className="rounded-md border border-border bg-muted p-3">
+                      <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        League uptime
+                      </div>
+                      {leagueUptimeLabel && leagueName ? (
+                        <a
+                          href={leagueUrl ?? 'https://www.pathofexile.com/leagues'}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mt-1 block text-lg font-semibold text-foreground underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                          title="Open league page"
+                        >
+                          {leagueUptimeLabel}
+                        </a>
+                      ) : (
+                        <div className="mt-1 text-sm text-muted-foreground">
+                          Unavailable
+                        </div>
+                      )}
+                      {leagueName ? (
+                        <div className="mt-0.5 text-xs text-muted-foreground">
+                          {leagueName}
+                        </div>
+                      ) : null}
+                      {leagueStartAt ? (
+                        <div className="mt-1 text-xs text-muted-foreground">
+                          Started:{' '}
+                          {new Date(leagueStartAt).toLocaleDateString()}
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+
+                  {gameInfo?.steam?.latest_version ? (
+                    <div className="rounded-md border border-border bg-muted p-3">
+                      <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Latest patch
+                      </div>
+                      <a
+                        href={gameInfo.steam.latest_version.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-1 inline-flex items-center gap-2 text-foreground underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      >
+                        v{gameInfo.steam.latest_version.version}
+                      </a>
+                      <div className="mt-1 text-xs text-muted-foreground">
+                        {gameInfo.steam.latest_version.title}
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {gameInfo?.steam?.latest_news?.length ? (
+                    <div className="rounded-md border border-border bg-muted p-3">
+                      <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Latest news
+                      </div>
+                      <ul className="mt-2 space-y-2">
+                        {gameInfo.steam.latest_news.slice(0, 3).map((item) => (
+                          <li key={item.gid}>
+                            <a
+                              href={item.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="text-sm text-foreground underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                            >
+                              {item.title}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                      {gameInfo.generated_at ? (
+                        <div className="mt-2 text-xs text-muted-foreground">
+                          Updated:{' '}
+                          {new Date(gameInfo.generated_at).toLocaleString()}
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : null}
+                </div>
+
+                <div className="border-b border-border px-4 py-3">
+                  <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                     Links
                   </div>
                 </div>
+
                 <div className="min-h-0 flex-1 overflow-auto p-3 text-sm">
                   <div className="space-y-1">
                     <a
-                      href="https://mobalytics.gg/"
+                      href="https://mobalytics.gg/poe-2"
                       target="_blank"
                       rel="noreferrer"
                       className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
-                      Mobalytics
+                      Mobalytics PoE 2
                     </a>
                     <a
-                      href="https://mobalytics.gg/path-of-exile-2"
+                      href="https://mobalytics.gg/poe-2/builds"
                       target="_blank"
                       rel="noreferrer"
                       className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
-                      Mobalytics POE2 hub
+                      Mobalytics Builds
                     </a>
                     <a
-                      href="https://mobalytics.gg/path-of-exile-2/builds"
+                      href="https://mobalytics.gg/poe-2/guides"
                       target="_blank"
                       rel="noreferrer"
                       className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
-                      Mobalytics builds
-                    </a>
-                    <a
-                      href="https://mobalytics.gg/path-of-exile-2/guides"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                    >
-                      Mobalytics guides
+                      Mobalytics Guides
                     </a>
                   </div>
 
@@ -1837,7 +1926,7 @@ function App() {
                       rel="noreferrer"
                       className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
-                      POE2 trade
+                      PoE 2 Trade
                     </a>
                     <a
                       href="https://poe.ninja/"
@@ -1845,7 +1934,7 @@ function App() {
                       rel="noreferrer"
                       className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
-                      POE Ninja
+                      PoE Ninja
                     </a>
                     <a
                       href="https://www.filterblade.xyz/"
@@ -1861,7 +1950,7 @@ function App() {
                       rel="noreferrer"
                       className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
-                      SteamDB (POE2)
+                      SteamDB (PoE 2)
                     </a>
                   </div>
 
