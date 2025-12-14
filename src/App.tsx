@@ -7,6 +7,18 @@ import { Button } from './components/ui/button'
 import { Input } from './components/ui/input'
 import { Separator } from './components/ui/separator'
 import { ToggleGroup, ToggleGroupItem } from './components/ui/toggle-group'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from './components/ui/alert-dialog'
+import { ChevronsDown, ChevronsUp, Link2, RotateCcw, Search, Settings2, SkipForward } from 'lucide-react'
+import { toast } from 'sonner'
 
 type ThemeId =
   | 'poe2-obsidian-gilt'
@@ -212,6 +224,9 @@ function App() {
     typeof storedUiPrefs.showOptionalBadges === 'boolean' ? storedUiPrefs.showOptionalBadges : true,
   )
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const [resetAllOpen, setResetAllOpen] = useState(false)
+  const [resetUiOpen, setResetUiOpen] = useState(false)
+  const [resetActTarget, setResetActTarget] = useState<string | null>(null)
   const [openChapters, setOpenChapters] = useState<string[]>(() => {
     const all = new Set(getDefaultOpenChapters())
     const fromStorage = Array.isArray(storedUiPrefs.openChapters) ? storedUiPrefs.openChapters : []
@@ -382,17 +397,24 @@ function App() {
     })
   }
 
-  const handleResetAll = () => {
-    const confirmed = window.confirm('Reset all checklist progress?')
-    if (confirmed) {
-      setCompleted(new Set())
-      localStorage.removeItem(storageVersion)
-    }
+  const performResetAll = () => {
+    setCompleted(new Set())
+    localStorage.removeItem(storageVersion)
+    toast.success('Progress reset')
   }
 
-  const handleResetAct = (chapterTitle: string) => {
-    const confirmed = window.confirm(`Reset progress for ${chapterTitle}?`)
-    if (!confirmed) return
+  const performResetUi = () => {
+    clearUiPrefs()
+    setStickyHeader(true)
+    setCompact(false)
+    setShowOptionalBadges(true)
+    setMode('speedrun')
+    setOpenChapters(getDefaultOpenChapters())
+    setOpenSections(getDefaultOpenSections('speedrun'))
+    toast.success('UI settings reset')
+  }
+
+  const performResetAct = (chapterTitle: string) => {
     const idsToRemove = chapterItemIds.get(chapterTitle)
     if (!idsToRemove) return
     setCompleted((prev) => {
@@ -400,6 +422,7 @@ function App() {
       idsToRemove.forEach((id) => next.delete(id))
       return next
     })
+    toast.success(`${chapterTitle} reset`)
   }
 
   const handleSectionLink = (sectionId: string) => {
@@ -413,11 +436,16 @@ function App() {
     const url = `${window.location.origin}${window.location.pathname}${window.location.search}${hash}`
 
     if (navigator.clipboard?.writeText) {
-      navigator.clipboard.writeText(url).catch(() => {
-        window.history.replaceState(null, '', hash)
-      })
+      navigator.clipboard
+        .writeText(url)
+        .then(() => toast.success('Link copied'))
+        .catch(() => {
+          window.history.replaceState(null, '', hash)
+          toast.message('Link ready in URL')
+        })
     } else {
       window.history.replaceState(null, '', hash)
+      toast.message('Link ready in URL')
     }
 
     window.history.replaceState(null, '', hash)
@@ -449,6 +477,82 @@ function App() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <AlertDialog open={resetAllOpen} onOpenChange={setResetAllOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Reset all progress?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This clears every checklist checkbox on this device.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              className="bg-destructive text-destructive-foreground hover:opacity-90"
+              onClick={() => {
+                performResetAll()
+                setResetAllOpen(false)
+              }}
+            >
+              Reset
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <AlertDialog open={resetUiOpen} onOpenChange={setResetUiOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Reset UI settings?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Restores default UI preferences (mode, layout, open panels). Checklist progress is not affected.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              className="bg-destructive text-destructive-foreground hover:opacity-90"
+              onClick={() => {
+                performResetUi()
+                setResetUiOpen(false)
+              }}
+            >
+              Reset
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <AlertDialog
+        open={resetActTarget !== null}
+        onOpenChange={(open) => {
+          if (!open) setResetActTarget(null)
+        }}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              Reset {resetActTarget ?? 'this act'} progress?
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              This clears checkboxes for this act only on this device.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              className="bg-destructive text-destructive-foreground hover:opacity-90"
+              onClick={() => {
+                if (resetActTarget) performResetAct(resetActTarget)
+                setResetActTarget(null)
+              }}
+            >
+              Reset
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
       <header
         className={[
           stickyHeader ? 'sticky top-0' : '',
@@ -485,28 +589,35 @@ function App() {
             </div>
 
             <div className="flex flex-1 flex-wrap items-center justify-end gap-2">
-              <div className="min-w-[220px] max-w-[360px] flex-1">
+              <div className="relative min-w-[220px] max-w-[360px] flex-1">
+                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="search"
                   value={search}
                   onChange={(event) => setSearch(event.target.value)}
                   placeholder="Search sections, zones, route, tips…"
+                  className="pl-9"
                 />
               </div>
 
-              <Button variant="outline" onClick={expandAll} disabled={filteredChapters.length === 0}>
+              <Button variant="outline" className="gap-2" onClick={expandAll} disabled={filteredChapters.length === 0}>
+                <ChevronsDown className="h-4 w-4" />
                 Expand all
               </Button>
-              <Button variant="outline" onClick={collapseAll} disabled={filteredChapters.length === 0}>
+              <Button variant="outline" className="gap-2" onClick={collapseAll} disabled={filteredChapters.length === 0}>
+                <ChevronsUp className="h-4 w-4" />
                 Collapse all
               </Button>
-              <Button variant="outline" onClick={handleNextUnchecked} disabled={!firstUnchecked}>
+              <Button variant="outline" className="gap-2" onClick={handleNextUnchecked} disabled={!firstUnchecked}>
+                <SkipForward className="h-4 w-4" />
                 Next unchecked
               </Button>
-              <Button variant="secondary" onClick={handleResetAll}>
+              <Button variant="secondary" className="gap-2" onClick={() => setResetAllOpen(true)}>
+                <RotateCcw className="h-4 w-4" />
                 Reset all
               </Button>
-              <Button variant="ghost" onClick={() => setSettingsOpen((prev) => !prev)}>
+              <Button variant="ghost" className="gap-2" onClick={() => setSettingsOpen((prev) => !prev)}>
+                <Settings2 className="h-4 w-4" />
                 Settings
               </Button>
             </div>
@@ -557,19 +668,8 @@ function App() {
             <div className="rounded-md border border-border bg-card p-3 text-sm">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="font-semibold">UI settings</div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    clearUiPrefs()
-                    setStickyHeader(true)
-                    setCompact(false)
-                    setShowOptionalBadges(true)
-                    setMode('speedrun')
-                    setOpenChapters(getDefaultOpenChapters())
-                    setOpenSections(getDefaultOpenSections('speedrun'))
-                  }}
-                >
+                <Button variant="outline" size="sm" className="gap-2" onClick={() => setResetUiOpen(true)}>
+                  <RotateCcw className="h-4 w-4" />
                   Reset UI
                 </Button>
               </div>
@@ -644,14 +744,16 @@ function App() {
                       <Button
                         variant="outline"
                         size="sm"
+                        className="gap-2"
                         onPointerDown={(event) => event.stopPropagation()}
                         onClick={(event) => {
                           event.preventDefault()
                           event.stopPropagation()
-                          handleResetAct(chapter.title)
+                          setResetActTarget(chapter.title)
                         }}
                       >
-                        Reset Act
+                        <RotateCcw className="h-4 w-4" />
+                        Reset act
                       </Button>
                     </div>
                   </AccordionTrigger>
@@ -689,7 +791,7 @@ function App() {
                                     handleSectionLink(section.id)
                                   }}
                                 >
-                                  🔗
+                                  <Link2 className="h-4 w-4" />
                                 </Button>
                               </div>
                               <div className="text-xs text-muted-foreground">
