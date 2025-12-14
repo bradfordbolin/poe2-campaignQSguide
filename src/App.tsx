@@ -1,11 +1,24 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { normalizeChapters, masterDb } from './lib/normalize'
 import type { NormalizedChecklistItem } from './types/masterDb'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './components/ui/accordion'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from './components/ui/accordion'
 import { Badge } from './components/ui/badge'
 import { Button } from './components/ui/button'
 import { Input } from './components/ui/input'
 import { Separator } from './components/ui/separator'
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from './components/ui/sheet'
 import { ToggleGroup, ToggleGroupItem } from './components/ui/toggle-group'
 import {
   AlertDialog,
@@ -17,7 +30,15 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from './components/ui/alert-dialog'
-import { ChevronsDown, ChevronsUp, Link2, RotateCcw, Search, Settings2, SkipForward } from 'lucide-react'
+import {
+  ChevronsDown,
+  ChevronsUp,
+  Link2,
+  RotateCcw,
+  Search,
+  Settings2,
+  SkipForward,
+} from 'lucide-react'
 import { toast } from 'sonner'
 
 type ThemeId =
@@ -42,14 +63,19 @@ const defaultTheme: ThemeId = 'poe2-obsidian-gilt'
 const themeStorageKey = 'theme'
 const contrastStorageKey = 'contrast'
 
-const readInitialPreferences = (): { theme: ThemeId; contrast: '' | 'high' } => {
+const readInitialPreferences = (): {
+  theme: ThemeId
+  contrast: '' | 'high'
+} => {
   if (typeof localStorage === 'undefined')
     return { theme: defaultTheme, contrast: '' }
 
   try {
     const storedTheme = localStorage.getItem(themeStorageKey) as ThemeId | null
-    const theme = storedTheme && themeIds.has(storedTheme) ? storedTheme : defaultTheme
-    const contrast = localStorage.getItem(contrastStorageKey) === 'high' ? 'high' : ''
+    const theme =
+      storedTheme && themeIds.has(storedTheme) ? storedTheme : defaultTheme
+    const contrast =
+      localStorage.getItem(contrastStorageKey) === 'high' ? 'high' : ''
 
     return { theme, contrast }
   } catch (error) {
@@ -83,7 +109,9 @@ const storageVersion = masterDb.meta?.revision
   ? `poe2-checklist-v${masterDb.meta.revision}`
   : 'poe2-checklist-v1'
 
-const uiStorageKey = masterDb.meta?.revision ? `poe2-ui-v${masterDb.meta.revision}` : 'poe2-ui-v1'
+const uiStorageKey = masterDb.meta?.revision
+  ? `poe2-ui-v${masterDb.meta.revision}`
+  : 'poe2-ui-v1'
 
 const loadCompleted = (): Set<string> => {
   if (typeof localStorage === 'undefined') return new Set()
@@ -107,7 +135,10 @@ const persistCompleted = (completed: Set<string>) => {
   localStorage.setItem(storageVersion, JSON.stringify(values))
 }
 
-const modeFilters: Record<'speedrun' | 'full', Set<NormalizedChecklistItem['classification']>> = {
+const modeFilters: Record<
+  'speedrun' | 'full',
+  Set<NormalizedChecklistItem['classification']>
+> = {
   speedrun: new Set(['required']),
   full: new Set(['required', 'optional']),
 }
@@ -117,6 +148,8 @@ type UiPrefs = {
   stickyHeader: boolean
   compact: boolean
   showOptionalBadges: boolean
+  rememberOpenPanels: boolean
+  autoCollapseCompleted: boolean
   openChapters: string[]
   openSections: string[]
 }
@@ -160,7 +193,7 @@ const chapterItemIds = normalizedChapters.reduce<Map<string, Set<string>>>(
     acc.set(chapter.title, ids)
     return acc
   },
-  new Map(),
+  new Map()
 )
 
 const sectionItemMap = normalizedChapters.reduce<
@@ -173,7 +206,10 @@ const sectionItemMap = normalizedChapters.reduce<
   return acc
 }, new Map())
 
-const computeProgress = (chapters = normalizedChapters, completed: Set<string> = new Set()) =>
+const computeProgress = (
+  chapters = normalizedChapters,
+  completed: Set<string> = new Set()
+) =>
   chapters.reduce(
     (totals, chapter) => {
       chapter.sections.forEach((section) => {
@@ -184,32 +220,36 @@ const computeProgress = (chapters = normalizedChapters, completed: Set<string> =
       })
       return totals
     },
-    { done: 0, total: 0 },
+    { done: 0, total: 0 }
   )
 
-const isOptionalSection = (section: { checklist: NormalizedChecklistItem[] }) =>
-  section.checklist.length > 0 &&
-  section.checklist.every((item) => item.classification === 'optional')
+const allChapterTitles = normalizedChapters.map((chapter) => chapter.title)
 
-const getDefaultOpenSections = (mode: 'speedrun' | 'full') =>
-  normalizedChapters.flatMap((chapter) =>
-    chapter.sections
-      .filter((section) => (mode === 'speedrun' ? true : !isOptionalSection(section)))
-      .map((section) => section.id),
-  )
+const getDefaultOpenSections = () => []
 
-const getDefaultOpenChapters = () => normalizedChapters.map((chapter) => chapter.title)
+const getDefaultOpenChapters = () => allChapterTitles
 
-const chapterSectionIdsMap = normalizedChapters.reduce<Map<string, string[]>>((acc, chapter) => {
-  acc.set(chapter.title, chapter.sections.map((section) => section.id))
-  return acc
-}, new Map())
+const chapterSectionIdsMap = normalizedChapters.reduce<Map<string, string[]>>(
+  (acc, chapter) => {
+    acc.set(
+      chapter.title,
+      chapter.sections.map((section) => section.id)
+    )
+    return acc
+  },
+  new Map()
+)
 
 type Poe2GameInfo = {
   generated_at?: string
   steam?: {
     appid: number
-    latest_version: null | { version: string; title: string; url: string; date: number }
+    latest_version: null | {
+      version: string
+      title: string
+      url: string
+      date: number
+    }
     current_players: null | { player_count: number; fetched_at: string }
     latest_news: Array<{
       gid: string
@@ -224,7 +264,9 @@ type Poe2GameInfo = {
 
 const formatCompactNumber = (value: number) => {
   try {
-    return new Intl.NumberFormat(undefined, { notation: 'compact' }).format(value)
+    return new Intl.NumberFormat(undefined, { notation: 'compact' }).format(
+      value
+    )
   } catch {
     return String(value)
   }
@@ -232,39 +274,69 @@ const formatCompactNumber = (value: number) => {
 
 function App() {
   const [theme, setTheme] = useState<ThemeId>(initialPreferences.theme)
-  const [contrast, setContrast] = useState(initialPreferences.contrast === 'high')
+  const [contrast, setContrast] = useState(
+    initialPreferences.contrast === 'high'
+  )
   const [search, setSearch] = useState('')
   const [gameInfo, setGameInfo] = useState<Poe2GameInfo | null>(null)
   const storedUiPrefs = loadUiPrefs()
+  const initialRememberOpenPanels =
+    typeof storedUiPrefs.rememberOpenPanels === 'boolean'
+      ? storedUiPrefs.rememberOpenPanels
+      : false
+  const initialAutoCollapseCompleted =
+    typeof storedUiPrefs.autoCollapseCompleted === 'boolean'
+      ? storedUiPrefs.autoCollapseCompleted
+      : true
   const [mode, setMode] = useState<'speedrun' | 'full'>(() =>
-    storedUiPrefs.mode === 'full' || storedUiPrefs.mode === 'speedrun' ? storedUiPrefs.mode : 'speedrun',
+    storedUiPrefs.mode === 'full' || storedUiPrefs.mode === 'speedrun'
+      ? storedUiPrefs.mode
+      : 'speedrun'
   )
   const [completed, setCompleted] = useState<Set<string>>(() => loadCompleted())
   const [stickyHeader, setStickyHeader] = useState<boolean>(() =>
-    typeof storedUiPrefs.stickyHeader === 'boolean' ? storedUiPrefs.stickyHeader : true,
+    typeof storedUiPrefs.stickyHeader === 'boolean'
+      ? storedUiPrefs.stickyHeader
+      : true
   )
   const [compact, setCompact] = useState<boolean>(() =>
-    typeof storedUiPrefs.compact === 'boolean' ? storedUiPrefs.compact : false,
+    typeof storedUiPrefs.compact === 'boolean' ? storedUiPrefs.compact : false
   )
   const [showOptionalBadges, setShowOptionalBadges] = useState<boolean>(() =>
-    typeof storedUiPrefs.showOptionalBadges === 'boolean' ? storedUiPrefs.showOptionalBadges : true,
+    typeof storedUiPrefs.showOptionalBadges === 'boolean'
+      ? storedUiPrefs.showOptionalBadges
+      : true
+  )
+  const [rememberOpenPanels, setRememberOpenPanels] = useState<boolean>(
+    initialRememberOpenPanels
+  )
+  const [autoCollapseCompleted, setAutoCollapseCompleted] = useState<boolean>(
+    initialAutoCollapseCompleted
   )
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [resetAllOpen, setResetAllOpen] = useState(false)
   const [resetUiOpen, setResetUiOpen] = useState(false)
   const [resetActTarget, setResetActTarget] = useState<string | null>(null)
   const [openChapters, setOpenChapters] = useState<string[]>(() => {
-    const all = new Set(getDefaultOpenChapters())
-    const fromStorage = Array.isArray(storedUiPrefs.openChapters) ? storedUiPrefs.openChapters : []
+    if (!initialRememberOpenPanels) return getDefaultOpenChapters()
+    const all = new Set(allChapterTitles)
+    const fromStorage = Array.isArray(storedUiPrefs.openChapters)
+      ? storedUiPrefs.openChapters
+      : []
     const filtered = fromStorage.filter((title) => all.has(title))
     return filtered.length > 0 ? filtered : getDefaultOpenChapters()
   })
   const [openSections, setOpenSections] = useState<string[]>(() => {
+    if (!initialRememberOpenPanels) return getDefaultOpenSections()
     const allSections = new Set<string>()
-    normalizedChapters.forEach((chapter) => chapter.sections.forEach((section) => allSections.add(section.id)))
-    const fromStorage = Array.isArray(storedUiPrefs.openSections) ? storedUiPrefs.openSections : []
+    normalizedChapters.forEach((chapter) =>
+      chapter.sections.forEach((section) => allSections.add(section.id))
+    )
+    const fromStorage = Array.isArray(storedUiPrefs.openSections)
+      ? storedUiPrefs.openSections
+      : []
     const filtered = fromStorage.filter((id) => allSections.has(id))
-    return filtered.length > 0 ? filtered : getDefaultOpenSections(mode)
+    return filtered.length > 0 ? filtered : getDefaultOpenSections()
   })
 
   useEffect(() => {
@@ -306,17 +378,13 @@ function App() {
   }, [contrast])
 
   useEffect(() => {
-    setSettingsOpen(false)
-    setOpenChapters(getDefaultOpenChapters())
-    setOpenSections(getDefaultOpenSections(mode))
-  }, [mode])
-
-  useEffect(() => {
     const hash = window.location.hash.replace('#', '')
     if (!hash) return
     const sectionInfo = sectionItemMap.get(hash)
     if (sectionInfo) {
-      setOpenChapters((prev) => Array.from(new Set([...prev, sectionInfo.chapter])))
+      setOpenChapters((prev) =>
+        Array.from(new Set([...prev, sectionInfo.chapter]))
+      )
       setOpenSections((prev) => Array.from(new Set([...prev, hash])))
     }
     requestAnimationFrame(() => {
@@ -331,10 +399,21 @@ function App() {
       stickyHeader,
       compact,
       showOptionalBadges,
+      rememberOpenPanels,
+      autoCollapseCompleted,
       openChapters,
       openSections,
     })
-  }, [mode, stickyHeader, compact, showOptionalBadges, openChapters, openSections])
+  }, [
+    mode,
+    stickyHeader,
+    compact,
+    showOptionalBadges,
+    rememberOpenPanels,
+    autoCollapseCompleted,
+    openChapters,
+    openSections,
+  ])
 
   const filteredChapters = useMemo(() => {
     const query = search.trim().toLowerCase()
@@ -358,7 +437,7 @@ function App() {
               section.upgrades
                 .map(
                   (upgrade) =>
-                    `${upgrade.title} ${upgrade.detail ?? ''} ${(upgrade.tags ?? []).join(' ')}`,
+                    `${upgrade.title} ${upgrade.detail ?? ''} ${(upgrade.tags ?? []).join(' ')}`
                 )
                 .join(' '),
               section.sectionRewards.map((reward) => reward.text).join(' '),
@@ -369,7 +448,9 @@ function App() {
             const checklist = filterChecklist(section.checklist)
             return { ...section, checklist }
           })
-          .filter((section): section is NonNullable<typeof section> => Boolean(section))
+          .filter((section): section is NonNullable<typeof section> =>
+            Boolean(section)
+          )
         return { ...chapter, sections }
       })
       .filter((chapter) => chapter.sections.length > 0)
@@ -377,7 +458,10 @@ function App() {
     return chapters
   }, [search, mode])
 
-  const totals = useMemo(() => computeProgress(filteredChapters, completed), [filteredChapters, completed])
+  const totals = useMemo(
+    () => computeProgress(filteredChapters, completed),
+    [filteredChapters, completed]
+  )
   const doneCount = totals.done
   const progressPercent = totals.total
     ? Math.min(100, Math.round((doneCount / totals.total) * 100))
@@ -388,18 +472,61 @@ function App() {
       for (const section of chapter.sections) {
         const visibleItems = section.checklist.filter((item) => !item.impliedBy)
         for (const item of visibleItems) {
-          if (!completed.has(item.id)) return { itemId: item.id, sectionId: section.id, chapter: chapter.title }
+          if (!completed.has(item.id))
+            return {
+              itemId: item.id,
+              sectionId: section.id,
+              chapter: chapter.title,
+            }
         }
       }
     }
     return undefined
   }, [filteredChapters, completed])
 
+  const visibleChecklistIdsBySection = useMemo(() => {
+    const allowed = modeFilters[mode]
+    const map = new Map<string, string[]>()
+
+    normalizedChapters.forEach((chapter) => {
+      chapter.sections.forEach((section) => {
+        const ids = section.checklist
+          .filter((item) => !item.impliedBy && allowed.has(item.classification))
+          .map((item) => item.id)
+        map.set(section.id, ids)
+      })
+    })
+
+    return map
+  }, [mode])
+
+  const lastToggledSectionIdRef = useRef<string | null>(null)
+
+  useEffect(() => {
+    if (!autoCollapseCompleted) return
+    const sectionId = lastToggledSectionIdRef.current
+    if (!sectionId) return
+    lastToggledSectionIdRef.current = null
+
+    const ids = visibleChecklistIdsBySection.get(sectionId) ?? []
+    if (ids.length === 0) return
+
+    if (ids.every((id) => completed.has(id))) {
+      setOpenSections((prev) => prev.filter((id) => id !== sectionId))
+    }
+  }, [completed, autoCollapseCompleted, visibleChecklistIdsBySection])
+
   const toggleItem = (item: NormalizedChecklistItem) => {
+    const sectionId = item.id.split('__')[0]
+    lastToggledSectionIdRef.current = sectionId || null
+
     setCompleted((prev) => {
       const next = new Set(prev)
       const nextState = !next.has(item.id)
-      const idsToSync = [item.id, ...(item.impliedRewards?.map((reward) => reward.id) ?? [])]
+      const idsToSync = [
+        item.id,
+        ...(item.impliedRewards?.map((reward) => reward.id) ?? []),
+      ]
 
       idsToSync.forEach((id) => {
         if (nextState) {
@@ -427,7 +554,9 @@ function App() {
     }
 
     requestAnimationFrame(() => {
-      const el = document.querySelector<HTMLElement>(`[data-item-id="${firstUnchecked.itemId}"]`)
+      const el = document.querySelector<HTMLElement>(
+        `[data-item-id="${firstUnchecked.itemId}"]`
+      )
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'center' })
         el.focus({ preventScroll: true })
@@ -443,12 +572,16 @@ function App() {
 
   const performResetUi = () => {
     clearUiPrefs()
+    setSettingsOpen(false)
+    setSearch('')
     setStickyHeader(true)
     setCompact(false)
     setShowOptionalBadges(true)
+    setRememberOpenPanels(false)
+    setAutoCollapseCompleted(true)
     setMode('speedrun')
     setOpenChapters(getDefaultOpenChapters())
-    setOpenSections(getDefaultOpenSections('speedrun'))
+    setOpenSections(getDefaultOpenSections())
     toast.success('UI settings reset')
   }
 
@@ -491,7 +624,10 @@ function App() {
     el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
-  const handleChapterSectionAccordionChange = (chapterTitle: string, nextValues: string[]) => {
+  const handleChapterSectionAccordionChange = (
+    chapterTitle: string,
+    nextValues: string[]
+  ) => {
     const chapterSectionIds = chapterSectionIdsMap.get(chapterTitle) ?? []
     setOpenSections((prev) => {
       const nextSet = new Set(prev)
@@ -503,7 +639,9 @@ function App() {
 
   const expandAll = () => {
     const chapterTitles = filteredChapters.map((chapter) => chapter.title)
-    const sectionIds = filteredChapters.flatMap((chapter) => chapter.sections.map((section) => section.id))
+    const sectionIds = filteredChapters.flatMap((chapter) =>
+      chapter.sections.map((section) => section.id)
+    )
     setOpenChapters(chapterTitles)
     setOpenSections(sectionIds)
   }
@@ -543,7 +681,8 @@ function App() {
           <AlertDialogHeader>
             <AlertDialogTitle>Reset UI settings?</AlertDialogTitle>
             <AlertDialogDescription>
-              Restores default UI preferences (mode, layout, open panels). Checklist progress is not affected.
+              Restores default UI preferences (mode, layout, open panels).
+              Checklist progress is not affected.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -599,11 +738,13 @@ function App() {
           .filter(Boolean)
           .join(' ')}
       >
-        <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-3">
+        <div className="mx-auto flex max-w-5xl flex-col gap-2 px-4 py-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="min-w-[220px]">
               <div className="flex flex-wrap items-center gap-2">
-                <div className="text-lg font-bold leading-tight">POE2 Campaign Checklist</div>
+                <div className="text-lg font-bold leading-tight">
+                  POE2 Campaign Checklist
+                </div>
                 {gameInfo?.steam?.latest_version ? (
                   <a
                     href={gameInfo.steam.latest_version.url}
@@ -612,20 +753,30 @@ function App() {
                     className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     onClick={(event) => event.stopPropagation()}
                   >
-                    <Badge variant="outline">v{gameInfo.steam.latest_version.version}</Badge>
+                    <Badge variant="outline">
+                      v{gameInfo.steam.latest_version.version}
+                    </Badge>
                   </a>
                 ) : null}
               </div>
               <div className="text-xs text-muted-foreground">
                 Acts/Interludes with progress tracking
-                {typeof gameInfo?.steam?.current_players?.player_count === 'number' ? (
-                  <> · Steam players: {formatCompactNumber(gameInfo.steam.current_players.player_count)}</>
+                {typeof gameInfo?.steam?.current_players?.player_count ===
+                'number' ? (
+                  <>
+                    {' '}
+                    · Steam players:{' '}
+                    {formatCompactNumber(
+                      gameInfo.steam.current_players.player_count
+                    )}
+                  </>
                 ) : null}
               </div>
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
               <ToggleGroup
+                size="sm"
                 type="single"
                 value={mode}
                 onValueChange={(value) => {
@@ -633,10 +784,14 @@ function App() {
                 }}
                 aria-label="Mode selection"
               >
-                <ToggleGroupItem value="speedrun" aria-label="Speedrun mode">
+                <ToggleGroupItem
+                  size="sm"
+                  value="speedrun"
+                  aria-label="Speedrun mode"
+                >
                   Speedrun
                 </ToggleGroupItem>
-                <ToggleGroupItem value="full" aria-label="Full mode">
+                <ToggleGroupItem size="sm" value="full" aria-label="Full mode">
                   Full
                 </ToggleGroupItem>
               </ToggleGroup>
@@ -650,30 +805,284 @@ function App() {
                   value={search}
                   onChange={(event) => setSearch(event.target.value)}
                   placeholder="Search sections, zones, route, tips…"
-                  className="pl-9"
+                  className="h-9 pl-9"
                 />
               </div>
 
-              <Button variant="outline" className="gap-2" onClick={expandAll} disabled={filteredChapters.length === 0}>
+              <Button
+                variant="outline"
+                size="icon"
+                title="Expand all"
+                aria-label="Expand all"
+                onClick={expandAll}
+                disabled={filteredChapters.length === 0}
+              >
                 <ChevronsDown className="h-4 w-4" />
-                Expand all
               </Button>
-              <Button variant="outline" className="gap-2" onClick={collapseAll} disabled={filteredChapters.length === 0}>
+              <Button
+                variant="outline"
+                size="icon"
+                title="Collapse all"
+                aria-label="Collapse all"
+                onClick={collapseAll}
+                disabled={filteredChapters.length === 0}
+              >
                 <ChevronsUp className="h-4 w-4" />
-                Collapse all
               </Button>
-              <Button variant="outline" className="gap-2" onClick={handleNextUnchecked} disabled={!firstUnchecked}>
+              <Button
+                variant="outline"
+                size="icon"
+                title="Next unchecked"
+                aria-label="Next unchecked"
+                onClick={handleNextUnchecked}
+                disabled={!firstUnchecked}
+              >
                 <SkipForward className="h-4 w-4" />
-                Next unchecked
               </Button>
-              <Button variant="secondary" className="gap-2" onClick={() => setResetAllOpen(true)}>
-                <RotateCcw className="h-4 w-4" />
-                Reset all
-              </Button>
-              <Button variant="ghost" className="gap-2" onClick={() => setSettingsOpen((prev) => !prev)}>
-                <Settings2 className="h-4 w-4" />
-                Settings
-              </Button>
+
+              <Sheet open={settingsOpen} onOpenChange={setSettingsOpen}>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    title="Settings"
+                    aria-label="Settings"
+                  >
+                    <Settings2 className="h-4 w-4" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent className="w-[360px] sm:max-w-md">
+                  <SheetHeader>
+                    <SheetTitle>Settings</SheetTitle>
+                    <SheetDescription>
+                      Appearance, layout, and reset actions.
+                    </SheetDescription>
+                  </SheetHeader>
+
+                  <div className="mt-5 space-y-6 text-sm">
+                    <div className="space-y-3">
+                      <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Appearance
+                      </div>
+                      <div className="grid gap-3">
+                        <label className="grid gap-1">
+                          <span className="text-xs text-muted-foreground">
+                            Theme
+                          </span>
+                          <select
+                            value={theme}
+                            onChange={(event) =>
+                              setTheme(event.target.value as ThemeId)
+                            }
+                            className="h-9 rounded-md border border-input bg-transparent px-3 text-sm"
+                          >
+                            {themeOptions.map((option) => (
+                              <option key={option.value} value={option.value}>
+                                {option.label}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+
+                        <label className="flex cursor-pointer items-center gap-2">
+                          <input
+                            type="checkbox"
+                            checked={contrast}
+                            onChange={(event) =>
+                              setContrast(event.target.checked)
+                            }
+                            className="h-4 w-4 accent-primary"
+                          />
+                          <span>High contrast</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <Separator />
+
+                    <div className="space-y-3">
+                      <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Layout
+                      </div>
+                      <div className="grid gap-3">
+                        <label className="flex cursor-pointer items-center gap-2">
+                          <input
+                            type="checkbox"
+                            checked={stickyHeader}
+                            onChange={(event) =>
+                              setStickyHeader(event.target.checked)
+                            }
+                            className="h-4 w-4 accent-primary"
+                          />
+                          <span>Sticky header</span>
+                        </label>
+
+                        <label className="flex cursor-pointer items-center gap-2">
+                          <input
+                            type="checkbox"
+                            checked={compact}
+                            onChange={(event) =>
+                              setCompact(event.target.checked)
+                            }
+                            className="h-4 w-4 accent-primary"
+                          />
+                          <span>Compact spacing</span>
+                        </label>
+
+                        <label className="flex cursor-pointer items-center gap-2">
+                          <input
+                            type="checkbox"
+                            checked={showOptionalBadges}
+                            onChange={(event) =>
+                              setShowOptionalBadges(event.target.checked)
+                            }
+                            className="h-4 w-4 accent-primary"
+                          />
+                          <span>Show optional badges</span>
+                        </label>
+
+                        <label className="flex cursor-pointer items-center gap-2">
+                          <input
+                            type="checkbox"
+                            checked={rememberOpenPanels}
+                            onChange={(event) =>
+                              setRememberOpenPanels(event.target.checked)
+                            }
+                            className="h-4 w-4 accent-primary"
+                          />
+                          <span>Remember open panels</span>
+                        </label>
+
+                        <label className="flex cursor-pointer items-center gap-2">
+                          <input
+                            type="checkbox"
+                            checked={autoCollapseCompleted}
+                            onChange={(event) =>
+                              setAutoCollapseCompleted(event.target.checked)
+                            }
+                            className="h-4 w-4 accent-primary"
+                          />
+                          <span>Auto-collapse completed sections</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <Separator />
+
+                    <div className="space-y-3">
+                      <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Actions
+                      </div>
+                      <div className="grid gap-2">
+                        <Button
+                          variant="outline"
+                          className="justify-start gap-2"
+                          onClick={expandAll}
+                          disabled={filteredChapters.length === 0}
+                        >
+                          <ChevronsDown className="h-4 w-4" />
+                          Expand all
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="justify-start gap-2"
+                          onClick={collapseAll}
+                          disabled={filteredChapters.length === 0}
+                        >
+                          <ChevronsUp className="h-4 w-4" />
+                          Collapse all
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="justify-start gap-2"
+                          onClick={handleNextUnchecked}
+                          disabled={!firstUnchecked}
+                        >
+                          <SkipForward className="h-4 w-4" />
+                          Next unchecked
+                        </Button>
+                      </div>
+                    </div>
+
+                    <Separator />
+
+                    <div className="space-y-3">
+                      <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Reset
+                      </div>
+                      <div className="grid gap-2">
+                        <Button
+                          variant="outline"
+                          className="justify-start gap-2"
+                          onClick={() => setResetUiOpen(true)}
+                        >
+                          <RotateCcw className="h-4 w-4" />
+                          Reset UI
+                        </Button>
+                        <Button
+                          variant="destructive"
+                          className="justify-start gap-2"
+                          onClick={() => setResetAllOpen(true)}
+                        >
+                          <RotateCcw className="h-4 w-4" />
+                          Reset progress
+                        </Button>
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        Progress is stored locally in your browser.
+                      </div>
+                    </div>
+
+                    {gameInfo?.steam ? (
+                      <>
+                        <Separator />
+                        <div className="space-y-2">
+                          <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                            Game info (Steam)
+                          </div>
+                          {gameInfo.steam.latest_version ? (
+                            <div className="text-xs text-muted-foreground">
+                              Latest patch:{' '}
+                              <a
+                                href={gameInfo.steam.latest_version.url}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="underline underline-offset-2"
+                              >
+                                v{gameInfo.steam.latest_version.version}
+                              </a>
+                            </div>
+                          ) : null}
+                          {gameInfo.generated_at ? (
+                            <div className="text-xs text-muted-foreground">
+                              Updated:{' '}
+                              {new Date(gameInfo.generated_at).toLocaleString()}
+                            </div>
+                          ) : null}
+                          {gameInfo.steam.latest_news?.length ? (
+                            <ul className="list-disc space-y-1 pl-5 text-xs text-muted-foreground">
+                              {gameInfo.steam.latest_news
+                                .slice(0, 3)
+                                .map((item) => (
+                                  <li key={item.gid}>
+                                    <a
+                                      href={item.url}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      className="underline underline-offset-2"
+                                    >
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                            </ul>
+                          ) : null}
+                        </div>
+                      </>
+                    ) : null}
+                  </div>
+                </SheetContent>
+              </Sheet>
             </div>
           </div>
 
@@ -689,125 +1098,17 @@ function App() {
                 />
               </div>
             </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              <label className="text-xs text-muted-foreground" htmlFor="theme">
-                Theme
-              </label>
-              <select
-                id="theme"
-                value={theme}
-                onChange={(event) => setTheme(event.target.value as ThemeId)}
-                className="h-10 rounded-md border border-input bg-transparent px-3 text-sm"
-              >
-                {themeOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-              <label className="flex items-center gap-2 text-sm text-muted-foreground">
-                <input
-                  type="checkbox"
-                  checked={contrast}
-                  onChange={(event) => setContrast(event.target.checked)}
-                  className="h-4 w-4 accent-primary"
-                />
-                High contrast
-              </label>
-            </div>
           </div>
-
-          {settingsOpen && (
-            <div className="rounded-md border border-border bg-card p-3 text-sm">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="font-semibold">UI settings</div>
-                <Button variant="outline" size="sm" className="gap-2" onClick={() => setResetUiOpen(true)}>
-                  <RotateCcw className="h-4 w-4" />
-                  Reset UI
-                </Button>
-              </div>
-              <Separator className="my-3" />
-              <div className="grid gap-3 sm:grid-cols-2">
-                <label className="flex cursor-pointer items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={stickyHeader}
-                    onChange={(event) => setStickyHeader(event.target.checked)}
-                    className="h-4 w-4 accent-primary"
-                  />
-                  <span>Sticky header</span>
-                </label>
-
-                <label className="flex cursor-pointer items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={compact}
-                    onChange={(event) => setCompact(event.target.checked)}
-                    className="h-4 w-4 accent-primary"
-                  />
-                  <span>Compact spacing</span>
-                </label>
-
-                <label className="flex cursor-pointer items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={showOptionalBadges}
-                    onChange={(event) => setShowOptionalBadges(event.target.checked)}
-                    className="h-4 w-4 accent-primary"
-                  />
-                  <span>Show optional badges</span>
-                </label>
-              </div>
-
-              {gameInfo?.steam ? (
-                <>
-                  <Separator className="my-3" />
-                  <div className="space-y-2">
-                    <div className="font-semibold">Game info (Steam)</div>
-                    {gameInfo.steam.latest_version ? (
-                      <div className="text-xs text-muted-foreground">
-                        Latest patch:{' '}
-                        <a
-                          href={gameInfo.steam.latest_version.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="underline underline-offset-2"
-                        >
-                          v{gameInfo.steam.latest_version.version}
-                        </a>
-                      </div>
-                    ) : null}
-                    {gameInfo.generated_at ? (
-                      <div className="text-xs text-muted-foreground">
-                        Updated: {new Date(gameInfo.generated_at).toLocaleString()}
-                      </div>
-                    ) : null}
-                    {gameInfo.steam.latest_news?.length ? (
-                      <ul className="list-disc space-y-1 pl-5 text-xs text-muted-foreground">
-                        {gameInfo.steam.latest_news.slice(0, 3).map((item) => (
-                          <li key={item.gid}>
-                            <a
-                              href={item.url}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="underline underline-offset-2"
-                            >
-                              {item.title}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </div>
-                </>
-              ) : null}
-            </div>
-          )}
         </div>
       </header>
 
-      <main className={compact ? 'mx-auto max-w-5xl px-4 py-4' : 'mx-auto max-w-5xl px-4 py-6'}>
+      <main
+        className={
+          compact
+            ? 'mx-auto max-w-5xl px-4 py-4'
+            : 'mx-auto max-w-5xl px-4 py-6'
+        }
+      >
         {filteredChapters.length === 0 ? (
           <div className="rounded-lg border border-border bg-card p-8 text-center text-sm text-muted-foreground">
             No sections match your search.
@@ -821,8 +1122,11 @@ function App() {
           >
             {filteredChapters.map((chapter) => {
               const chapterTotals = computeProgress([chapter], completed)
-              const chapterSectionIds = chapterSectionIdsMap.get(chapter.title) ?? []
-              const chapterOpenSections = openSections.filter((id) => chapterSectionIds.includes(id))
+              const chapterSectionIds =
+                chapterSectionIdsMap.get(chapter.title) ?? []
+              const chapterOpenSections = openSections.filter((id) =>
+                chapterSectionIds.includes(id)
+              )
 
               return (
                 <AccordionItem
@@ -833,7 +1137,9 @@ function App() {
                   <AccordionTrigger className="px-4">
                     <div className="flex w-full flex-wrap items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
-                        <div className="text-base font-semibold">{chapter.title}</div>
+                        <div className="text-base font-semibold">
+                          {chapter.title}
+                        </div>
                         <Badge variant="primary">
                           {chapterTotals.done} / {chapterTotals.total}
                         </Badge>
@@ -859,12 +1165,22 @@ function App() {
                       type="multiple"
                       value={chapterOpenSections}
                       onValueChange={(values) =>
-                        handleChapterSectionAccordionChange(chapter.title, values)
+                        handleChapterSectionAccordionChange(
+                          chapter.title,
+                          values
+                        )
                       }
                       className="rounded-md border border-border"
                     >
                       {chapter.sections.map((section) => {
-                        const visibleChecklistItems = section.checklist.filter((item) => !item.impliedBy)
+                        const visibleChecklistItems = section.checklist.filter(
+                          (item) => !item.impliedBy
+                        )
+                        const sectionComplete =
+                          visibleChecklistItems.length > 0 &&
+                          visibleChecklistItems.every((item) =>
+                            completed.has(item.id)
+                          )
 
                         return (
                           <AccordionItem
@@ -873,18 +1189,29 @@ function App() {
                             id={section.id}
                             className="px-4"
                           >
-                            <AccordionTrigger className={compact ? 'py-3' : 'py-4'}>
+                            <AccordionTrigger
+                              className={compact ? 'py-3' : 'py-4'}
+                            >
                               <div className="flex w-full flex-col gap-1">
                                 <div className="flex flex-wrap items-center gap-2">
-                                  <div className="text-sm font-semibold">{section.title}</div>
+                                  <div className="text-sm font-semibold">
+                                    {section.title}
+                                  </div>
                                   {section.levelRange ? (
-                                    <Badge variant="secondary">Level {section.levelRange}</Badge>
+                                    <Badge variant="secondary">
+                                      Level {section.levelRange}
+                                    </Badge>
+                                  ) : null}
+                                  {sectionComplete ? (
+                                    <Badge variant="primary">Done</Badge>
                                   ) : null}
                                   <Button
                                     variant="ghost"
                                     size="icon"
                                     aria-label={`Copy link to ${section.title}`}
-                                    onPointerDown={(event) => event.stopPropagation()}
+                                    onPointerDown={(event) =>
+                                      event.stopPropagation()
+                                    }
                                     onClick={(event) => {
                                       event.preventDefault()
                                       event.stopPropagation()
@@ -895,7 +1222,9 @@ function App() {
                                   </Button>
                                 </div>
                                 <div className="text-xs text-muted-foreground">
-                                  <span className="font-semibold text-foreground">Zones:</span>{' '}
+                                  <span className="font-semibold text-foreground">
+                                    Zones:
+                                  </span>{' '}
                                   {section.zoneNames.join(', ')}
                                 </div>
                                 {section.impliedSubzones.length > 0 ? (
@@ -909,9 +1238,12 @@ function App() {
                               </div>
                             </AccordionTrigger>
                             <AccordionContent className="pt-0">
-                              {(section.routeSummary || section.routeSteps.length > 0) && (
+                              {(section.routeSummary ||
+                                section.routeSteps.length > 0) && (
                                 <div className="mb-4 rounded-md border border-border bg-muted p-4">
-                                  <div className="mb-2 text-sm font-semibold">Route</div>
+                                  <div className="mb-2 text-sm font-semibold">
+                                    Route
+                                  </div>
                                   {section.routeSummary ? (
                                     <div className="text-sm text-muted-foreground">
                                       {section.routeSummary}
@@ -930,20 +1262,25 @@ function App() {
                               {visibleChecklistItems.length > 0 ? (
                                 <div className="rounded-md border border-border">
                                   <div className="px-4 py-3">
-                                    <div className="text-sm font-semibold">Checklist</div>
+                                    <div className="text-sm font-semibold">
+                                      Checklist
+                                    </div>
                                   </div>
                                   <Separator />
                                   <div className="divide-y divide-border">
                                     {visibleChecklistItems.map((item) => {
                                       const checked = completed.has(item.id)
-                                      const showOptional = item.classification === 'optional'
+                                      const showOptional =
+                                        item.classification === 'optional'
 
                                       return (
                                         <div
                                           key={item.id}
                                           data-item-id={item.id}
                                           tabIndex={-1}
-                                          className={compact ? 'px-4 py-2' : 'px-4 py-3'}
+                                          className={
+                                            compact ? 'px-4 py-2' : 'px-4 py-3'
+                                          }
                                         >
                                           <label className="flex cursor-pointer items-start gap-3">
                                             <input
@@ -963,20 +1300,32 @@ function App() {
                                                 >
                                                   {item.text}
                                                 </span>
-                                                {showOptional && showOptionalBadges ? (
-                                                  <Badge variant="outline">Optional</Badge>
+                                                {showOptional &&
+                                                showOptionalBadges ? (
+                                                  <Badge variant="outline">
+                                                    Optional
+                                                  </Badge>
                                                 ) : null}
                                               </div>
                                               {item.impliedRewards?.length ? (
                                                 <div className="mt-1 space-y-0.5 text-sm text-muted-foreground">
-                                                  {item.impliedRewards.map((reward) => {
-                                                    const label = reward.text.replace(/^Reward:\s*/i, '')
-                                                    return (
-                                                      <div key={reward.id} className="pl-0.5">
-                                                        {label}
-                                                      </div>
-                                                    )
-                                                  })}
+                                                  {item.impliedRewards.map(
+                                                    (reward) => {
+                                                      const label =
+                                                        reward.text.replace(
+                                                          /^Reward:\s*/i,
+                                                          ''
+                                                        )
+                                                      return (
+                                                        <div
+                                                          key={reward.id}
+                                                          className="pl-0.5"
+                                                        >
+                                                          {label}
+                                                        </div>
+                                                      )
+                                                    }
+                                                  )}
                                                 </div>
                                               ) : null}
                                             </div>
@@ -989,22 +1338,33 @@ function App() {
                               ) : null}
 
                               {section.sectionRewards.length > 0 ? (
-                                <div className={visibleChecklistItems.length > 0 ? 'mt-4 rounded-md border border-border bg-muted p-4' : 'rounded-md border border-border bg-muted p-4'}>
+                                <div
+                                  className={
+                                    visibleChecklistItems.length > 0
+                                      ? 'mt-4 rounded-md border border-border bg-muted p-4'
+                                      : 'rounded-md border border-border bg-muted p-4'
+                                  }
+                                >
                                   <div className="mb-2 flex items-center gap-2">
-                                    <Badge variant="default">Section rewards</Badge>
+                                    <Badge variant="default">
+                                      Section rewards
+                                    </Badge>
                                     <span className="text-xs text-muted-foreground">
                                       (not checkboxes)
                                     </span>
                                   </div>
                                   <ul className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
-                                    {section.sectionRewards.map((reward, index) => (
-                                      <li key={index}>{reward.text}</li>
-                                    ))}
+                                    {section.sectionRewards.map(
+                                      (reward, index) => (
+                                        <li key={index}>{reward.text}</li>
+                                      )
+                                    )}
                                   </ul>
                                 </div>
                               ) : null}
 
-                              {(section.tips.length > 0 || section.upgrades.length > 0) && (
+                              {(section.tips.length > 0 ||
+                                section.upgrades.length > 0) && (
                                 <div className="mt-4">
                                   <Accordion
                                     type="multiple"
@@ -1012,8 +1372,13 @@ function App() {
                                     className="rounded-md border border-border"
                                   >
                                     {section.tips.length > 0 ? (
-                                      <AccordionItem value={`${section.id}__tips`} className="px-4">
-                                        <AccordionTrigger>Tips</AccordionTrigger>
+                                      <AccordionItem
+                                        value={`${section.id}__tips`}
+                                        className="px-4"
+                                      >
+                                        <AccordionTrigger>
+                                          Tips
+                                        </AccordionTrigger>
                                         <AccordionContent>
                                           <ul className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
                                             {section.tips.map((tip, index) => (
@@ -1025,12 +1390,20 @@ function App() {
                                     ) : null}
 
                                     {section.upgrades.length > 0 ? (
-                                      <AccordionItem value={`${section.id}__upgrades`} className="px-4">
-                                        <AccordionTrigger>Upgrades</AccordionTrigger>
+                                      <AccordionItem
+                                        value={`${section.id}__upgrades`}
+                                        className="px-4"
+                                      >
+                                        <AccordionTrigger>
+                                          Upgrades
+                                        </AccordionTrigger>
                                         <AccordionContent>
                                           <div className="space-y-3">
                                             {section.upgrades.map((upgrade) => (
-                                              <div key={upgrade.id} className="space-y-1">
+                                              <div
+                                                key={upgrade.id}
+                                                className="space-y-1"
+                                              >
                                                 <div className="text-sm font-semibold">
                                                   {upgrade.title}
                                                 </div>
@@ -1042,7 +1415,10 @@ function App() {
                                                 {upgrade.tags?.length ? (
                                                   <div className="flex flex-wrap gap-2">
                                                     {upgrade.tags.map((tag) => (
-                                                      <Badge key={tag} variant="default">
+                                                      <Badge
+                                                        key={tag}
+                                                        variant="default"
+                                                      >
                                                         {tag}
                                                       </Badge>
                                                     ))}

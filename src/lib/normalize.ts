@@ -25,20 +25,25 @@ if (import.meta.env.DEV) {
 }
 
 const isChecklistClassification = (
-  value: unknown,
+  value: unknown
 ): value is ChecklistClassification =>
   value === 'required' || value === 'optional' || value === 'never_checklist'
 
-const checklistOverrides: ChecklistOverrides = masterDb.checklist_overrides ?? {}
+const checklistOverrides: ChecklistOverrides =
+  masterDb.checklist_overrides ?? {}
 
 const classificationByKey = new Map<string, ChecklistClassification>()
-Object.entries(checklistOverrides.key_classifications ?? {}).forEach(([key, value]) => {
-  if (isChecklistClassification(value)) {
-    classificationByKey.set(key, value)
-  } else if (import.meta.env.DEV) {
-    console.warn(`Ignoring invalid checklist classification "${value}" for key "${key}"`)
+Object.entries(checklistOverrides.key_classifications ?? {}).forEach(
+  ([key, value]) => {
+    if (isChecklistClassification(value)) {
+      classificationByKey.set(key, value)
+    } else if (import.meta.env.DEV) {
+      console.warn(
+        `Ignoring invalid checklist classification "${value}" for key "${key}"`
+      )
+    }
   }
-})
+)
 
 const classificationDefault: ChecklistClassification =
   isChecklistClassification(checklistOverrides.classification_default)
@@ -55,14 +60,22 @@ const optionalKeyRegex = (() => {
     return new RegExp(source, flags)
   } catch (error) {
     if (import.meta.env.DEV) {
-      console.warn('Invalid checklist_overrides.optional_key_suffix_regex; ignoring', error)
+      console.warn(
+        'Invalid checklist_overrides.optional_key_suffix_regex; ignoring',
+        error
+      )
     }
     return undefined
   }
 })()
 
 const permanentPowerTags = new Set(
-  checklistOverrides.permanent_power_tags ?? ['permanent_buff', 'skill_points', 'ascendancy', 'key_unlock'],
+  checklistOverrides.permanent_power_tags ?? [
+    'permanent_buff',
+    'skill_points',
+    'ascendancy',
+    'key_unlock',
+  ]
 )
 
 const classifyRewardTags = (tags: string[]): ChecklistClassification =>
@@ -85,14 +98,14 @@ const ensureBossRequired = (item: NormalizedChecklistItem) => {
 
 const buildRewardIndex = (
   containers: Record<string, RewardContainer>,
-  formatter: (key: string) => string,
+  formatter: (key: string) => string
 ): Record<string, RewardContainer> => {
   return Object.entries(containers).reduce<Record<string, RewardContainer>>(
     (acc, [key, value]) => {
       acc[formatter(key)] = value
       return acc
     },
-    {},
+    {}
   )
 }
 
@@ -107,7 +120,8 @@ const interludeRewards = buildRewardIndex(masterDb.interludes, (key) => {
 
 const upgradeRules: UpgradeRule[] = masterDb.upgrade_rules ?? []
 
-const getBreakpointLevel = (rule: UpgradeRule) => rule.max_level ?? rule.min_level
+const getBreakpointLevel = (rule: UpgradeRule) =>
+  rule.max_level ?? rule.min_level
 
 const getSectionRange = (section: CampaignSection) => {
   const range = section.common_level_range
@@ -119,7 +133,9 @@ const getSectionRange = (section: CampaignSection) => {
 
 const buildUpgradeAssignments = (sectionsInOrder: CampaignSection[]) => {
   const assignments = new Map<string, UpgradeRule[]>()
-  const rulesWithBreakpoint = upgradeRules.filter((rule) => getBreakpointLevel(rule) !== undefined)
+  const rulesWithBreakpoint = upgradeRules.filter(
+    (rule) => getBreakpointLevel(rule) !== undefined
+  )
 
   rulesWithBreakpoint.forEach((rule) => {
     const breakpoint = getBreakpointLevel(rule)
@@ -152,7 +168,9 @@ const buildUpgradeAssignments = (sectionsInOrder: CampaignSection[]) => {
         assignments.set(sectionId, list)
       }
     } else if (import.meta.env.DEV) {
-      console.warn(`Upgrade rule "${rule.id}" could not be assigned to a section (breakpoint ${breakpoint})`)
+      console.warn(
+        `Upgrade rule "${rule.id}" could not be assigned to a section (breakpoint ${breakpoint})`
+      )
     }
   })
 
@@ -163,7 +181,10 @@ const hashChecklistId = (sectionId: string, text: string) => {
   const normalized = text.trim().toLowerCase().replace(/\s+/g, ' ')
   const slug = normalized.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
   const base = `${sectionId}__${slug}`
-  const checksum = Array.from(base).reduce((acc, char) => acc + char.charCodeAt(0), 0)
+  const checksum = Array.from(base).reduce(
+    (acc, char) => acc + char.charCodeAt(0),
+    0
+  )
   return `${base}-${checksum.toString(36)}`
 }
 
@@ -175,7 +196,8 @@ const isSectionActive = (section: CampaignSection) => {
 }
 
 const formatLevelRange = (section: CampaignSection) => {
-  if (section.common_level_range_display) return section.common_level_range_display
+  if (section.common_level_range_display)
+    return section.common_level_range_display
   const range = section.common_level_range
   if (!range?.min && !range?.max) return undefined
   if (range?.min !== undefined && range?.max !== undefined) {
@@ -186,8 +208,10 @@ const formatLevelRange = (section: CampaignSection) => {
   return undefined
 }
 
-const resolveZoneDisplayNames = (zoneIds: string[], zoneMap: Map<string, string>) =>
-  zoneIds.map((id) => zoneMap.get(id) ?? id)
+const resolveZoneDisplayNames = (
+  zoneIds: string[],
+  zoneMap: Map<string, string>
+) => zoneIds.map((id) => zoneMap.get(id) ?? id)
 
 const rewardTagMatchers = [
   {
@@ -200,7 +224,11 @@ const rewardTagMatchers = [
         /\b(buff|boon|bonus|relic|tattoo|choice|attribute|resist|resistance|life|mana|spirit|maximum|xp|ms|movement|cdr|cooldown)\b/i
       if (hasPermanent && permanentKeywords.test(text)) return true
 
-      if (/\bshrine\b/i.test(text) && /\+\d+%/i.test(text) && /\bresist|resistance\b/i.test(text)) {
+      if (
+        /\bshrine\b/i.test(text) &&
+        /\+\d+%/i.test(text) &&
+        /\bresist|resistance\b/i.test(text)
+      ) {
         return true
       }
 
@@ -216,14 +244,20 @@ const rewardTagMatchers = [
     test: (text: string) => /skill\s*points?|passive|book|tome/i.test(text),
   },
   { tag: 'ascendancy', test: (text: string) => /ascendancy/i.test(text) },
-  { tag: 'key_unlock', test: (text: string) => /(unlock|key|access|gate)/i.test(text) },
+  {
+    tag: 'key_unlock',
+    test: (text: string) => /(unlock|key|access|gate)/i.test(text),
+  },
 ]
 
 const buildChecklistItems = (
   sectionId: string,
   resolvedZones: string[],
-  rewards: RewardContainer | undefined,
-): { checklist: NormalizedChecklistItem[]; sectionRewards: { text: string; tags: string[] }[] } => {
+  rewards: RewardContainer | undefined
+): {
+  checklist: NormalizedChecklistItem[]
+  sectionRewards: { text: string; tags: string[] }[]
+} => {
   const bossItems: { item: NormalizedChecklistItem; name: string }[] = []
   const rewardItems: { item: NormalizedChecklistItem; note: string }[] = []
   const sectionRewards: { text: string; tags: string[] }[] = []
@@ -237,7 +271,10 @@ const buildChecklistItems = (
         if (classification === 'never_checklist') return
 
         const text = `Defeat: ${boss}`
-        const tags = classification === 'optional' ? ['optional_content'] : ['required_progression']
+        const tags =
+          classification === 'optional'
+            ? ['optional_content']
+            : ['required_progression']
         const item: NormalizedChecklistItem = {
           id: hashChecklistId(sectionId, text),
           text,
@@ -274,23 +311,31 @@ const buildChecklistItems = (
 
   if (bossCount === 1 && rewardItems.length > 0) {
     const boss = bossItems[0]
-    const impliedRewards = rewardItems.map((reward) => ({ ...reward.item, impliedBy: boss.item.id }))
+    const impliedRewards = rewardItems.map((reward) => ({
+      ...reward.item,
+      impliedBy: boss.item.id,
+    }))
     if (impliedRewards.some((reward) => reward.classification === 'required')) {
       ensureBossRequired(boss.item)
     }
     boss.item.impliedRewards = impliedRewards
-    rewardItems.forEach((reward) => impliedByMap.set(reward.item.id, boss.item.id))
+    rewardItems.forEach((reward) =>
+      impliedByMap.set(reward.item.id, boss.item.id)
+    )
   }
 
   if (bossCount > 1) {
     rewardItems.forEach((reward) => {
       const match = bossItems.find((boss) =>
-        reward.note.toLowerCase().includes(boss.name.toLowerCase()),
+        reward.note.toLowerCase().includes(boss.name.toLowerCase())
       )
       if (match) {
         const implied = { ...reward.item, impliedBy: match.item.id }
         impliedByMap.set(reward.item.id, match.item.id)
-        match.item.impliedRewards = [...(match.item.impliedRewards ?? []), implied]
+        match.item.impliedRewards = [
+          ...(match.item.impliedRewards ?? []),
+          implied,
+        ]
         if (implied.classification === 'required') {
           ensureBossRequired(match.item)
         }
@@ -305,29 +350,46 @@ const buildChecklistItems = (
 
   const items: NormalizedChecklistItem[] = bossItems.map((entry) => entry.item)
 
+  const text = 'Section complete'
+  items.push({
+    id: hashChecklistId(sectionId, text),
+    text,
+    tags: ['section_complete'],
+    kind: 'other',
+    classification: 'required',
+  })
+
   return { checklist: items, sectionRewards }
 }
 
 export const normalizeChapters = (): NormalizedChapter[] => {
   const zoneMap = new Map<string, string>(
-    Object.entries(masterDb.zones_db ?? {}).map(([id, info]) => [id, info.display_name]),
+    Object.entries(masterDb.zones_db ?? {}).map(([id, info]) => [
+      id,
+      info.display_name,
+    ])
   )
 
   const normalizeSection = (
     section: CampaignSection,
-    assignedUpgrades: UpgradeRule[] = [],
+    assignedUpgrades: UpgradeRule[] = []
   ): NormalizedSection => {
     const zoneIds = section.zone_ids ?? section.zones ?? []
     const zoneNames = resolveZoneDisplayNames(zoneIds, zoneMap)
     const impliedSubzones = resolveZoneDisplayNames(
       section.completion_rule?.subzones_implied ?? [],
-      zoneMap,
+      zoneMap
     )
 
     const levelRangeValues = section.common_level_range ?? {}
 
-    const rewardsSource = actRewards[section.chapter] ?? interludeRewards[section.chapter]
-    const { checklist, sectionRewards } = buildChecklistItems(section.id, zoneNames, rewardsSource)
+    const rewardsSource =
+      actRewards[section.chapter] ?? interludeRewards[section.chapter]
+    const { checklist, sectionRewards } = buildChecklistItems(
+      section.id,
+      zoneNames,
+      rewardsSource
+    )
 
     return {
       id: section.id,
@@ -347,7 +409,9 @@ export const normalizeChapters = (): NormalizedChapter[] => {
     }
   }
 
-  const buildChaptersFromSections = (sections: CampaignSection[]): NormalizedChapter[] => {
+  const buildChaptersFromSections = (
+    sections: CampaignSection[]
+  ): NormalizedChapter[] => {
     const chapters = new Map<string, CampaignSection[]>()
 
     sections.filter(isSectionActive).forEach((section) => {
@@ -358,7 +422,9 @@ export const normalizeChapters = (): NormalizedChapter[] => {
 
     const chapterEntries = Array.from(chapters.entries())
       .map(([title, chapterSections]) => {
-        const sortedSections = [...chapterSections].sort((a, b) => a.order - b.order)
+        const sortedSections = [...chapterSections].sort(
+          (a, b) => a.order - b.order
+        )
         const minOrder = sortedSections[0]?.order ?? Number.POSITIVE_INFINITY
         return { title, sections: sortedSections, order: minOrder }
       })
@@ -370,7 +436,7 @@ export const normalizeChapters = (): NormalizedChapter[] => {
     return chapterEntries
       .map(({ title, sections }) => {
         const normalizedSections = sections.map((section) =>
-          normalizeSection(section, upgradeAssignments.get(section.id) ?? []),
+          normalizeSection(section, upgradeAssignments.get(section.id) ?? [])
         )
         return { title, sections: normalizedSections }
       })
@@ -382,15 +448,19 @@ export const normalizeChapters = (): NormalizedChapter[] => {
     return buildChaptersFromSections(sections)
   }
 
-  const legacyChapters = (masterDb as unknown as { campaign_progression_chapters?: unknown })
-    .campaign_progression_chapters
+  const legacyChapters = (
+    masterDb as unknown as { campaign_progression_chapters?: unknown }
+  ).campaign_progression_chapters
 
   if (legacyChapters && typeof legacyChapters === 'object') {
     const legacySections: CampaignSection[] = []
 
     if (Array.isArray((legacyChapters as { sections?: unknown }).sections)) {
-      legacySections.push(...(((legacyChapters as { sections: CampaignSection[] }).sections ?? [])
-        .filter(Boolean) as CampaignSection[]))
+      legacySections.push(
+        ...((
+          (legacyChapters as { sections: CampaignSection[] }).sections ?? []
+        ).filter(Boolean) as CampaignSection[])
+      )
     } else {
       Object.values(legacyChapters).forEach((value) => {
         if (Array.isArray(value)) {
