@@ -205,10 +205,36 @@ const chapterSectionIdsMap = normalizedChapters.reduce<Map<string, string[]>>((a
   return acc
 }, new Map())
 
+type Poe2GameInfo = {
+  generated_at?: string
+  steam?: {
+    appid: number
+    latest_version: null | { version: string; title: string; url: string; date: number }
+    current_players: null | { player_count: number; fetched_at: string }
+    latest_news: Array<{
+      gid: string
+      title: string
+      url: string
+      date: number
+      author?: string
+      feedlabel?: string
+    }>
+  }
+}
+
+const formatCompactNumber = (value: number) => {
+  try {
+    return new Intl.NumberFormat(undefined, { notation: 'compact' }).format(value)
+  } catch {
+    return String(value)
+  }
+}
+
 function App() {
   const [theme, setTheme] = useState<ThemeId>(initialPreferences.theme)
   const [contrast, setContrast] = useState(initialPreferences.contrast === 'high')
   const [search, setSearch] = useState('')
+  const [gameInfo, setGameInfo] = useState<Poe2GameInfo | null>(null)
   const storedUiPrefs = loadUiPrefs()
   const [mode, setMode] = useState<'speedrun' | 'full'>(() =>
     storedUiPrefs.mode === 'full' || storedUiPrefs.mode === 'speedrun' ? storedUiPrefs.mode : 'speedrun',
@@ -244,6 +270,18 @@ function App() {
   useEffect(() => {
     persistCompleted(completed)
   }, [completed])
+
+  useEffect(() => {
+    const url = `${import.meta.env.BASE_URL}poe2-game-info.json`
+    fetch(url)
+      .then((response) => (response.ok ? response.json() : null))
+      .then((json) => {
+        if (json && typeof json === 'object') {
+          setGameInfo(json as Poe2GameInfo)
+        }
+      })
+      .catch(() => {})
+  }, [])
 
   useEffect(() => {
     applyThemeDataset(theme)
@@ -564,9 +602,25 @@ function App() {
         <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="min-w-[220px]">
-              <div className="text-lg font-bold leading-tight">POE2 Campaign Checklist</div>
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="text-lg font-bold leading-tight">POE2 Campaign Checklist</div>
+                {gameInfo?.steam?.latest_version ? (
+                  <a
+                    href={gameInfo.steam.latest_version.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    <Badge variant="outline">v{gameInfo.steam.latest_version.version}</Badge>
+                  </a>
+                ) : null}
+              </div>
               <div className="text-xs text-muted-foreground">
                 Acts/Interludes with progress tracking
+                {typeof gameInfo?.steam?.current_players?.player_count === 'number' ? (
+                  <> · Steam players: {formatCompactNumber(gameInfo.steam.current_players.player_count)}</>
+                ) : null}
               </div>
             </div>
 
@@ -705,6 +759,49 @@ function App() {
                   <span>Show optional badges</span>
                 </label>
               </div>
+
+              {gameInfo?.steam ? (
+                <>
+                  <Separator className="my-3" />
+                  <div className="space-y-2">
+                    <div className="font-semibold">Game info (Steam)</div>
+                    {gameInfo.steam.latest_version ? (
+                      <div className="text-xs text-muted-foreground">
+                        Latest patch:{' '}
+                        <a
+                          href={gameInfo.steam.latest_version.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="underline underline-offset-2"
+                        >
+                          v{gameInfo.steam.latest_version.version}
+                        </a>
+                      </div>
+                    ) : null}
+                    {gameInfo.generated_at ? (
+                      <div className="text-xs text-muted-foreground">
+                        Updated: {new Date(gameInfo.generated_at).toLocaleString()}
+                      </div>
+                    ) : null}
+                    {gameInfo.steam.latest_news?.length ? (
+                      <ul className="list-disc space-y-1 pl-5 text-xs text-muted-foreground">
+                        {gameInfo.steam.latest_news.slice(0, 3).map((item) => (
+                          <li key={item.gid}>
+                            <a
+                              href={item.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="underline underline-offset-2"
+                            >
+                              {item.title}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
+                </>
+              ) : null}
             </div>
           )}
         </div>
@@ -766,200 +863,204 @@ function App() {
                       }
                       className="rounded-md border border-border"
                     >
-                      {chapter.sections.map((section) => (
-                        <AccordionItem
-                          key={section.id}
-                          value={section.id}
-                          id={section.id}
-                          className="px-4"
-                        >
-                          <AccordionTrigger className={compact ? 'py-3' : 'py-4'}>
-                            <div className="flex w-full flex-col gap-1">
-                              <div className="flex flex-wrap items-center gap-2">
-                                <div className="text-sm font-semibold">{section.title}</div>
-                                {section.levelRange ? (
-                                  <Badge variant="secondary">Level {section.levelRange}</Badge>
-                                ) : null}
-                                <Button
-                                  variant="ghost"
-                                  size="icon"
-                                  aria-label={`Copy link to ${section.title}`}
-                                  onPointerDown={(event) => event.stopPropagation()}
-                                  onClick={(event) => {
-                                    event.preventDefault()
-                                    event.stopPropagation()
-                                    handleSectionLink(section.id)
-                                  }}
-                                >
-                                  <Link2 className="h-4 w-4" />
-                                </Button>
-                              </div>
-                              <div className="text-xs text-muted-foreground">
-                                <span className="font-semibold text-foreground">Zones:</span>{' '}
-                                {section.zoneNames.join(', ')}
-                              </div>
-                              {section.impliedSubzones.length > 0 ? (
-                                <div className="text-xs text-muted-foreground">
-                                  <span className="font-semibold text-foreground">
-                                    Implied:
-                                  </span>{' '}
-                                  {section.impliedSubzones.join(', ')}
+                      {chapter.sections.map((section) => {
+                        const visibleChecklistItems = section.checklist.filter((item) => !item.impliedBy)
+
+                        return (
+                          <AccordionItem
+                            key={section.id}
+                            value={section.id}
+                            id={section.id}
+                            className="px-4"
+                          >
+                            <AccordionTrigger className={compact ? 'py-3' : 'py-4'}>
+                              <div className="flex w-full flex-col gap-1">
+                                <div className="flex flex-wrap items-center gap-2">
+                                  <div className="text-sm font-semibold">{section.title}</div>
+                                  {section.levelRange ? (
+                                    <Badge variant="secondary">Level {section.levelRange}</Badge>
+                                  ) : null}
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    aria-label={`Copy link to ${section.title}`}
+                                    onPointerDown={(event) => event.stopPropagation()}
+                                    onClick={(event) => {
+                                      event.preventDefault()
+                                      event.stopPropagation()
+                                      handleSectionLink(section.id)
+                                    }}
+                                  >
+                                    <Link2 className="h-4 w-4" />
+                                  </Button>
                                 </div>
-                              ) : null}
-                            </div>
-                          </AccordionTrigger>
-                          <AccordionContent className="pt-0">
-                            {(section.routeSummary || section.routeSteps.length > 0) && (
-                              <div className="mb-4 rounded-md border border-border bg-muted p-4">
-                                <div className="mb-2 text-sm font-semibold">Route</div>
-                                {section.routeSummary ? (
-                                  <div className="text-sm text-muted-foreground">
-                                    {section.routeSummary}
+                                <div className="text-xs text-muted-foreground">
+                                  <span className="font-semibold text-foreground">Zones:</span>{' '}
+                                  {section.zoneNames.join(', ')}
+                                </div>
+                                {section.impliedSubzones.length > 0 ? (
+                                  <div className="text-xs text-muted-foreground">
+                                    <span className="font-semibold text-foreground">
+                                      Implied:
+                                    </span>{' '}
+                                    {section.impliedSubzones.join(', ')}
                                   </div>
                                 ) : null}
-                                {section.routeSteps.length > 0 ? (
-                                  <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-muted-foreground">
-                                    {section.routeSteps.map((step, index) => (
-                                      <li key={index}>{step}</li>
+                              </div>
+                            </AccordionTrigger>
+                            <AccordionContent className="pt-0">
+                              {(section.routeSummary || section.routeSteps.length > 0) && (
+                                <div className="mb-4 rounded-md border border-border bg-muted p-4">
+                                  <div className="mb-2 text-sm font-semibold">Route</div>
+                                  {section.routeSummary ? (
+                                    <div className="text-sm text-muted-foreground">
+                                      {section.routeSummary}
+                                    </div>
+                                  ) : null}
+                                  {section.routeSteps.length > 0 ? (
+                                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-muted-foreground">
+                                      {section.routeSteps.map((step, index) => (
+                                        <li key={index}>{step}</li>
+                                      ))}
+                                    </ul>
+                                  ) : null}
+                                </div>
+                              )}
+
+                              {visibleChecklistItems.length > 0 ? (
+                                <div className="rounded-md border border-border">
+                                  <div className="px-4 py-3">
+                                    <div className="text-sm font-semibold">Checklist</div>
+                                  </div>
+                                  <Separator />
+                                  <div className="divide-y divide-border">
+                                    {visibleChecklistItems.map((item) => {
+                                      const checked = completed.has(item.id)
+                                      const showOptional = item.classification === 'optional'
+
+                                      return (
+                                        <div
+                                          key={item.id}
+                                          data-item-id={item.id}
+                                          tabIndex={-1}
+                                          className={compact ? 'px-4 py-2' : 'px-4 py-3'}
+                                        >
+                                          <label className="flex cursor-pointer items-start gap-3">
+                                            <input
+                                              type="checkbox"
+                                              checked={checked}
+                                              onChange={() => toggleItem(item)}
+                                              className="mt-0.5 h-4 w-4 accent-primary"
+                                            />
+                                            <div className="min-w-0 flex-1">
+                                              <div className="flex flex-wrap items-center gap-2">
+                                                <span
+                                                  className={
+                                                    checked
+                                                      ? 'text-sm line-through opacity-60'
+                                                      : 'text-sm'
+                                                  }
+                                                >
+                                                  {item.text}
+                                                </span>
+                                                {showOptional && showOptionalBadges ? (
+                                                  <Badge variant="outline">Optional</Badge>
+                                                ) : null}
+                                              </div>
+                                              {item.impliedRewards?.length ? (
+                                                <div className="mt-1 space-y-0.5 text-sm text-muted-foreground">
+                                                  {item.impliedRewards.map((reward) => {
+                                                    const label = reward.text.replace(/^Reward:\s*/i, '')
+                                                    return (
+                                                      <div key={reward.id} className="pl-0.5">
+                                                        {label}
+                                                      </div>
+                                                    )
+                                                  })}
+                                                </div>
+                                              ) : null}
+                                            </div>
+                                          </label>
+                                        </div>
+                                      )
+                                    })}
+                                  </div>
+                                </div>
+                              ) : null}
+
+                              {section.sectionRewards.length > 0 ? (
+                                <div className={visibleChecklistItems.length > 0 ? 'mt-4 rounded-md border border-border bg-muted p-4' : 'rounded-md border border-border bg-muted p-4'}>
+                                  <div className="mb-2 flex items-center gap-2">
+                                    <Badge variant="default">Section rewards</Badge>
+                                    <span className="text-xs text-muted-foreground">
+                                      (not checkboxes)
+                                    </span>
+                                  </div>
+                                  <ul className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
+                                    {section.sectionRewards.map((reward, index) => (
+                                      <li key={index}>{reward.text}</li>
                                     ))}
                                   </ul>
-                                ) : null}
-                              </div>
-                            )}
-
-                            <div className="rounded-md border border-border">
-                              <div className="px-4 py-3">
-                                <div className="text-sm font-semibold">Checklist</div>
-                              </div>
-                              <Separator />
-                              <div className="divide-y divide-border">
-                                {section.checklist
-                                  .filter((item) => !item.impliedBy)
-                                  .map((item) => {
-                                    const checked = completed.has(item.id)
-                                    const showOptional = item.classification === 'optional'
-
-                                    return (
-                                      <div
-                                        key={item.id}
-                                        data-item-id={item.id}
-                                        tabIndex={-1}
-                                        className={compact ? 'px-4 py-2' : 'px-4 py-3'}
-                                      >
-                                        <label className="flex cursor-pointer items-start gap-3">
-                                          <input
-                                            type="checkbox"
-                                            checked={checked}
-                                            onChange={() => toggleItem(item)}
-                                            className="mt-0.5 h-4 w-4 accent-primary"
-                                          />
-                                          <div className="min-w-0 flex-1">
-                                            <div className="flex flex-wrap items-center gap-2">
-                                              <span
-                                                className={
-                                                  checked
-                                                    ? 'text-sm line-through opacity-60'
-                                                    : 'text-sm'
-                                                }
-                                              >
-                                                {item.text}
-                                              </span>
-                                              {showOptional && showOptionalBadges ? (
-                                                <Badge variant="outline">Optional</Badge>
-                                              ) : null}
-                                            </div>
-                                            {item.impliedRewards?.length ? (
-                                              <div className="mt-1 space-y-0.5 text-sm text-muted-foreground">
-                                                {item.impliedRewards.map((reward) => {
-                                                  const label = reward.text.replace(/^Reward:\s*/i, '')
-                                                  return (
-                                                    <div key={reward.id} className="pl-0.5">
-                                                      {label}
-                                                    </div>
-                                                  )
-                                                })}
-                                              </div>
-                                            ) : null}
-                                          </div>
-                                        </label>
-                                      </div>
-                                    )
-                                  })}
-                              </div>
-                            </div>
-
-                            {section.sectionRewards.length > 0 ? (
-                              <div className="mt-4 rounded-md border border-border bg-muted p-4">
-                                <div className="mb-2 flex items-center gap-2">
-                                  <Badge variant="default">Section rewards</Badge>
-                                  <span className="text-xs text-muted-foreground">
-                                    (not checkboxes)
-                                  </span>
                                 </div>
-                                <ul className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
-                                  {section.sectionRewards.map((reward, index) => (
-                                    <li key={index}>{reward.text}</li>
-                                  ))}
-                                </ul>
-                              </div>
-                            ) : null}
+                              ) : null}
 
-                            {(section.tips.length > 0 || section.upgrades.length > 0) && (
-                              <div className="mt-4">
-                                <Accordion
-                                  type="multiple"
-                                  defaultValue={[]}
-                                  className="rounded-md border border-border"
-                                >
-                                  {section.tips.length > 0 ? (
-                                    <AccordionItem value={`${section.id}__tips`} className="px-4">
-                                      <AccordionTrigger>Tips</AccordionTrigger>
-                                      <AccordionContent>
-                                        <ul className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
-                                          {section.tips.map((tip, index) => (
-                                            <li key={index}>{tip}</li>
-                                          ))}
-                                        </ul>
-                                      </AccordionContent>
-                                    </AccordionItem>
-                                  ) : null}
+                              {(section.tips.length > 0 || section.upgrades.length > 0) && (
+                                <div className="mt-4">
+                                  <Accordion
+                                    type="multiple"
+                                    defaultValue={[]}
+                                    className="rounded-md border border-border"
+                                  >
+                                    {section.tips.length > 0 ? (
+                                      <AccordionItem value={`${section.id}__tips`} className="px-4">
+                                        <AccordionTrigger>Tips</AccordionTrigger>
+                                        <AccordionContent>
+                                          <ul className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
+                                            {section.tips.map((tip, index) => (
+                                              <li key={index}>{tip}</li>
+                                            ))}
+                                          </ul>
+                                        </AccordionContent>
+                                      </AccordionItem>
+                                    ) : null}
 
-                                  {section.upgrades.length > 0 ? (
-                                    <AccordionItem value={`${section.id}__upgrades`} className="px-4">
-                                      <AccordionTrigger>Upgrades</AccordionTrigger>
-                                      <AccordionContent>
-                                        <div className="space-y-3">
-                                          {section.upgrades.map((upgrade) => (
-                                            <div key={upgrade.id} className="space-y-1">
-                                              <div className="text-sm font-semibold">
-                                                {upgrade.title}
+                                    {section.upgrades.length > 0 ? (
+                                      <AccordionItem value={`${section.id}__upgrades`} className="px-4">
+                                        <AccordionTrigger>Upgrades</AccordionTrigger>
+                                        <AccordionContent>
+                                          <div className="space-y-3">
+                                            {section.upgrades.map((upgrade) => (
+                                              <div key={upgrade.id} className="space-y-1">
+                                                <div className="text-sm font-semibold">
+                                                  {upgrade.title}
+                                                </div>
+                                                {upgrade.detail ? (
+                                                  <div className="text-sm text-muted-foreground">
+                                                    {upgrade.detail}
+                                                  </div>
+                                                ) : null}
+                                                {upgrade.tags?.length ? (
+                                                  <div className="flex flex-wrap gap-2">
+                                                    {upgrade.tags.map((tag) => (
+                                                      <Badge key={tag} variant="default">
+                                                        {tag}
+                                                      </Badge>
+                                                    ))}
+                                                  </div>
+                                                ) : null}
                                               </div>
-                                              {upgrade.detail ? (
-                                                <div className="text-sm text-muted-foreground">
-                                                  {upgrade.detail}
-                                                </div>
-                                              ) : null}
-                                              {upgrade.tags?.length ? (
-                                                <div className="flex flex-wrap gap-2">
-                                                  {upgrade.tags.map((tag) => (
-                                                    <Badge key={tag} variant="default">
-                                                      {tag}
-                                                    </Badge>
-                                                  ))}
-                                                </div>
-                                              ) : null}
-                                            </div>
-                                          ))}
-                                        </div>
-                                      </AccordionContent>
-                                    </AccordionItem>
-                                  ) : null}
-                                </Accordion>
-                              </div>
-                            )}
-                          </AccordionContent>
-                        </AccordionItem>
-                      ))}
+                                            ))}
+                                          </div>
+                                        </AccordionContent>
+                                      </AccordionItem>
+                                    ) : null}
+                                  </Accordion>
+                                </div>
+                              )}
+                            </AccordionContent>
+                          </AccordionItem>
+                        )
+                      })}
                     </Accordion>
                   </AccordionContent>
                 </AccordionItem>

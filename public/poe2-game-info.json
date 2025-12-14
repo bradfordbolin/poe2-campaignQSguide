@@ -1,0 +1,58 @@
+{
+  "generated_at": "2025-12-14T05:23:05.474Z",
+  "steam": {
+    "appid": 2694490,
+    "latest_version": {
+      "version": "0.4.0",
+      "title": "Path of Exile 2: 0.4.0 Content Update Timeline",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1815580768401217",
+      "date": 1762805886
+    },
+    "current_players": {
+      "player_count": 151043,
+      "fetched_at": "2025-12-14T05:23:05.474Z"
+    },
+    "latest_news": [
+      {
+        "gid": "1818752592125334",
+        "title": "Path of Exile 2: The Last of the Druids Launches Soon",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818752592125334",
+        "date": 1765500306,
+        "author": "kiki",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1818752592124905",
+        "title": "Path of Exile 2: The Last of the Druids Launch Twitch Drops and Discord Quest",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818752592124905",
+        "date": 1765483637,
+        "author": "kiki",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1818752592122041",
+        "title": "Free Path of Exile 2 Weekend + Cosmetics on December 12 - 15 PST",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818752592122041",
+        "date": 1765400875,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1818118366186481",
+        "title": "Path of Exile 2: The Last of the Druids Item Filter Information",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818118366186481",
+        "date": 1765312173,
+        "author": "kiki",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1818118366184082",
+        "title": "Path of Exile 2: The Game Awards Twitch Drops",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818118366184082",
+        "date": 1765239996,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      }
+    ]
+  }
+}

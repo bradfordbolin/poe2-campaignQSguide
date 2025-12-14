@@ -259,7 +259,7 @@
           ]
         },
         {
-          "zone": "The Grelwood / The Red Vale / Tree of Souls",
+          "zone": "Tree of Souls",
           "key": [
             "Gerung (optional)",
             "Areagne (optional)",
@@ -293,7 +293,7 @@
           ]
         },
         {
-          "zone": "The Hunting Grounds",
+          "zone": "Hunting Grounds",
           "key": [
             "The Crowbell (optional)"
           ],
@@ -401,7 +401,7 @@
           ]
         },
         {
-          "zone": "Valley of the Titans / Titan Grotto",
+          "zone": "The Titan Grotto",
           "key": [
             "Zalmarath, the Colossus"
           ],
@@ -411,7 +411,7 @@
           ]
         },
         {
-          "zone": "Deshar / Path of Mourning",
+          "zone": "Path of Mourning",
           "key": [
             "Fallen Dekhara / Final Letter"
           ],
@@ -561,7 +561,7 @@
           ]
         },
         {
-          "zone": "Whakapanu Island & Singing Caverns",
+          "zone": "Whakapanu Island",
           "key": [
             "The Deep Mother"
           ],
@@ -599,7 +599,7 @@
           ]
         },
         {
-          "zone": "Kedge Bay / Journey's End",
+          "zone": "Journey's End",
           "key": [
             "Captain Hartlin",
             "Omniphobia reveal"
@@ -610,7 +610,7 @@
           ]
         },
         {
-          "zone": "Isle of Kin / Volcanic Warrens",
+          "zone": "Volcanic Warrens",
           "key": [
             "Blind Beast (optional)",
             "Krutog"
@@ -1209,11 +1209,11 @@
         "id": "sec_19",
         "order": 19,
         "chapter": "Act 2",
-        "section_title": "Mastodon Badlands / The Lost City / V",
+        "section_title": "Mastodon Badlands / The Lost City / Valley of the Titans",
         "zones": [
           "Mastodon Badlands",
           "The Lost City",
-          "V"
+          "Valley of the Titans"
         ],
         "common_level_range": {
           "min": 26,
@@ -1230,7 +1230,7 @@
       {
         "id": "sec_20",
         "order": 20,
-        "chapter": "Act 3",
+        "chapter": "Act 2",
         "section_title": "The Bone Pits / Buried Shrines / The Titan Grotto",
         "zones": [
           "The Bone Pits",
@@ -1252,7 +1252,7 @@
       {
         "id": "sec_21",
         "order": 21,
-        "chapter": "Act 3",
+        "chapter": "Act 2",
         "section_title": "Deshar / Path of Mourning / Spires of Deshar",
         "zones": [
           "Deshar",
@@ -1274,7 +1274,7 @@
       {
         "id": "sec_22",
         "order": 22,
-        "chapter": "Act 3",
+        "chapter": "Act 2",
         "section_title": "The Dreadnought / Dreadnought Vanguard",
         "zones": [
           "The Dreadnought",
@@ -1926,7 +1926,9 @@
         "order": 54,
         "chapter": "Interlude 3: Doryani's Contingency",
         "section_title": "Endgame transition",
-        "zones": [],
+        "zones": [
+          "Endgame transition"
+        ],
         "common_level_range": {
           "min": 60,
           "max": 65
