@@ -15,5 +15,5 @@
 - Commit: db0f6d854f0afb885296afa3b933f9bcd955258e
 - Files: plasmic-preview.html, src/plasmic-preview.tsx
 - Why: Provide a user-viewable preview page (no router) that renders a published Plasmic component for local dev and GitHub Pages builds.
-- Component selection: defaults to "Homepage" but can be overridden via Vite env var .
+- Component selection: defaults to "Homepage" but can be overridden via Vite env var `VITE_PLASMIC_PREVIEW_COMPONENT`.
 - URL (dev): http://localhost:5173/plasmic-preview.html
