@@ -109,31 +109,51 @@ const upgradeRules: UpgradeRule[] = masterDb.upgrade_rules ?? []
 
 const getBreakpointLevel = (rule: UpgradeRule) => rule.max_level ?? rule.min_level
 
-const getSectionRangeMax = (section: CampaignSection) =>
-  section.common_level_range?.max ?? section.common_level_range?.min
+const getSectionRange = (section: CampaignSection) => {
+  const range = section.common_level_range
+  if (!range) return undefined
+  const min = range.min ?? Number.NEGATIVE_INFINITY
+  const max = range.max ?? Number.POSITIVE_INFINITY
+  return { min, max }
+}
 
 const buildUpgradeAssignments = (sectionsInOrder: CampaignSection[]) => {
   const assignments = new Map<string, UpgradeRule[]>()
-  let remaining = upgradeRules.filter((rule) => getBreakpointLevel(rule) !== undefined)
-  let previousMax = Number.NEGATIVE_INFINITY
+  const rulesWithBreakpoint = upgradeRules.filter((rule) => getBreakpointLevel(rule) !== undefined)
 
-  sectionsInOrder.forEach((section) => {
-    const currentMax = getSectionRangeMax(section)
-    if (currentMax === undefined) return
+  rulesWithBreakpoint.forEach((rule) => {
+    const breakpoint = getBreakpointLevel(rule)
+    if (breakpoint === undefined) return
 
-    const toAssign = remaining.filter((rule) => {
-      const breakpoint = getBreakpointLevel(rule)
-      if (breakpoint === undefined) return false
-      return currentMax >= breakpoint && previousMax < breakpoint
+    let targetIndex = -1
+    let fallbackIndex = -1
+
+    sectionsInOrder.forEach((section, index) => {
+      const range = getSectionRange(section)
+      if (!range) return
+      const { min, max } = range
+
+      if (min <= breakpoint && breakpoint <= max) {
+        targetIndex = index
+      }
+
+      if (max >= breakpoint) {
+        fallbackIndex = index
+      }
     })
 
-    if (toAssign.length > 0) {
-      assignments.set(section.id, toAssign)
-      const assignedIds = new Set(toAssign.map((rule) => rule.id))
-      remaining = remaining.filter((rule) => !assignedIds.has(rule.id))
-    }
+    const finalIndex = targetIndex !== -1 ? targetIndex : fallbackIndex
 
-    previousMax = currentMax
+    if (finalIndex !== -1) {
+      const sectionId = sectionsInOrder[finalIndex]?.id
+      if (sectionId) {
+        const list = assignments.get(sectionId) ?? []
+        list.push(rule)
+        assignments.set(sectionId, list)
+      }
+    } else if (import.meta.env.DEV) {
+      console.warn(`Upgrade rule "${rule.id}" could not be assigned to a section (breakpoint ${breakpoint})`)
+    }
   })
 
   return assignments
