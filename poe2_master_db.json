@@ -307,7 +307,7 @@
             "The King in the Mists"
           ],
           "reward_notes": [
-            "Gembloom Skull: +30 Spirit + Uncut Spirit Gem (level per summary)",
+            "Permanent buff: +30 Spirit (Gembloom Skull; also grants Uncut Spirit Gem)",
             "Charm choice (Sapphire recommended in provided summary)"
           ]
         },
@@ -326,7 +326,7 @@
             "The Executioner"
           ],
           "reward_notes": [
-            "Unlock Salvage Bench (first character) via Renley’s tools",
+            "Unlock Smithing Bench (first character) via Renly’s Tools",
             "Secret chest: Artificer’s Orb + Blank Rune"
           ]
         },
@@ -346,7 +346,7 @@
             "Count Geonor"
           ],
           "reward_notes": [
-            "Candlemass’ Essence: +20 Maximum Life"
+            "Candlemass: Permanent buff: +10% Fire Resistance"
           ]
         }
       ]
@@ -406,7 +406,7 @@
             "Zalmarath, the Colossus"
           ],
           "reward_notes": [
-            "Place Sun + Kabala relics at Relic Altar near waypoint; changeable permanent relic buff; Uncut Support Gem",
+            "Permanent buff choice (changeable): +30% increased Charm Charges +15% increased Mana Recovery from Flasks (Relic Altar near waypoint; insert Sun + Kabala relics; includes Uncut Support Gem)",
             "Secret: Titan's Sword (guaranteed Lesser Rune)"
           ]
         },
@@ -467,7 +467,7 @@
             "Corpse-snake Venom"
           ],
           "reward_notes": [
-            "Permanent buff choice (cannot be changed): examples include stun threshold / ailment threshold / mana regen"
+            "Permanent buff choice (cannot be changed, Venom Draught): Normal: 25% increased Stun Threshold / 30% increased Elemental Ailment Threshold / 25% increased Mana Regeneration Rate; Cruel: +10% Chaos Resistance / +5 to All Attributes / 15% reduced Slowing Potency Debuffs"
           ]
         },
         {
@@ -476,7 +476,7 @@
             "Ignagduk, the Bog Witch"
           ],
           "reward_notes": [
-            "Gemrot Skull: +30 Spirit + Uncut Spirit Gem (level per summary)",
+            "Permanent buff: +30 Spirit (Normal) / +40 Spirit (Cruel) (Ignagduk, the Bog Witch; also grants Uncut Spirit Gem)",
             "Optional: Flameskin Ritual temp fire res"
           ]
         },
@@ -595,7 +595,7 @@
           ],
           "reward_notes": [
             "Blank Tattoos: permanent +5 Attribute or +5% Resist choices",
-            "Book reward attribution flagged (see verification flags)"
+            "Yama, the White: Book: +2 Weapon Set Passive Skill Points (Trial of the Ancestors / Book of Specialisation)"
           ]
         },
         {
@@ -605,6 +605,7 @@
             "Omniphobia reveal"
           ],
           "reward_notes": [
+            "Omniphobia reveal: Book: +2 Weapon Set Passive Skill Points (Dark Mists / defeat Omniphobia; 0.4)",
             "Delirium distilled emotions for instilling amulet (per summary)"
           ]
         },
@@ -615,7 +616,7 @@
             "Krutog"
           ],
           "reward_notes": [
-            "Blind Beast: Blank Greater Rune (per provided summary). Weapon-set points from Blind Beast are flagged for verification due to known 0.4 changes in other notes."
+            "Blind Beast: Book: +2 Weapon Set Passive Skill Points (changed in 0.4; verify) + Blank Greater Rune (per provided summary)"
           ]
         }
       ]
@@ -729,7 +730,7 @@
             "Lythara, the Wayward Spear"
           ],
           "reward_notes": [
-            "Gemcrust Skull: +40 Spirit + Uncut Spirit Gem Level 14"
+            "Permanent buff: +40 Spirit (Gemcrust Skull; Lythara, the Wayward Spear; also grants Uncut Spirit Gem L14)"
           ]
         },
         {
@@ -2086,7 +2087,7 @@
       "Lythara, the Wayward Spear": "required",
       "Mektul, the Forgemaster": "required",
       "Mighty Silverfist": "required",
-      "Omniphobia reveal": "never_checklist",
+      "Omniphobia reveal": "required",
       "Orbala's Pillar": "never_checklist",
       "Orok Campfire secret": "never_checklist",
       "Oswin, the Dread Warden": "required",
