@@ -1,5 +1,11 @@
 {
-  "generated_at": "2025-12-14T05:23:05.474Z",
+  "generated_at": "2025-12-14T14:56:34.560Z",
+  "league": {
+    "id": "Keepers",
+    "name": "Keepers",
+    "url": "https://www.pathofexile.com/ladders/league/Keepers",
+    "start_at": "2025-10-31T19:00:00Z"
+  },
   "steam": {
     "appid": 2694490,
     "latest_version": {
@@ -9,8 +15,8 @@
       "date": 1762805886
     },
     "current_players": {
-      "player_count": 151043,
-      "fetched_at": "2025-12-14T05:23:05.474Z"
+      "player_count": 241717,
+      "fetched_at": "2025-12-14T14:56:34.560Z"
     },
     "latest_news": [
       {

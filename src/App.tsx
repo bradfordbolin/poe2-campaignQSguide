@@ -55,6 +55,8 @@ type ThemeId =
   | 'poe2-stormsteel'
   | 'poe2-ash-pyrite'
 
+type FontId = 'inter' | 'roboto' | 'poppins' | 'open-sans'
+
 const themeOptions: { label: string; value: ThemeId }[] = [
   { label: 'Obsidian Gilt', value: 'poe2-obsidian-gilt' },
   { label: 'Light', value: 'poe2-light' },
@@ -71,31 +73,50 @@ const themeIds = new Set(themeOptions.map((option) => option.value))
 const defaultTheme: ThemeId = 'poe2-obsidian-gilt'
 const themeStorageKey = 'theme'
 const contrastStorageKey = 'contrast'
+const fontStorageKey = 'font'
+
+const fontOptions: { label: string; value: FontId }[] = [
+  { label: 'Inter', value: 'inter' },
+  { label: 'Roboto', value: 'roboto' },
+  { label: 'Poppins', value: 'poppins' },
+  { label: 'Open Sans', value: 'open-sans' },
+]
+
+const fontIds = new Set(fontOptions.map((option) => option.value))
+const defaultFont: FontId = 'inter'
 
 const readInitialPreferences = (): {
   theme: ThemeId
+  font: FontId
   contrast: '' | 'high'
 } => {
   if (typeof localStorage === 'undefined')
-    return { theme: defaultTheme, contrast: '' }
+    return { theme: defaultTheme, font: defaultFont, contrast: '' }
 
   try {
     const storedTheme = localStorage.getItem(themeStorageKey) as ThemeId | null
     const theme =
       storedTheme && themeIds.has(storedTheme) ? storedTheme : defaultTheme
+    const storedFont = localStorage.getItem(fontStorageKey) as FontId | null
+    const font = storedFont && fontIds.has(storedFont) ? storedFont : defaultFont
     const contrast =
       localStorage.getItem(contrastStorageKey) === 'high' ? 'high' : ''
 
-    return { theme, contrast }
+    return { theme, font, contrast }
   } catch (error) {
     console.warn('Falling back to default theme preferences', error)
-    return { theme: defaultTheme, contrast: '' }
+    return { theme: defaultTheme, font: defaultFont, contrast: '' }
   }
 }
 
 const applyThemeDataset = (theme: ThemeId) => {
   if (typeof document === 'undefined') return
   document.documentElement.dataset.theme = theme
+}
+
+const applyFontDataset = (font: FontId) => {
+  if (typeof document === 'undefined') return
+  document.documentElement.dataset.font = font
 }
 
 const applyContrastDataset = (contrast: '' | 'high') => {
@@ -110,6 +131,7 @@ const applyContrastDataset = (contrast: '' | 'high') => {
 const initialPreferences = readInitialPreferences()
 if (typeof document !== 'undefined') {
   applyThemeDataset(initialPreferences.theme)
+  applyFontDataset(initialPreferences.font)
   applyContrastDataset(initialPreferences.contrast)
 }
 
@@ -236,7 +258,7 @@ const allChapterTitles = normalizedChapters.map((chapter) => chapter.title)
 
 const getDefaultOpenSections = () => []
 
-const getDefaultOpenChapters = () => allChapterTitles
+const getDefaultOpenChapters = () => []
 
 const chapterSectionIdsMap = normalizedChapters.reduce<Map<string, string[]>>(
   (acc, chapter) => {
@@ -251,6 +273,12 @@ const chapterSectionIdsMap = normalizedChapters.reduce<Map<string, string[]>>(
 
 type Poe2GameInfo = {
   generated_at?: string
+  league?: null | {
+    id: string
+    name: string
+    start_at: string
+    url?: string
+  }
   steam?: {
     appid: number
     latest_version: null | {
@@ -281,14 +309,30 @@ const formatCompactNumber = (value: number) => {
   }
 }
 
+const formatElapsed = (totalSeconds: number) => {
+  const safeSeconds = Math.max(0, Math.floor(totalSeconds))
+  const days = Math.floor(safeSeconds / 86_400)
+  const hours = Math.floor((safeSeconds % 86_400) / 3_600)
+  const minutes = Math.floor((safeSeconds % 3_600) / 60)
+  const seconds = safeSeconds % 60
+
+  if (days > 0) return `${days}d ${hours}h ${minutes}m`
+  if (hours > 0) return `${hours}h ${minutes}m`
+  if (minutes > 0) return `${minutes}m ${seconds}s`
+  return `${seconds}s`
+}
+
 function App() {
   const [theme, setTheme] = useState<ThemeId>(initialPreferences.theme)
+  const [font, setFont] = useState<FontId>(initialPreferences.font)
   const [contrast, setContrast] = useState(
     initialPreferences.contrast === 'high'
   )
   const [search, setSearch] = useState('')
   const [gameInfo, setGameInfo] = useState<Poe2GameInfo | null>(null)
+  const [now, setNow] = useState(() => Date.now())
   const [tocOpen, setTocOpen] = useState(false)
+  const [tocOpenChapters, setTocOpenChapters] = useState<string[]>([])
   const storedUiPrefs = loadUiPrefs()
   const initialRememberOpenPanels =
     typeof storedUiPrefs.rememberOpenPanels === 'boolean'
@@ -301,7 +345,7 @@ function App() {
   const [mode, setMode] = useState<'speedrun' | 'full'>(() =>
     storedUiPrefs.mode === 'full' || storedUiPrefs.mode === 'speedrun'
       ? storedUiPrefs.mode
-      : 'speedrun'
+      : 'full'
   )
   const [completed, setCompleted] = useState<Set<string>>(() => loadCompleted())
   const [stickyHeader, setStickyHeader] = useState<boolean>(() =>
@@ -390,6 +434,16 @@ function App() {
       .catch(() => {})
   }, [])
 
+  const leagueStartAt = gameInfo?.league?.start_at ?? ''
+  const leagueName = gameInfo?.league?.name ?? ''
+  const leagueUrl = gameInfo?.league?.url
+
+  useEffect(() => {
+    if (!leagueStartAt) return
+    const id = window.setInterval(() => setNow(Date.now()), 1000)
+    return () => window.clearInterval(id)
+  }, [leagueStartAt])
+
   useEffect(() => {
     applyThemeDataset(theme)
     if (typeof localStorage !== 'undefined') {
@@ -400,6 +454,17 @@ function App() {
       }
     }
   }, [theme])
+
+  useEffect(() => {
+    applyFontDataset(font)
+    if (typeof localStorage !== 'undefined') {
+      try {
+        localStorage.setItem(fontStorageKey, font)
+      } catch (error) {
+        console.warn('Unable to store font preference', error)
+      }
+    }
+  }, [font])
 
   useEffect(() => {
     applyContrastDataset(contrast ? 'high' : '')
@@ -422,6 +487,9 @@ function App() {
         Array.from(new Set([...prev, sectionInfo.chapter]))
       )
       setOpenSections((prev) => Array.from(new Set([...prev, hash])))
+      setTocOpenChapters((prev) =>
+        Array.from(new Set([...prev, sectionInfo.chapter]))
+      )
     }
     requestAnimationFrame(() => {
       const el = document.getElementById(hash)
@@ -584,6 +652,7 @@ function App() {
     setOpenChapters((prev) => Array.from(new Set([...prev, targetChapter])))
     setOpenSections((prev) => Array.from(new Set([...prev, targetSectionId])))
     setActiveSectionId(targetSectionId)
+    setTocOpenChapters((prev) => Array.from(new Set([...prev, targetChapter])))
 
     const hash = `#${targetSectionId}`
     if (window.location.hash !== hash) {
@@ -616,7 +685,7 @@ function App() {
     setShowOptionalBadges(true)
     setRememberOpenPanels(false)
     setAutoCollapseCompleted(true)
-    setMode('speedrun')
+    setMode('full')
     setOpenChapters(getDefaultOpenChapters())
     setOpenSections(getDefaultOpenSections())
     toast.success('UI settings reset')
@@ -641,6 +710,7 @@ function App() {
     if (info) {
       setOpenChapters((prev) => Array.from(new Set([...prev, info.chapter])))
       setOpenSections((prev) => Array.from(new Set([...prev, sectionId])))
+      setTocOpenChapters((prev) => Array.from(new Set([...prev, info.chapter])))
     }
 
     setActiveSectionId(sectionId)
@@ -711,61 +781,99 @@ function App() {
   const tocTopOffset = stickyHeader ? headerHeight + 16 : 16
   const sectionScrollMarginTop = stickyHeader ? headerHeight + 24 : 24
 
-  const renderTocList = (closeOnNavigate: boolean) => (
-    <nav aria-label="Table of contents" className="space-y-4">
-      {filteredChapters.map((chapter) => {
-        const chapterTotals = computeProgress([chapter], completed)
-        return (
-          <div key={chapter.title} className="space-y-1">
-            <div className="flex items-center justify-between px-2">
-              <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                {chapter.title}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                {chapterTotals.done} / {chapterTotals.total}
-              </div>
-            </div>
-            <div className="space-y-1">
-              {chapter.sections.map((section) => {
-                const visibleIds =
-                  visibleChecklistIdsBySection.get(section.id) ?? []
-                const sectionComplete =
-                  visibleIds.length > 0 &&
-                  visibleIds.every((id) => completed.has(id))
-                const active = section.id === activeSectionId
+  const leagueUptimeLabel = useMemo(() => {
+    if (!leagueStartAt) return null
+    const startMs = Date.parse(leagueStartAt)
+    if (!Number.isFinite(startMs)) return null
+    const diffSeconds = Math.floor((now - startMs) / 1000)
+    return formatElapsed(diffSeconds)
+  }, [leagueStartAt, now])
 
-                return (
-                  <button
-                    key={section.id}
-                    type="button"
-                    aria-current={active ? 'location' : undefined}
-                    className={cn(
-                      'flex w-full items-start justify-between gap-3 rounded-md px-3 py-2 text-left text-sm transition-colors',
-                      active
-                        ? 'bg-muted text-foreground'
-                        : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                    )}
-                    onClick={() =>
-                      navigateToSection(section.id, {
-                        closeToc: closeOnNavigate,
-                      })
-                    }
-                  >
-                    <span className="min-w-0 flex-1 truncate">
-                      {section.title}
+  const renderTocList = (closeOnNavigate: boolean) => {
+    const query = search.trim()
+    const chapterTitles = filteredChapters.map((chapter) => chapter.title)
+    const tocValue = query ? chapterTitles : tocOpenChapters
+
+    return (
+      <nav aria-label="Table of contents">
+        <Accordion
+          type="multiple"
+          value={tocValue}
+          onValueChange={(values) => {
+            if (query) return
+            setTocOpenChapters(values)
+          }}
+          className="space-y-2"
+        >
+          {filteredChapters.map((chapter) => {
+            const chapterTotals = computeProgress([chapter], completed)
+            const chapterComplete =
+              chapterTotals.total > 0 && chapterTotals.done === chapterTotals.total
+
+            return (
+              <AccordionItem
+                key={chapter.title}
+                value={chapter.title}
+                className="rounded-md border border-border bg-muted px-3 border-b-0"
+              >
+                <AccordionTrigger className="py-2 text-xs font-semibold uppercase tracking-wide text-foreground">
+                  <div className="flex w-full items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <span>{chapter.title}</span>
+                      {chapterComplete ? (
+                        <Check className="h-3.5 w-3.5 text-primary" />
+                      ) : null}
+                    </div>
+                    <span className="text-xs text-muted-foreground">
+                      {chapterTotals.done} / {chapterTotals.total}
                     </span>
-                    {sectionComplete ? (
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                    ) : null}
-                  </button>
-                )
-              })}
-            </div>
-          </div>
-        )
-      })}
-    </nav>
-  )
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pb-2 pt-0">
+                  <div className="space-y-1">
+                    {chapter.sections.map((section) => {
+                      const visibleIds =
+                        visibleChecklistIdsBySection.get(section.id) ?? []
+                      const sectionComplete =
+                        visibleIds.length > 0 &&
+                        visibleIds.every((id) => completed.has(id))
+                      const active = section.id === activeSectionId
+
+                      return (
+                        <button
+                          key={section.id}
+                          type="button"
+                          aria-current={active ? 'location' : undefined}
+                          className={cn(
+                            'flex w-full items-start justify-between gap-3 rounded-md px-2 py-2 text-left text-sm transition-colors',
+                            active
+                              ? 'bg-card text-foreground'
+                              : 'text-muted-foreground hover:bg-card hover:text-foreground'
+                          )}
+                          onClick={() =>
+                            navigateToSection(section.id, {
+                              closeToc: closeOnNavigate,
+                            })
+                          }
+                        >
+                          <span className="min-w-0 flex-1 truncate">
+                            {section.title}
+                          </span>
+                          {sectionComplete ? (
+                            <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                          ) : null}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            )
+          })}
+        </Accordion>
+      </nav>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -855,7 +963,7 @@ function App() {
           .filter(Boolean)
           .join(' ')}
       >
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-3">
+        <div className="mx-auto flex w-full max-w-[1800px] flex-col gap-2 px-4 py-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="min-w-[220px]">
               <div className="flex flex-wrap items-center gap-2">
@@ -881,6 +989,18 @@ function App() {
                       </div>
                       <div className="text-xs text-muted-foreground">
                         Jump to any section.
+                      </div>
+                    </div>
+                    <div className="border-b border-border px-5 py-3">
+                      <div className="relative">
+                        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                        <Input
+                          id="search-mobile"
+                          value={search}
+                          onChange={(event) => setSearch(event.target.value)}
+                          placeholder="Search…"
+                          className="h-9 pl-9"
+                        />
                       </div>
                     </div>
                     <div className="min-h-0 flex-1 overflow-auto p-3">
@@ -944,16 +1064,19 @@ function App() {
             </div>
 
             <div className="flex flex-1 flex-wrap items-center justify-end gap-2">
-              <div className="relative min-w-[220px] max-w-[360px] flex-1">
-                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  id="search"
-                  value={search}
-                  onChange={(event) => setSearch(event.target.value)}
-                  placeholder="Search sections, zones, route, tips…"
-                  className="h-9 pl-9"
-                />
-              </div>
+              {leagueUptimeLabel && leagueName ? (
+                <a
+                  href={leagueUrl ?? 'https://www.pathofexile.com/leagues'}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <Badge variant="outline">
+                    {leagueName}: {leagueUptimeLabel}
+                  </Badge>
+                </a>
+              ) : null}
 
               <Button
                 variant="outline"
@@ -1023,6 +1146,25 @@ function App() {
                             className="h-9 rounded-md border border-input bg-transparent px-3 text-sm"
                           >
                             {themeOptions.map((option) => (
+                              <option key={option.value} value={option.value}>
+                                {option.label}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+
+                        <label className="grid gap-1">
+                          <span className="text-xs text-muted-foreground">
+                            Font
+                          </span>
+                          <select
+                            value={font}
+                            onChange={(event) =>
+                              setFont(event.target.value as FontId)
+                            }
+                            className="h-9 rounded-md border border-input bg-transparent px-3 text-sm"
+                          >
+                            {fontOptions.map((option) => (
                               <option key={option.value} value={option.value}>
                                 {option.label}
                               </option>
@@ -1251,11 +1393,11 @@ function App() {
       <main
         className={
           compact
-            ? 'mx-auto max-w-7xl px-4 py-4'
-            : 'mx-auto max-w-7xl px-4 py-6'
+            ? 'mx-auto w-full max-w-[1800px] px-4 py-4'
+            : 'mx-auto w-full max-w-[1800px] px-4 py-6'
         }
       >
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[280px,minmax(0,1fr)]">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[300px,minmax(0,1fr)] xl:grid-cols-[300px,minmax(0,1fr),280px]">
           <aside className="hidden lg:block">
             <div
               className="sticky"
@@ -1265,13 +1407,25 @@ function App() {
               }}
             >
               <div className="flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
-                <div className="flex items-center justify-between gap-2 border-b border-border px-4 py-3">
-                  <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                    Contents
+                <div className="space-y-3 border-b border-border px-4 py-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                      Contents
+                    </div>
+                    <Badge variant="outline">
+                      {doneCount} / {totals.total}
+                    </Badge>
                   </div>
-                  <Badge variant="outline">
-                    {doneCount} / {totals.total}
-                  </Badge>
+                  <div className="relative">
+                    <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                    <Input
+                      id="search"
+                      value={search}
+                      onChange={(event) => setSearch(event.target.value)}
+                      placeholder="Search…"
+                      className="h-9 pl-9"
+                    />
+                  </div>
                 </div>
                 <div className="min-h-0 flex-1 overflow-auto p-3">
                   {renderTocList(false)}
@@ -1374,15 +1528,18 @@ function App() {
                                       </div>
                                       {section.levelRange ? (
                                         <Badge variant="secondary">
-                                          Level {section.levelRange}
-                                        </Badge>
-                                      ) : null}
-                                      {sectionComplete ? (
-                                        <Badge variant="primary">Done</Badge>
-                                      ) : null}
-                                      <Button
-                                        variant="ghost"
-                                        size="icon"
+                                      Level {section.levelRange}
+                                    </Badge>
+                                  ) : null}
+                                  {sectionComplete ? (
+                                    <Badge variant="primary" className="gap-1">
+                                      <Check className="h-3.5 w-3.5" />
+                                      Done
+                                    </Badge>
+                                  ) : null}
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
                                         aria-label={`Copy link to ${section.title}`}
                                         onPointerDown={(event) =>
                                           event.stopPropagation()
@@ -1620,6 +1777,118 @@ function App() {
               </Accordion>
             )}
           </div>
+
+          <aside className="hidden xl:block">
+            <div
+              className="sticky"
+              style={{
+                top: tocTopOffset,
+                height: `calc(100vh - ${tocTopOffset}px)`,
+              }}
+            >
+              <div className="flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+                <div className="border-b border-border px-4 py-3">
+                  <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Links
+                  </div>
+                </div>
+                <div className="min-h-0 flex-1 overflow-auto p-3 text-sm">
+                  <div className="space-y-1">
+                    <a
+                      href="https://mobalytics.gg/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      Mobalytics
+                    </a>
+                    <a
+                      href="https://mobalytics.gg/path-of-exile-2"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      Mobalytics POE2 hub
+                    </a>
+                    <a
+                      href="https://mobalytics.gg/path-of-exile-2/builds"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      Mobalytics builds
+                    </a>
+                    <a
+                      href="https://mobalytics.gg/path-of-exile-2/guides"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      Mobalytics guides
+                    </a>
+                  </div>
+
+                  <Separator className="my-3" />
+
+                  <div className="space-y-1">
+                    <a
+                      href="https://www.pathofexile.com/trade2"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      POE2 trade
+                    </a>
+                    <a
+                      href="https://poe.ninja/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      POE Ninja
+                    </a>
+                    <a
+                      href="https://www.filterblade.xyz/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      FilterBlade
+                    </a>
+                    <a
+                      href="https://steamdb.info/app/2694490/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      SteamDB (POE2)
+                    </a>
+                  </div>
+
+                  <Separator className="my-3" />
+
+                  <div className="space-y-1">
+                    <a
+                      href="https://github.com/Kvan7/Exiled-Exchange-2"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      Exiled Exchange 2
+                    </a>
+                    <a
+                      href="https://pathofbuilding.community/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      Path of Building
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
         </div>
       </main>
     </div>

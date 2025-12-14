@@ -13,6 +13,11 @@ const steamPlayersUrl = new URL(
 )
 steamPlayersUrl.searchParams.set('appid', String(APP_ID))
 
+const poeLeaguesUrl = new URL('https://www.pathofexile.com/api/leagues')
+poeLeaguesUrl.searchParams.set('type', 'main')
+poeLeaguesUrl.searchParams.set('realm', 'pc')
+poeLeaguesUrl.searchParams.set('compact', '1')
+
 const versionRegex = /\b0\.\d+(?:\.\d+){0,2}[a-z]?\b/i
 
 const fetchJson = async (url, { timeoutMs = 20_000 } = {}) => {
@@ -39,9 +44,10 @@ const fetchJson = async (url, { timeoutMs = 20_000 } = {}) => {
 }
 
 const main = async () => {
-  const [newsJson, playersJson] = await Promise.all([
+  const [newsJson, playersJson, leaguesJson] = await Promise.all([
     fetchJson(steamNewsUrl),
     fetchJson(steamPlayersUrl),
+    fetchJson(poeLeaguesUrl),
   ])
 
   const newsItems = (newsJson?.appnews?.newsitems ?? []).map((item) => ({
@@ -56,8 +62,52 @@ const main = async () => {
   const latestVersionItem = newsItems.find((item) => versionRegex.test(item.title))
   const versionMatch = latestVersionItem?.title?.match(versionRegex)?.[0]
 
+  const leagues = Array.isArray(leaguesJson) ? leaguesJson : []
+  const leagueRows = leagues
+    .filter((league) => league && typeof league === 'object')
+    .map((league) => ({
+      id: league.id,
+      name: league.name ?? league.id,
+      url: league.url,
+      startAt: league.startAt,
+    }))
+    .filter(
+      (league) =>
+        typeof league.id === 'string' &&
+        typeof league.name === 'string' &&
+        typeof league.startAt === 'string' &&
+        league.startAt.length > 0
+    )
+
+  let latestLeague = null
+  if (leagueRows.length > 0) {
+    const dates = leagueRows
+      .map((league) => Date.parse(league.startAt))
+      .filter((value) => Number.isFinite(value))
+    const latestStart = dates.length ? Math.max(...dates) : null
+    const newest = latestStart
+      ? leagueRows.filter(
+          (league) => Date.parse(league.startAt) === latestStart
+        )
+      : []
+    const base =
+      newest.find(
+        (league) => !/(hardcore|ssf|ruthless)/i.test(String(league.id))
+      ) ?? newest[0]
+
+    latestLeague = base
+      ? {
+          id: base.id,
+          name: base.name,
+          url: typeof base.url === 'string' ? base.url : undefined,
+          start_at: base.startAt,
+        }
+      : null
+  }
+
   const out = {
     generated_at: new Date().toISOString(),
+    league: latestLeague,
     steam: {
       appid: APP_ID,
       latest_version: latestVersionItem?.url && versionMatch
@@ -89,4 +139,3 @@ main().catch((error) => {
   console.error(error)
   process.exitCode = 1
 })
-
