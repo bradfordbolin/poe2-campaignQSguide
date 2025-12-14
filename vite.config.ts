@@ -10,6 +10,7 @@ export default defineConfig(({ command }) => ({
       input: {
         main: resolve(__dirname, 'index.html'),
         'plasmic-host': resolve(__dirname, 'plasmic-host.html'),
+        'plasmic-preview': resolve(__dirname, 'plasmic-preview.html'),
       },
     },
   },
