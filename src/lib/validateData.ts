@@ -49,120 +49,144 @@ const resolveZoneDisplayNames = (
 const warn = (message: string) => console.warn(`[validateData] ${message}`)
 
 export const validateMasterData = (db: MasterDb) => {
-  const zonesDb = db.zones_db ?? {}
-  const zoneIds = new Set(Object.keys(zonesDb))
-  const zoneDisplayMap = new Map<string, string>(
-    Object.entries(zonesDb).map(([id, info]) => [id, info.display_name ?? id]),
-  )
+  try {
+    const zonesDb = db.zones_db ?? {}
+    const zoneIds = new Set(Object.keys(zonesDb))
+    const zoneDisplayMap = new Map<string, string>(
+      Object.entries(zonesDb).map(([id, info]) => [id, info.display_name ?? id]),
+    )
 
-  const checklistOverrides = (db as unknown as {
-    checklist_overrides?: { key_kinds?: Record<string, string> }
-  }).checklist_overrides
-  const keyKinds = checklistOverrides?.key_kinds ?? {}
+    const checklistOverrides = (db as unknown as {
+      checklist_overrides?: { key_kinds?: Record<string, string> }
+    }).checklist_overrides
+    const keyKinds = checklistOverrides?.key_kinds ?? {}
+    const missingKeyKinds = new Map<string, Set<string>>()
 
-  const chapterRewards = buildChapterRewardMap(db)
+    const chapterRewards = buildChapterRewardMap(db)
 
-  const validateZones = (section: CampaignSection) => {
-    const sectionZoneIds = section.zone_ids ?? section.zones ?? []
-    sectionZoneIds
-      .filter((id) => !zoneIds.has(id))
-      .forEach((id) => warn(`Section ${section.id} references missing zone_id "${id}"`))
+    const validateZones = (section: CampaignSection) => {
+      const sectionZoneIds = section.zone_ids ?? section.zones ?? []
+      sectionZoneIds.forEach((id) => {
+        if (!zoneIds.has(id)) {
+          warn(`Section ${section.id} references missing zone_id "${id}"`)
+          return
+        }
 
-    const implied = section.completion_rule?.subzones_implied ?? []
-    implied
-      .filter((id) => !zoneIds.has(id))
-      .forEach((id) => warn(`Section ${section.id} references missing implied subzone "${id}"`))
-  }
+        const zoneInfo = zonesDb[id]
+        if (!zoneInfo || !zoneInfo.display_name) {
+          warn(`Section ${section.id} references zone "${id}" but zone data is incomplete`)
+        }
+      })
 
-  const validateLevelRange = (section: CampaignSection) => {
-    const range = section.common_level_range
-    const hasRangeDisplay = Boolean(section.common_level_range_display)
-    const hasRange = hasRangeDisplay || (range && (range.min !== undefined || range.max !== undefined))
-    if (!hasRange) {
-      warn(`Section ${section.id} is missing a level range`)
+      const implied = section.completion_rule?.subzones_implied ?? []
+      implied
+        .filter((id) => !zoneIds.has(id))
+        .forEach((id) => warn(`Section ${section.id} references missing implied subzone "${id}"`))
     }
 
-    if (range?.min !== undefined && range?.max !== undefined && range.min > range.max) {
-      warn(`Section ${section.id} has malformed level range: min (${range.min}) > max (${range.max})`)
+    const validateLevelRange = (section: CampaignSection) => {
+      const range = section.common_level_range
+      const hasRangeDisplay = Boolean(section.common_level_range_display)
+      const hasRange = hasRangeDisplay || (range && (range.min !== undefined || range.max !== undefined))
+      if (!hasRange) {
+        warn(`Section ${section.id} is missing a level range`)
+      }
+
+      if (range?.min !== undefined && range?.max !== undefined && range.min > range.max) {
+        warn(`Section ${section.id} has malformed level range: min (${range.min}) > max (${range.max})`)
+      }
     }
-  }
 
-  const validateRewardKeys = (container: RewardContainer, containerId: string) => {
-    container.zones?.forEach((entry) => {
-      entry.key?.forEach((key) => {
-        if (!(key in keyKinds)) {
-          warn(`Reward key "${key}" in ${containerId} is missing from checklist_overrides.key_kinds`)
-        }
+    const validateRewardKeys = (container: RewardContainer, containerId: string) => {
+      container.zones?.forEach((entry) => {
+        entry.key?.forEach((key) => {
+          if (keyKinds[key]) return
+          const contexts = missingKeyKinds.get(key) ?? new Set<string>()
+          contexts.add(`${containerId}:${entry.zone}`)
+          missingKeyKinds.set(key, contexts)
+        })
       })
-    })
-  }
+    }
 
-  const validatePermanentPowerNotes = (section: CampaignSection) => {
-    const rewardSource = chapterRewards.get(section.chapter)
-    if (!rewardSource) return
+    const validatePermanentPowerNotes = (section: CampaignSection) => {
+      const rewardSource = chapterRewards.get(section.chapter)
+      if (!rewardSource) return
 
-    const sectionZones = resolveZoneDisplayNames(section.zone_ids ?? section.zones, zoneDisplayMap)
-    const matchingEntries = rewardSource.zones?.filter((entry) =>
-      sectionZones.includes(entry.zone),
-    )
-    if (!matchingEntries || matchingEntries.length === 0) return
+      const sectionZones = resolveZoneDisplayNames(section.zone_ids ?? section.zones, zoneDisplayMap)
+      const matchingEntries = rewardSource.zones?.filter((entry) =>
+        sectionZones.includes(entry.zone),
+      )
+      if (!matchingEntries || matchingEntries.length === 0) return
 
-    const bossCount = matchingEntries.reduce(
-      (total, entry) => total + (entry.key?.length ?? 0),
-      0,
-    )
+      const bossCount = matchingEntries.reduce(
+        (total, entry) => total + (entry.key?.length ?? 0),
+        0,
+      )
 
-    matchingEntries.forEach((entry) => {
-      entry.reward_notes?.forEach((note) => {
-        if (permanentPowerRegex.test(note) && bossCount === 0) {
-          warn(
-            `Section ${section.id} has permanent power note without bosses: "${note}" (zone ${entry.zone})`,
-          )
-        }
+      matchingEntries.forEach((entry) => {
+        entry.reward_notes?.forEach((note) => {
+          if (permanentPowerRegex.test(note) && bossCount === 0) {
+            warn(
+              `Section ${section.id} has permanent power note without bosses: "${note}" (zone ${entry.zone})`,
+            )
+          }
+        })
       })
-    })
-  }
+    }
 
-  const validateRewardAssociations = (section: CampaignSection) => {
-    const rewardSource = chapterRewards.get(section.chapter)
-    if (!rewardSource) return
+    const validateRewardAssociations = (section: CampaignSection) => {
+      const rewardSource = chapterRewards.get(section.chapter)
+      if (!rewardSource) return
 
-    const sectionZones = resolveZoneDisplayNames(section.zone_ids ?? section.zones, zoneDisplayMap)
-    const matchingEntries = rewardSource.zones?.filter((entry) =>
-      sectionZones.includes(entry.zone),
-    )
-    if (!matchingEntries || matchingEntries.length === 0) return
+      const sectionZones = resolveZoneDisplayNames(section.zone_ids ?? section.zones, zoneDisplayMap)
+      const matchingEntries = rewardSource.zones?.filter((entry) =>
+        sectionZones.includes(entry.zone),
+      )
+      if (!matchingEntries || matchingEntries.length === 0) return
 
-    const bossNames = matchingEntries.flatMap((entry) => entry.key ?? [])
-    if (bossNames.length <= 1) return
+      const bossNames = matchingEntries.flatMap((entry) => entry.key ?? [])
+      if (bossNames.length <= 1) return
 
-    matchingEntries.forEach((entry) => {
-      entry.reward_notes?.forEach((note) => {
-        if (!rewardTagMatchers.some((regex) => regex.test(note))) return
+      matchingEntries.forEach((entry) => {
+        entry.reward_notes?.forEach((note) => {
+          if (!rewardTagMatchers.some((regex) => regex.test(note))) return
 
-        const matched = bossNames.some((boss) => note.toLowerCase().includes(boss.toLowerCase()))
-        if (!matched) {
-          warn(
-            `Section ${section.id} has reward note that cannot be matched to a boss: "${note}" (zone ${entry.zone})`,
-          )
-        }
+          const matched = bossNames.some((boss) => note.toLowerCase().includes(boss.toLowerCase()))
+          if (!matched) {
+            warn(
+              `Section ${section.id} has reward note that cannot be matched to a boss: "${note}" (zone ${entry.zone})`,
+            )
+          }
+        })
       })
+    }
+
+    const sections = db.campaign_progression_sections?.sections ?? []
+    sections.forEach((section) => {
+      validateZones(section)
+      validateLevelRange(section)
+      validatePermanentPowerNotes(section)
+      validateRewardAssociations(section)
     })
+
+    const allRewardContainers = [
+      ...Array.from(chapterRewards.entries()).map(([id, container]) => ({ id, container })),
+    ]
+
+    if (!checklistOverrides?.key_kinds) {
+      warn('checklist_overrides.key_kinds is missing; checklist key validation skipped')
+    } else {
+      allRewardContainers.forEach(({ id, container }) => validateRewardKeys(container, id))
+
+      missingKeyKinds.forEach((contexts, key) => {
+        warn(
+          `Checklist key "${key}" is missing from checklist_overrides.key_kinds; seen in ${Array.from(contexts).join(', ')}`,
+        )
+      })
+    }
+  } catch (error) {
+    warn(`Data validation encountered an error: ${error instanceof Error ? error.message : String(error)}`)
   }
-
-  const sections = db.campaign_progression_sections?.sections ?? []
-  sections.forEach((section) => {
-    validateZones(section)
-    validateLevelRange(section)
-    validatePermanentPowerNotes(section)
-    validateRewardAssociations(section)
-  })
-
-  const allRewardContainers = [
-    ...Array.from(chapterRewards.entries()).map(([id, container]) => ({ id, container })),
-  ]
-
-  allRewardContainers.forEach(({ id, container }) => validateRewardKeys(container, id))
 }
 
 export default validateMasterData
