@@ -107,15 +107,36 @@ const interludeRewards = buildRewardIndex(masterDb.interludes, (key) => {
 
 const upgradeRules: UpgradeRule[] = masterDb.upgrade_rules ?? []
 
-const overlapsLevelRange = (
-  sectionRange: { min?: number; max?: number },
-  ruleRange: { min?: number; max?: number },
-) => {
-  const sectionMin = sectionRange.min ?? Number.NEGATIVE_INFINITY
-  const sectionMax = sectionRange.max ?? Number.POSITIVE_INFINITY
-  const ruleMin = ruleRange.min ?? Number.NEGATIVE_INFINITY
-  const ruleMax = ruleRange.max ?? Number.POSITIVE_INFINITY
-  return sectionMin <= ruleMax && sectionMax >= ruleMin
+const getBreakpointLevel = (rule: UpgradeRule) => rule.max_level ?? rule.min_level
+
+const getSectionRangeMax = (section: CampaignSection) =>
+  section.common_level_range?.max ?? section.common_level_range?.min
+
+const buildUpgradeAssignments = (sectionsInOrder: CampaignSection[]) => {
+  const assignments = new Map<string, UpgradeRule[]>()
+  let remaining = upgradeRules.filter((rule) => getBreakpointLevel(rule) !== undefined)
+  let previousMax = Number.NEGATIVE_INFINITY
+
+  sectionsInOrder.forEach((section) => {
+    const currentMax = getSectionRangeMax(section)
+    if (currentMax === undefined) return
+
+    const toAssign = remaining.filter((rule) => {
+      const breakpoint = getBreakpointLevel(rule)
+      if (breakpoint === undefined) return false
+      return currentMax >= breakpoint && previousMax < breakpoint
+    })
+
+    if (toAssign.length > 0) {
+      assignments.set(section.id, toAssign)
+      const assignedIds = new Set(toAssign.map((rule) => rule.id))
+      remaining = remaining.filter((rule) => !assignedIds.has(rule.id))
+    }
+
+    previousMax = currentMax
+  })
+
+  return assignments
 }
 
 const hashChecklistId = (sectionId: string, text: string) => {
@@ -252,7 +273,10 @@ export const normalizeChapters = (): NormalizedChapter[] => {
     Object.entries(masterDb.zones_db ?? {}).map(([id, info]) => [id, info.display_name]),
   )
 
-  const normalizeSection = (section: CampaignSection): NormalizedSection => {
+  const normalizeSection = (
+    section: CampaignSection,
+    assignedUpgrades: UpgradeRule[] = [],
+  ): NormalizedSection => {
     const zoneIds = section.zone_ids ?? section.zones ?? []
     const zoneNames = resolveZoneDisplayNames(zoneIds, zoneMap)
     const impliedSubzones = resolveZoneDisplayNames(
@@ -261,12 +285,6 @@ export const normalizeChapters = (): NormalizedChapter[] => {
     )
 
     const levelRangeValues = section.common_level_range ?? {}
-    const hasLevelRange = levelRangeValues.min !== undefined || levelRangeValues.max !== undefined
-    const upgrades = hasLevelRange
-      ? upgradeRules.filter((rule) =>
-          overlapsLevelRange(levelRangeValues, { min: rule.min_level, max: rule.max_level }),
-        )
-      : []
 
     const rewardsSource = actRewards[section.chapter] ?? interludeRewards[section.chapter]
     const { checklist, sectionRewards } = buildChecklistItems(section.id, zoneNames, rewardsSource)
@@ -283,7 +301,7 @@ export const normalizeChapters = (): NormalizedChapter[] => {
       routeSummary: section.route_summary,
       routeSteps: section.route_steps ?? [],
       tips: section.tips ?? [],
-      upgrades,
+      upgrades: assignedUpgrades,
       sectionRewards,
       checklist,
     }
@@ -298,15 +316,24 @@ export const normalizeChapters = (): NormalizedChapter[] => {
       chapters.set(section.chapter, bucket)
     })
 
-    return Array.from(chapters.entries())
+    const chapterEntries = Array.from(chapters.entries())
       .map(([title, chapterSections]) => {
         const sortedSections = [...chapterSections].sort((a, b) => a.order - b.order)
-        const normalizedSections = sortedSections.map(normalizeSection)
-        const minOrder = normalizedSections[0]?.order ?? Number.POSITIVE_INFINITY
-        return { title, sections: normalizedSections, order: minOrder }
+        const minOrder = sortedSections[0]?.order ?? Number.POSITIVE_INFINITY
+        return { title, sections: sortedSections, order: minOrder }
       })
       .sort((a, b) => a.order - b.order)
-      .map(({ title, sections }) => ({ title, sections }))
+
+    const sectionsInOrder = chapterEntries.flatMap((entry) => entry.sections)
+    const upgradeAssignments = buildUpgradeAssignments(sectionsInOrder)
+
+    return chapterEntries
+      .map(({ title, sections }) => {
+        const normalizedSections = sections.map((section) =>
+          normalizeSection(section, upgradeAssignments.get(section.id) ?? []),
+        )
+        return { title, sections: normalizedSections }
+      })
       .filter((chapter) => chapter.sections.length > 0)
   }
 

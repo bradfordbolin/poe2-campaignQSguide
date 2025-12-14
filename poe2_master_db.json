@@ -852,7 +852,13 @@
           "min": 1,
           "max": 2
         },
-        "common_level_range_display": "1-2"
+        "common_level_range_display": "1-2",
+        "route_summary": "Stay on the shoreline; push to Bloated Miller; exit to Clearfell.",
+        "route_steps": [
+          "Follow the coast in a single direction to minimize backtracking.",
+          "Kill Bloated Miller when you hit the arena.",
+          "Continue forward to the Clearfell exit."
+        ]
       },
       {
         "id": "sec_02",
@@ -866,7 +872,13 @@
           "min": 2,
           "max": 3
         },
-        "common_level_range_display": "2-3"
+        "common_level_range_display": "2-3",
+        "route_summary": "Push through to Beira; don't full-clear; keep moving toward the exit.",
+        "route_steps": [
+          "Follow the main path; avoid deep side loops.",
+          "Kill Beira when you hit her arena; grab the permanent reward if present.",
+          "Head straight to the next exit after the fight."
+        ]
       },
       {
         "id": "sec_03",
@@ -880,7 +892,13 @@
           "min": 3,
           "max": 4
         },
-        "common_level_range_display": "3-4"
+        "common_level_range_display": "3-4",
+        "route_summary": "Wall-follow; locate the objective; leave immediately.",
+        "route_steps": [
+          "Pick a wall and follow it consistently.",
+          "Do the required objective/boss if present.",
+          "Back to the main path and out."
+        ]
       },
       {
         "id": "sec_04",
@@ -896,7 +914,13 @@
           "min": 4,
           "max": 6
         },
-        "common_level_range_display": "4-6"
+        "common_level_range_display": "4-6",
+        "route_summary": "Use the Act 1 wall-follow patterns; treat these as straight shot zones.",
+        "route_steps": [
+          "Commit to one edge (left/right) until you find the next transition.",
+          "Only detour for mandatory gates/permanent power.",
+          "Use checkpoints to reset position if you overshoot."
+        ]
       },
       {
         "id": "sec_05",
@@ -910,7 +934,13 @@
           "min": 6,
           "max": 7
         },
-        "common_level_range_display": "6-7"
+        "common_level_range_display": "6-7",
+        "route_summary": "Find the Weaver's Chambers by committing to an edge; don't spiral.",
+        "route_steps": [
+          "Follow a single outer edge until you hit a major branch.",
+          "If you find dead-ends repeatedly, swap to the opposite edge.",
+          "Exit once the required objective is done."
+        ]
       },
       {
         "id": "sec_06",
@@ -924,7 +954,13 @@
           "min": 7,
           "max": 8
         },
-        "common_level_range_display": "7-8"
+        "common_level_range_display": "7-8",
+        "route_summary": "Sweep the perimeter; enter Mausoleum/Tomb from Cemetery and return; then leave.",
+        "route_steps": [
+          "Hug the outer edge to find subzone entrances.",
+          "Enter Mausoleum/Tomb as you find them, finish them, and return to Cemetery.",
+          "After both are done, continue perimeter to the exit."
+        ]
       },
       {
         "id": "sec_07",
@@ -938,7 +974,13 @@
           "min": 9,
           "max": 10
         },
-        "common_level_range_display": "9-10"
+        "common_level_range_display": "9-10",
+        "route_summary": "Straightforward crypt; stay on the main hallway to the boss and exit.",
+        "route_steps": [
+          "Follow the central corridor, ignoring deep side rooms.",
+          "Clear the required encounter/boss when found.",
+          "Exit quickly after the objective."
+        ]
       },
       {
         "id": "sec_08",
@@ -953,7 +995,13 @@
           "min": 10,
           "max": 12
         },
-        "common_level_range_display": "10-12"
+        "common_level_range_display": "10-12",
+        "route_summary": "Run one edge to find Freythorn; kill King in the Mists; leave.",
+        "route_steps": [
+          "Pick an edge and run it until the Freythorn entrance appears.",
+          "Do the required boss/objective in Freythorn.",
+          "Return and continue to next zone."
+        ]
       },
       {
         "id": "sec_09",
@@ -967,7 +1015,13 @@
           "min": 12,
           "max": 13
         },
-        "common_level_range_display": "12-13"
+        "common_level_range_display": "12-13",
+        "route_summary": "Follow the U-shape logic to find quest objective and exit.",
+        "route_steps": [
+          "Move in a broad U-shape rather than criss-crossing.",
+          "Complete the required quest objective (Lost Lute).",
+          "Continue the U path until the exit appears."
+        ]
       },
       {
         "id": "sec_10",
@@ -981,7 +1035,13 @@
           "min": 13,
           "max": 14
         },
-        "common_level_range_display": "13-14"
+        "common_level_range_display": "13-14",
+        "route_summary": "Keep moving; hit the Executioner; proceed to Manor Ramparts.",
+        "route_steps": [
+          "Follow the main roads through the village.",
+          "Kill the Executioner when encountered; grab required unlock if any.",
+          "Continue to Manor Ramparts."
+        ]
       },
       {
         "id": "sec_11",
@@ -995,7 +1055,13 @@
           "min": 14,
           "max": 15
         },
-        "common_level_range_display": "14-15"
+        "common_level_range_display": "14-15",
+        "route_summary": "Follow the U-shape; identify which seed you have; go to Ogham Manor.",
+        "route_steps": [
+          "Run the U-shape pattern; if you hit a quick dead-end, you likely have the flipped seed.",
+          "Use the seed tell to choose NE vs NW exit direction.",
+          "Proceed into Ogham Manor."
+        ]
       },
       {
         "id": "sec_12",
@@ -1009,7 +1075,13 @@
           "min": 15,
           "max": 16
         },
-        "common_level_range_display": "15-16"
+        "common_level_range_display": "15-16",
+        "route_summary": "Floor-to-floor: always go opposite your entry direction; cross bridges; boss on floor 3.",
+        "route_steps": [
+          "Floor 1: head toward the bridge side; clear the required boss if it grants permanent power; then go to Floor 2.",
+          "Floor 2: go opposite the entrance direction; cross bridge; find Floor 3.",
+          "Floor 3: go opposite entrance direction; find bridge -> Count -> elevator to boss."
+        ]
       },
       {
         "id": "sec_13",
@@ -1023,7 +1095,13 @@
           "min": 16,
           "max": 17
         },
-        "common_level_range_display": "16-17"
+        "common_level_range_display": "16-17",
+        "route_summary": "Long road segment; follow the main path toward Traitor’s Passage.",
+        "route_steps": [
+          "Stick to the central road and avoid deep side caves.",
+          "Tag the waypoint when you see it.",
+          "Keep pushing forward to the next zone transition."
+        ]
       },
       {
         "id": "sec_14",
@@ -1038,7 +1116,13 @@
           "min": 17,
           "max": 19
         },
-        "common_level_range_display": "17-19"
+        "common_level_range_display": "17-19",
+        "route_summary": "Follow the rails downward; dive into the mine and finish Rudja; exit to the trial.",
+        "route_steps": [
+          "Stay on the cart rails to descend through the quarry.",
+          "Take downward splits toward mine shafts until you hit Rudja.",
+          "After the fight, continue to the Trial of the Sekhemas exit."
+        ]
       },
       {
         "id": "sec_15",
@@ -1052,7 +1136,13 @@
           "min": 19,
           "max": 20
         },
-        "common_level_range_display": "19-20"
+        "common_level_range_display": "19-20",
+        "route_summary": "Find the Decree (lore book). Yellow seals lead to Balbala; otherwise keep pushing to Halani.",
+        "route_steps": [
+          "Move generally opposite your entry direction as a baseline.",
+          "At the Decree/lore book intersection: follow yellow paper seals for Balbala.",
+          "After Balbala, resume direction toward Halani Gates."
+        ]
       },
       {
         "id": "sec_16",
@@ -1066,7 +1156,13 @@
           "min": 20,
           "max": 21
         },
-        "common_level_range_display": "20-21"
+        "common_level_range_display": "20-21",
+        "route_summary": "Linear bridges funnel you; just keep pushing to boss/exit (bring lightning res if possible).",
+        "route_steps": [
+          "Go opposite entry direction and follow bridges.",
+          "Don't overthink branches; it's a funnel.",
+          "Prepare for lightning damage on boss if relevant."
+        ]
       },
       {
         "id": "sec_17",
@@ -1080,7 +1176,13 @@
           "min": 22,
           "max": 23
         },
-        "common_level_range_display": "22-23"
+        "common_level_range_display": "22-23",
+        "route_summary": "Circular trial arena; keep moving to reach Rattlecage and finish the gauntlet.",
+        "route_steps": [
+          "Run the outer ring to find arena triggers.",
+          "Stay mobile through the trial waves.",
+          "Defeat Rattlecage and leave via the unlocked exit."
+        ]
       },
       {
         "id": "sec_18",
@@ -1094,7 +1196,13 @@
           "min": 25,
           "max": 26
         },
-        "common_level_range_display": "25-26"
+        "common_level_range_display": "25-26",
+        "route_summary": "Run outer edge to find Kabala/Venom Pit; use checkpoint warp to search opposite edge fast.",
+        "route_steps": [
+          "Run one outside edge watching for Venom Pit/Kabala.",
+          "Tag the exit checkpoint then warp back to the start checkpoint.",
+          "Run the opposite outside edge; then check remaining corners if needed."
+        ]
       },
       {
         "id": "sec_19",
@@ -1110,7 +1218,13 @@
           "min": 26,
           "max": 27
         },
-        "common_level_range_display": "26-27"
+        "common_level_range_display": "26-27",
+        "route_summary": "Badlands: wall-follow. Lost City: find the V-bridge, then far wall to exit. V/Titans: perimeter seals then Titan Grotto.",
+        "route_steps": [
+          "Badlands: hug a wall until the exit.",
+          "Lost City: find the V-bridge by checking corners; cross; run far wall to the wing-shaped exit tile.",
+          "Valley/Titans: locate sealed Titan Grotto, then perimeter-run for 3 seals; return to grotto."
+        ]
       },
       {
         "id": "sec_20",
@@ -1126,7 +1240,13 @@
           "min": 27,
           "max": 28
         },
-        "common_level_range_display": "27-28"
+        "common_level_range_display": "27-28",
+        "route_summary": "Gather Titan seals in shrines, then open the grotto and fight Zalmarath.",
+        "route_steps": [
+          "Run through Bone Pits into the shrine area.",
+          "Circle shrines to collect seals while staying on the perimeter.",
+          "Use the seals to open Titan Grotto and defeat the boss."
+        ]
       },
       {
         "id": "sec_21",
@@ -1142,7 +1262,13 @@
           "min": 28,
           "max": 31
         },
-        "common_level_range_display": "28-31"
+        "common_level_range_display": "28-31",
+        "route_summary": "Climb through Deshar collecting key pieces; unlock the gate; circle the spires for seals and boss.",
+        "route_steps": [
+          "Follow the main ascent while grabbing key items.",
+          "Use the Memorial Gate to enter the Spires/Titan area.",
+          "Run the spire perimeter for seals, then climb to Tor Gul."
+        ]
       },
       {
         "id": "sec_22",
@@ -1157,7 +1283,13 @@
           "min": 31,
           "max": 33
         },
-        "common_level_range_display": "31-33"
+        "common_level_range_display": "31-33",
+        "route_summary": "Board the Dreadnought and push forward through vanguard packs to Jamanra.",
+        "route_steps": [
+          "Move toward the prow using the main deck paths.",
+          "Clear vanguard groups as you advance upward.",
+          "Finish with the Jamanra encounter and exit."
+        ]
       },
       {
         "id": "sec_23",
@@ -1172,7 +1304,13 @@
           "min": 33,
           "max": 35
         },
-        "common_level_range_display": "33-35"
+        "common_level_range_display": "33-35",
+        "route_summary": "Marsh: ride the outer edge to the Jungle entrance. Jungle: loop perimeter to the arena and leave.",
+        "route_steps": [
+          "Hug one side of the marsh until the Jungle Ruins transition.",
+          "Grab quick rewards only if on-path; avoid backtracking.",
+          "In Jungle Ruins, follow the outer loop to Mighty Silverfist then exit."
+        ]
       },
       {
         "id": "sec_24",
@@ -1187,7 +1325,13 @@
           "min": 35,
           "max": 36
         },
-        "common_level_range_display": "35-36"
+        "common_level_range_display": "35-36",
+        "route_summary": "Linear descent into the barrens; stay on the main spine to the objective/boss.",
+        "route_steps": [
+          "Push straight through Venom Crypts toward the drop-down.",
+          "In Infested Barrens, follow the central spine to the boss.",
+          "Take permanent power when found and leave immediately."
+        ]
       },
       {
         "id": "sec_25",
@@ -1202,7 +1346,13 @@
           "min": 36,
           "max": 37
         },
-        "common_level_range_display": "36-37"
+        "common_level_range_display": "36-37",
+        "route_summary": "Bog: follow waterways to Ignagduk. Wetlands: push to the Chimera/trial path.",
+        "route_steps": [
+          "Hug a bank through Azak Bog to reach the boss arena.",
+          "Avoid poison pools; reset via checkpoint if lost.",
+          "Enter Chimeral Wetlands and follow the main route to Xyclucian/trial."
+        ]
       },
       {
         "id": "sec_26",
@@ -1217,7 +1367,13 @@
           "min": 37,
           "max": 39
         },
-        "common_level_range_display": "37-39"
+        "common_level_range_display": "37-39",
+        "route_summary": "Machinarium: loop corridors for the soul core/optional boss. Temple: straight push to the trial.",
+        "route_steps": [
+          "Circle the outer loop to reach machinery and Blackjaw (optional).",
+          "Secure the soul core, then continue to the Temple of Chaos.",
+          "Follow the direct path to the Trial/Ascendancy portal."
+        ]
       },
       {
         "id": "sec_27",
@@ -1231,7 +1387,13 @@
           "min": 38,
           "max": 39
         },
-        "common_level_range_display": "38-39"
+        "common_level_range_display": "38-39",
+        "route_summary": "Open side labs to unlock the central chamber; head to Zicoatl.",
+        "route_steps": [
+          "Clear side wings to power the central doors.",
+          "Use bridges/elevators to reach the upper level.",
+          "Fight Zicoatl once the core room opens."
+        ]
       },
       {
         "id": "sec_28",
@@ -1246,7 +1408,13 @@
           "min": 39,
           "max": 41
         },
-        "common_level_range_display": "39-41"
+        "common_level_range_display": "39-41",
+        "route_summary": "Stay on the main canals, crossing bridges toward the flooded plaza exit.",
+        "route_steps": [
+          "Follow canal edges, swapping sides via bridges when needed.",
+          "Enter the Drowned City when you reach the submerged hub.",
+          "Keep to the primary route until the final exit."
+        ]
       },
       {
         "id": "sec_29",
@@ -1262,7 +1430,13 @@
           "min": 41,
           "max": 43
         },
-        "common_level_range_display": "41-43"
+        "common_level_range_display": "41-43",
+        "route_summary": "Vault rails to Forgemaster; Apex climb with shade windows; Kopec outer path to Ketzuli.",
+        "route_steps": [
+          "Follow rail lines in the Molten Vault to Mektul/bench unlock.",
+          "In Apex of Filth, climb ramps during shade downtime to reach the top.",
+          "Temple of Kopec: circle the outer path into the boss arena."
+        ]
       },
       {
         "id": "sec_30",
@@ -1276,7 +1450,12 @@
           "min": 43,
           "max": 44
         },
-        "common_level_range_display": "43-44"
+        "common_level_range_display": "43-44",
+        "route_summary": "Short connector; go straight to the exit/portal.",
+        "route_steps": [
+          "Head forward along the main corridor.",
+          "Ignore side rooms; leave as soon as the exit appears."
+        ]
       },
       {
         "id": "sec_31",
@@ -1290,7 +1469,13 @@
           "min": 44,
           "max": 45
         },
-        "common_level_range_display": "44-45"
+        "common_level_range_display": "44-45",
+        "route_summary": "Past zone; take the main road to the Sacrificial Heart objective and exit.",
+        "route_steps": [
+          "Enter the past portal and follow the primary road.",
+          "Use the Sacrificial Heart at the marked altar.",
+          "Leave once the objective is complete."
+        ]
       },
       {
         "id": "sec_32",
@@ -1304,7 +1489,13 @@
           "min": 45,
           "max": 46
         },
-        "common_level_range_display": "45-46"
+        "common_level_range_display": "45-46",
+        "route_summary": "Linear past zone; rush to Doryani and exit.",
+        "route_steps": [
+          "Take the past portal and head straight forward.",
+          "Ignore optional side wings to save time.",
+          "Defeat Doryani and leave."
+        ]
       },
       {
         "id": "sec_33",
@@ -1318,7 +1509,13 @@
           "min": 53,
           "max": 54
         },
-        "common_level_range_display": "53-54"
+        "common_level_range_display": "53-54",
+        "route_summary": "Hub zone; tag waypoint and choose your next targets.",
+        "route_steps": [
+          "Grab waypoint/vendors on arrival.",
+          "Plan which surrounding zones to tackle next.",
+          "Return here between objectives."
+        ]
       },
       {
         "id": "sec_34",
@@ -1333,7 +1530,13 @@
           "min": 46,
           "max": 48
         },
-        "common_level_range_display": "46-48"
+        "common_level_range_display": "46-48",
+        "route_summary": "Boat to island; follow coast to the cavern; descend to the Deep Mother.",
+        "route_steps": [
+          "Take the boat and hug the coastline to the cavern entrance.",
+          "Move downward through the cavern to the arena.",
+          "Kill the Deep Mother and leave."
+        ]
       },
       {
         "id": "sec_35",
@@ -1347,7 +1550,13 @@
           "min": 46,
           "max": 47
         },
-        "common_level_range_display": "46-47"
+        "common_level_range_display": "46-47",
+        "route_summary": "Linear prison crawl; reach the Goddess reward and exit.",
+        "route_steps": [
+          "Follow cell blocks toward the central yard.",
+          "Interact with the Goddess of Justice reward.",
+          "Exit via the far gate."
+        ]
       },
       {
         "id": "sec_36",
@@ -1361,7 +1570,13 @@
           "min": 46,
           "max": 47
         },
-        "common_level_range_display": "46-47"
+        "common_level_range_display": "46-47",
+        "route_summary": "Climb to the Silent Hall; complete tests and take the reward.",
+        "route_steps": [
+          "Use bridges to move upward through the arena wings.",
+          "Finish the Tests of Mettle and reach the Silent Hall.",
+          "Take the permanent buff and leave."
+        ]
       },
       {
         "id": "sec_37",
@@ -1375,7 +1590,13 @@
           "min": 47,
           "max": 48
         },
-        "common_level_range_display": "47-48"
+        "common_level_range_display": "47-48",
+        "route_summary": "Advance through trial arenas to Yama; keep moving around totems.",
+        "route_steps": [
+          "Follow the main path through each arena segment.",
+          "Complete the Trial and face Yama.",
+          "Collect rewards and exit."
+        ]
       },
       {
         "id": "sec_38",
@@ -1390,7 +1611,13 @@
           "min": 46,
           "max": 48
         },
-        "common_level_range_display": "46-48"
+        "common_level_range_display": "46-48",
+        "route_summary": "Shoreline route to Hartlin; brace for Omniphobia reveal; exit to Kingsmarch.",
+        "route_steps": [
+          "Move along the docks/shoreline toward the ship encounter.",
+          "Defeat Captain Hartlin and handle the reveal event.",
+          "Use the exit to return to Kingsmarch."
+        ]
       },
       {
         "id": "sec_39",
@@ -1405,7 +1632,13 @@
           "min": 46,
           "max": 48
         },
-        "common_level_range_display": "46-48"
+        "common_level_range_display": "46-48",
+        "route_summary": "Circle the island to the Warrens; do optional Blind Beast, then Krutog.",
+        "route_steps": [
+          "Run the island perimeter to find the Warrens entrance.",
+          "Take the optional Blind Beast if you detour.",
+          "Push to Krutog and exit."
+        ]
       },
       {
         "id": "sec_40",
@@ -1419,7 +1652,13 @@
           "min": 54,
           "max": 55
         },
-        "common_level_range_display": "54-55"
+        "common_level_range_display": "54-55",
+        "route_summary": "Follow main path; only detour for permanent power/required gates.",
+        "route_steps": [
+          "Commit to a direction; avoid full-clears.",
+          "Do permanent power as soon as encountered.",
+          "Exit immediately after required objective."
+        ]
       },
       {
         "id": "sec_41",
@@ -1433,7 +1672,13 @@
           "min": 54,
           "max": 55
         },
-        "common_level_range_display": "54-55"
+        "common_level_range_display": "54-55",
+        "route_summary": "Follow main path; only detour for permanent power/required gates.",
+        "route_steps": [
+          "Commit to a direction; avoid full-clears.",
+          "Do permanent power as soon as encountered.",
+          "Exit immediately after required objective."
+        ]
       },
       {
         "id": "sec_42",
@@ -1447,7 +1692,13 @@
           "min": 56,
           "max": 57
         },
-        "common_level_range_display": "56-57"
+        "common_level_range_display": "56-57",
+        "route_summary": "Follow main path; only detour for permanent power/required gates.",
+        "route_steps": [
+          "Commit to a direction; avoid full-clears.",
+          "Do permanent power as soon as encountered.",
+          "Exit immediately after required objective."
+        ]
       },
       {
         "id": "sec_43",
@@ -1461,7 +1712,13 @@
           "min": 56,
           "max": 57
         },
-        "common_level_range_display": "56-57"
+        "common_level_range_display": "56-57",
+        "route_summary": "Follow main path; only detour for permanent power/required gates.",
+        "route_steps": [
+          "Commit to a direction; avoid full-clears.",
+          "Do permanent power as soon as encountered.",
+          "Exit immediately after required objective."
+        ]
       },
       {
         "id": "sec_44",
@@ -1475,7 +1732,13 @@
           "min": 54,
           "max": 55
         },
-        "common_level_range_display": "54-55"
+        "common_level_range_display": "54-55",
+        "route_summary": "Follow main path; only detour for permanent power/required gates.",
+        "route_steps": [
+          "Commit to a direction; avoid full-clears.",
+          "Do permanent power as soon as encountered.",
+          "Exit immediately after required objective."
+        ]
       },
       {
         "id": "sec_45",
@@ -1489,7 +1752,13 @@
           "min": 55,
           "max": 56
         },
-        "common_level_range_display": "55-56"
+        "common_level_range_display": "55-56",
+        "route_summary": "Follow main path; only detour for permanent power/required gates.",
+        "route_steps": [
+          "Commit to a direction; avoid full-clears.",
+          "Do permanent power as soon as encountered.",
+          "Exit immediately after required objective."
+        ]
       },
       {
         "id": "sec_46",
@@ -1503,7 +1772,13 @@
           "min": 56,
           "max": 57
         },
-        "common_level_range_display": "56-57"
+        "common_level_range_display": "56-57",
+        "route_summary": "Follow main path; only detour for permanent power/required gates.",
+        "route_steps": [
+          "Commit to a direction; avoid full-clears.",
+          "Do permanent power as soon as encountered.",
+          "Exit immediately after required objective."
+        ]
       },
       {
         "id": "sec_47",
@@ -1517,7 +1792,13 @@
           "min": 56,
           "max": 57
         },
-        "common_level_range_display": "56-57"
+        "common_level_range_display": "56-57",
+        "route_summary": "Follow main path; only detour for permanent power/required gates.",
+        "route_steps": [
+          "Commit to a direction; avoid full-clears.",
+          "Do permanent power as soon as encountered.",
+          "Exit immediately after required objective."
+        ]
       },
       {
         "id": "sec_48",
@@ -1531,7 +1812,13 @@
           "min": 56,
           "max": 57
         },
-        "common_level_range_display": "56-57"
+        "common_level_range_display": "56-57",
+        "route_summary": "Follow main path; only detour for permanent power/required gates.",
+        "route_steps": [
+          "Commit to a direction; avoid full-clears.",
+          "Do permanent power as soon as encountered.",
+          "Exit immediately after required objective."
+        ]
       },
       {
         "id": "sec_49",
@@ -1545,7 +1832,13 @@
           "min": 54,
           "max": 55
         },
-        "common_level_range_display": "54-55"
+        "common_level_range_display": "54-55",
+        "route_summary": "Follow main path; only detour for permanent power/required gates.",
+        "route_steps": [
+          "Commit to a direction; avoid full-clears.",
+          "Do permanent power as soon as encountered.",
+          "Exit immediately after required objective."
+        ]
       },
       {
         "id": "sec_50",
@@ -1559,7 +1852,13 @@
           "min": 54,
           "max": 55
         },
-        "common_level_range_display": "54-55"
+        "common_level_range_display": "54-55",
+        "route_summary": "Follow main path; only detour for permanent power/required gates.",
+        "route_steps": [
+          "Commit to a direction; avoid full-clears.",
+          "Do permanent power as soon as encountered.",
+          "Exit immediately after required objective."
+        ]
       },
       {
         "id": "sec_51",
@@ -1573,7 +1872,13 @@
           "min": 55,
           "max": 56
         },
-        "common_level_range_display": "55-56"
+        "common_level_range_display": "55-56",
+        "route_summary": "Follow main path; only detour for permanent power/required gates.",
+        "route_steps": [
+          "Commit to a direction; avoid full-clears.",
+          "Do permanent power as soon as encountered.",
+          "Exit immediately after required objective."
+        ]
       },
       {
         "id": "sec_52",
@@ -1587,7 +1892,13 @@
           "min": 56,
           "max": 57
         },
-        "common_level_range_display": "56-57"
+        "common_level_range_display": "56-57",
+        "route_summary": "Follow main path; only detour for permanent power/required gates.",
+        "route_steps": [
+          "Commit to a direction; avoid full-clears.",
+          "Do permanent power as soon as encountered.",
+          "Exit immediately after required objective."
+        ]
       },
       {
         "id": "sec_53",
@@ -1601,7 +1912,13 @@
           "min": 56,
           "max": 57
         },
-        "common_level_range_display": "56-57"
+        "common_level_range_display": "56-57",
+        "route_summary": "Follow main path; only detour for permanent power/required gates.",
+        "route_steps": [
+          "Commit to a direction; avoid full-clears.",
+          "Do permanent power as soon as encountered.",
+          "Exit immediately after required objective."
+        ]
       },
       {
         "id": "sec_54",
@@ -1613,7 +1930,13 @@
           "min": 60,
           "max": 65
         },
-        "common_level_range_display": "60-65"
+        "common_level_range_display": "60-65",
+        "route_summary": "Follow main path; only detour for permanent power/required gates.",
+        "route_steps": [
+          "Commit to a direction; avoid full-clears.",
+          "Do permanent power as soon as encountered.",
+          "Exit immediately after required objective."
+        ]
       }
     ]
   },
