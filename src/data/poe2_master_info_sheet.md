@@ -254,8 +254,10 @@ This table is the **canonical website guide section order** for Early Access, wi
   - `static_panels.how_to_play` (string/markdown)
   - `static_panels.key_tips` (string/markdown)
   - `milestone_groups[]`: `{ id, label, level_range:{min,max}, items[] }`
-  - `section_inserts[]`: `{ campaign_section_id, milestone_group_ids[], checklist_item_ids[], placement_hint, notes }`
+- `section_inserts[]`: `{ campaign_section_id, milestone_group_ids[], checklist_item_ids[], placement_hint, notes }`
   - `rules.auto_map_milestone_groups.method = "level_range_overlap"` (optional helper rule)
+- `upgrade_rules[]`: `{ id, min_level?, max_level?, title, detail?, tags?[] }` (matched by overlap with section level ranges)
+- Campaign sections may include optional helpers: `route_summary` (string), `route_steps[]`, `tips[]`.
 
 **Recommended rendering rule (simple default)**
 - When rendering a campaign section, show any milestone group whose `level_range` overlaps that section’s `common_level_range`.

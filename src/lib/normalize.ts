@@ -9,6 +9,7 @@ import type {
   NormalizedChecklistItem,
   NormalizedSection,
   RewardContainer,
+  UpgradeRule,
 } from '../types/masterDb'
 
 const interludeTitleMap: Record<string, string> = {
@@ -104,6 +105,19 @@ const interludeRewards = buildRewardIndex(masterDb.interludes, (key) => {
   return interludeTitleMap[key] ?? key
 })
 
+const upgradeRules: UpgradeRule[] = masterDb.upgrade_rules ?? []
+
+const overlapsLevelRange = (
+  sectionRange: { min?: number; max?: number },
+  ruleRange: { min?: number; max?: number },
+) => {
+  const sectionMin = sectionRange.min ?? Number.NEGATIVE_INFINITY
+  const sectionMax = sectionRange.max ?? Number.POSITIVE_INFINITY
+  const ruleMin = ruleRange.min ?? Number.NEGATIVE_INFINITY
+  const ruleMax = ruleRange.max ?? Number.POSITIVE_INFINITY
+  return sectionMin <= ruleMax && sectionMax >= ruleMin
+}
+
 const hashChecklistId = (sectionId: string, text: string) => {
   const normalized = text.trim().toLowerCase().replace(/\s+/g, ' ')
   const slug = normalized.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
@@ -148,9 +162,10 @@ const buildChecklistItems = (
   sectionId: string,
   resolvedZones: string[],
   rewards: RewardContainer | undefined,
-): NormalizedChecklistItem[] => {
+): { checklist: NormalizedChecklistItem[]; sectionRewards: { text: string; tags: string[] }[] } => {
   const bossItems: { item: NormalizedChecklistItem; name: string }[] = []
   const rewardItems: { item: NormalizedChecklistItem; note: string }[] = []
+  const sectionRewards: { text: string; tags: string[] }[] = []
 
   const candidates = rewards?.zones ?? []
   candidates
@@ -222,16 +237,14 @@ const buildChecklistItems = (
     })
   }
 
-  const items: NormalizedChecklistItem[] = [
-    ...bossItems.map((entry) => entry.item),
-    ...rewardItems.map((reward) =>
-      impliedByMap.has(reward.item.id)
-        ? { ...reward.item, impliedBy: impliedByMap.get(reward.item.id) }
-        : reward.item,
-    ),
-  ]
+  rewardItems.forEach((reward) => {
+    if (impliedByMap.has(reward.item.id)) return
+    sectionRewards.push({ text: reward.note, tags: reward.item.tags })
+  })
 
-  return items
+  const items: NormalizedChecklistItem[] = bossItems.map((entry) => entry.item)
+
+  return { checklist: items, sectionRewards }
 }
 
 export const normalizeChapters = (): NormalizedChapter[] => {
@@ -247,8 +260,16 @@ export const normalizeChapters = (): NormalizedChapter[] => {
       zoneMap,
     )
 
+    const levelRangeValues = section.common_level_range ?? {}
+    const hasLevelRange = levelRangeValues.min !== undefined || levelRangeValues.max !== undefined
+    const upgrades = hasLevelRange
+      ? upgradeRules.filter((rule) =>
+          overlapsLevelRange(levelRangeValues, { min: rule.min_level, max: rule.max_level }),
+        )
+      : []
+
     const rewardsSource = actRewards[section.chapter] ?? interludeRewards[section.chapter]
-    const checklist = buildChecklistItems(section.id, zoneNames, rewardsSource)
+    const { checklist, sectionRewards } = buildChecklistItems(section.id, zoneNames, rewardsSource)
 
     return {
       id: section.id,
@@ -256,8 +277,14 @@ export const normalizeChapters = (): NormalizedChapter[] => {
       order: section.order,
       chapter: section.chapter,
       levelRange: formatLevelRange(section),
+      levelRangeValues,
       zoneNames,
       impliedSubzones,
+      routeSummary: section.route_summary,
+      routeSteps: section.route_steps ?? [],
+      tips: section.tips ?? [],
+      upgrades,
+      sectionRewards,
       checklist,
     }
   }

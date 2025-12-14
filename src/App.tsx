@@ -213,6 +213,16 @@ function App() {
               ...section.zoneNames,
               ...section.impliedSubzones,
               section.levelRange ?? '',
+              section.routeSummary ?? '',
+              section.routeSteps.join(' '),
+              section.tips.join(' '),
+              section.upgrades
+                .map(
+                  (upgrade) =>
+                    `${upgrade.title} ${upgrade.detail ?? ''} ${(upgrade.tags ?? []).join(' ')}`,
+                )
+                .join(' '),
+              section.sectionRewards.map((reward) => reward.text).join(' '),
             ]
               .join(' ')
               .toLowerCase()
@@ -482,34 +492,102 @@ function App() {
                       </div>
 
                       {expanded && (
-                        <ul className="checklist">
-                          {section.checklist
-                            .filter((item) => !item.impliedBy)
-                            .map((item) => {
-                              const checked = completed.has(item.id)
-                              return (
-                                <li key={item.id} data-item-id={item.id}>
-                                  <label>
-                                    <input
-                                      type="checkbox"
-                                      checked={checked}
-                                      onChange={() => toggleItem(item)}
-                                    />
-                                    <span className={checked ? 'checked' : ''}>{item.text}</span>
-                                  </label>
-                                  {item.impliedRewards?.length ? (
-                                    <div className="reward-lines">
-                                      {item.impliedRewards.map((reward) => (
-                                        <div key={reward.id} className="reward-line">
-                                          {reward.text}
-                                        </div>
-                                      ))}
-                                    </div>
-                                  ) : null}
-                                </li>
-                              )
-                            })}
-                        </ul>
+                        <>
+                          {(section.routeSummary || section.routeSteps.length > 0) && (
+                            <details className="section-block" open>
+                              <summary>Route</summary>
+                              {section.routeSummary && (
+                                <p className="route-summary">{section.routeSummary}</p>
+                              )}
+                              {section.routeSteps.length > 0 && (
+                                <ul className="bullet-list">
+                                  {section.routeSteps.map((step, index) => (
+                                    <li key={index}>{step}</li>
+                                  ))}
+                                </ul>
+                              )}
+                            </details>
+                          )}
+
+                          <ul className="checklist">
+                            {section.checklist
+                              .filter((item) => !item.impliedBy)
+                              .map((item) => {
+                                const checked = completed.has(item.id)
+                                return (
+                                  <li key={item.id} data-item-id={item.id}>
+                                    <label>
+                                      <input
+                                        type="checkbox"
+                                        checked={checked}
+                                        onChange={() => toggleItem(item)}
+                                      />
+                                      <span className={checked ? 'checked' : ''}>{item.text}</span>
+                                    </label>
+                                    {item.impliedRewards?.length ? (
+                                      <div className="reward-lines">
+                                        {item.impliedRewards.map((reward) => {
+                                          const label = reward.text.replace(/^Reward:\s*/i, '')
+                                          return (
+                                            <div key={reward.id} className="reward-line">
+                                              {label}
+                                            </div>
+                                          )
+                                        })}
+                                      </div>
+                                    ) : null}
+                                  </li>
+                                )
+                              })}
+                          </ul>
+
+                          {section.sectionRewards.length > 0 && (
+                            <div className="section-block section-rewards">
+                              <div className="section-block-title">Section rewards</div>
+                              <ul className="bullet-list">
+                                {section.sectionRewards.map((reward, index) => (
+                                  <li key={index}>{reward.text}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          {section.tips.length > 0 && (
+                            <details className="section-block" key="tips">
+                              <summary>Tips</summary>
+                              <ul className="bullet-list">
+                                {section.tips.map((tip, index) => (
+                                  <li key={index}>{tip}</li>
+                                ))}
+                              </ul>
+                            </details>
+                          )}
+
+                          {section.upgrades.length > 0 && (
+                            <details className="section-block" key="upgrades">
+                              <summary>Upgrades</summary>
+                              <ul className="bullet-list">
+                                {section.upgrades.map((upgrade) => (
+                                  <li key={upgrade.id} className="upgrade-item">
+                                    <div className="upgrade-title">{upgrade.title}</div>
+                                    {upgrade.detail && (
+                                      <div className="upgrade-detail">{upgrade.detail}</div>
+                                    )}
+                                    {upgrade.tags?.length ? (
+                                      <div className="upgrade-tags">
+                                        {upgrade.tags.map((tag) => (
+                                          <span key={tag} className="mini-pill">
+                                            {tag}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    ) : null}
+                                  </li>
+                                ))}
+                              </ul>
+                            </details>
+                          )}
+                        </>
                       )}
                     </article>
                   )

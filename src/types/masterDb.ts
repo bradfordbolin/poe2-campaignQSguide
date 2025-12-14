@@ -18,6 +18,9 @@ export interface CampaignSection {
   deprecated?: boolean
   replaced_by?: string
   completion_rule?: CompletionRule
+  route_summary?: string
+  route_steps?: string[]
+  tips?: string[]
 }
 
 export interface ZonesDbEntry {
@@ -39,6 +42,15 @@ export interface RewardContainer {
   zones: RewardEntry[]
   town?: string
   title?: string
+}
+
+export interface UpgradeRule {
+  id: string
+  min_level?: number
+  max_level?: number
+  title: string
+  detail?: string
+  tags?: string[]
 }
 
 export type ChecklistClassification = 'required' | 'optional' | 'never_checklist'
@@ -64,6 +76,7 @@ export interface MasterDb {
   acts: Record<string, RewardContainer>
   interludes: Record<string, RewardContainer>
   checklist_overrides?: ChecklistOverrides
+  upgrade_rules?: UpgradeRule[]
 }
 
 export interface NormalizedChecklistItem {
@@ -82,8 +95,14 @@ export interface NormalizedSection {
   order: number
   chapter: string
   levelRange?: string
+  levelRangeValues?: { min?: number; max?: number }
   zoneNames: string[]
   impliedSubzones: string[]
+  routeSummary?: string
+  routeSteps: string[]
+  tips: string[]
+  upgrades: UpgradeRule[]
+  sectionRewards: { text: string; tags: string[] }[]
   checklist: NormalizedChecklistItem[]
 }
 

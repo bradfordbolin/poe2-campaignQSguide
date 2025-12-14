@@ -170,6 +170,62 @@
       "details": ""
     }
   ],
+  "upgrade_rules": [
+    {
+      "id": "upgrade_ms_boots_early",
+      "min_level": 1,
+      "max_level": 8,
+      "title": "Movement speed boots",
+      "detail": "Target 10-15% MS; transmute/augment early boots.",
+      "tags": [
+        "movement",
+        "boots"
+      ]
+    },
+    {
+      "id": "upgrade_flasks_early",
+      "min_level": 3,
+      "max_level": 16,
+      "title": "Flask upgrades",
+      "detail": "Keep life/mana flasks upgraded (Medium → Grand).",
+      "tags": [
+        "flasks",
+        "survival"
+      ]
+    },
+    {
+      "id": "upgrade_resist_rings",
+      "min_level": 6,
+      "max_level": 20,
+      "title": "Resistance rings",
+      "detail": "Craft/loot ruby/sapphire/topaz rings for upcoming bosses.",
+      "tags": [
+        "resists",
+        "defense"
+      ]
+    },
+    {
+      "id": "upgrade_weapon_refresh",
+      "min_level": 12,
+      "max_level": 40,
+      "title": "Refresh main weapon",
+      "detail": "Replace or craft your weapon every ~8-10 levels.",
+      "tags": [
+        "weapon",
+        "damage"
+      ]
+    },
+    {
+      "id": "upgrade_flasks_late",
+      "min_level": 40,
+      "title": "Late campaign flasks",
+      "detail": "Upgrade to Gargantuan/Ultimate flasks and roll charge regen.",
+      "tags": [
+        "flasks",
+        "survival"
+      ]
+    }
+  ],
   "acts": {
     "act_1": {
       "title": "The Iron Count's Domain",

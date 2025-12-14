@@ -302,6 +302,37 @@ button:disabled {
   opacity: var(--done-opacity);
 }
 
+.section-block {
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel-strong);
+  padding: 10px 12px;
+}
+
+.section-block summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.bullet-list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+  color: var(--muted);
+}
+
+.route-summary {
+  margin: 8px 0 0;
+}
+
+.section-rewards .section-block-title {
+  font-weight: 700;
+  color: var(--text);
+}
+
 .reward-lines {
   margin-left: 26px;
   margin-top: 4px;
@@ -312,6 +343,36 @@ button:disabled {
 
 .reward-line {
   font-size: 14px;
+}
+
+.upgrade-item {
+  display: grid;
+  gap: 4px;
+}
+
+.upgrade-title {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.upgrade-detail {
+  color: var(--muted);
+}
+
+.upgrade-tags {
+  display: inline-flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.mini-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--pill-bg);
+  color: var(--pill-text);
+  font-size: 12px;
+  border: 1px solid var(--border);
 }
 
 .empty {
