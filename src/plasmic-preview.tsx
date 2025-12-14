@@ -4,37 +4,37 @@ import { PlasmicComponent, PlasmicRootProvider } from '@plasmicapp/loader-react'
 import { PLASMIC } from './plasmic-init'
 
 const root = document.getElementById('root')!
-
-const componentName =
-  (import.meta.env.VITE_PLASMIC_PREVIEW_COMPONENT as string | undefined) ??
-  'Homepage'
+const reactRoot = createRoot(root)
 
 const renderMessage = (message: string) => {
-  createRoot(root).render(
+  reactRoot.render(
     <StrictMode>
       <div style={{ padding: 16, fontFamily: 'system-ui' }}>{message}</div>
     </StrictMode>,
   )
 }
 
-if (!PLASMIC) {
-  renderMessage(
-    'Plasmic is not configured. Check .env.local values and restart `npm run dev`.',
-  )
-} else {
+;(async () => {
+  if (!PLASMIC) {
+    renderMessage(
+      'Plasmic is not configured. Check .env.local values and restart `npm run dev`.',
+    )
+    return
+  }
+
   try {
-    const data = await PLASMIC.fetchComponentData(componentName)
-    createRoot(root).render(
+    const prefetched = await PLASMIC.fetchComponentData('Homepage')
+    reactRoot.render(
       <StrictMode>
-        <PlasmicRootProvider loader={PLASMIC} prefetchedData={data}>
-          <PlasmicComponent component={componentName} />
+        <PlasmicRootProvider loader={PLASMIC} prefetchedData={prefetched}>
+          <PlasmicComponent component="Homepage" />
         </PlasmicRootProvider>
       </StrictMode>,
     )
   } catch (error) {
     console.error(error)
     renderMessage(
-      `Failed to load Plasmic component "${componentName}". Check the component name and your .env.local settings.`,
+      'Failed to load Plasmic component "Homepage". Check your .env.local settings and restart `npm run dev`.',
     )
   }
-}
+})()
