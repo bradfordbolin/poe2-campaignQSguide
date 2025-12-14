@@ -125,3 +125,58 @@
   --shadow: rgba(0, 0, 0, 0.65);
   --pill-bg: rgba(227, 193, 107, 0.15);
 }
+
+:root[data-theme='poe2-light'] {
+  color-scheme: light;
+  --bg: #f7f7f5;
+  --text: #111827;
+  --muted: #4b5563;
+  --panel: #ffffff;
+  --panel-strong: #f1f5f9;
+  --card: #ffffff;
+  --border: rgba(15, 23, 42, 0.14);
+  --accent: #b45309;
+  --accent2: #0284c7;
+  --focus: #0ea5e9;
+  --shadow: rgba(15, 23, 42, 0.08);
+  --progress-bg: rgba(15, 23, 42, 0.12);
+  --pill-bg: rgba(180, 83, 9, 0.12);
+  --pill-text: #111827;
+  --input-border: rgba(15, 23, 42, 0.18);
+  --button-text: #ffffff;
+  --button-secondary-bg: rgba(15, 23, 42, 0.06);
+  --row-hover: rgba(15, 23, 42, 0.04);
+  --done-opacity: 0.55;
+}
+
+:root[data-theme='poe2-dark'] {
+  color-scheme: dark;
+  --bg: #0b0f14;
+  --text: #e6edf3;
+  --muted: #9aa7b3;
+  --panel: #0f1520;
+  --panel-strong: #131c2a;
+  --card: #111a26;
+  --border: rgba(148, 163, 184, 0.24);
+  --accent: #60a5fa;
+  --accent2: #34d399;
+  --focus: #93c5fd;
+  --shadow: rgba(0, 0, 0, 0.66);
+  --pill-bg: rgba(96, 165, 250, 0.14);
+}
+
+:root[data-theme='poe2-oled'] {
+  color-scheme: dark;
+  --bg: #000000;
+  --text: #f5f5f5;
+  --muted: #bdbdbd;
+  --panel: #050505;
+  --panel-strong: #0a0a0a;
+  --card: #101114;
+  --border: rgba(255, 255, 255, 0.14);
+  --accent: #f0b35a;
+  --accent2: #7ce7ff;
+  --focus: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.85);
+  --pill-bg: rgba(240, 179, 90, 0.14);
+}

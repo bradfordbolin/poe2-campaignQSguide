@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { normalizeChapters, masterDb } from './lib/normalize'
 import type { NormalizedChecklistItem } from './types/masterDb'
 import {
@@ -31,18 +31,24 @@ import {
   AlertDialogTitle,
 } from './components/ui/alert-dialog'
 import {
+  Check,
   ChevronsDown,
   ChevronsUp,
   Link2,
+  PanelLeft,
   RotateCcw,
   Search,
   Settings2,
   SkipForward,
 } from 'lucide-react'
 import { toast } from 'sonner'
+import { cn } from './lib/utils'
 
 type ThemeId =
   | 'poe2-obsidian-gilt'
+  | 'poe2-light'
+  | 'poe2-dark'
+  | 'poe2-oled'
   | 'poe2-vaal-ember'
   | 'poe2-verdant-eldritch'
   | 'poe2-blood-moon'
@@ -51,6 +57,9 @@ type ThemeId =
 
 const themeOptions: { label: string; value: ThemeId }[] = [
   { label: 'Obsidian Gilt', value: 'poe2-obsidian-gilt' },
+  { label: 'Light', value: 'poe2-light' },
+  { label: 'Dark', value: 'poe2-dark' },
+  { label: 'OLED', value: 'poe2-oled' },
   { label: 'Vaal Ember', value: 'poe2-vaal-ember' },
   { label: 'Eldritch Verdigris', value: 'poe2-verdant-eldritch' },
   { label: 'Blood Moon Brass', value: 'poe2-blood-moon' },
@@ -279,6 +288,7 @@ function App() {
   )
   const [search, setSearch] = useState('')
   const [gameInfo, setGameInfo] = useState<Poe2GameInfo | null>(null)
+  const [tocOpen, setTocOpen] = useState(false)
   const storedUiPrefs = loadUiPrefs()
   const initialRememberOpenPanels =
     typeof storedUiPrefs.rememberOpenPanels === 'boolean'
@@ -339,6 +349,31 @@ function App() {
     return filtered.length > 0 ? filtered : getDefaultOpenSections()
   })
 
+  const [activeSectionId, setActiveSectionId] = useState<string>(() => {
+    if (typeof window === 'undefined') return ''
+    return window.location.hash.replace('#', '')
+  })
+
+  const headerRef = useRef<HTMLElement | null>(null)
+  const [headerHeight, setHeaderHeight] = useState(0)
+
+  useLayoutEffect(() => {
+    const headerEl = headerRef.current
+    if (!headerEl) return
+
+    const update = () => {
+      setHeaderHeight(headerEl.getBoundingClientRect().height)
+    }
+
+    update()
+    if (typeof ResizeObserver === 'undefined') return
+
+    const observer = new ResizeObserver(update)
+    observer.observe(headerEl)
+
+    return () => observer.disconnect()
+  }, [])
+
   useEffect(() => {
     persistCompleted(completed)
   }, [completed])
@@ -380,6 +415,7 @@ function App() {
   useEffect(() => {
     const hash = window.location.hash.replace('#', '')
     if (!hash) return
+    setActiveSectionId(hash)
     const sectionInfo = sectionItemMap.get(hash)
     if (sectionInfo) {
       setOpenChapters((prev) =>
@@ -547,6 +583,7 @@ function App() {
 
     setOpenChapters((prev) => Array.from(new Set([...prev, targetChapter])))
     setOpenSections((prev) => Array.from(new Set([...prev, targetSectionId])))
+    setActiveSectionId(targetSectionId)
 
     const hash = `#${targetSectionId}`
     if (window.location.hash !== hash) {
@@ -596,32 +633,52 @@ function App() {
     toast.success(`${chapterTitle} reset`)
   }
 
-  const handleSectionLink = (sectionId: string) => {
+  const navigateToSection = (
+    sectionId: string,
+    options: { behavior?: ScrollBehavior; closeToc?: boolean } = {}
+  ) => {
     const info = sectionItemMap.get(sectionId)
     if (info) {
       setOpenChapters((prev) => Array.from(new Set([...prev, info.chapter])))
       setOpenSections((prev) => Array.from(new Set([...prev, sectionId])))
     }
 
+    setActiveSectionId(sectionId)
+
+    const hash = `#${sectionId}`
+    if (window.location.hash !== hash) {
+      window.history.replaceState(null, '', hash)
+    }
+
+    if (options.closeToc) {
+      setTocOpen(false)
+    }
+
+    requestAnimationFrame(() => {
+      const el = document.getElementById(sectionId)
+      el?.scrollIntoView({
+        behavior: options.behavior ?? 'smooth',
+        block: 'start',
+      })
+    })
+  }
+
+  const handleSectionLink = (sectionId: string) => {
+    navigateToSection(sectionId, { behavior: 'smooth' })
+
     const hash = `#${sectionId}`
     const url = `${window.location.origin}${window.location.pathname}${window.location.search}${hash}`
+
+    const fallback = () => toast.message('Link ready in URL')
 
     if (navigator.clipboard?.writeText) {
       navigator.clipboard
         .writeText(url)
         .then(() => toast.success('Link copied'))
-        .catch(() => {
-          window.history.replaceState(null, '', hash)
-          toast.message('Link ready in URL')
-        })
+        .catch(fallback)
     } else {
-      window.history.replaceState(null, '', hash)
-      toast.message('Link ready in URL')
+      fallback()
     }
-
-    window.history.replaceState(null, '', hash)
-    const el = document.getElementById(sectionId)
-    el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   const handleChapterSectionAccordionChange = (
@@ -650,6 +707,65 @@ function App() {
     setOpenSections([])
     setOpenChapters([])
   }
+
+  const tocTopOffset = stickyHeader ? headerHeight + 16 : 16
+  const sectionScrollMarginTop = stickyHeader ? headerHeight + 24 : 24
+
+  const renderTocList = (closeOnNavigate: boolean) => (
+    <nav aria-label="Table of contents" className="space-y-4">
+      {filteredChapters.map((chapter) => {
+        const chapterTotals = computeProgress([chapter], completed)
+        return (
+          <div key={chapter.title} className="space-y-1">
+            <div className="flex items-center justify-between px-2">
+              <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                {chapter.title}
+              </div>
+              <div className="text-xs text-muted-foreground">
+                {chapterTotals.done} / {chapterTotals.total}
+              </div>
+            </div>
+            <div className="space-y-1">
+              {chapter.sections.map((section) => {
+                const visibleIds =
+                  visibleChecklistIdsBySection.get(section.id) ?? []
+                const sectionComplete =
+                  visibleIds.length > 0 &&
+                  visibleIds.every((id) => completed.has(id))
+                const active = section.id === activeSectionId
+
+                return (
+                  <button
+                    key={section.id}
+                    type="button"
+                    aria-current={active ? 'location' : undefined}
+                    className={cn(
+                      'flex w-full items-start justify-between gap-3 rounded-md px-3 py-2 text-left text-sm transition-colors',
+                      active
+                        ? 'bg-muted text-foreground'
+                        : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                    )}
+                    onClick={() =>
+                      navigateToSection(section.id, {
+                        closeToc: closeOnNavigate,
+                      })
+                    }
+                  >
+                    <span className="min-w-0 flex-1 truncate">
+                      {section.title}
+                    </span>
+                    {sectionComplete ? (
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    ) : null}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        )
+      })}
+    </nav>
+  )
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -731,6 +847,7 @@ function App() {
       </AlertDialog>
 
       <header
+        ref={headerRef}
         className={[
           stickyHeader ? 'sticky top-0' : '',
           'z-20 border-b border-border bg-background backdrop-blur',
@@ -738,12 +855,41 @@ function App() {
           .filter(Boolean)
           .join(' ')}
       >
-        <div className="mx-auto flex max-w-5xl flex-col gap-2 px-4 py-3">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="min-w-[220px]">
               <div className="flex flex-wrap items-center gap-2">
+                <Sheet open={tocOpen} onOpenChange={setTocOpen}>
+                  <SheetTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="lg:hidden"
+                      title="Table of contents"
+                      aria-label="Open table of contents"
+                    >
+                      <PanelLeft className="h-4 w-4" />
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent
+                    side="left"
+                    className="flex w-[320px] flex-col p-0 sm:max-w-sm"
+                  >
+                    <div className="border-b border-border px-5 py-4">
+                      <div className="text-sm font-semibold">
+                        Table of contents
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        Jump to any section.
+                      </div>
+                    </div>
+                    <div className="min-h-0 flex-1 overflow-auto p-3">
+                      {renderTocList(true)}
+                    </div>
+                  </SheetContent>
+                </Sheet>
                 <div className="text-lg font-bold leading-tight">
-                  POE2 Campaign Checklist
+                  Brodfard's Campaign Quickstart Guide
                 </div>
                 {gameInfo?.steam?.latest_version ? (
                   <a
@@ -1105,139 +1251,168 @@ function App() {
       <main
         className={
           compact
-            ? 'mx-auto max-w-5xl px-4 py-4'
-            : 'mx-auto max-w-5xl px-4 py-6'
+            ? 'mx-auto max-w-7xl px-4 py-4'
+            : 'mx-auto max-w-7xl px-4 py-6'
         }
       >
-        {filteredChapters.length === 0 ? (
-          <div className="rounded-lg border border-border bg-card p-8 text-center text-sm text-muted-foreground">
-            No sections match your search.
-          </div>
-        ) : (
-          <Accordion
-            type="multiple"
-            value={openChapters}
-            onValueChange={setOpenChapters}
-            className="space-y-4"
-          >
-            {filteredChapters.map((chapter) => {
-              const chapterTotals = computeProgress([chapter], completed)
-              const chapterSectionIds =
-                chapterSectionIdsMap.get(chapter.title) ?? []
-              const chapterOpenSections = openSections.filter((id) =>
-                chapterSectionIds.includes(id)
-              )
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[280px,minmax(0,1fr)]">
+          <aside className="hidden lg:block">
+            <div
+              className="sticky"
+              style={{
+                top: tocTopOffset,
+                height: `calc(100vh - ${tocTopOffset}px)`,
+              }}
+            >
+              <div className="flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+                <div className="flex items-center justify-between gap-2 border-b border-border px-4 py-3">
+                  <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Contents
+                  </div>
+                  <Badge variant="outline">
+                    {doneCount} / {totals.total}
+                  </Badge>
+                </div>
+                <div className="min-h-0 flex-1 overflow-auto p-3">
+                  {renderTocList(false)}
+                </div>
+              </div>
+            </div>
+          </aside>
 
-              return (
-                <AccordionItem
-                  key={chapter.title}
-                  value={chapter.title}
-                  className="rounded-lg border border-border bg-card shadow-sm border-b-0"
-                >
-                  <AccordionTrigger className="px-4">
-                    <div className="flex w-full flex-wrap items-center justify-between gap-2">
-                      <div className="flex items-center gap-2">
-                        <div className="text-base font-semibold">
-                          {chapter.title}
-                        </div>
-                        <Badge variant="primary">
-                          {chapterTotals.done} / {chapterTotals.total}
-                        </Badge>
-                      </div>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="gap-2"
-                        onPointerDown={(event) => event.stopPropagation()}
-                        onClick={(event) => {
-                          event.preventDefault()
-                          event.stopPropagation()
-                          setResetActTarget(chapter.title)
-                        }}
-                      >
-                        <RotateCcw className="h-4 w-4" />
-                        Reset act
-                      </Button>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-4">
-                    <Accordion
-                      type="multiple"
-                      value={chapterOpenSections}
-                      onValueChange={(values) =>
-                        handleChapterSectionAccordionChange(
-                          chapter.title,
-                          values
-                        )
-                      }
-                      className="rounded-md border border-border"
+          <div className="min-w-0">
+            {filteredChapters.length === 0 ? (
+              <div className="rounded-lg border border-border bg-card p-8 text-center text-sm text-muted-foreground">
+                No sections match your search.
+              </div>
+            ) : (
+              <Accordion
+                type="multiple"
+                value={openChapters}
+                onValueChange={setOpenChapters}
+                className="space-y-4"
+              >
+                {filteredChapters.map((chapter) => {
+                  const chapterTotals = computeProgress([chapter], completed)
+                  const chapterSectionIds =
+                    chapterSectionIdsMap.get(chapter.title) ?? []
+                  const chapterOpenSections = openSections.filter((id) =>
+                    chapterSectionIds.includes(id)
+                  )
+
+                  return (
+                    <AccordionItem
+                      key={chapter.title}
+                      value={chapter.title}
+                      className="rounded-lg border border-border bg-card shadow-sm border-b-0"
                     >
-                      {chapter.sections.map((section) => {
-                        const visibleChecklistItems = section.checklist.filter(
-                          (item) => !item.impliedBy
-                        )
-                        const sectionComplete =
-                          visibleChecklistItems.length > 0 &&
-                          visibleChecklistItems.every((item) =>
-                            completed.has(item.id)
-                          )
-
-                        return (
-                          <AccordionItem
-                            key={section.id}
-                            value={section.id}
-                            id={section.id}
-                            className="px-4"
+                      <AccordionTrigger className="px-4">
+                        <div className="flex w-full flex-wrap items-center justify-between gap-2">
+                          <div className="flex items-center gap-2">
+                            <div className="text-base font-semibold">
+                              {chapter.title}
+                            </div>
+                            <Badge variant="primary">
+                              {chapterTotals.done} / {chapterTotals.total}
+                            </Badge>
+                          </div>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="gap-2"
+                            onPointerDown={(event) => event.stopPropagation()}
+                            onClick={(event) => {
+                              event.preventDefault()
+                              event.stopPropagation()
+                              setResetActTarget(chapter.title)
+                            }}
                           >
-                            <AccordionTrigger
-                              className={compact ? 'py-3' : 'py-4'}
-                            >
-                              <div className="flex w-full flex-col gap-1">
-                                <div className="flex flex-wrap items-center gap-2">
-                                  <div className="text-sm font-semibold">
-                                    {section.title}
+                            <RotateCcw className="h-4 w-4" />
+                            Reset act
+                          </Button>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent className="px-4">
+                        <Accordion
+                          type="multiple"
+                          value={chapterOpenSections}
+                          onValueChange={(values) =>
+                            handleChapterSectionAccordionChange(
+                              chapter.title,
+                              values
+                            )
+                          }
+                          className="rounded-md border border-border"
+                        >
+                          {chapter.sections.map((section) => {
+                            const visibleChecklistItems =
+                              section.checklist.filter((item) => !item.impliedBy)
+                            const sectionComplete =
+                              visibleChecklistItems.length > 0 &&
+                              visibleChecklistItems.every((item) =>
+                                completed.has(item.id)
+                              )
+
+                            return (
+                              <AccordionItem
+                                key={section.id}
+                                value={section.id}
+                                id={section.id}
+                                style={{
+                                  scrollMarginTop: sectionScrollMarginTop,
+                                }}
+                                className="px-4"
+                              >
+                                <AccordionTrigger
+                                  className={compact ? 'py-3' : 'py-4'}
+                                  onClick={() => setActiveSectionId(section.id)}
+                                >
+                                  <div className="flex w-full flex-col gap-1">
+                                    <div className="flex flex-wrap items-center gap-2">
+                                      <div className="text-sm font-semibold">
+                                        {section.title}
+                                      </div>
+                                      {section.levelRange ? (
+                                        <Badge variant="secondary">
+                                          Level {section.levelRange}
+                                        </Badge>
+                                      ) : null}
+                                      {sectionComplete ? (
+                                        <Badge variant="primary">Done</Badge>
+                                      ) : null}
+                                      <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        aria-label={`Copy link to ${section.title}`}
+                                        onPointerDown={(event) =>
+                                          event.stopPropagation()
+                                        }
+                                        onClick={(event) => {
+                                          event.preventDefault()
+                                          event.stopPropagation()
+                                          handleSectionLink(section.id)
+                                        }}
+                                      >
+                                        <Link2 className="h-4 w-4" />
+                                      </Button>
+                                    </div>
+                                    <div className="text-xs text-muted-foreground">
+                                      <span className="font-semibold text-foreground">
+                                        Zones:
+                                      </span>{' '}
+                                      {section.zoneNames.join(', ')}
+                                    </div>
+                                    {section.impliedSubzones.length > 0 ? (
+                                      <div className="text-xs text-muted-foreground">
+                                        <span className="font-semibold text-foreground">
+                                          Implied:
+                                        </span>{' '}
+                                        {section.impliedSubzones.join(', ')}
+                                      </div>
+                                    ) : null}
                                   </div>
-                                  {section.levelRange ? (
-                                    <Badge variant="secondary">
-                                      Level {section.levelRange}
-                                    </Badge>
-                                  ) : null}
-                                  {sectionComplete ? (
-                                    <Badge variant="primary">Done</Badge>
-                                  ) : null}
-                                  <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    aria-label={`Copy link to ${section.title}`}
-                                    onPointerDown={(event) =>
-                                      event.stopPropagation()
-                                    }
-                                    onClick={(event) => {
-                                      event.preventDefault()
-                                      event.stopPropagation()
-                                      handleSectionLink(section.id)
-                                    }}
-                                  >
-                                    <Link2 className="h-4 w-4" />
-                                  </Button>
-                                </div>
-                                <div className="text-xs text-muted-foreground">
-                                  <span className="font-semibold text-foreground">
-                                    Zones:
-                                  </span>{' '}
-                                  {section.zoneNames.join(', ')}
-                                </div>
-                                {section.impliedSubzones.length > 0 ? (
-                                  <div className="text-xs text-muted-foreground">
-                                    <span className="font-semibold text-foreground">
-                                      Implied:
-                                    </span>{' '}
-                                    {section.impliedSubzones.join(', ')}
-                                  </div>
-                                ) : null}
-                              </div>
-                            </AccordionTrigger>
-                            <AccordionContent className="pt-0">
+                                </AccordionTrigger>
+                                <AccordionContent className="pt-0">
                               {(section.routeSummary ||
                                 section.routeSteps.length > 0) && (
                                 <div className="mb-4 rounded-md border border-border bg-muted p-4">
@@ -1435,15 +1610,17 @@ function App() {
                               )}
                             </AccordionContent>
                           </AccordionItem>
-                        )
-                      })}
-                    </Accordion>
-                  </AccordionContent>
-                </AccordionItem>
-              )
-            })}
-          </Accordion>
-        )}
+                            )
+                          })}
+                        </Accordion>
+                      </AccordionContent>
+                    </AccordionItem>
+                  )
+                })}
+              </Accordion>
+            )}
+          </div>
+        </div>
       </main>
     </div>
   )
