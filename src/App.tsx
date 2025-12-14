@@ -71,6 +71,8 @@ const storageVersion = masterDb.meta?.revision
   ? `poe2-checklist-v${masterDb.meta.revision}`
   : 'poe2-checklist-v1'
 
+const uiStorageKey = masterDb.meta?.revision ? `poe2-ui-v${masterDb.meta.revision}` : 'poe2-ui-v1'
+
 const loadCompleted = (): Set<string> => {
   if (typeof localStorage === 'undefined') return new Set()
   const stored = localStorage.getItem(storageVersion)
@@ -96,6 +98,45 @@ const persistCompleted = (completed: Set<string>) => {
 const modeFilters: Record<'speedrun' | 'full', Set<NormalizedChecklistItem['classification']>> = {
   speedrun: new Set(['required']),
   full: new Set(['required', 'optional']),
+}
+
+type UiPrefs = {
+  mode: 'speedrun' | 'full'
+  stickyHeader: boolean
+  compact: boolean
+  showOptionalBadges: boolean
+  openChapters: string[]
+  openSections: string[]
+}
+
+const loadUiPrefs = (): Partial<UiPrefs> => {
+  if (typeof localStorage === 'undefined') return {}
+  try {
+    const raw = localStorage.getItem(uiStorageKey)
+    if (!raw) return {}
+    const parsed = JSON.parse(raw) as Partial<UiPrefs>
+    return parsed && typeof parsed === 'object' ? parsed : {}
+  } catch {
+    return {}
+  }
+}
+
+const persistUiPrefs = (prefs: UiPrefs) => {
+  if (typeof localStorage === 'undefined') return
+  try {
+    localStorage.setItem(uiStorageKey, JSON.stringify(prefs))
+  } catch (error) {
+    console.warn('Unable to store UI preferences', error)
+  }
+}
+
+const clearUiPrefs = () => {
+  if (typeof localStorage === 'undefined') return
+  try {
+    localStorage.removeItem(uiStorageKey)
+  } catch (error) {
+    console.warn('Unable to clear UI preferences', error)
+  }
 }
 
 const chapterItemIds = normalizedChapters.reduce<Map<string, Set<string>>>(
@@ -145,6 +186,8 @@ const getDefaultOpenSections = (mode: 'speedrun' | 'full') =>
       .map((section) => section.id),
   )
 
+const getDefaultOpenChapters = () => normalizedChapters.map((chapter) => chapter.title)
+
 const chapterSectionIdsMap = normalizedChapters.reduce<Map<string, string[]>>((acc, chapter) => {
   acc.set(chapter.title, chapter.sections.map((section) => section.id))
   return acc
@@ -154,12 +197,34 @@ function App() {
   const [theme, setTheme] = useState<ThemeId>(initialPreferences.theme)
   const [contrast, setContrast] = useState(initialPreferences.contrast === 'high')
   const [search, setSearch] = useState('')
-  const [mode, setMode] = useState<'speedrun' | 'full'>('speedrun')
-  const [completed, setCompleted] = useState<Set<string>>(() => loadCompleted())
-  const [openChapters, setOpenChapters] = useState<string[]>(() =>
-    normalizedChapters.map((chapter) => chapter.title),
+  const storedUiPrefs = loadUiPrefs()
+  const [mode, setMode] = useState<'speedrun' | 'full'>(() =>
+    storedUiPrefs.mode === 'full' || storedUiPrefs.mode === 'speedrun' ? storedUiPrefs.mode : 'speedrun',
   )
-  const [openSections, setOpenSections] = useState<string[]>(() => getDefaultOpenSections('speedrun'))
+  const [completed, setCompleted] = useState<Set<string>>(() => loadCompleted())
+  const [stickyHeader, setStickyHeader] = useState<boolean>(() =>
+    typeof storedUiPrefs.stickyHeader === 'boolean' ? storedUiPrefs.stickyHeader : true,
+  )
+  const [compact, setCompact] = useState<boolean>(() =>
+    typeof storedUiPrefs.compact === 'boolean' ? storedUiPrefs.compact : false,
+  )
+  const [showOptionalBadges, setShowOptionalBadges] = useState<boolean>(() =>
+    typeof storedUiPrefs.showOptionalBadges === 'boolean' ? storedUiPrefs.showOptionalBadges : true,
+  )
+  const [settingsOpen, setSettingsOpen] = useState(false)
+  const [openChapters, setOpenChapters] = useState<string[]>(() => {
+    const all = new Set(getDefaultOpenChapters())
+    const fromStorage = Array.isArray(storedUiPrefs.openChapters) ? storedUiPrefs.openChapters : []
+    const filtered = fromStorage.filter((title) => all.has(title))
+    return filtered.length > 0 ? filtered : getDefaultOpenChapters()
+  })
+  const [openSections, setOpenSections] = useState<string[]>(() => {
+    const allSections = new Set<string>()
+    normalizedChapters.forEach((chapter) => chapter.sections.forEach((section) => allSections.add(section.id)))
+    const fromStorage = Array.isArray(storedUiPrefs.openSections) ? storedUiPrefs.openSections : []
+    const filtered = fromStorage.filter((id) => allSections.has(id))
+    return filtered.length > 0 ? filtered : getDefaultOpenSections(mode)
+  })
 
   useEffect(() => {
     persistCompleted(completed)
@@ -188,6 +253,8 @@ function App() {
   }, [contrast])
 
   useEffect(() => {
+    setSettingsOpen(false)
+    setOpenChapters(getDefaultOpenChapters())
     setOpenSections(getDefaultOpenSections(mode))
   }, [mode])
 
@@ -204,6 +271,17 @@ function App() {
       el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     })
   }, [])
+
+  useEffect(() => {
+    persistUiPrefs({
+      mode,
+      stickyHeader,
+      compact,
+      showOptionalBadges,
+      openChapters,
+      openSections,
+    })
+  }, [mode, stickyHeader, compact, showOptionalBadges, openChapters, openSections])
 
   const filteredChapters = useMemo(() => {
     const query = search.trim().toLowerCase()
@@ -357,9 +435,28 @@ function App() {
     })
   }
 
+  const expandAll = () => {
+    const chapterTitles = filteredChapters.map((chapter) => chapter.title)
+    const sectionIds = filteredChapters.flatMap((chapter) => chapter.sections.map((section) => section.id))
+    setOpenChapters(chapterTitles)
+    setOpenSections(sectionIds)
+  }
+
+  const collapseAll = () => {
+    setOpenSections([])
+    setOpenChapters([])
+  }
+
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-20 border-b border-border bg-background backdrop-blur">
+      <header
+        className={[
+          stickyHeader ? 'sticky top-0' : '',
+          'z-20 border-b border-border bg-background backdrop-blur',
+        ]
+          .filter(Boolean)
+          .join(' ')}
+      >
         <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="min-w-[220px]">
@@ -397,11 +494,20 @@ function App() {
                 />
               </div>
 
+              <Button variant="outline" onClick={expandAll} disabled={filteredChapters.length === 0}>
+                Expand all
+              </Button>
+              <Button variant="outline" onClick={collapseAll} disabled={filteredChapters.length === 0}>
+                Collapse all
+              </Button>
               <Button variant="outline" onClick={handleNextUnchecked} disabled={!firstUnchecked}>
                 Next unchecked
               </Button>
               <Button variant="secondary" onClick={handleResetAll}>
                 Reset all
+              </Button>
+              <Button variant="ghost" onClick={() => setSettingsOpen((prev) => !prev)}>
+                Settings
               </Button>
             </div>
           </div>
@@ -446,10 +552,65 @@ function App() {
               </label>
             </div>
           </div>
+
+          {settingsOpen && (
+            <div className="rounded-md border border-border bg-card p-3 text-sm">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="font-semibold">UI settings</div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    clearUiPrefs()
+                    setStickyHeader(true)
+                    setCompact(false)
+                    setShowOptionalBadges(true)
+                    setMode('speedrun')
+                    setOpenChapters(getDefaultOpenChapters())
+                    setOpenSections(getDefaultOpenSections('speedrun'))
+                  }}
+                >
+                  Reset UI
+                </Button>
+              </div>
+              <Separator className="my-3" />
+              <div className="grid gap-3 sm:grid-cols-2">
+                <label className="flex cursor-pointer items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={stickyHeader}
+                    onChange={(event) => setStickyHeader(event.target.checked)}
+                    className="h-4 w-4 accent-primary"
+                  />
+                  <span>Sticky header</span>
+                </label>
+
+                <label className="flex cursor-pointer items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={compact}
+                    onChange={(event) => setCompact(event.target.checked)}
+                    className="h-4 w-4 accent-primary"
+                  />
+                  <span>Compact spacing</span>
+                </label>
+
+                <label className="flex cursor-pointer items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={showOptionalBadges}
+                    onChange={(event) => setShowOptionalBadges(event.target.checked)}
+                    className="h-4 w-4 accent-primary"
+                  />
+                  <span>Show optional badges</span>
+                </label>
+              </div>
+            </div>
+          )}
         </div>
       </header>
 
-      <main className="mx-auto max-w-5xl px-4 py-6">
+      <main className={compact ? 'mx-auto max-w-5xl px-4 py-4' : 'mx-auto max-w-5xl px-4 py-6'}>
         {filteredChapters.length === 0 ? (
           <div className="rounded-lg border border-border bg-card p-8 text-center text-sm text-muted-foreground">
             No sections match your search.
@@ -510,7 +671,7 @@ function App() {
                           id={section.id}
                           className="px-4"
                         >
-                          <AccordionTrigger className="py-4">
+                          <AccordionTrigger className={compact ? 'py-3' : 'py-4'}>
                             <div className="flex w-full flex-col gap-1">
                               <div className="flex flex-wrap items-center gap-2">
                                 <div className="text-sm font-semibold">{section.title}</div>
@@ -581,7 +742,7 @@ function App() {
                                         key={item.id}
                                         data-item-id={item.id}
                                         tabIndex={-1}
-                                        className="px-4 py-3"
+                                        className={compact ? 'px-4 py-2' : 'px-4 py-3'}
                                       >
                                         <label className="flex cursor-pointer items-start gap-3">
                                           <input
@@ -601,7 +762,7 @@ function App() {
                                               >
                                                 {item.text}
                                               </span>
-                                              {showOptional ? (
+                                              {showOptional && showOptionalBadges ? (
                                                 <Badge variant="outline">Optional</Badge>
                                               ) : null}
                                             </div>
