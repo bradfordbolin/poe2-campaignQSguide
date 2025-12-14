@@ -1,7 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { PlasmicCanvasHost } from '@plasmicapp/loader-react'
-import { PLASMIC } from './plasmic-init'
+import { PLASMIC } from './plasmic-loader'
+import './plasmic-init'
 
 const root = document.getElementById('root')!
 
