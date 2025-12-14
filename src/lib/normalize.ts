@@ -189,7 +189,6 @@ const hashChecklistId = (sectionId: string, text: string) => {
 }
 
 const isSectionActive = (section: CampaignSection) => {
-  if (section.id === 'sec_07') return false
   if (section.deprecated) return false
   if (section.is_active === false) return false
   return true
@@ -270,14 +269,14 @@ const buildChecklistItems = (
         const classification = classifyKey(boss)
         if (classification === 'never_checklist') return
 
-        const text = `Defeat: ${boss}`
+        const stableText = `Defeat: ${boss}`
         const tags =
           classification === 'optional'
             ? ['optional_content']
             : ['required_progression']
         const item: NormalizedChecklistItem = {
-          id: hashChecklistId(sectionId, text),
-          text,
+          id: hashChecklistId(sectionId, stableText),
+          text: boss,
           tags,
           kind: 'boss',
           classification,
@@ -292,11 +291,11 @@ const buildChecklistItems = (
           .map((matcher) => matcher.tag)
 
         if (tags.length > 0) {
-          const text = `Reward: ${note}`
+          const stableText = `Reward: ${note}`
           const classification = classifyRewardTags(tags)
           const item: NormalizedChecklistItem = {
-            id: hashChecklistId(sectionId, text),
-            text,
+            id: hashChecklistId(sectionId, stableText),
+            text: note,
             tags,
             kind: 'reward',
             classification,
@@ -326,9 +325,17 @@ const buildChecklistItems = (
 
   if (bossCount > 1) {
     rewardItems.forEach((reward) => {
-      const match = bossItems.find((boss) =>
-        reward.note.toLowerCase().includes(boss.name.toLowerCase())
-      )
+      const noteLower = reward.note.toLowerCase()
+      const match = bossItems.find((boss) => {
+        const cleaned = boss.name.replace(/\s*\(optional\)\s*$/i, '').trim()
+        if (!cleaned) return false
+        const candidate = cleaned.toLowerCase()
+        const withoutThe = candidate.replace(/^the\s+/, '')
+        return (
+          noteLower.includes(candidate) ||
+          (withoutThe !== candidate && noteLower.includes(withoutThe))
+        )
+      })
       if (match) {
         const implied = { ...reward.item, impliedBy: match.item.id }
         impliedByMap.set(reward.item.id, match.item.id)

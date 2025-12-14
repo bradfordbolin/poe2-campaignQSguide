@@ -1,6 +1,13 @@
-# POE2 Campaign Checklist
+# Brodfard’s Campaign Quickstart Guide
 
-A single-page Vite + React + TypeScript checklist for tracking Path of Exile 2 campaign progress by chapter and section.
+A single-page Path of Exile 2 campaign quickstart guide (Vite + React + TypeScript) with per-section routes and progress tracking.
+
+## Features
+- Act/Interlude accordion layout with section routes, checklists, tips, and upgrade reminders.
+- Speedrun vs Full modes (Speedrun = required/permanent power + required gates; Full adds optional content).
+- Progress + UI preferences persist in `localStorage` (versioned by `meta.revision`).
+- Sidebars: table of contents + search (left), live game info + helpful links (right).
+- Theme/font controls and common UX settings (compact mode, sticky header, etc).
 
 ## Master data
 - Canonical source files live at the repo root:
@@ -8,14 +15,16 @@ A single-page Vite + React + TypeScript checklist for tracking Path of Exile 2 c
   - `poe2_master_info_sheet.md`
 - Runtime uses bundled copies at `src/data/poe2_master_db.json` and `src/data/poe2_master_info_sheet.md`. Update these copies whenever the root master files change to keep the UI in sync.
 
+## Game info feeds
+- `public/poe2-game-info.json` drives the live sidebar stats (Steam player counts, league name + uptime, patch version/news).
+- Refresh locally with `npm run update:poe2-game-info` (requires internet).
+
 ## Data handling
-- Data types are defined in `src/types/masterDb.ts`.
-- Normalization and checklist generation live in `src/lib/normalize.ts`:
-  - Builds chapters in canonical order (Acts 1–4, then Interludes).
-  - Filters inactive/deprecated sections and omits `sec_07`.
-  - Resolves zone display names via `zones_db` and lists implied subzones for routing context.
-  - Generates checklist items per section (base objective + boss and reward notes) with stable IDs.
-- UI components consume the normalized data in `src/App.tsx` and persist completion state in `localStorage` (versioned using the master DB revision when present).
+- Types: `src/types/masterDb.ts`
+- Validation + normalization + checklist generation: `src/lib/validateData.ts`, `src/lib/normalize.ts`
+- UI + persistence: `src/App.tsx`
+
+Note: If you change boss keys or section IDs, you will break existing saved progress. Avoid bumping `meta.revision` unless you intentionally want to reset stored progress for everyone.
 
 ## Development
 ```
@@ -24,6 +33,7 @@ npm run dev
 npm run build
 npm run lint
 npm run format
+npm run update:poe2-game-info
 ```
 
 ## GitHub Pages

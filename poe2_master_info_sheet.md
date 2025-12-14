@@ -56,14 +56,18 @@ Note: Per user-provided walkthrough summary: full release planned as 6 acts with
 
 ### Act 2: Vastiri Outskirts
 
+- **Vastiri Outskirts**: Key: Rathbreaker
 - **Mawdun Mine**: Key: Rudja, the Dread Engineer — Rewards/Notes: Fire resistance recommended; frees Risu
 - **Traitor’s Passage**: Key: Balbala, the Traitor — Rewards/Notes: Barya for Trial of the Sekhemas (Ascendancy)
+- **The Halani Gates**: Key: Jamanra, the Risen King
 - **Trial of the Sekhemas**: Key: Rattlecage — Rewards/Notes: Ascendancy unlock (touch altar)
 - **Keth**: Key: Kabala, Constrictor Queen — Rewards/Notes: Book: +2 Weapon Set Passive Skill Points; Secret: guaranteed Magic Amulet
+- **Mastodon Badlands**: Key: Iktab, the Deathlord; Ekbab, Ancient Steed — Rewards/Notes: Quest: Mastodon Tusks (progression)
 - **Buried Shrines**: Key: Azarian, the Forsaken Son — Rewards/Notes: Resistance ring choice (Ruby recommended); Essence of Water; Uncut Support Gem
-- **Valley of the Titans / Titan Grotto**: Key: Zalmarath, the Colossus — Rewards/Notes: Place Sun + Kabala relics at Relic Altar near waypoint; changeable permanent relic buff; Uncut Support Gem; Secret: Titan's Sword (guaranteed Lesser Rune)
-- **Deshar / Path of Mourning**: Key: Fallen Dekhara / Final Letter — Rewards/Notes: Deliver Final Letter to Shambrin: Book +2 Weapon Set Passive Skill Points
+- **Valley of the Titans / Titan Grotto**: Key: Zalmarath, the Colossus — Rewards/Notes: Valley altar (Kabala + Sun relics) gives a changeable permanent buff: 30% increased Charm Charges gained, +1 Charm Slot OR 30% increased Charm Effect Duration, +1 Charm Slot; Titan Grotto: Flame Ruby -> Uncut Support Gem; Horn of the Vastiri (progression); Secret: Titan's Sword (guaranteed Lesser Rune)
+- **Deshar**: Key: Fallen Dekhara (optional) — Rewards/Notes: Fallen Dekhara: Final Letter -> Book: +2 Weapon Set Passive Skill Points
 - **Spires of Deshar**: Key: Tor Gul, the Defiler — Rewards/Notes: Sisters of Garukhan shrine: +10% Lightning Resistance
+- **The Dreadnought**: Key: Faridun Plaguebringer — Rewards/Notes: Quest progression
 - **Dreadnought Vanguard**: Key: Jamanra, the Abomination — Rewards/Notes: End of Act 2
 
 ### Act 3: Sandswept Marsh
@@ -88,9 +92,9 @@ Note: Per user-provided walkthrough summary: full release planned as 6 acts with
 - **Whakapanu Island & Singing Caverns**: Key: The Deep Mother — Rewards/Notes: Strategy note: doing Whakapanu early can unlock hideout/currency exchange/async trading (per summary)
 - **Abandoned Prison**: Key: The Prisoner — Rewards/Notes: Goddess of Justice: +30% Life OR Mana Flask Recovery (changeable)
 - **Eye of Hinekora**: Key: Tests of mettle — Rewards/Notes: Silent Hall: +5% Maximum Mana permanent buff
-- **Halls of the Dead**: Key: Tests of strength, Yama, the White — Rewards/Notes: Blank Tattoos: permanent +5 Attribute or +5% Resist choices; Book reward attribution flagged (see verification flags)
-- **Kedge Bay / Journey's End**: Key: Captain Hartlin, Omniphobia reveal — Rewards/Notes: Delirium distilled emotions for instilling amulet (per summary)
-- **Isle of Kin / Volcanic Warrens**: Key: Blind Beast (optional), Krutog — Rewards/Notes: Blind Beast: Blank Greater Rune (per provided summary). Weapon-set points from Blind Beast are flagged for verification due to known 0.4 changes in other notes.
+- **Halls of the Dead**: Key: Tests of strength, Yama, the White — Rewards/Notes: Blank Tattoos: permanent +5 Attribute or +5% Resist choices; Yama: Book +2 Weapon Set Passive Skill Points (Trial of the Ancestors / Book of Specialisation)
+- **Kedge Bay / Journey's End**: Key: Captain Hartlin, Omniphobia reveal — Rewards/Notes: Omniphobia (Dark Mists): Book +2 Weapon Set Passive Skill Points (0.4); Delirium distilled emotions for instilling amulet (per summary)
+- **Isle of Kin / Volcanic Warrens**: Key: Blind Beast (optional), Krutog — Rewards/Notes: Blind Beast drops a Blank Greater Rune (0.4); weapon-set points are from Omniphobia (Dark Mists).
 
 ## Interludes
 
@@ -106,7 +110,7 @@ Note: Per user-provided walkthrough summary: full release planned as 6 acts with
 - **The Khari Crossing**: Key: Akthi, Anundr — Rewards/Notes: Optional quest: Book +2 Weapon Set Passive Skill Points (from Risu in summary); Skullmaw Stairway: Molten One’s Gift -> +5% Maximum Life
 - **Sel Khari Sanctuary**: Key: Elzarah, the Cobra Lord — Rewards/Notes: Optional: Yoon's Barya / Rangeen's Barya -> choice of Rare Ring/Amulet/Jewel
 - **The Galai Gates**: Key: Vornas, the Fell Flame
-- **Qimah**: Key: Orbala's Pillar — Rewards/Notes: Changeable permanent buff (examples listed: 12% CDR, 3% MS, 5% XP)
+- **Qimah**: Key: Orbala's Pillar — Rewards/Notes: Changeable permanent buff (Seven Pillars): Kochai's Boon (+5 all Attributes) / Tabana's Boon (+5% all Elemental Resists) / Halani's Boon (12% CDR) / Orbala's Boon (3% MS) / Galai's Boon (20% Presence AoE) / Ahkeli's Boon (15% Global Defences) / Alima's Disgrace (5% XP + inverted drawbacks)
 - **Qimah Reservoir**: Key: Azmadi, the Faridun Prince — Rewards/Notes: Sacred Wells reward (Exalt + Alch) is flagged for verification
 
 ### Interlude 3 Doryanis Contingency (Town: The Glade)
@@ -155,12 +159,9 @@ Note: Per user-provided walkthrough summary: full release planned as 6 acts with
 - Checkpoints: teleport to discovered checkpoints; respawn-at-checkpoint can reset zones.
 - Movement skills via temporary mace/shield + uncut gem (Leap Slam / Shield Charge); weapon swap passives can temporarily allocate STR nodes; dodge-roll to animation-cancel landing.
 
-## Verification flags (must confirm later)
+## Verification flags (remaining)
 
-- **Act 4 - Blind Beast reward includes +2 weapon-set points** — User-provided walkthrough summary claims points + Blank Greater Rune; other external notes indicate 0.4 moved the tome to Dark Mists/Omniphobia. Verify against patch notes/in-game.
-- **Act 4 - Halls of the Dead: Navali grants +2 weapon-set points** — User-provided summary attributes points to Navali; external notes suggest reward tied to Trial completion; verify.
 - **Interlude 2 - Sacred Wells guarantee Exalted Orb + Orb of Alchemy** — Often reported inconsistently; treat as unconfirmed until validated.
-- **Interlude 2 - Orbala's Pillar exact boon options** — User-provided list may be incomplete/variable; verify.
 
 
 ---

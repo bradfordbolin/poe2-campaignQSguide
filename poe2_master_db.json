@@ -8,7 +8,7 @@
       "Fields marked 'verification_flag' should be validated against primary sources (GGG patch notes / in-game) when available.",
       "2025-12-12: Added campaign progression section common-level ranges table (v1) + build overlay data-format templates."
     ],
-    "last_updated": "2025-12-13",
+    "last_updated": "2025-12-14",
     "revision": 1
   },
   "sources": [
@@ -314,7 +314,7 @@
         {
           "zone": "Ogham Farmlands",
           "key": [
-            "Una's Lute quest"
+            "Una's Lute"
           ],
           "reward_notes": [
             "Book: +2 Weapon Set Passive Skill Points (Lost Lute)"
@@ -326,7 +326,7 @@
             "The Executioner"
           ],
           "reward_notes": [
-            "Unlock Smithing Bench (first character) via Renly’s Tools",
+            "Unlock Salvaging Bench (first character) via Smithing Tools (Renly)",
             "Secret chest: Artificer’s Orb + Blank Rune"
           ]
         },
@@ -346,7 +346,7 @@
             "Count Geonor"
           ],
           "reward_notes": [
-            "Candlemass: Permanent buff: +10% Fire Resistance"
+            "Candlemass: Permanent buff: +20 Maximum Life"
           ]
         }
       ]
@@ -354,6 +354,13 @@
     "act_2": {
       "title": "Vastiri Outskirts",
       "zones": [
+        {
+          "zone": "Vastiri Outskirts",
+          "key": [
+            "Rathbreaker"
+          ],
+          "reward_notes": []
+        },
         {
           "zone": "Mawdun Mine",
           "key": [
@@ -371,6 +378,13 @@
           "reward_notes": [
             "Barya for Trial of the Sekhemas (Ascendancy)"
           ]
+        },
+        {
+          "zone": "The Halani Gates",
+          "key": [
+            "Jamanra, the Risen King"
+          ],
+          "reward_notes": []
         },
         {
           "zone": "Trial of the Sekhemas",
@@ -392,6 +406,16 @@
           ]
         },
         {
+          "zone": "Mastodon Badlands",
+          "key": [
+            "Iktab, the Deathlord",
+            "Ekbab, Ancient Steed"
+          ],
+          "reward_notes": [
+            "Quest: Mastodon Tusks (progression)"
+          ]
+        },
+        {
           "zone": "Buried Shrines",
           "key": [
             "Azarian, the Forsaken Son"
@@ -401,22 +425,31 @@
           ]
         },
         {
+          "zone": "Valley of the Titans",
+          "key": [
+            "Titan Altar (Charm Slot)"
+          ],
+          "reward_notes": [
+            "Titan Altar (Charm Slot): Permanent buff choice (changeable): 30% increased Charm Charges gained, +1 Charm Slot OR 30% increased Charm Effect Duration, +1 Charm Slot"
+          ]
+        },
+        {
           "zone": "The Titan Grotto",
           "key": [
             "Zalmarath, the Colossus"
           ],
           "reward_notes": [
-            "Permanent buff choice (changeable): +30% increased Charm Charges +15% increased Mana Recovery from Flasks (Relic Altar near waypoint; insert Sun + Kabala relics; includes Uncut Support Gem)",
+            "Quest: Flame Ruby -> Uncut Support Gem; Horn of the Vastiri (progression)",
             "Secret: Titan's Sword (guaranteed Lesser Rune)"
           ]
         },
         {
-          "zone": "Path of Mourning",
+          "zone": "Deshar",
           "key": [
-            "Fallen Dekhara / Final Letter"
+            "Fallen Dekhara (optional)"
           ],
           "reward_notes": [
-            "Deliver Final Letter to Shambrin: Book +2 Weapon Set Passive Skill Points"
+            "Fallen Dekhara: Final Letter -> Book: +2 Weapon Set Passive Skill Points"
           ]
         },
         {
@@ -426,6 +459,15 @@
           ],
           "reward_notes": [
             "Sisters of Garukhan shrine: +10% Lightning Resistance"
+          ]
+        },
+        {
+          "zone": "The Dreadnought",
+          "key": [
+            "Faridun Plaguebringer"
+          ],
+          "reward_notes": [
+            "Quest progression"
           ]
         },
         {
@@ -581,20 +623,20 @@
         {
           "zone": "Eye of Hinekora",
           "key": [
-            "Tests of mettle"
+            "The Silent Hall"
           ],
           "reward_notes": [
-            "Silent Hall: +5% Maximum Mana permanent buff"
+            "The Silent Hall: Permanent buff: +5% Maximum Mana"
           ]
         },
         {
           "zone": "Halls of the Dead",
           "key": [
-            "Tests of strength",
+            "Tattoos (3 Tests)",
             "Yama, the White"
           ],
           "reward_notes": [
-            "Blank Tattoos: permanent +5 Attribute or +5% Resist choices",
+            "Tattoos (3 Tests): Permanent (cannot be changed). Tawhoa's Test (+5 Dexterity OR +5% Lightning Resistance), Tasalio's Test (+5 Intelligence OR +5% Cold Resistance), Ngamahu's Test (+5 Strength OR +5% Fire Resistance)",
             "Yama, the White: Book: +2 Weapon Set Passive Skill Points (Trial of the Ancestors / Book of Specialisation)"
           ]
         },
@@ -610,14 +652,20 @@
           ]
         },
         {
-          "zone": "Volcanic Warrens",
+          "zone": "Isle of Kin",
           "key": [
-            "Blind Beast (optional)",
-            "Krutog"
+            "Blind Beast (optional)"
           ],
           "reward_notes": [
-            "Blind Beast: Book: +2 Weapon Set Passive Skill Points (changed in 0.4; verify) + Blank Greater Rune (per provided summary)"
+            "Blind Beast: Blank Greater Rune (0.4)"
           ]
+        },
+        {
+          "zone": "Volcanic Warrens",
+          "key": [
+            "Krutog"
+          ],
+          "reward_notes": []
         }
       ]
     }
@@ -669,11 +717,12 @@
           "zone": "The Khari Crossing",
           "key": [
             "Akthi",
-            "Anundr"
+            "Anundr",
+            "Molten One's Gift"
           ],
           "reward_notes": [
-            "Optional quest: Book +2 Weapon Set Passive Skill Points (from Risu in summary)",
-            "Skullmaw Stairway: Molten One’s Gift -> +5% Maximum Life"
+            "Akthi & Anundr: Book: +2 Weapon Set Passive Skill Points (Clearing the Way; talk to Risu)",
+            "Molten One's Gift: Permanent buff: +5% Maximum Life (Skullmaw Stairway)"
           ]
         },
         {
@@ -698,7 +747,7 @@
             "Orbala's Pillar"
           ],
           "reward_notes": [
-            "Changeable permanent buff (examples listed: 12% CDR, 3% MS, 5% XP)"
+            "Changeable permanent buff (Seven Pillars): Kochai's Boon (+5 to all Attributes) / Tabana's Boon (+5% to all Elemental Resistances) / Halani's Boon (12% increased Cooldown Recovery Rate) / Orbala's Boon (3% increased Movement Speed) / Galai's Boon (20% increased Presence Area of Effect) / Ahkeli's Boon (15% increased Global Defences) / Alima's Disgrace (5% increased Experience Gain + inverted drawbacks)"
           ]
         },
         {
@@ -813,26 +862,38 @@
   },
   "verification_flags": [
     {
+      "id": "vf_act4_blind_beast_reward",
+      "status": "resolved",
       "item": "Act 4 - Blind Beast reward includes +2 weapon-set points",
-      "reason": "User-provided walkthrough summary claims points + Blank Greater Rune; other external notes indicate 0.4 moved the tome to Dark Mists/Omniphobia. Verify against patch notes/in-game."
+      "resolution": "Validated via Maxroll (Campaign Guide) + PoE2DB (quest table): Blind Beast drops Blank Greater Rune; +2 weapon-set points come from Omniphobia (Dark Mists) in 0.4.",
+      "resolved": "2025-12-14"
     },
     {
+      "id": "vf_act4_navali_weapon_set_points",
+      "status": "resolved",
       "item": "Act 4 - Halls of the Dead: Navali grants +2 weapon-set points",
-      "reason": "User-provided summary attributes points to Navali; external notes suggest reward tied to Trial completion; verify."
+      "resolution": "Validated via PoE2DB (Act 4 page): Trial of the Ancestors completion leads to Navali granting 2 Weapon Set Passive Skill Points.",
+      "resolved": "2025-12-14"
     },
     {
       "item": "Interlude 2 - Sacred Wells guarantee Exalted Orb + Orb of Alchemy",
       "reason": "Often reported inconsistently; treat as unconfirmed until validated."
     },
     {
+      "id": "vf_interlude2_orbala_pillar_boons",
+      "status": "resolved",
       "item": "Interlude 2 - Orbala's Pillar exact boon options",
-      "reason": "User-provided list may be incomplete/variable; verify."
+      "resolution": "Validated via PoE2DB (quest table): Seven Pillars boon list captured in interlude_2 reward notes.",
+      "resolved": "2025-12-14"
     },
     {
       "id": "vf_act4_levels_kingsmarch_mismatch",
+      "status": "resolved",
       "severity": "medium",
       "area": "campaign_progression_sections",
       "description": "Act 4 section levels include Kingsmarch at 53-54 while nearby Act 4 zones are 46-48; verify Act 4 order/area levels vs in-game.",
+      "resolution": "Confirmed via PoE2DB Act 4 area table: Kingsmarch is level 53 while early islands are mid-40s; Act 4 is non-linear so this mismatch is expected.",
+      "resolved": "2025-12-14",
       "added": "2025-12-12"
     }
   ],
@@ -968,6 +1029,7 @@
         "order": 7,
         "chapter": "Act 1",
         "section_title": "Mausoleum of the Praetor",
+        "is_active": false,
         "zones": [
           "Mausoleum of the Praetor"
         ],
@@ -2064,23 +2126,28 @@
       "Blackjaw (optional)": "optional",
       "Blind Beast (optional)": "optional",
       "Bloated Miller": "required",
-      "Blood Sacrifice": "never_checklist",
+      "Blood Sacrifice": "required",
       "Candlemass (optional)": "optional",
       "Captain Hartlin": "required",
-      "Corpse-snake Venom": "never_checklist",
+      "Corpse-snake Venom": "required",
       "Count Geonor": "required",
       "Doryani": "required",
       "Draven": "required",
       "Elder Madox": "required",
       "Elzarah, the Cobra Lord": "required",
       "Ervig (optional)": "optional",
+      "Ekbab, Ancient Steed": "required",
       "Fallen Dekhara / Final Letter": "never_checklist",
+      "Fallen Dekhara (optional)": "optional",
+      "Faridun Plaguebringer": "required",
       "Gallows secret": "never_checklist",
       "Gerung (optional)": "optional",
       "Heldra of the Black Pyre": "required",
       "Ignagduk, the Bog Witch": "required",
+      "Iktab, the Deathlord": "required",
       "Isolde of the White Shroud": "required",
       "Jamanra, the Abomination": "required",
+      "Jamanra, the Risen King": "required",
       "Kabala, Constrictor Queen": "required",
       "Ketzuli": "required",
       "Krutog": "required",
@@ -2089,14 +2156,18 @@
       "Lythara, the Wayward Spear": "required",
       "Mektul, the Forgemaster": "required",
       "Mighty Silverfist": "required",
+      "Molten One's Gift": "required",
       "Omniphobia reveal": "required",
-      "Orbala's Pillar": "never_checklist",
+      "Orbala's Pillar": "required",
       "Orok Campfire secret": "never_checklist",
       "Oswin, the Dread Warden": "required",
       "Rattlecage": "required",
+      "Rathbreaker": "required",
       "Rudja, the Dread Engineer": "required",
       "Siora, Blade of the Mists": "required",
       "Stormgore, the Guardian": "required",
+      "Tattoos (3 Tests)": "required",
+      "The Silent Hall": "required",
       "Tests of mettle": "never_checklist",
       "Tests of strength": "never_checklist",
       "Thane Wulfric": "required",
@@ -2109,8 +2180,10 @@
       "The King in the Mists": "required",
       "The Prisoner": "required",
       "The Rust King": "required",
+      "Titan Altar (Charm Slot)": "required",
       "Tor Gul, the Defiler": "required",
       "Town hub": "never_checklist",
+      "Una's Lute": "required",
       "Una's Lute quest": "never_checklist",
       "Vornas, the Fell Flame": "required",
       "Xyclucian, the Chimera": "required",
