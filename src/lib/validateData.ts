@@ -11,10 +11,11 @@ const interludeTitleMap: Record<string, string> = {
   interlude_3_doryanis_contingency: "Interlude 3: Doryani's Contingency",
 }
 
-const permanentPowerRegex = /permanent\s+(buff|power)/i
+const permanentPowerRegex =
+  /permanent\s+(buff|power)|\bpermanent\b.*\b(buff|boon|bonus|relic|tattoo|choice|attribute|resist|resistance|life|mana|spirit|maximum|xp|ms|movement|cdr|cooldown)\b|\bshrine\b.*\+\d+%.*\b(resist|resistance)\b|\+\d+%\s*(cold|fire|lightning)\s*resistance|goddess of justice.*\+\d+%/i
 const rewardTagMatchers = [
   permanentPowerRegex,
-  /skill\s*points?|passive|book/i,
+  /skill\s*points?|passive|book|tome/i,
   /ascendancy/i,
   /(unlock|key|access|gate)/i,
 ]

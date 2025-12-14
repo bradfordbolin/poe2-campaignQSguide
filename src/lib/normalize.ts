@@ -190,10 +190,30 @@ const resolveZoneDisplayNames = (zoneIds: string[], zoneMap: Map<string, string>
   zoneIds.map((id) => zoneMap.get(id) ?? id)
 
 const rewardTagMatchers = [
-  { tag: 'permanent_buff', test: (text: string) => /permanent\s+(buff|power)/i.test(text) },
+  {
+    tag: 'permanent_buff',
+    test: (text: string) => {
+      if (/permanent\s+(buff|power)/i.test(text)) return true
+
+      const hasPermanent = /\bpermanent\b/i.test(text)
+      const permanentKeywords =
+        /\b(buff|boon|bonus|relic|tattoo|choice|attribute|resist|resistance|life|mana|spirit|maximum|xp|ms|movement|cdr|cooldown)\b/i
+      if (hasPermanent && permanentKeywords.test(text)) return true
+
+      if (/\bshrine\b/i.test(text) && /\+\d+%/i.test(text) && /\bresist|resistance\b/i.test(text)) {
+        return true
+      }
+
+      if (/goddess of justice/i.test(text) && /\+\d+%/i.test(text)) return true
+
+      if (/\+\d+%\s*(cold|fire|lightning)\s*resistance/i.test(text)) return true
+
+      return false
+    },
+  },
   {
     tag: 'skill_points',
-    test: (text: string) => /skill\s*points?|passive|book/i.test(text),
+    test: (text: string) => /skill\s*points?|passive|book|tome/i.test(text),
   },
   { tag: 'ascendancy', test: (text: string) => /ascendancy/i.test(text) },
   { tag: 'key_unlock', test: (text: string) => /(unlock|key|access|gate)/i.test(text) },
