@@ -13,10 +13,15 @@ const steamPlayersUrl = new URL(
 )
 steamPlayersUrl.searchParams.set('appid', String(APP_ID))
 
-const poeLeaguesUrl = new URL('https://www.pathofexile.com/api/leagues')
-poeLeaguesUrl.searchParams.set('type', 'main')
-poeLeaguesUrl.searchParams.set('realm', 'pc')
-poeLeaguesUrl.searchParams.set('compact', '1')
+const poe2TradeLeaguesUrl = new URL(
+  'https://www.pathofexile.com/api/trade2/data/leagues',
+)
+
+const poe2ContentUrl = new URL('https://pathofexile2.com/internal-api/content.json')
+
+const poe2LeagueAnnouncementUrl = new URL(
+  'https://pathofexile2.com/internal-api/content/league-announcement',
+)
 
 const versionRegex = /\b0\.\d+(?:\.\d+){0,2}[a-z]?\b/i
 
@@ -44,10 +49,13 @@ const fetchJson = async (url, { timeoutMs = 20_000 } = {}) => {
 }
 
 const main = async () => {
-  const [newsJson, playersJson, leaguesJson] = await Promise.all([
+  const [newsJson, playersJson, tradeLeaguesJson, poe2ContentJson, leagueAnnouncementJson] =
+    await Promise.all([
     fetchJson(steamNewsUrl),
     fetchJson(steamPlayersUrl),
-    fetchJson(poeLeaguesUrl),
+    fetchJson(poe2TradeLeaguesUrl),
+    fetchJson(poe2ContentUrl),
+    fetchJson(poe2LeagueAnnouncementUrl),
   ])
 
   const newsItems = (newsJson?.appnews?.newsitems ?? []).map((item) => ({
@@ -62,48 +70,51 @@ const main = async () => {
   const latestVersionItem = newsItems.find((item) => versionRegex.test(item.title))
   const versionMatch = latestVersionItem?.title?.match(versionRegex)?.[0]
 
-  const leagues = Array.isArray(leaguesJson) ? leaguesJson : []
-  const leagueRows = leagues
+  const tradeLeagues = (tradeLeaguesJson?.result ?? [])
     .filter((league) => league && typeof league === 'object')
     .map((league) => ({
-      id: league.id,
-      name: league.name ?? league.id,
-      url: league.url,
-      startAt: league.startAt,
+      id: String(league.id ?? ''),
+      name: String(league.text ?? league.id ?? ''),
+      realm: String(league.realm ?? ''),
     }))
-    .filter(
+    .filter((league) => league.id.length > 0)
+
+  const activeTradeLeague =
+    tradeLeagues.find(
       (league) =>
-        typeof league.id === 'string' &&
-        typeof league.name === 'string' &&
-        typeof league.startAt === 'string' &&
-        league.startAt.length > 0
-    )
+        league.realm === 'poe2' &&
+        !/^HC\b/i.test(league.id) &&
+        !/^(Standard|Hardcore)$/i.test(league.id),
+    ) ?? null
 
-  let latestLeague = null
-  if (leagueRows.length > 0) {
-    const dates = leagueRows
-      .map((league) => Date.parse(league.startAt))
-      .filter((value) => Number.isFinite(value))
-    const latestStart = dates.length ? Math.max(...dates) : null
-    const newest = latestStart
-      ? leagueRows.filter(
-          (league) => Date.parse(league.startAt) === latestStart
-        )
-      : []
-    const base =
-      newest.find(
-        (league) => !/(hardcore|ssf|ruthless)/i.test(String(league.id))
-      ) ?? newest[0]
+  const countdownDateRaw =
+    leagueAnnouncementJson?.components?.['league-announcement']?.props?.countdown
+      ?.date ?? null
+  const countdownDate =
+    typeof countdownDateRaw === 'string' && countdownDateRaw.length > 0
+      ? countdownDateRaw
+      : null
 
-    latestLeague = base
+  const leagueAnnouncementSlugRaw =
+    poe2ContentJson?.data?.['league-announcement']?.slug ?? null
+  const leagueAnnouncementSlug =
+    typeof leagueAnnouncementSlugRaw === 'string' && leagueAnnouncementSlugRaw
+      ? leagueAnnouncementSlugRaw
+      : null
+
+  const leagueAnnouncementUrl = leagueAnnouncementSlug
+    ? `https://pathofexile2.com/${leagueAnnouncementSlug}`
+    : 'https://pathofexile2.com/'
+
+  const latestLeague =
+    activeTradeLeague && countdownDate
       ? {
-          id: base.id,
-          name: base.name,
-          url: typeof base.url === 'string' ? base.url : undefined,
-          start_at: base.startAt,
+          id: activeTradeLeague.id,
+          name: activeTradeLeague.name || activeTradeLeague.id,
+          url: leagueAnnouncementUrl,
+          start_at: countdownDate,
         }
       : null
-  }
 
   const out = {
     generated_at: new Date().toISOString(),
