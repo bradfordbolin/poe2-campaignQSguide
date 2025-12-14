@@ -267,16 +267,12 @@ This table is the **canonical website guide section order** for Early Access, wi
 - **Full mode:** Speedrun items **plus** explicitly marked **optional bosses/content**.
 
 ### Data-driven overrides (in `poe2_master_db.json`)
-`checklist_overrides` provides deterministic rules to prevent “Defeat: quest/secret/hub/monument” noise:
+`checklist_overrides` provides deterministic rules to prevent “Defeat: quest/secret/hub/monument” noise and to drive filtering:
 
-- `key_kinds` (map): key string → kind  
-  Kinds include: `boss`, `quest`, `secret`, `hub`, `checkpoint`, `trial`
-- `key_kind_default`: default kind for unknown keys (recommended: `boss`)
-- `key_kind_checkbox_kinds`: which key kinds may produce a “Defeat:” checklist item (recommended: `["boss"]`)
-- `never_checklist_key_kinds`: kinds that must never create checkboxes (recommended: `["quest","secret","hub","checkpoint","trial"]`)
-- `optional_key_suffix_regex`: pattern to tag optional keys (default: `(optional)` suffix)
-- `reward_note_matchers`: regex patterns used to detect permanent power + unlock rewards
-- `mode_tag_visibility`: which tags are visible in each mode
+- `key_classifications` (map): key string → `required | optional | never_checklist`
+- `classification_default`: fallback for unknown keys (recommended: `optional`)
+- `optional_key_suffix_regex`: pattern to mark optional keys when no explicit classification exists
+- `permanent_power_tags`: reward tags that always classify as `required` (permanent buffs, skill points, ascendancy, unlocks)
 
 ### Implementation note
 - Item IDs should remain stable across refactors (hash of `section_id` + normalized display text).

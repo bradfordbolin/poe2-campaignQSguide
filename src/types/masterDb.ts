@@ -41,6 +41,17 @@ export interface RewardContainer {
   title?: string
 }
 
+export type ChecklistClassification = 'required' | 'optional' | 'never_checklist'
+
+export type ChecklistItemKind = 'boss' | 'reward' | 'other'
+
+export interface ChecklistOverrides {
+  key_classifications?: Record<string, ChecklistClassification | string>
+  classification_default?: ChecklistClassification | string
+  optional_key_suffix_regex?: string
+  permanent_power_tags?: string[]
+}
+
 export interface MasterDb {
   meta?: {
     revision?: number
@@ -52,12 +63,15 @@ export interface MasterDb {
   zones_db?: Record<string, Omit<ZonesDbEntry, 'zone_id'>>
   acts: Record<string, RewardContainer>
   interludes: Record<string, RewardContainer>
+  checklist_overrides?: ChecklistOverrides
 }
 
 export interface NormalizedChecklistItem {
   id: string
   text: string
   tags: string[]
+  kind: ChecklistItemKind
+  classification: ChecklistClassification
   impliedBy?: string
   impliedRewards?: NormalizedChecklistItem[]
 }

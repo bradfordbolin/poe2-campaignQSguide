@@ -2,6 +2,8 @@ import data from '../data/poe2_master_db.json'
 import { validateMasterData } from './validateData'
 import type {
   CampaignSection,
+  ChecklistClassification,
+  ChecklistOverrides,
   MasterDb,
   NormalizedChapter,
   NormalizedChecklistItem,
@@ -19,6 +21,65 @@ export const masterDb: MasterDb = data
 
 if (import.meta.env.DEV) {
   validateMasterData(masterDb)
+}
+
+const isChecklistClassification = (
+  value: unknown,
+): value is ChecklistClassification =>
+  value === 'required' || value === 'optional' || value === 'never_checklist'
+
+const checklistOverrides: ChecklistOverrides = masterDb.checklist_overrides ?? {}
+
+const classificationByKey = new Map<string, ChecklistClassification>()
+Object.entries(checklistOverrides.key_classifications ?? {}).forEach(([key, value]) => {
+  if (isChecklistClassification(value)) {
+    classificationByKey.set(key, value)
+  } else if (import.meta.env.DEV) {
+    console.warn(`Ignoring invalid checklist classification "${value}" for key "${key}"`)
+  }
+})
+
+const classificationDefault: ChecklistClassification =
+  isChecklistClassification(checklistOverrides.classification_default)
+    ? checklistOverrides.classification_default
+    : 'optional'
+
+const optionalKeyRegex = (() => {
+  const pattern = checklistOverrides.optional_key_suffix_regex
+  if (!pattern) return undefined
+  const inlineInsensitive = pattern.startsWith('(?i)')
+  const source = pattern.replace(/^\(\?i\)/, '')
+  const flags = inlineInsensitive ? 'i' : undefined
+  try {
+    return new RegExp(source, flags)
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      console.warn('Invalid checklist_overrides.optional_key_suffix_regex; ignoring', error)
+    }
+    return undefined
+  }
+})()
+
+const permanentPowerTags = new Set(
+  checklistOverrides.permanent_power_tags ?? ['permanent_buff', 'skill_points', 'ascendancy', 'key_unlock'],
+)
+
+const classifyRewardTags = (tags: string[]): ChecklistClassification =>
+  tags.some((tag) => permanentPowerTags.has(tag)) ? 'required' : 'optional'
+
+const classifyKey = (key: string): ChecklistClassification => {
+  const override = classificationByKey.get(key)
+  if (override) return override
+  if (optionalKeyRegex?.test(key)) return 'optional'
+  return classificationDefault
+}
+
+const ensureBossRequired = (item: NormalizedChecklistItem) => {
+  if (item.classification === 'required') return
+  item.classification = 'required'
+  const tags = new Set(item.tags.filter((tag) => tag !== 'optional_content'))
+  tags.add('required_progression')
+  item.tags = Array.from(tags)
 }
 
 const buildRewardIndex = (
@@ -96,9 +157,18 @@ const buildChecklistItems = (
     .filter((entry) => resolvedZones.includes(entry.zone))
     .forEach((entry) => {
       entry.key?.forEach((boss) => {
+        const classification = classifyKey(boss)
+        if (classification === 'never_checklist') return
+
         const text = `Defeat: ${boss}`
-        const tags = /optional/i.test(boss) ? ['optional_content'] : ['required_progression']
-        const item = { id: hashChecklistId(sectionId, text), text, tags }
+        const tags = classification === 'optional' ? ['optional_content'] : ['required_progression']
+        const item: NormalizedChecklistItem = {
+          id: hashChecklistId(sectionId, text),
+          text,
+          tags,
+          kind: 'boss',
+          classification,
+        }
         bossItems.push({ item, name: boss })
       })
 
@@ -110,7 +180,14 @@ const buildChecklistItems = (
 
         if (tags.length > 0) {
           const text = `Reward: ${note}`
-          const item: NormalizedChecklistItem = { id: hashChecklistId(sectionId, text), text, tags }
+          const classification = classifyRewardTags(tags)
+          const item: NormalizedChecklistItem = {
+            id: hashChecklistId(sectionId, text),
+            text,
+            tags,
+            kind: 'reward',
+            classification,
+          }
           rewardItems.push({ item, note })
         }
       })
@@ -121,7 +198,11 @@ const buildChecklistItems = (
 
   if (bossCount === 1 && rewardItems.length > 0) {
     const boss = bossItems[0]
-    boss.item.impliedRewards = rewardItems.map((reward) => ({ ...reward.item, impliedBy: boss.item.id }))
+    const impliedRewards = rewardItems.map((reward) => ({ ...reward.item, impliedBy: boss.item.id }))
+    if (impliedRewards.some((reward) => reward.classification === 'required')) {
+      ensureBossRequired(boss.item)
+    }
+    boss.item.impliedRewards = impliedRewards
     rewardItems.forEach((reward) => impliedByMap.set(reward.item.id, boss.item.id))
   }
 
@@ -134,6 +215,9 @@ const buildChecklistItems = (
         const implied = { ...reward.item, impliedBy: match.item.id }
         impliedByMap.set(reward.item.id, match.item.id)
         match.item.impliedRewards = [...(match.item.impliedRewards ?? []), implied]
+        if (implied.classification === 'required') {
+          ensureBossRequired(match.item)
+        }
       }
     })
   }

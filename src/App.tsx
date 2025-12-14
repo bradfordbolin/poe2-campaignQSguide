@@ -88,28 +88,10 @@ const persistCompleted = (completed: Set<string>) => {
   localStorage.setItem(storageVersion, JSON.stringify(values))
 }
 
-const modeFilters: Record<'speedrun' | 'full', Set<string>> = {
-  speedrun: new Set([
-    'required_progression',
-    'permanent_buff',
-    'skill_points',
-    'key_unlock',
-    'ascendancy',
-  ]),
-  full: new Set([
-    'required_progression',
-    'permanent_buff',
-    'skill_points',
-    'key_unlock',
-    'ascendancy',
-    'optional_content',
-    'optional_buff',
-    'optional_boss',
-    'farming_stop',
-  ]),
+const modeFilters: Record<'speedrun' | 'full', Set<NormalizedChecklistItem['classification']>> = {
+  speedrun: new Set(['required']),
+  full: new Set(['required', 'optional']),
 }
-
-const optionalTags = new Set(['optional_content', 'optional_buff', 'optional_boss', 'farming_stop'])
 
 const chapterItemIds = normalizedChapters.reduce<Map<string, Set<string>>>(
   (acc, chapter) => {
@@ -149,7 +131,7 @@ const computeProgress = (chapters = normalizedChapters, completed: Set<string> =
 
 const isOptionalSection = (section: { checklist: NormalizedChecklistItem[] }) =>
   section.checklist.length > 0 &&
-  section.checklist.every((item) => item.tags.every((tag) => optionalTags.has(tag)))
+  section.checklist.every((item) => item.classification === 'optional')
 
 const getDefaultSectionExpansion = (mode: 'speedrun' | 'full') => {
   const entries = normalizedChapters.flatMap((chapter) =>
@@ -217,10 +199,10 @@ function App() {
 
   const filteredChapters = useMemo(() => {
     const query = search.trim().toLowerCase()
-    const allowedTags = modeFilters[mode]
+    const allowedClassifications = modeFilters[mode]
 
     const filterChecklist = (items: NormalizedChecklistItem[]) =>
-      items.filter((item) => item.tags.some((tag) => allowedTags.has(tag)))
+      items.filter((item) => allowedClassifications.has(item.classification))
 
     const chapters = normalizedChapters
       .map((chapter) => {

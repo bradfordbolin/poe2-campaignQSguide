@@ -1,4 +1,9 @@
-import type { CampaignSection, MasterDb, RewardContainer } from '../types/masterDb'
+import type {
+  CampaignSection,
+  ChecklistClassification,
+  MasterDb,
+  RewardContainer,
+} from '../types/masterDb'
 
 const interludeTitleMap: Record<string, string> = {
   interlude_1_curse_of_holten: 'Interlude 1: Curse of Holten',
@@ -48,6 +53,11 @@ const resolveZoneDisplayNames = (
 
 const warn = (message: string) => console.warn(`[validateData] ${message}`)
 
+const isChecklistClassification = (
+  value: unknown,
+): value is ChecklistClassification =>
+  value === 'required' || value === 'optional' || value === 'never_checklist'
+
 export const validateMasterData = (db: MasterDb) => {
   try {
     const zonesDb = db.zones_db ?? {}
@@ -56,11 +66,9 @@ export const validateMasterData = (db: MasterDb) => {
       Object.entries(zonesDb).map(([id, info]) => [id, info.display_name ?? id]),
     )
 
-    const checklistOverrides = (db as unknown as {
-      checklist_overrides?: { key_kinds?: Record<string, string> }
-    }).checklist_overrides
-    const keyKinds = checklistOverrides?.key_kinds ?? {}
-    const missingKeyKinds = new Map<string, Set<string>>()
+    const checklistOverrides = db.checklist_overrides
+    const keyClassifications = checklistOverrides?.key_classifications ?? {}
+    const missingClassifications = new Map<string, Set<string>>()
 
     const chapterRewards = buildChapterRewardMap(db)
 
@@ -100,10 +108,11 @@ export const validateMasterData = (db: MasterDb) => {
     const validateRewardKeys = (container: RewardContainer, containerId: string) => {
       container.zones?.forEach((entry) => {
         entry.key?.forEach((key) => {
-          if (keyKinds[key]) return
-          const contexts = missingKeyKinds.get(key) ?? new Set<string>()
+          const classification = keyClassifications[key]
+          if (isChecklistClassification(classification)) return
+          const contexts = missingClassifications.get(key) ?? new Set<string>()
           contexts.add(`${containerId}:${entry.zone}`)
-          missingKeyKinds.set(key, contexts)
+          missingClassifications.set(key, contexts)
         })
       })
     }
@@ -173,14 +182,22 @@ export const validateMasterData = (db: MasterDb) => {
       ...Array.from(chapterRewards.entries()).map(([id, container]) => ({ id, container })),
     ]
 
-    if (!checklistOverrides?.key_kinds) {
-      warn('checklist_overrides.key_kinds is missing; checklist key validation skipped')
+    if (!checklistOverrides?.key_classifications) {
+      warn('checklist_overrides.key_classifications is missing; checklist key validation skipped')
     } else {
+      Object.entries(keyClassifications).forEach(([key, value]) => {
+        if (!isChecklistClassification(value)) {
+          warn(
+            `Invalid checklist classification "${value}" for key "${key}" in checklist_overrides.key_classifications`,
+          )
+        }
+      })
+
       allRewardContainers.forEach(({ id, container }) => validateRewardKeys(container, id))
 
-      missingKeyKinds.forEach((contexts, key) => {
+      missingClassifications.forEach((contexts, key) => {
         warn(
-          `Checklist key "${key}" is missing from checklist_overrides.key_kinds; seen in ${Array.from(contexts).join(', ')}`,
+          `Checklist key "${key}" is missing from checklist_overrides.key_classifications; seen in ${Array.from(contexts).join(', ')}`,
         )
       })
     }
