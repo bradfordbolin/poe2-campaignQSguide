@@ -5,37 +5,37 @@ module.exports = {
     extend: {
       colors: {
         border: 'var(--border)',
-        input: 'var(--input)',
-        ring: 'var(--ring)',
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
+        input: 'var(--input-border)',
+        ring: 'var(--focus)',
+        background: 'var(--bg)',
+        foreground: 'var(--text)',
         primary: {
-          DEFAULT: 'var(--primary)',
-          foreground: 'var(--primary-foreground)',
+          DEFAULT: 'var(--accent)',
+          foreground: 'var(--button-text)',
         },
         secondary: {
-          DEFAULT: 'var(--secondary)',
-          foreground: 'var(--secondary-foreground)',
+          DEFAULT: 'var(--button-secondary-bg)',
+          foreground: 'var(--text)',
         },
         destructive: {
-          DEFAULT: 'var(--destructive)',
-          foreground: 'var(--destructive-foreground)',
+          DEFAULT: '#ef4444',
+          foreground: '#ffffff',
         },
         muted: {
-          DEFAULT: 'var(--muted)',
-          foreground: 'var(--muted-foreground)',
+          DEFAULT: 'var(--panel)',
+          foreground: 'var(--muted)',
         },
         accent: {
-          DEFAULT: 'var(--accent)',
-          foreground: 'var(--accent-foreground)',
+          DEFAULT: 'var(--row-hover)',
+          foreground: 'var(--text)',
         },
         popover: {
-          DEFAULT: 'var(--popover)',
-          foreground: 'var(--popover-foreground)',
+          DEFAULT: 'var(--panel)',
+          foreground: 'var(--text)',
         },
         card: {
           DEFAULT: 'var(--card)',
-          foreground: 'var(--card-foreground)',
+          foreground: 'var(--text)',
         },
       },
       borderRadius: {
