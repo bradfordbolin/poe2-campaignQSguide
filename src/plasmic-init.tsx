@@ -1,14 +1,4 @@
-import { initPlasmicLoader } from '@plasmicapp/loader-react'
-
-const projectId = import.meta.env.VITE_PLASMIC_PROJECT_ID as string | undefined
-const apiToken = import.meta.env.VITE_PLASMIC_API_TOKEN as string | undefined
-
-export const PLASMIC =
-  projectId && apiToken
-    ? initPlasmicLoader({
-        projects: [{ id: projectId, token: apiToken }],
-      })
-    : null
+import { PLASMIC } from './plasmic-loader'
 
 type HelloWorldProps = {
   text?: string

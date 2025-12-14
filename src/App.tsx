@@ -503,23 +503,33 @@ function App() {
   }, [contrast])
 
   useEffect(() => {
-    const hash = window.location.hash.replace('#', '')
-    if (!hash) return
-    setActiveSectionId(hash)
-    const sectionInfo = sectionItemMap.get(hash)
-    if (sectionInfo) {
-      setOpenChapters((prev) =>
-        Array.from(new Set([...prev, sectionInfo.chapter]))
-      )
-      setOpenSections((prev) => Array.from(new Set([...prev, hash])))
-      setTocOpenChapters((prev) =>
-        Array.from(new Set([...prev, sectionInfo.chapter]))
-      )
+    const onHash = () => {
+      const hash = window.location.hash.replace('#', '')
+      if (!hash) return
+      setActiveSectionId(hash)
+      const sectionInfo = sectionItemMap.get(hash)
+      if (sectionInfo) {
+        setOpenChapters((prev) =>
+          Array.from(new Set([...prev, sectionInfo.chapter]))
+        )
+        setOpenSections((prev) => Array.from(new Set([...prev, hash])))
+        setTocOpenChapters((prev) =>
+          Array.from(new Set([...prev, sectionInfo.chapter]))
+        )
+      }
+      requestAnimationFrame(() => {
+        const el = document.getElementById(hash)
+        el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      })
     }
-    requestAnimationFrame(() => {
-      const el = document.getElementById(hash)
-      el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    })
+
+    window.addEventListener('hashchange', onHash)
+    const timeoutId = window.setTimeout(onHash, 0)
+
+    return () => {
+      window.removeEventListener('hashchange', onHash)
+      window.clearTimeout(timeoutId)
+    }
   }, [])
 
   useEffect(() => {
@@ -596,6 +606,7 @@ function App() {
     ? Math.min(100, Math.round((doneCount / totals.total) * 100))
     : 0
 
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const firstUnchecked = useMemo(() => {
     for (const chapter of filteredChapters) {
       for (const section of chapter.sections) {

@@ -1,7 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { PlasmicComponent, PlasmicRootProvider } from '@plasmicapp/loader-react'
-import { PLASMIC } from './plasmic-init'
+
+import { PLASMIC } from './plasmic-loader'
+import './plasmic-init' // IMPORTANT: registers HelloWorld + any other components
 
 const root = document.getElementById('root')!
 const reactRoot = createRoot(root)
@@ -10,14 +12,14 @@ const renderMessage = (message: string) => {
   reactRoot.render(
     <StrictMode>
       <div style={{ padding: 16, fontFamily: 'system-ui' }}>{message}</div>
-    </StrictMode>,
+    </StrictMode>
   )
 }
 
 ;(async () => {
   if (!PLASMIC) {
     renderMessage(
-      'Plasmic is not configured. Check .env.local values and restart `npm run dev`.',
+      'Plasmic is not configured. Check .env.local values and restart `npm run dev`.'
     )
     return
   }
@@ -29,12 +31,12 @@ const renderMessage = (message: string) => {
         <PlasmicRootProvider loader={PLASMIC} prefetchedData={prefetched}>
           <PlasmicComponent component="Homepage" />
         </PlasmicRootProvider>
-      </StrictMode>,
+      </StrictMode>
     )
   } catch (error) {
     console.error(error)
     renderMessage(
-      'Failed to load Plasmic component "Homepage". Check your .env.local settings and restart `npm run dev`.',
+      'Failed to load Plasmic component "Homepage". Check your .env.local settings and restart `npm run dev`.'
     )
   }
 })()
