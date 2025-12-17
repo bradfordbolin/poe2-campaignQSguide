@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-12-16T05:00:31.549Z",
+  "generated_at": "2025-12-17T04:58:45.183Z",
   "league": {
     "id": "Fate of the Vaal",
     "name": "Fate of the Vaal",
@@ -15,10 +15,18 @@
       "date": 1762805886
     },
     "current_players": {
-      "player_count": 103914,
-      "fetched_at": "2025-12-16T05:00:31.549Z"
+      "player_count": 93341,
+      "fetched_at": "2025-12-17T04:58:45.184Z"
     },
     "latest_news": [
+      {
+        "gid": "1819386365085473",
+        "title": "Introducing The Last of the Druids Mystery Box",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365085473",
+        "date": 1765938827,
+        "author": "kiki",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1818752592125334",
         "title": "Path of Exile 2: The Last of the Druids Launches Soon",
@@ -49,14 +57,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818118366186481",
         "date": 1765312173,
         "author": "kiki",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1818118366184082",
-        "title": "Path of Exile 2: The Game Awards Twitch Drops",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818118366184082",
-        "date": 1765239996,
-        "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
     ]
