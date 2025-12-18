@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-12-17T04:58:45.183Z",
+  "generated_at": "2025-12-18T04:59:58.648Z",
   "league": {
     "id": "Fate of the Vaal",
     "name": "Fate of the Vaal",
@@ -15,10 +15,18 @@
       "date": 1762805886
     },
     "current_players": {
-      "player_count": 93341,
-      "fetched_at": "2025-12-17T04:58:45.184Z"
+      "player_count": 88784,
+      "fetched_at": "2025-12-18T04:59:58.648Z"
     },
     "latest_news": [
+      {
+        "gid": "1819386365088317",
+        "title": "Improvements to the Fate of the Vaal League",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365088317",
+        "date": 1766021063,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1819386365085473",
         "title": "Introducing The Last of the Druids Mystery Box",
@@ -49,14 +57,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818752592122041",
         "date": 1765400875,
         "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1818118366186481",
-        "title": "Path of Exile 2: The Last of the Druids Item Filter Information",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818118366186481",
-        "date": 1765312173,
-        "author": "kiki",
         "feedlabel": "Community Announcements"
       }
     ]
