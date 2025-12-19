@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-12-18T04:59:58.648Z",
+  "generated_at": "2025-12-19T04:59:50.992Z",
   "league": {
     "id": "Fate of the Vaal",
     "name": "Fate of the Vaal",
@@ -15,10 +15,18 @@
       "date": 1762805886
     },
     "current_players": {
-      "player_count": 88784,
-      "fetched_at": "2025-12-18T04:59:58.648Z"
+      "player_count": 85815,
+      "fetched_at": "2025-12-19T04:59:50.992Z"
     },
     "latest_news": [
+      {
+        "gid": "1819386365092986",
+        "title": "Path of Exile 2 New Microtransactions & Weekend Stash Sale",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365092986",
+        "date": 1766104073,
+        "author": "kiki",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1819386365088317",
         "title": "Improvements to the Fate of the Vaal League",
@@ -49,14 +57,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818752592124905",
         "date": 1765483637,
         "author": "kiki",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1818752592122041",
-        "title": "Free Path of Exile 2 Weekend + Cosmetics on December 12 - 15 PST",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818752592122041",
-        "date": 1765400875,
-        "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
     ]
