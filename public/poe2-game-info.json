@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-12-21T05:00:01.737Z",
+  "generated_at": "2025-12-23T05:02:29.547Z",
   "league": {
     "id": "Fate of the Vaal",
     "name": "Fate of the Vaal",
@@ -15,10 +15,26 @@
       "date": 1762805886
     },
     "current_players": {
-      "player_count": 99567,
-      "fetched_at": "2025-12-21T05:00:01.737Z"
+      "player_count": 77916,
+      "fetched_at": "2025-12-23T05:02:29.547Z"
     },
     "latest_news": [
+      {
+        "gid": "1819386365102713",
+        "title": "New Path of Exile 2 Displates Are Now Available",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365102713",
+        "date": 1766433825,
+        "author": "kiki",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1819386365100779",
+        "title": "Path of Exile 2 Build Showcase - Fire and Ice Djinni Summoner",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365100779",
+        "date": 1766359520,
+        "author": "kiki",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1819386365092986",
         "title": "Path of Exile 2 New Microtransactions & Weekend Stash Sale",
@@ -40,22 +56,6 @@
         "title": "Introducing The Last of the Druids Mystery Box",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365085473",
         "date": 1765938827,
-        "author": "kiki",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1818752592125334",
-        "title": "Path of Exile 2: The Last of the Druids Launches Soon",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818752592125334",
-        "date": 1765500306,
-        "author": "kiki",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1818752592124905",
-        "title": "Path of Exile 2: The Last of the Druids Launch Twitch Drops and Discord Quest",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818752592124905",
-        "date": 1765483637,
         "author": "kiki",
         "feedlabel": "Community Announcements"
       }
