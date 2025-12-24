@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-12-23T05:02:29.547Z",
+  "generated_at": "2025-12-24T05:02:06.517Z",
   "league": {
     "id": "Fate of the Vaal",
     "name": "Fate of the Vaal",
@@ -15,10 +15,18 @@
       "date": 1762805886
     },
     "current_players": {
-      "player_count": 77916,
-      "fetched_at": "2025-12-23T05:02:29.547Z"
+      "player_count": 77499,
+      "fetched_at": "2025-12-24T05:02:06.517Z"
     },
     "latest_news": [
+      {
+        "gid": "1819386365104358",
+        "title": "Steam Global Top Sellers for week of 16 Dec — 23 December 2025",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/SteamDB/1819386365104358",
+        "date": 1766480400,
+        "author": "SteamDB",
+        "feedlabel": "SteamDB"
+      },
       {
         "gid": "1819386365102713",
         "title": "New Path of Exile 2 Displates Are Now Available",
@@ -49,14 +57,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365088317",
         "date": 1766021063,
         "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1819386365085473",
-        "title": "Introducing The Last of the Druids Mystery Box",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365085473",
-        "date": 1765938827,
-        "author": "kiki",
         "feedlabel": "Community Announcements"
       }
     ]
