@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-01T05:44:59.575Z",
+  "generated_at": "2026-01-02T05:44:17.172Z",
   "league": {
     "id": "Fate of the Vaal",
     "name": "Fate of the Vaal",
@@ -15,10 +15,18 @@
       "date": 1762805886
     },
     "current_players": {
-      "player_count": 61689,
-      "fetched_at": "2026-01-01T05:44:59.575Z"
+      "player_count": 67706,
+      "fetched_at": "2026-01-02T05:44:17.173Z"
     },
     "latest_news": [
+      {
+        "gid": "1819386365117644",
+        "title": "The Last of the Druids Original Soundtrack",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365117644",
+        "date": 1767301257,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1819386365111984",
         "title": "The Last of the Druids Supporter Packs Concept Art",
@@ -48,14 +56,6 @@
         "title": "Path of Exile 2 Build Showcase - Fire and Ice Djinni Summoner",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365100779",
         "date": 1766359520,
-        "author": "kiki",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1819386365092986",
-        "title": "Path of Exile 2 New Microtransactions & Weekend Stash Sale",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365092986",
-        "date": 1766104073,
         "author": "kiki",
         "feedlabel": "Community Announcements"
       }
