@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-06T05:04:27.924Z",
+  "generated_at": "2026-01-07T05:43:37.680Z",
   "league": {
     "id": "Fate of the Vaal",
     "name": "Fate of the Vaal",
@@ -15,10 +15,18 @@
       "date": 1762805886
     },
     "current_players": {
-      "player_count": 53427,
-      "fetched_at": "2026-01-06T05:04:27.924Z"
+      "player_count": 48676,
+      "fetched_at": "2026-01-07T05:43:37.680Z"
     },
     "latest_news": [
+      {
+        "gid": "1819386365126538",
+        "title": "Boss VS Boss: Jamanra VS Geonor",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365126538",
+        "date": 1767736100,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1819386365122243",
         "title": "The Last of the Druids Mystery Box Concept Art",
@@ -50,14 +58,6 @@
         "date": 1766480400,
         "author": "SteamDB",
         "feedlabel": "SteamDB"
-      },
-      {
-        "gid": "1819386365102713",
-        "title": "New Path of Exile 2 Displates Are Now Available",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365102713",
-        "date": 1766433825,
-        "author": "kiki",
-        "feedlabel": "Community Announcements"
       }
     ]
   }
