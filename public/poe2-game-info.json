@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-13T04:55:01.843Z",
+  "generated_at": "2026-01-14T04:56:37.806Z",
   "league": {
     "id": "Fate of the Vaal",
     "name": "Fate of the Vaal",
@@ -9,16 +9,32 @@
   "steam": {
     "appid": 2694490,
     "latest_version": {
-      "version": "0.4.0",
-      "title": "Path of Exile 2: 0.4.0 Content Update Timeline",
-      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1815580768401217",
-      "date": 1762805886
+      "version": "0.4.0d",
+      "title": "Path of Exile 2 0.4.0d Patch Notes Preview",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1821922921809503",
+      "date": 1768348630
     },
     "current_players": {
-      "player_count": 44235,
-      "fetched_at": "2026-01-13T04:55:01.843Z"
+      "player_count": 41332,
+      "fetched_at": "2026-01-14T04:56:37.806Z"
     },
     "latest_news": [
+      {
+        "gid": "1821922921809503",
+        "title": "Path of Exile 2 0.4.0d Patch Notes Preview",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1821922921809503",
+        "date": 1768348630,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1821288646588167",
+        "title": "Steam Global Top Sellers for week of 6 Jan — 13 January 2026",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/SteamDB/1821288646588167",
+        "date": 1768294800,
+        "author": "SteamDB",
+        "feedlabel": "SteamDB"
+      },
       {
         "gid": "1819386365126538",
         "title": "Boss VS Boss: Jamanra VS Geonor",
@@ -42,22 +58,6 @@
         "date": 1767301257,
         "author": "CommunityTeam_GGG",
         "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1819386365111984",
-        "title": "The Last of the Druids Supporter Packs Concept Art",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365111984",
-        "date": 1766952184,
-        "author": "kiki",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1819386365104358",
-        "title": "Steam Global Top Sellers for week of 16 Dec — 23 December 2025",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/SteamDB/1819386365104358",
-        "date": 1766480400,
-        "author": "SteamDB",
-        "feedlabel": "SteamDB"
       }
     ]
   }
