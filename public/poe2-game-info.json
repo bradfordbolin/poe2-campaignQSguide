@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-18T04:54:13.467Z",
+  "generated_at": "2026-01-19T05:03:58.234Z",
   "league": {
     "id": "Fate of the Vaal",
     "name": "Fate of the Vaal",
@@ -15,10 +15,18 @@
       "date": 1768348630
     },
     "current_players": {
-      "player_count": 48086,
-      "fetched_at": "2026-01-18T04:54:13.467Z"
+      "player_count": 37705,
+      "fetched_at": "2026-01-19T05:03:58.234Z"
     },
     "latest_news": [
+      {
+        "gid": "1821922921820181",
+        "title": "Fate of the Vaal Concept and Environment Art",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1821922921820181",
+        "date": 1768784838,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1821922921809503",
         "title": "Path of Exile 2 0.4.0d Patch Notes Preview",
@@ -49,14 +57,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365122243",
         "date": 1767557450,
         "author": "kiki",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1819386365117644",
-        "title": "The Last of the Druids Original Soundtrack",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365117644",
-        "date": 1767301257,
-        "author": "CommunityTeam_GGG",
         "feedlabel": "Community Announcements"
       }
     ]
