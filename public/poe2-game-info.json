@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-22T05:00:26.349Z",
+  "generated_at": "2026-01-23T04:57:17.189Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1768348630
     },
     "current_players": {
-      "player_count": 30900,
-      "fetched_at": "2026-01-22T05:00:26.349Z"
+      "player_count": 29874,
+      "fetched_at": "2026-01-23T04:57:17.189Z"
     },
     "latest_news": [
+      {
+        "gid": "1822556746160291",
+        "title": "Build of the Week: Poison Basketballs by Pants",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1822556746160291",
+        "date": 1769116006,
+        "author": "kiki",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1821922921820181",
         "title": "Fate of the Vaal Concept and Environment Art",
@@ -44,14 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365126538",
         "date": 1767736100,
         "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1819386365122243",
-        "title": "The Last of the Druids Mystery Box Concept Art",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365122243",
-        "date": 1767557450,
-        "author": "kiki",
         "feedlabel": "Community Announcements"
       }
     ]
