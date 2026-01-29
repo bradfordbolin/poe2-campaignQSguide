@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-28T04:57:53.306Z",
+  "generated_at": "2026-01-29T05:14:31.907Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1768348630
     },
     "current_players": {
-      "player_count": 24012,
-      "fetched_at": "2026-01-28T04:57:53.306Z"
+      "player_count": 22547,
+      "fetched_at": "2026-01-29T05:14:31.907Z"
     },
     "latest_news": [
+      {
+        "gid": "1823191198600836",
+        "title": "ExileCon 2026",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823191198600836",
+        "date": 1769636405,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1822556746160291",
         "title": "Build of the Week: Poison Basketballs by Pants",
@@ -45,14 +53,6 @@
         "date": 1768294800,
         "author": "SteamDB",
         "feedlabel": "SteamDB"
-      },
-      {
-        "gid": "1819386365126538",
-        "title": "Boss VS Boss: Jamanra VS Geonor",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365126538",
-        "date": 1767736100,
-        "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
       }
     ]
   }
