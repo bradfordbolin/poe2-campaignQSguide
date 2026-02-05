@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-04T05:16:57.242Z",
+  "generated_at": "2026-02-05T05:34:07.987Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1768348630
     },
     "current_players": {
-      "player_count": 17804,
-      "fetched_at": "2026-02-04T05:16:57.242Z"
+      "player_count": 16740,
+      "fetched_at": "2026-02-05T05:34:07.987Z"
     },
     "latest_news": [
+      {
+        "gid": "1823825466495045",
+        "title": "Hideout Showcase",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823825466495045",
+        "date": 1770237942,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1823191198600836",
         "title": "ExileCon 2026",
@@ -45,14 +53,6 @@
         "date": 1768348630,
         "author": "CommunityTeam_GGG",
         "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1821288646588167",
-        "title": "Steam Global Top Sellers for week of 6 Jan — 13 January 2026",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/SteamDB/1821288646588167",
-        "date": 1768294800,
-        "author": "SteamDB",
-        "feedlabel": "SteamDB"
       }
     ]
   }
