@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-08T05:42:10.672Z",
+  "generated_at": "2026-02-09T05:48:50.749Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1768348630
     },
     "current_players": {
-      "player_count": 21241,
-      "fetched_at": "2026-02-08T05:42:10.672Z"
+      "player_count": 15028,
+      "fetched_at": "2026-02-09T05:48:50.749Z"
     },
     "latest_news": [
+      {
+        "gid": "1823825466504283",
+        "title": "Developer Interview - John Espiritu, Lead Rigging Artist",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823825466504283",
+        "date": 1770600531,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1823825466495045",
         "title": "Hideout Showcase",
@@ -43,14 +51,6 @@
         "title": "Fate of the Vaal Concept and Environment Art",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1821922921820181",
         "date": 1768784838,
-        "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1821922921809503",
-        "title": "Path of Exile 2 0.4.0d Patch Notes Preview",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1821922921809503",
-        "date": 1768348630,
         "author": "CommunityTeam_GGG",
         "feedlabel": "Community Announcements"
       }
