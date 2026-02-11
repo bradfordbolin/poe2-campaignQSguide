@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-10T05:52:04.031Z",
+  "generated_at": "2026-02-11T05:47:32.461Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1768348630
     },
     "current_players": {
-      "player_count": 13946,
-      "fetched_at": "2026-02-10T05:52:04.031Z"
+      "player_count": 14236,
+      "fetched_at": "2026-02-11T05:47:32.461Z"
     },
     "latest_news": [
+      {
+        "gid": "1823825466509503",
+        "title": "ExileCon 2026 Tickets Now on Sale!",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823825466509503",
+        "date": 1770753649,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1823825466504283",
         "title": "Developer Interview - John Espiritu, Lead Rigging Artist",
@@ -44,14 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1822556746160291",
         "date": 1769116006,
         "author": "kiki",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1821922921820181",
-        "title": "Fate of the Vaal Concept and Environment Art",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1821922921820181",
-        "date": 1768784838,
-        "author": "CommunityTeam_GGG",
         "feedlabel": "Community Announcements"
       }
     ]
