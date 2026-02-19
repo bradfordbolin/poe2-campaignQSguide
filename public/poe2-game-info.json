@@ -1,19 +1,27 @@
 {
-  "generated_at": "2026-02-18T05:40:17.273Z",
+  "generated_at": "2026-02-19T05:38:48.303Z",
   "league": null,
   "steam": {
     "appid": 2694490,
     "latest_version": {
-      "version": "0.4.0d",
-      "title": "Path of Exile 2 0.4.0d Patch Notes Preview",
-      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1821922921809503",
-      "date": 1768348630
+      "version": "0.5.0",
+      "title": "Path of Exile 2 0.5.0 Timeline",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1825093633183532",
+      "date": 1771451264
     },
     "current_players": {
-      "player_count": 11824,
-      "fetched_at": "2026-02-18T05:40:17.274Z"
+      "player_count": 11467,
+      "fetched_at": "2026-02-19T05:38:48.304Z"
     },
     "latest_news": [
+      {
+        "gid": "1825093633183532",
+        "title": "Path of Exile 2 0.5.0 Timeline",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1825093633183532",
+        "date": 1771451264,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1823825466509503",
         "title": "ExileCon 2026 Tickets Now on Sale!",
@@ -44,14 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823191198600836",
         "date": 1769636405,
         "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1822556746160291",
-        "title": "Build of the Week: Poison Basketballs by Pants",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1822556746160291",
-        "date": 1769116006,
-        "author": "kiki",
         "feedlabel": "Community Announcements"
       }
     ]
