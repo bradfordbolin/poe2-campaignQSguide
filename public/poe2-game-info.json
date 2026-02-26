@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-25T05:39:49.339Z",
+  "generated_at": "2026-02-26T05:36:19.312Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 10189,
-      "fetched_at": "2026-02-25T05:39:49.339Z"
+      "player_count": 10019,
+      "fetched_at": "2026-02-26T05:36:19.312Z"
     },
     "latest_news": [
+      {
+        "gid": "1825727806705906",
+        "title": "Announcing The Last of the Druids Race Event",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1825727806705906",
+        "date": 1772051526,
+        "author": "kiki",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1825093633183532",
         "title": "Path of Exile 2 0.5.0 Timeline",
@@ -44,14 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823825466495045",
         "date": 1770237942,
         "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1823191198600836",
-        "title": "ExileCon 2026",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823191198600836",
-        "date": 1769636405,
-        "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
     ]
