@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-05T05:18:38.368Z",
+  "generated_at": "2026-03-06T05:15:54.451Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,8 +10,8 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 8184,
-      "fetched_at": "2026-03-05T05:18:38.368Z"
+      "player_count": 7834,
+      "fetched_at": "2026-03-06T05:15:54.451Z"
     },
     "latest_news": [
       {
