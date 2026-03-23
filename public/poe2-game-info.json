@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-22T05:33:55.463Z",
+  "generated_at": "2026-03-23T05:50:01.165Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 6406,
-      "fetched_at": "2026-03-22T05:33:55.464Z"
+      "player_count": 4518,
+      "fetched_at": "2026-03-23T05:50:01.165Z"
     },
     "latest_news": [
+      {
+        "gid": "1827626365762495",
+        "title": "The Last of the Druids Race Event Starts Soon",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1827626365762495",
+        "date": 1774227125,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1825727806705906",
         "title": "Announcing The Last of the Druids Race Event",
@@ -43,14 +51,6 @@
         "title": "Developer Interview - John Espiritu, Lead Rigging Artist",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823825466504283",
         "date": 1770600531,
-        "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1823825466495045",
-        "title": "Hideout Showcase",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823825466495045",
-        "date": 1770237942,
         "author": "CommunityTeam_GGG",
         "feedlabel": "Community Announcements"
       }
