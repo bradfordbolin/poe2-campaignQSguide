@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-30T06:10:37.982Z",
+  "generated_at": "2026-03-31T05:56:12.604Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 4278,
-      "fetched_at": "2026-03-30T06:10:37.983Z"
+      "player_count": 4175,
+      "fetched_at": "2026-03-31T05:56:12.604Z"
     },
     "latest_news": [
+      {
+        "gid": "1828441623110728",
+        "title": "Build Showcase: Pounce Tactician by Lexxure",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1828441623110728",
+        "date": 1774906634,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1827626365762495",
         "title": "The Last of the Druids Race Event Starts Soon",
@@ -44,14 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823825466509503",
         "date": 1770753649,
         "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1823825466504283",
-        "title": "Developer Interview - John Espiritu, Lead Rigging Artist",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823825466504283",
-        "date": 1770600531,
-        "author": "CommunityTeam_GGG",
         "feedlabel": "Community Announcements"
       }
     ]
