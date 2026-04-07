@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-06T06:11:07.472Z",
+  "generated_at": "2026-04-07T05:57:55.078Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 5052,
-      "fetched_at": "2026-04-06T06:11:07.472Z"
+      "player_count": 4200,
+      "fetched_at": "2026-04-07T05:57:55.078Z"
     },
     "latest_news": [
+      {
+        "gid": "1828894815566425",
+        "title": "The Last of the Druids Race Event VODs",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1828894815566425",
+        "date": 1775530661,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1828441623110728",
         "title": "Build Showcase: Pounce Tactician by Lexxure",
@@ -44,14 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1825093633183532",
         "date": 1771451264,
         "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1823825466509503",
-        "title": "ExileCon 2026 Tickets Now on Sale!",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823825466509503",
-        "date": 1770753649,
-        "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
     ]
