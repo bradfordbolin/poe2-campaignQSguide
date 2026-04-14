@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-13T06:27:34.243Z",
+  "generated_at": "2026-04-14T06:12:31.896Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 4448,
-      "fetched_at": "2026-04-13T06:27:34.244Z"
+      "player_count": 4351,
+      "fetched_at": "2026-04-14T06:12:31.897Z"
     },
     "latest_news": [
+      {
+        "gid": "1829528821316491",
+        "title": "The Last of the Druids Race Event Winners",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1829528821316491",
+        "date": 1776117349,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1828894815566425",
         "title": "The Last of the Druids Race Event VODs",
@@ -44,14 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1825727806705906",
         "date": 1772051526,
         "author": "kiki",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1825093633183532",
-        "title": "Path of Exile 2 0.5.0 Timeline",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1825093633183532",
-        "date": 1771451264,
-        "author": "CommunityTeam_GGG",
         "feedlabel": "Community Announcements"
       }
     ]
