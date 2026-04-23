@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-22T06:13:13.364Z",
+  "generated_at": "2026-04-23T06:18:10.188Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 3928,
-      "fetched_at": "2026-04-22T06:13:13.364Z"
+      "player_count": 3885,
+      "fetched_at": "2026-04-23T06:18:10.188Z"
     },
     "latest_news": [
+      {
+        "gid": "1830797770231713",
+        "title": "Watch GGG Live on May 7th PDT",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1830797770231713",
+        "date": 1776894356,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1829528821316491",
         "title": "The Last of the Druids Race Event Winners",
@@ -44,14 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1827626365762495",
         "date": 1774227125,
         "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1825727806705906",
-        "title": "Announcing The Last of the Druids Race Event",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1825727806705906",
-        "date": 1772051526,
-        "author": "kiki",
         "feedlabel": "Community Announcements"
       }
     ]
