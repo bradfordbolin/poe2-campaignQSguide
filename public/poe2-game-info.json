@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-27T06:42:11.684Z",
+  "generated_at": "2026-04-28T06:46:30.769Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 4400,
-      "fetched_at": "2026-04-27T06:42:11.684Z"
+      "player_count": 3933,
+      "fetched_at": "2026-04-28T06:46:30.770Z"
     },
     "latest_news": [
+      {
+        "gid": "1830797770243678",
+        "title": "Path of Exile 2: Return of the Ancients - Uncover the Truth Teaser",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1830797770243678",
+        "date": 1777325054,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1830797770231713",
         "title": "Watch GGG Live on May 7th PDT",
@@ -43,14 +51,6 @@
         "title": "Build Showcase: Pounce Tactician by Lexxure",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1828441623110728",
         "date": 1774906634,
-        "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1827626365762495",
-        "title": "The Last of the Druids Race Event Starts Soon",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1827626365762495",
-        "date": 1774227125,
         "author": "CommunityTeam_GGG",
         "feedlabel": "Community Announcements"
       }
