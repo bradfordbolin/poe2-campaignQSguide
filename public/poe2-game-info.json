@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-30T06:43:31.673Z",
+  "generated_at": "2026-05-01T06:46:52.478Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 3912,
-      "fetched_at": "2026-04-30T06:43:31.674Z"
+      "player_count": 4936,
+      "fetched_at": "2026-05-01T06:46:52.478Z"
     },
     "latest_news": [
+      {
+        "gid": "1831432155569555",
+        "title": "Stop the Madness | Path of Exile 2: Return of the Ancients",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1831432155569555",
+        "date": 1777579293,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1830797770243678",
         "title": "Path of Exile 2: Return of the Ancients - Uncover the Truth Teaser",
@@ -43,14 +51,6 @@
         "title": "The Last of the Druids Race Event VODs",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1828894815566425",
         "date": 1775530661,
-        "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1828441623110728",
-        "title": "Build Showcase: Pounce Tactician by Lexxure",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1828441623110728",
-        "date": 1774906634,
         "author": "CommunityTeam_GGG",
         "feedlabel": "Community Announcements"
       }
