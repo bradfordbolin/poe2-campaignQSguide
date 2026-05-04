@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-03T06:42:40.983Z",
+  "generated_at": "2026-05-04T07:27:30.213Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 5795,
-      "fetched_at": "2026-05-03T06:42:40.984Z"
+      "player_count": 4414,
+      "fetched_at": "2026-05-04T07:27:30.213Z"
     },
     "latest_news": [
+      {
+        "gid": "1831432155576133",
+        "title": "The Dreamer Must Wake",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1831432155576133",
+        "date": 1777840323,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1831432155569555",
         "title": "Stop the Madness | Path of Exile 2: Return of the Ancients",
@@ -43,14 +51,6 @@
         "title": "The Last of the Druids Race Event Winners",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1829528821316491",
         "date": 1776117349,
-        "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1828894815566425",
-        "title": "The Last of the Druids Race Event VODs",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1828894815566425",
-        "date": 1775530661,
         "author": "CommunityTeam_GGG",
         "feedlabel": "Community Announcements"
       }
