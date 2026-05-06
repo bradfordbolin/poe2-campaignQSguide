@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-05T06:30:00.451Z",
+  "generated_at": "2026-05-06T06:46:59.550Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 4186,
-      "fetched_at": "2026-05-05T06:30:00.451Z"
+      "player_count": 4166,
+      "fetched_at": "2026-05-06T06:46:59.550Z"
     },
     "latest_news": [
+      {
+        "gid": "1831432155581398",
+        "title": "Face the Darkness",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1831432155581398",
+        "date": 1778015074,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1831432155576133",
         "title": "The Dreamer Must Wake",
@@ -44,14 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1830797770231713",
         "date": 1776894356,
         "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1829528821316491",
-        "title": "The Last of the Druids Race Event Winners",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1829528821316491",
-        "date": 1776117349,
-        "author": "CommunityTeam_GGG",
         "feedlabel": "Community Announcements"
       }
     ]
