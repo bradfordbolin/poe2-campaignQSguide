@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-06T06:46:59.550Z",
+  "generated_at": "2026-05-07T07:20:47.752Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 4166,
-      "fetched_at": "2026-05-06T06:46:59.550Z"
+      "player_count": 4010,
+      "fetched_at": "2026-05-07T07:20:47.752Z"
     },
     "latest_news": [
+      {
+        "gid": "1832065502810420",
+        "title": "Return of the Ancients Livestream Twitch Drops",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832065502810420",
+        "date": 1778108116,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1831432155581398",
         "title": "Face the Darkness",
@@ -43,14 +51,6 @@
         "title": "Path of Exile 2: Return of the Ancients - Uncover the Truth Teaser",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1830797770243678",
         "date": 1777325054,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1830797770231713",
-        "title": "Watch GGG Live on May 7th PDT",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1830797770231713",
-        "date": 1776894356,
         "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
