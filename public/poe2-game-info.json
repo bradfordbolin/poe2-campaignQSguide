@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-08T06:11:40.242Z",
+  "generated_at": "2026-05-09T06:29:19.950Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,26 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 5301,
-      "fetched_at": "2026-05-08T06:11:40.242Z"
+      "player_count": 8209,
+      "fetched_at": "2026-05-09T06:29:19.951Z"
     },
     "latest_news": [
+      {
+        "gid": "1832065502815913",
+        "title": "Path of Exile 2 should hopefully be Steam Deck Verified with the next major update",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/GamingOnLinux/1832065502815913",
+        "date": 1778261643,
+        "author": "",
+        "feedlabel": "GamingOnLinux"
+      },
+      {
+        "gid": "1832065502814659",
+        "title": "Path of Exile 2's 1.0 release might slip beyond 2026, but at least we're getting a crafting system that summons skeletons to beat you up when you use it",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/Rock, Paper, Shotgun/1832065502814659",
+        "date": 1778236066,
+        "author": "",
+        "feedlabel": "Rock, Paper, Shotgun"
+      },
       {
         "gid": "1832065502813330",
         "title": "Our Biggest Expansion Ever Launches on May 29",
@@ -35,22 +51,6 @@
         "title": "Face the Darkness",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1831432155581398",
         "date": 1778015074,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1831432155576133",
-        "title": "The Dreamer Must Wake",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1831432155576133",
-        "date": 1777840323,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1831432155569555",
-        "title": "Stop the Madness | Path of Exile 2: Return of the Ancients",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1831432155569555",
-        "date": 1777579293,
         "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
