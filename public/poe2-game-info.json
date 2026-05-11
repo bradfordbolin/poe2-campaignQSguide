@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-10T06:46:58.603Z",
+  "generated_at": "2026-05-11T07:55:01.439Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,26 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 10037,
-      "fetched_at": "2026-05-10T06:46:58.603Z"
+      "player_count": 8096,
+      "fetched_at": "2026-05-11T07:55:01.439Z"
     },
     "latest_news": [
+      {
+        "gid": "1832065502820237",
+        "title": "Path of Exile 2: Return of the Ancients FAQ",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832065502820237",
+        "date": 1778466231,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1832065502820132",
+        "title": "New Uniques - Redemption & Nightfall",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832065502820132",
+        "date": 1778457394,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1832065502815913",
         "title": "Path of Exile 2 should hopefully be Steam Deck Verified with the next major update",
@@ -35,22 +51,6 @@
         "title": "Our Biggest Expansion Ever Launches on May 29",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832065502813330",
         "date": 1778185820,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1832065502810420",
-        "title": "Return of the Ancients Livestream Twitch Drops",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832065502810420",
-        "date": 1778108116,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1831432155581398",
-        "title": "Face the Darkness",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1831432155581398",
-        "date": 1778015074,
         "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
