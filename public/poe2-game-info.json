@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-11T07:55:01.439Z",
+  "generated_at": "2026-05-12T07:18:52.848Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 8096,
-      "fetched_at": "2026-05-11T07:55:01.439Z"
+      "player_count": 7424,
+      "fetched_at": "2026-05-12T07:18:52.848Z"
     },
     "latest_news": [
+      {
+        "gid": "1832065502822425",
+        "title": "More ExileCon Tickets Available On May 17th PDT",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832065502822425",
+        "date": 1778534079,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1832065502820237",
         "title": "Path of Exile 2: Return of the Ancients FAQ",
@@ -45,14 +53,6 @@
         "date": 1778236066,
         "author": "",
         "feedlabel": "Rock, Paper, Shotgun"
-      },
-      {
-        "gid": "1832065502813330",
-        "title": "Our Biggest Expansion Ever Launches on May 29",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832065502813330",
-        "date": 1778185820,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
       }
     ]
   }
