@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-12T07:18:52.848Z",
+  "generated_at": "2026-05-13T07:29:48.690Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 7424,
-      "fetched_at": "2026-05-12T07:18:52.848Z"
+      "player_count": 7804,
+      "fetched_at": "2026-05-13T07:29:48.690Z"
     },
     "latest_news": [
+      {
+        "gid": "1832065502825052",
+        "title": "The Spirit Walker Ascendancy Showcase",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832065502825052",
+        "date": 1778623344,
+        "author": "kiki",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1832065502822425",
         "title": "More ExileCon Tickets Available On May 17th PDT",
@@ -45,14 +53,6 @@
         "date": 1778261643,
         "author": "",
         "feedlabel": "GamingOnLinux"
-      },
-      {
-        "gid": "1832065502814659",
-        "title": "Path of Exile 2's 1.0 release might slip beyond 2026, but at least we're getting a crafting system that summons skeletons to beat you up when you use it",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/Rock, Paper, Shotgun/1832065502814659",
-        "date": 1778236066,
-        "author": "",
-        "feedlabel": "Rock, Paper, Shotgun"
       }
     ]
   }
