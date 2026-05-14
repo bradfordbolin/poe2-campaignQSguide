@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-13T07:29:48.690Z",
+  "generated_at": "2026-05-14T07:24:40.081Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,26 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 7804,
-      "fetched_at": "2026-05-13T07:29:48.690Z"
+      "player_count": 8600,
+      "fetched_at": "2026-05-14T07:24:40.081Z"
     },
     "latest_news": [
+      {
+        "gid": "1832700592787922",
+        "title": "The Last of the Druids Supporter Packs Are Leaving the Store Soon",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832700592787922",
+        "date": 1778727036,
+        "author": "kiki",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1832700592787600",
+        "title": "Streamlining the Campaign in Return of the Ancients ",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832700592787600",
+        "date": 1778710877,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1832065502825052",
         "title": "The Spirit Walker Ascendancy Showcase",
@@ -37,22 +53,6 @@
         "date": 1778466231,
         "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1832065502820132",
-        "title": "New Uniques - Redemption & Nightfall",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832065502820132",
-        "date": 1778457394,
-        "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1832065502815913",
-        "title": "Path of Exile 2 should hopefully be Steam Deck Verified with the next major update",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/GamingOnLinux/1832065502815913",
-        "date": 1778261643,
-        "author": "",
-        "feedlabel": "GamingOnLinux"
       }
     ]
   }
