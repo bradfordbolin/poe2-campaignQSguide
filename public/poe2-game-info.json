@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-15T07:34:13.400Z",
+  "generated_at": "2026-05-16T06:36:47.980Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 8318,
-      "fetched_at": "2026-05-15T07:34:13.400Z"
+      "player_count": 10677,
+      "fetched_at": "2026-05-16T06:36:47.981Z"
     },
     "latest_news": [
+      {
+        "gid": "1832700592793163",
+        "title": "Fate of the Vaal as Core Path of Exile 2 Mechanic",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832700592793163",
+        "date": 1778878926,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1832700592790537",
         "title": "Reworked Uniques - Reverie and Hollow Mask",
@@ -44,14 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832065502825052",
         "date": 1778623344,
         "author": "kiki",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1832065502822425",
-        "title": "More ExileCon Tickets Available On May 17th PDT",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832065502822425",
-        "date": 1778534079,
-        "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
     ]
