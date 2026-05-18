@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T07:16:11.548Z",
+  "generated_at": "2026-05-18T08:15:59.077Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 12211,
-      "fetched_at": "2026-05-17T07:16:11.548Z"
+      "player_count": 8675,
+      "fetched_at": "2026-05-18T08:15:59.077Z"
     },
     "latest_news": [
+      {
+        "gid": "1832700592797200",
+        "title": "Tavern Talk Podcast with Jonathan Rogers and Mark Roberts",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832700592797200",
+        "date": 1779067844,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1832700592793163",
         "title": "Fate of the Vaal as Core Path of Exile 2 Mechanic",
@@ -44,14 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832700592787600",
         "date": 1778710877,
         "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1832065502825052",
-        "title": "The Spirit Walker Ascendancy Showcase",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832065502825052",
-        "date": 1778623344,
-        "author": "kiki",
         "feedlabel": "Community Announcements"
       }
     ]
