@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-18T08:15:59.077Z",
+  "generated_at": "2026-05-19T07:58:20.560Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 8675,
-      "fetched_at": "2026-05-18T08:15:59.077Z"
+      "player_count": 8377,
+      "fetched_at": "2026-05-19T07:58:20.561Z"
     },
     "latest_news": [
+      {
+        "gid": "1832700592799524",
+        "title": "New Unique Items - the Auspex and Facebreaker",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832700592799524",
+        "date": 1779138512,
+        "author": "kiki",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1832700592797200",
         "title": "Tavern Talk Podcast with Jonathan Rogers and Mark Roberts",
@@ -44,14 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832700592787922",
         "date": 1778727036,
         "author": "kiki",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1832700592787600",
-        "title": "Streamlining the Campaign in Return of the Ancients ",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832700592787600",
-        "date": 1778710877,
-        "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
     ]
