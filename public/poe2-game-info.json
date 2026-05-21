@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-20T07:57:25.863Z",
+  "generated_at": "2026-05-21T08:04:50.827Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1771451264
     },
     "current_players": {
-      "player_count": 8108,
-      "fetched_at": "2026-05-20T07:57:25.863Z"
+      "player_count": 8084,
+      "fetched_at": "2026-05-21T08:04:50.827Z"
     },
     "latest_news": [
+      {
+        "gid": "1833334318567357",
+        "title": "Balance Changes to Chronomancer and Gemling Legionnaire Ascendancies",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833334318567357",
+        "date": 1779311176,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1832700592801961",
         "title": "Expedition: Logbook Exploration",
@@ -43,14 +51,6 @@
         "title": "Fate of the Vaal as Core Path of Exile 2 Mechanic",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832700592793163",
         "date": 1778878926,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1832700592790537",
-        "title": "Reworked Uniques - Reverie and Hollow Mask",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832700592790537",
-        "date": 1778801572,
         "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
