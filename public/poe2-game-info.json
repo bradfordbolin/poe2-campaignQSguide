@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-24T07:30:59.088Z",
+  "generated_at": "2026-05-25T08:40:47.566Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,26 @@
       "date": 1779478986
     },
     "current_players": {
-      "player_count": 14978,
-      "fetched_at": "2026-05-24T07:30:59.088Z"
+      "player_count": 13066,
+      "fetched_at": "2026-05-25T08:40:47.566Z"
     },
     "latest_news": [
+      {
+        "gid": "1833334318576364",
+        "title": "Return of the Ancients: Ritual and Delirium Mechanics Recap",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833334318576364",
+        "date": 1779678904,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1833334318576122",
+        "title": "Return of the Ancients: Free Weekend & 50% Off Early Access Supporter Pack",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833334318576122",
+        "date": 1779660746,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1833334318572767",
         "title": "Martial Artist Ascendancy Showcase",
@@ -36,22 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833334318567357",
         "date": 1779311176,
         "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1832700592801961",
-        "title": "Expedition: Logbook Exploration",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832700592801961",
-        "date": 1779224577,
-        "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1832700592799524",
-        "title": "New Unique Items - the Auspex and Facebreaker",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832700592799524",
-        "date": 1779138512,
-        "author": "kiki",
         "feedlabel": "Community Announcements"
       }
     ]
