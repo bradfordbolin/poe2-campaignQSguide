@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-26T08:01:58.965Z",
+  "generated_at": "2026-05-27T08:12:52.729Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,26 @@
       "date": 1779478986
     },
     "current_players": {
-      "player_count": 10780,
-      "fetched_at": "2026-05-26T08:01:58.965Z"
+      "player_count": 11133,
+      "fetched_at": "2026-05-27T08:12:52.729Z"
     },
     "latest_news": [
+      {
+        "gid": "1833968530884194",
+        "title": "Runes of Aldur: Challenges and Rewards",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530884194",
+        "date": 1779845419,
+        "author": "kiki",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1833968530883975",
+        "title": "Runes of Aldur: Runecrafting",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530883975",
+        "date": 1779835537,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1833334318578541",
         "title": "Return of the Ancients Launch Discord Quest",
@@ -35,22 +51,6 @@
         "title": "Path of Exile 2: Return of the Ancients Item Filter Information",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833334318578118",
         "date": 1779745955,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1833334318576364",
-        "title": "Return of the Ancients: Ritual and Delirium Mechanics Recap",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833334318576364",
-        "date": 1779678904,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1833334318576122",
-        "title": "Return of the Ancients: Free Weekend & 50% Off Early Access Supporter Pack",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833334318576122",
-        "date": 1779660746,
         "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
