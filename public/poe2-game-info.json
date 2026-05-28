@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-27T08:12:52.729Z",
+  "generated_at": "2026-05-28T08:12:31.575Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,26 @@
       "date": 1779478986
     },
     "current_players": {
-      "player_count": 11133,
-      "fetched_at": "2026-05-27T08:12:52.729Z"
+      "player_count": 11700,
+      "fetched_at": "2026-05-28T08:12:31.575Z"
     },
     "latest_news": [
+      {
+        "gid": "1833968530886922",
+        "title": "Path of Exile 2: Return of the Ancients - Kalguuran Gems Showcase",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530886922",
+        "date": 1779934417,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1833968530886637",
+        "title": "User Experience Improvements in Return of the Ancients",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530886637",
+        "date": 1779921028,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1833968530884194",
         "title": "Runes of Aldur: Challenges and Rewards",
@@ -35,22 +51,6 @@
         "title": "Return of the Ancients Launch Discord Quest",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833334318578541",
         "date": 1779771664,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1833334318578378",
-        "title": "The Return of the Ancients Launch New Twitch Drops",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833334318578378",
-        "date": 1779761093,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1833334318578118",
-        "title": "Path of Exile 2: Return of the Ancients Item Filter Information",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833334318578118",
-        "date": 1779745955,
         "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
