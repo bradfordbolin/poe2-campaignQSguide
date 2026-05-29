@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-28T08:12:31.575Z",
+  "generated_at": "2026-05-29T08:10:03.911Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,34 @@
       "date": 1779478986
     },
     "current_players": {
-      "player_count": 11700,
-      "fetched_at": "2026-05-28T08:12:31.575Z"
+      "player_count": 11769,
+      "fetched_at": "2026-05-29T08:10:03.911Z"
     },
     "latest_news": [
+      {
+        "gid": "1833968530889975",
+        "title": "Return of the Ancients: the Genesis Tree Deep Dive",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530889975",
+        "date": 1780023877,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1833968530889810",
+        "title": "Path of Exile 2: Return of the Ancients Launches Soon",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530889810",
+        "date": 1780017008,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1833968530889488",
+        "title": "Path of Exile 2: Masters of the Atlas Showcase",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530889488",
+        "date": 1780003078,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1833968530886922",
         "title": "Path of Exile 2: Return of the Ancients - Kalguuran Gems Showcase",
@@ -27,30 +51,6 @@
         "title": "User Experience Improvements in Return of the Ancients",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530886637",
         "date": 1779921028,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1833968530884194",
-        "title": "Runes of Aldur: Challenges and Rewards",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530884194",
-        "date": 1779845419,
-        "author": "kiki",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1833968530883975",
-        "title": "Runes of Aldur: Runecrafting",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530883975",
-        "date": 1779835537,
-        "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1833334318578541",
-        "title": "Return of the Ancients Launch Discord Quest",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833334318578541",
-        "date": 1779771664,
         "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
