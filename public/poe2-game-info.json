@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-01T09:36:49.929Z",
+  "generated_at": "2026-06-02T08:48:14.507Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1779478986
     },
     "current_players": {
-      "player_count": 200346,
-      "fetched_at": "2026-06-01T09:36:49.929Z"
+      "player_count": 171806,
+      "fetched_at": "2026-06-02T08:48:14.507Z"
     },
     "latest_news": [
+      {
+        "gid": "1833968530898954",
+        "title": "Dev Insights with Jonathan Rogers and Mark Roberts",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530898954",
+        "date": 1780354295,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1833968530889975",
         "title": "Return of the Ancients: the Genesis Tree Deep Dive",
@@ -43,14 +51,6 @@
         "title": "Path of Exile 2: Return of the Ancients - Kalguuran Gems Showcase",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530886922",
         "date": 1779934417,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1833968530886637",
-        "title": "User Experience Improvements in Return of the Ancients",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530886637",
-        "date": 1779921028,
         "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
