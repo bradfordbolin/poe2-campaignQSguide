@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-09T08:03:25.015Z",
+  "generated_at": "2026-06-10T08:27:58.418Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,26 @@
       "date": 1779478986
     },
     "current_players": {
-      "player_count": 132464,
-      "fetched_at": "2026-06-09T08:03:25.015Z"
+      "player_count": 130198,
+      "fetched_at": "2026-06-10T08:27:58.418Z"
     },
     "latest_news": [
+      {
+        "gid": "1835236783556105",
+        "title": "Path of Exile 2: Return of the Ancients interview with Zizaran",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783556105",
+        "date": 1781047699,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1834602721201770",
+        "title": "Steam Global Top Sellers for week of 2 Jun — 9 June 2026",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/SteamDB/1834602721201770",
+        "date": 1780995600,
+        "author": "SteamDB",
+        "feedlabel": "SteamDB"
+      },
       {
         "gid": "1834602721183443",
         "title": "What We Are Working On",
@@ -35,22 +51,6 @@
         "title": "Dev Insights with Jonathan Rogers and Mark Roberts",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530898954",
         "date": 1780354295,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1833968530889975",
-        "title": "Return of the Ancients: the Genesis Tree Deep Dive",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530889975",
-        "date": 1780023877,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1833968530889810",
-        "title": "Path of Exile 2: Return of the Ancients Launches Soon",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530889810",
-        "date": 1780017008,
         "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
