@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-10T08:27:58.418Z",
+  "generated_at": "2026-06-11T08:55:30.822Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1779478986
     },
     "current_players": {
-      "player_count": 130198,
-      "fetched_at": "2026-06-10T08:27:58.418Z"
+      "player_count": 130980,
+      "fetched_at": "2026-06-11T08:55:30.823Z"
     },
     "latest_news": [
+      {
+        "gid": "1835236783559067",
+        "title": "Path of Exile 2: Return of the Ancients Soundtrack",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783559067",
+        "date": 1781144337,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1835236783556105",
         "title": "Path of Exile 2: Return of the Ancients interview with Zizaran",
@@ -45,14 +53,6 @@
         "date": 1780390800,
         "author": "SteamDB",
         "feedlabel": "SteamDB"
-      },
-      {
-        "gid": "1833968530898954",
-        "title": "Dev Insights with Jonathan Rogers and Mark Roberts",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530898954",
-        "date": 1780354295,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
       }
     ]
   }
