@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-14T08:28:35.184Z",
+  "generated_at": "2026-06-15T10:35:10.372Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1781232245
     },
     "current_players": {
-      "player_count": 180165,
-      "fetched_at": "2026-06-14T08:28:35.184Z"
+      "player_count": 132149,
+      "fetched_at": "2026-06-15T10:35:10.372Z"
     },
     "latest_news": [
+      {
+        "gid": "1835236783568632",
+        "title": "Path of Exile 2: Return of the Ancients Two Week Recap",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783568632",
+        "date": 1781476536,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1835236783562243",
         "title": "0.5.2 Patch Notes",
@@ -45,14 +53,6 @@
         "date": 1781047699,
         "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1834602721201770",
-        "title": "Steam Global Top Sellers for week of 2 Jun — 9 June 2026",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/SteamDB/1834602721201770",
-        "date": 1780995600,
-        "author": "SteamDB",
-        "feedlabel": "SteamDB"
       }
     ]
   }
