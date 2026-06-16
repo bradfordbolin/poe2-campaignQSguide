@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-15T10:35:10.372Z",
+  "generated_at": "2026-06-16T09:36:07.537Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1781232245
     },
     "current_players": {
-      "player_count": 132149,
-      "fetched_at": "2026-06-15T10:35:10.372Z"
+      "player_count": 118755,
+      "fetched_at": "2026-06-16T09:36:07.537Z"
     },
     "latest_news": [
+      {
+        "gid": "1835236783572478",
+        "title": "Path of Exile 2 Build Showcase: Stag Launcher by Phylaris",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783572478",
+        "date": 1781564372,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1835236783568632",
         "title": "Path of Exile 2: Return of the Ancients Two Week Recap",
@@ -43,14 +51,6 @@
         "title": "Path of Exile 2: Return of the Ancients Soundtrack",
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783559067",
         "date": 1781144337,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1835236783556105",
-        "title": "Path of Exile 2: Return of the Ancients interview with Zizaran",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783556105",
-        "date": 1781047699,
         "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
