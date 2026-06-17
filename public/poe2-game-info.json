@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-16T09:36:07.537Z",
+  "generated_at": "2026-06-17T09:14:16.773Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,26 @@
       "date": 1781232245
     },
     "current_players": {
-      "player_count": 118755,
-      "fetched_at": "2026-06-16T09:36:07.537Z"
+      "player_count": 110768,
+      "fetched_at": "2026-06-17T09:14:16.773Z"
     },
     "latest_news": [
+      {
+        "gid": "1835871199299253",
+        "title": "Microtransaction Roundup - Path of Exile 2: Return of the Ancients",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835871199299253",
+        "date": 1781660914,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1835236783574345",
+        "title": "Steam Global Top Sellers for week of 9 Jun — 16 June 2026",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/SteamDB/1835236783574345",
+        "date": 1781600400,
+        "author": "SteamDB",
+        "feedlabel": "SteamDB"
+      },
       {
         "gid": "1835236783572478",
         "title": "Path of Exile 2 Build Showcase: Stag Launcher by Phylaris",
@@ -36,22 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783562243",
         "date": 1781232245,
         "author": "stacey",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1835236783561876",
-        "title": "Path of Exile 2 0.5.2 Patch Preview",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783561876",
-        "date": 1781217947,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1835236783559067",
-        "title": "Path of Exile 2: Return of the Ancients Soundtrack",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783559067",
-        "date": 1781144337,
-        "author": "Natalia_GGG",
         "feedlabel": "Community Announcements"
       }
     ]
