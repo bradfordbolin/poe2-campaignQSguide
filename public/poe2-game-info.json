@@ -1,19 +1,35 @@
 {
-  "generated_at": "2026-06-18T08:56:54.282Z",
+  "generated_at": "2026-06-19T09:15:52.218Z",
   "league": null,
   "steam": {
     "appid": 2694490,
     "latest_version": {
-      "version": "0.5.2",
-      "title": "0.5.2 Patch Notes",
-      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783562243",
-      "date": 1781232245
+      "version": "0.5.3",
+      "title": "0.5.3 Patch Notes",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835871199305657",
+      "date": 1781823640
     },
     "current_players": {
-      "player_count": 106317,
-      "fetched_at": "2026-06-18T08:56:54.282Z"
+      "player_count": 116722,
+      "fetched_at": "2026-06-19T09:15:52.218Z"
     },
     "latest_news": [
+      {
+        "gid": "1835871199305657",
+        "title": "0.5.3 Patch Notes",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835871199305657",
+        "date": 1781823640,
+        "author": "stacey",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1835871199305583",
+        "title": "Path of Exile 2 0.5.3 Patch Preview",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835871199305583",
+        "date": 1781820231,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1835871199299253",
         "title": "Microtransaction Roundup - Path of Exile 2: Return of the Ancients",
@@ -36,22 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783572478",
         "date": 1781564372,
         "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1835236783568632",
-        "title": "Path of Exile 2: Return of the Ancients Two Week Recap",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783568632",
-        "date": 1781476536,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1835236783562243",
-        "title": "0.5.2 Patch Notes",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783562243",
-        "date": 1781232245,
-        "author": "stacey",
         "feedlabel": "Community Announcements"
       }
     ]
