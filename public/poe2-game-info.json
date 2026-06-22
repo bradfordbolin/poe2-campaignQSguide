@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-21T08:42:03.157Z",
+  "generated_at": "2026-06-22T10:17:02.806Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1781823640
     },
     "current_players": {
-      "player_count": 148628,
-      "fetched_at": "2026-06-21T08:42:03.157Z"
+      "player_count": 106511,
+      "fetched_at": "2026-06-22T10:17:02.806Z"
     },
     "latest_news": [
+      {
+        "gid": "1835871199311874",
+        "title": "Path of Exile 2 Build Guides on the Website",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835871199311874",
+        "date": 1782092316,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1835871199305657",
         "title": "0.5.3 Patch Notes",
@@ -45,14 +53,6 @@
         "date": 1781600400,
         "author": "SteamDB",
         "feedlabel": "SteamDB"
-      },
-      {
-        "gid": "1835236783572478",
-        "title": "Path of Exile 2 Build Showcase: Stag Launcher by Phylaris",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783572478",
-        "date": 1781564372,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
       }
     ]
   }
