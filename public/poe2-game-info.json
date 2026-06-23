@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T10:17:02.806Z",
+  "generated_at": "2026-06-23T07:59:19.528Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1781823640
     },
     "current_players": {
-      "player_count": 106511,
-      "fetched_at": "2026-06-22T10:17:02.806Z"
+      "player_count": 89765,
+      "fetched_at": "2026-06-23T07:59:19.528Z"
     },
     "latest_news": [
+      {
+        "gid": "1835871199314034",
+        "title": "Path of Exile 2 Wallpapers",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835871199314034",
+        "date": 1782163191,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1835871199311874",
         "title": "Path of Exile 2 Build Guides on the Website",
@@ -45,14 +53,6 @@
         "date": 1781660914,
         "author": "CommunityTeam_GGG",
         "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1835236783574345",
-        "title": "Steam Global Top Sellers for week of 9 Jun — 16 June 2026",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/SteamDB/1835236783574345",
-        "date": 1781600400,
-        "author": "SteamDB",
-        "feedlabel": "SteamDB"
       }
     ]
   }
