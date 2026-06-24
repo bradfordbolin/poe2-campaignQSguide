@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T07:59:19.528Z",
+  "generated_at": "2026-06-24T07:54:11.468Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,26 @@
       "date": 1781823640
     },
     "current_players": {
-      "player_count": 89765,
-      "fetched_at": "2026-06-23T07:59:19.528Z"
+      "player_count": 84891,
+      "fetched_at": "2026-06-24T07:54:11.468Z"
     },
     "latest_news": [
+      {
+        "gid": "1836506165544418",
+        "title": "Path of Exile 2 Build Showcase: Chaos Tornados by FlickerSlide",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165544418",
+        "date": 1782256371,
+        "author": "CommunityTeam_GGG",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1835871199315577",
+        "title": "Steam Global Top Sellers for week of 16 Jun — 23 June 2026",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/SteamDB/1835871199315577",
+        "date": 1782205200,
+        "author": "SteamDB",
+        "feedlabel": "SteamDB"
+      },
       {
         "gid": "1835871199314034",
         "title": "Path of Exile 2 Wallpapers",
@@ -36,22 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835871199305657",
         "date": 1781823640,
         "author": "stacey",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1835871199305583",
-        "title": "Path of Exile 2 0.5.3 Patch Preview",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835871199305583",
-        "date": 1781820231,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1835871199299253",
-        "title": "Microtransaction Roundup - Path of Exile 2: Return of the Ancients",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835871199299253",
-        "date": 1781660914,
-        "author": "CommunityTeam_GGG",
         "feedlabel": "Community Announcements"
       }
     ]
