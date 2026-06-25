@@ -1,19 +1,35 @@
 {
-  "generated_at": "2026-06-24T07:54:11.468Z",
+  "generated_at": "2026-06-25T07:55:21.719Z",
   "league": null,
   "steam": {
     "appid": 2694490,
     "latest_version": {
-      "version": "0.5.3",
-      "title": "0.5.3 Patch Notes",
-      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835871199305657",
-      "date": 1781823640
+      "version": "0.5.4",
+      "title": "0.5.4 Patch Notes",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165547866",
+      "date": 1782363605
     },
     "current_players": {
-      "player_count": 84891,
-      "fetched_at": "2026-06-24T07:54:11.468Z"
+      "player_count": 85936,
+      "fetched_at": "2026-06-25T07:55:21.720Z"
     },
     "latest_news": [
+      {
+        "gid": "1836506165547866",
+        "title": "0.5.4 Patch Notes",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165547866",
+        "date": 1782363605,
+        "author": "stacey",
+        "feedlabel": "Community Announcements"
+      },
+      {
+        "gid": "1836506165547582",
+        "title": "Path of Exile 2 0.5.4 Patch Preview",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165547582",
+        "date": 1782352520,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1836506165544418",
         "title": "Path of Exile 2 Build Showcase: Chaos Tornados by FlickerSlide",
@@ -36,22 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835871199314034",
         "date": 1782163191,
         "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1835871199311874",
-        "title": "Path of Exile 2 Build Guides on the Website",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835871199311874",
-        "date": 1782092316,
-        "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1835871199305657",
-        "title": "0.5.3 Patch Notes",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835871199305657",
-        "date": 1781823640,
-        "author": "stacey",
         "feedlabel": "Community Announcements"
       }
     ]
