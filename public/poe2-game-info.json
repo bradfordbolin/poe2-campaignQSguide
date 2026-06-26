@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25T07:55:21.719Z",
+  "generated_at": "2026-06-26T08:03:54.600Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1782363605
     },
     "current_players": {
-      "player_count": 85936,
-      "fetched_at": "2026-06-25T07:55:21.720Z"
+      "player_count": 83596,
+      "fetched_at": "2026-06-26T08:03:54.600Z"
     },
     "latest_news": [
+      {
+        "gid": "1836506165552139",
+        "title": "ExileCon 2026 Path of Exile 2 Race Qualifier Events",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165552139",
+        "date": 1782430778,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1836506165547866",
         "title": "0.5.4 Patch Notes",
@@ -45,14 +53,6 @@
         "date": 1782205200,
         "author": "SteamDB",
         "feedlabel": "SteamDB"
-      },
-      {
-        "gid": "1835871199314034",
-        "title": "Path of Exile 2 Wallpapers",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835871199314034",
-        "date": 1782163191,
-        "author": "CommunityTeam_GGG",
-        "feedlabel": "Community Announcements"
       }
     ]
   }
