@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T09:11:26.360Z",
+  "generated_at": "2026-06-30T08:02:31.125Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1782363605
     },
     "current_players": {
-      "player_count": 78597,
-      "fetched_at": "2026-06-29T09:11:26.360Z"
+      "player_count": 69733,
+      "fetched_at": "2026-06-30T08:02:31.125Z"
     },
     "latest_news": [
+      {
+        "gid": "1836506165561042",
+        "title": "Microtransaction Roundup: Wendigo Spear Skill Effect & Verisium Effect Bundle",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165561042",
+        "date": 1782768740,
+        "author": "kiki",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1836506165552139",
         "title": "ExileCon 2026 Path of Exile 2 Race Qualifier Events",
@@ -45,14 +53,6 @@
         "date": 1782256371,
         "author": "CommunityTeam_GGG",
         "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1835871199315577",
-        "title": "Steam Global Top Sellers for week of 16 Jun — 23 June 2026",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/SteamDB/1835871199315577",
-        "date": 1782205200,
-        "author": "SteamDB",
-        "feedlabel": "SteamDB"
       }
     ]
   }
