@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T08:32:47.901Z",
+  "generated_at": "2026-07-02T07:45:39.833Z",
   "league": null,
   "steam": {
     "appid": 2694490,
@@ -10,10 +10,18 @@
       "date": 1782363605
     },
     "current_players": {
-      "player_count": 66136,
-      "fetched_at": "2026-07-01T08:32:47.901Z"
+      "player_count": 61982,
+      "fetched_at": "2026-07-02T07:45:39.833Z"
     },
     "latest_news": [
+      {
+        "gid": "1836506165566596",
+        "title": "Path of Exile 2 Build Showcase: Frogmancer by Yuzo TV",
+        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165566596",
+        "date": 1782946346,
+        "author": "Natalia_GGG",
+        "feedlabel": "Community Announcements"
+      },
       {
         "gid": "1836506165561042",
         "title": "Microtransaction Roundup: Wendigo Spear Skill Effect & Verisium Effect Bundle",
@@ -44,14 +52,6 @@
         "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165547582",
         "date": 1782352520,
         "author": "Natalia_GGG",
-        "feedlabel": "Community Announcements"
-      },
-      {
-        "gid": "1836506165544418",
-        "title": "Path of Exile 2 Build Showcase: Chaos Tornados by FlickerSlide",
-        "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165544418",
-        "date": 1782256371,
-        "author": "CommunityTeam_GGG",
         "feedlabel": "Community Announcements"
       }
     ]
